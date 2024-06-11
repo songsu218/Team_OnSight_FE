@@ -1,0 +1,57 @@
+.gnb {
+  position: fixed;
+  top: 0;
+  width: 230px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.gnb h1 {
+  padding: 1rem 1rem 3rem 1rem;
+}
+
+.gnb h1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.holdBar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.holdBar > a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.holdBar > a > img {
+  width: 120px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.holdBar > a > span {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-family: 'Gaegu', sans-serif;
+  font-weight: bold;
+  font-size: 1.75rem;
+}
+
+.gnb .viewMore {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.gnb .viewMore i {
+  padding: 0 0.5rem 1rem 2rem;
+}
