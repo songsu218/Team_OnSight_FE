@@ -1,0 +1,53 @@
+.register {
+  padding: 100px 0;
+}
+.register h2 {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.register form {
+  max-width: 400px;
+  width: calc(100% - 2rem);
+  margin: auto;
+  text-align: center;
+}
+.register form > section {
+  font-size: 0.7rem;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.register input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #000;
+  /* border: 1px solid red; */
+}
+
+.register button {
+  margin-top: 50px;
+  padding: 0.3rem;
+  width: 100%;
+  border-radius: 5px;
+  background-color: #ffffff;
+}
+
+.register > p {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.7rem;
+}
+.register > p a {
+  color: tomato;
+}
+.register form > span {
+  display: block;
+  font-size: 0.7rem;
+  color: tomato;
+  text-align: left;
+  padding-top: 0.25rem;
+}
