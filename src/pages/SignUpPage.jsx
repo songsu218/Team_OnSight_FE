@@ -15,8 +15,10 @@ const SignUpPage = () => {
   const register = async (e) => {
     e.preventDefault();
     console.log(emailId);
-    if (!/^[a-zA-Z][a-zA-Z0-9]{3,}$/.test(emailId)) {
-      setMessage1("아이디는 4자 이상이어야 하며 영어로 시작해야 합니다.");
+    if (!/^[a-z0-9_-]{5,20}$/.test(emailId)) {
+      setMessage1(
+        "아이디는 5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다."
+      );
       return;
     } else {
       setMessage1("");
@@ -99,10 +101,10 @@ const SignUpPage = () => {
           }}
         />
         <span>{message4}</span>
-        <button type="submit">Submit</button>
+        <button type="submit">가입하기</button>
       </form>
       <p>
-        이미 회원이세요? <Link to="/SignInPage">로그인페이지</Link>로 이동
+        이미 계정이 있으신가요?<Link to="/SignInPage">로그인페이지</Link>로 이동
       </p>
     </main>
   );
