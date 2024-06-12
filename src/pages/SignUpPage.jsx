@@ -43,7 +43,7 @@ const SignUpPage = () => {
     }
 
     //백엔드로 POST 요청 및 응답
-    const response = await fetch("http://localhost:3000/SignUpPage", {
+    const response = await fetch("http://localhost:8000/user/register", {
       method: "POST",
       body: JSON.stringify({ id, nick, password }),
       headers: { "Content-Type": "application/json" },
