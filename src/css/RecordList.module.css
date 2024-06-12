@@ -1,0 +1,45 @@
+.swiperBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.upperBox {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-weight: bold;
+}
+.upperBox img {
+  width: 50px;
+  border-radius: 50%;
+}
+
+.lowerBox {
+  display: flex;
+  gap: 1rem;
+}
+
+.lowerBox img {
+  width: 150px;
+  border-radius: 1rem;
+}
+
+.lowerBox .levelBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.lowerBox .levelBox strong {
+  font-size: 1.25rem;
+  white-space: nowrap;
+}
+
+.lowerBox .levelBox span {
+  color: #a9a0a0;
+  white-space: nowrap;
+}
