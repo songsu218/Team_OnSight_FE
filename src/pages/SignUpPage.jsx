@@ -15,7 +15,7 @@ const SignUpPage = () => {
   const register = async (e) => {
     e.preventDefault();
     console.log(Id);
-    if (!/^[a-zA-Z0-9._%+-]{2,50}$/.test(Id)) {
+    if (!/^[a-zA-Z0-9._%+-]{2,20}$/.test(Id)) {
       setMessage1(
         "유효한 아이디를 입력해주세요. 영문,숫자,특수기호,_,-만 사용 가능"
       );
