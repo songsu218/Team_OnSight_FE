@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import style from '../css/SignInPage.module.css';
 
 const SignInPage = () => {
-  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [message1, setMessage1] = useState('');
   const [message2, setMessage2] = useState('');
@@ -11,8 +11,10 @@ const SignInPage = () => {
   const SignIn = async (e) => {
     e.preventDefault();
 
-    if (!/^[a-zA-Z0-9_-]{5,20}@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
-      setMessage1('유효한 이메일 주소를 입력해주세요.');
+    if (!/^[a-zA-Z0-9._%+-]{2,20}$/.test(id)) {
+      setMessage1(
+        '유효한 아이디를 입력해주세요. 영문,숫자,특수기호,_,-만 사용 가능합니다.'
+      );
       return;
     } else {
       setMessage1('');
@@ -26,9 +28,9 @@ const SignInPage = () => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/login`, {
+      const response = await fetch(`http://localhost:8000/user/login`, {
         method: 'POST',
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ id, password }),
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
       });
@@ -73,12 +75,8 @@ const SignInPage = () => {
     <main className={`mw ${style.SignInPage}`}>
       <form onSubmit={SignIn}>
         <h2>로그인</h2>
-        <label>이메일 아이디</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
+        <label>아이디</label>
+        <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
         <span className={style.errorMessage}>{message1}</span>
         <label>비밀번호</label>
         <input
