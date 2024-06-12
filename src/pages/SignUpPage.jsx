@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import style from "../css/SignUpPage.module.css";
 
 const SignUpPage = () => {
-  const [Id, setId] = useState("");
+  const [id, setId] = useState("");
   const [nick, setNick] = useState("");
   const [password, setPassword] = useState("");
   const [pdcon, setPdcon] = useState("");
@@ -14,8 +14,8 @@ const SignUpPage = () => {
 
   const register = async (e) => {
     e.preventDefault();
-    console.log(Id);
-    if (!/^[a-zA-Z0-9._%+-]{2,20}$/.test(Id)) {
+    console.log(id);
+    if (!/^[a-zA-Z0-9._%+-]{2,20}$/.test(id)) {
       setMessage1(
         "유효한 아이디를 입력해주세요. 영문,숫자,특수기호,_,-만 사용 가능"
       );
@@ -43,9 +43,9 @@ const SignUpPage = () => {
     }
 
     //백엔드로 POST 요청 및 응답
-    const response = await fetch("http://localhost:3000/SignUpPage", {
+    const response = await fetch("http://localhost:8000/user/register", {
       method: "POST",
-      body: JSON.stringify({ Id, password }),
+      body: JSON.stringify({ id, nick, password }),
       headers: { "Content-Type": "application/json" },
     });
     console.log(response);
@@ -65,7 +65,7 @@ const SignUpPage = () => {
         <input
           type="text"
           placeholder="아이디"
-          value={Id}
+          value={id}
           onChange={(e) => {
             setId(e.target.value);
           }}
