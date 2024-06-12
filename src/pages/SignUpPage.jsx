@@ -59,8 +59,8 @@ const SignUpPage = () => {
 
   return (
     <main className={`mw ${style.register}`}>
-      <h2>회원가입</h2>
       <form onSubmit={register}>
+        <h2>회원가입</h2>
         <section>이메일 아이디</section>
         <input
           type="text"
@@ -101,7 +101,7 @@ const SignUpPage = () => {
           }}
         />
         <span>{message4}</span>
-        <button type="submit">가입하기</button>
+        <button type="submit">회원가입</button>
       </form>
       <p>
         이미 계정이 있으신가요?<Link to="/SignInPage">로그인페이지</Link>로 이동
