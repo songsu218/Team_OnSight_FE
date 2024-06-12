@@ -1,0 +1,17 @@
+.main {
+  margin-top: 5vw;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+
+.recordArea {
+  border: 1px solid blue;
+  width: 90%;
+  margin: auto;
+}
+
+.cupBox {
+  border: 1px solid red;
+  width: 50%;
+}
