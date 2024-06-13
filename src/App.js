@@ -5,6 +5,7 @@ import Header from './components/Header';
 
 import Main from './pages/Main';
 import SignInPage from './pages/SignInPage';
+import SignUpPage from './pages/SignUpPage';
 import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
 import Crew from './pages/Crew';

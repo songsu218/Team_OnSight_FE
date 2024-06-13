@@ -3,20 +3,24 @@
   max-width: 720px;
   width: calc(100% - 10rem);
 }
+
 .SignInPage h2 {
   text-align: left;
   margin-bottom: 60px;
   font-weight: bold;
   font-size: 3rem;
 }
+
 .SignInPage form {
   text-align: center;
 }
+
 .SignInPage label {
   display: inline-block;
   display: flex;
   align-items: center;
 }
+
 .SignInPage input {
   border: none;
   border-bottom: 1px solid lightgray;
@@ -25,11 +29,13 @@
   padding: 1rem;
   margin: 1rem 0;
 }
+
 .SignInPage form span {
   display: block;
   text-align: left;
   margin-bottom: 3rem;
 }
+
 button {
   border: 3px solid black;
   font-size: 1.25rem;
@@ -37,16 +43,19 @@ button {
   padding: 1rem;
   border-radius: 1rem;
 }
+
 .SignInPage form button {
   background-color: white;
   width: 100%;
   margin-bottom: 3rem;
 }
+
 .SignInPage > button {
   position: relative;
   background-color: #fdcf3e;
   width: 100%;
 }
+
 .SignInPage > button::after {
   content: '';
   position: absolute;
@@ -55,7 +64,12 @@ button {
   bottom: -3rem;
   left: 0;
 }
+
 .SignInPage a {
   display: block;
   margin-top: 6rem;
+}
+
+.errorMessage {
+  color: red;
 }
