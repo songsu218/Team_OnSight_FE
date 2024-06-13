@@ -21,6 +21,7 @@
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   font-weight: bold;
   font-size: 2.5rem;
+  white-space: nowrap;
 }
 
 .cupBox .cupArea {
