@@ -1,10 +1,14 @@
 import './css/my_reset.css';
 import './css/App.css';
+import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 
 import Main from './pages/Main';
-
-import { Route, Routes } from 'react-router-dom';
+import SignInPage from './pages/SignInPage';
+import MyPage from './pages/MyPage';
+import SearchPage from './pages/SearchPage';
+import Crew from './pages/Crew';
+import Challenge from './pages/Challenge';
 
 function App() {
   return (
@@ -12,6 +16,12 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/signinpage" element={<SignInPage />} />
+        <Route path="/signuppage" element={<SignUpPage />} />
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/Search" element={<SearchPage />} />
+        <Route path="/Crew" element={<Crew />} />
+        <Route path="/Challenge" element={<Challenge />} />
       </Routes>
     </div>
   );
