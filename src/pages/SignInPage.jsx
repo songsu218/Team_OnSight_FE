@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import style from '../css/SignInPage.module.css';
+import { Link } from 'react-router-dom';
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 
@@ -11,6 +12,7 @@ const SignInPage = () => {
 
   const SignIn = async (e) => {
     e.preventDefault();
+    console.log(id, password);
 
     try {
       const response = await fetch(`http://localhost:8000/user/login`, {
@@ -19,8 +21,9 @@ const SignInPage = () => {
         body: JSON.stringify({ id, password }),
         credentials: 'include',
       });
-
       const data = await response.json();
+      console.log(data);
+      console.log(data.id);
 
       if (data.id) {
         setRedirect(true);
@@ -63,18 +66,14 @@ const SignInPage = () => {
         <label>아이디</label>
         <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
         <label>비밀번호</label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         <span className={style.errorMessage}>{message1}</span>
         <button type="submit">로그인</button>
       </form>
       <button className={style.kakaoButtom} onClick={kakaoLogin}>
         카카오로 로그인
       </button>
-      <a href="">계정이 없으신가요?</a>
+      <Link to="/user/register">계정이 없으신가요?</Link>
     </main>
   );
 };
