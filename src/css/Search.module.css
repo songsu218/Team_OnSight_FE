@@ -1,0 +1,67 @@
+.mw {
+    width: calc(100% - 240px);
+    margin-left: auto;
+    border: 1px solid red;
+}
+
+
+.search {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    border: 1px solid red;
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.mapContainer {
+    flex: 1;
+}
+
+.searchInput {
+    width: 90%;
+    height: 1.5rem;
+    padding: 8px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.list {
+
+    list-style: none;
+    padding: 0;
+}
+
+.listItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.listItem img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.listItem div {
+
+    flex: 1;
+}
+
+.starButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
