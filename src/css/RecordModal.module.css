@@ -1,0 +1,135 @@
+.addBtn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #000000;
+  position: absolute;
+  border: none;
+  bottom: 5%;
+  right: 5%;
+  transition: 0.3s;
+}
+
+.addBtn:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.addBtn > i {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  font-size: 2rem;
+  color: #ffffff;
+}
+
+.modalRe {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.recordCon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recordCon label {
+  align-self: flex-start;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+}
+
+.recordCon .dateWrap {
+  align-self: flex-start;
+  margin-left: 1.5rem;
+}
+
+.recordCon .placeC,
+.recordCon .diffiC {
+  width: 90%;
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 1rem 0 0.5rem 1rem;
+  box-shadow: 0 3px 3px -3px #777777;
+}
+
+.recordCon .placeC > div,
+.recordCon .diffiC > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+
+.recordCon .placeList,
+.recordCon .diffiList {
+  padding: 1rem;
+  position: absolute;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  z-index: 10;
+  box-shadow: 0px 0px 5px #777777;
+}
+
+.recordCon .placeList > li,
+.recordCon .diffiList > li {
+  padding: 0.25rem;
+}
+
+.recordCon .diffiList > li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.recordCon .diffiList .inDeBtn {
+  border: none;
+  background-color: transparent;
+  padding: 0 0.75rem;
+  font-size: 1rem;
+}
+
+.modalBody input {
+  width: 90%;
+  margin-bottom: 1rem;
+  border: none;
+  box-shadow: 0 3px 3px -3px #777777;
+}
+
+.modalBody .diffiCon {
+  padding: 1rem;
+  width: 90%;
+  margin-bottom: 2rem;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.modalRe .ModalFt {
+  display: flex;
+  justify-content: center;
+}
+.ModalFt .saveBtn {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+.ModalFt .saveBtn:hover {
+  background-color: #000000;
+  color: #ffffff;
+}

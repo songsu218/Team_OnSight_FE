@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import style from '../css/Header.module.css';
+import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [hoverImg, setHoverImg] = useState({
@@ -23,15 +24,15 @@ const Header = () => {
       <div>
         <h1>
           <div>
-            <a href="/">
+            <Link to="/">
               <img src="img/logo.png" alt="" />
-            </a>
+            </Link>
           </div>
         </h1>
         <nav>
           <div className={style.holdBar}>
-            <a
-              href="/"
+            <Link
+              to="/"
               onMouseEnter={() => MouseHover('link1')}
               onMouseLeave={() => MouseLeave('link1')}
             >
@@ -42,9 +43,9 @@ const Header = () => {
               <span style={{ color: hoverImg.link1 ? '#E90D0D' : '#FFFFFF' }}>
                 온사이트
               </span>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               onMouseEnter={() => MouseHover('link2')}
               onMouseLeave={() => MouseLeave('link2')}
             >
@@ -55,9 +56,9 @@ const Header = () => {
               <span style={{ color: hoverImg.link2 ? '#1332D1' : '#FFFFFF' }}>
                 암장탐색
               </span>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               onMouseEnter={() => MouseHover('link3')}
               onMouseLeave={() => MouseLeave('link3')}
             >
@@ -68,9 +69,9 @@ const Header = () => {
               <span style={{ color: hoverImg.link3 ? '#FACA3D' : '#FFFFFF' }}>
                 크루
               </span>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               onMouseEnter={() => MouseHover('link4')}
               onMouseLeave={() => MouseLeave('link4')}
             >
@@ -81,9 +82,9 @@ const Header = () => {
               <span style={{ color: hoverImg.link4 ? '#4DD65B' : '#FFFFFF' }}>
                 챌린지
               </span>
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/"
               onMouseEnter={() => MouseHover('link5')}
               onMouseLeave={() => MouseLeave('link5')}
             >
@@ -94,15 +95,15 @@ const Header = () => {
               <span style={{ color: hoverImg.link5 ? '#8F3AFF' : '#FFFFFF' }}>
                 MY
               </span>
-            </a>
+            </Link>
           </div>
         </nav>
       </div>
       <div className={style.viewMore}>
-        <a href="/">
+        <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
           <i className="fa-solid fa-gear"></i>
           <span>로그인</span>
-        </a>
+        </Link>
       </div>
     </header>
   );
