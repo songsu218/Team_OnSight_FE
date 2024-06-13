@@ -15,28 +15,30 @@ const SignUpPage = () => {
   const register = async (e) => {
     e.preventDefault();
     console.log(id);
-    if (!/^[a-zA-Z0-9._%+-]{2,20}$/.test(id)) {
-      setMessage1(
-        "유효한 아이디를 입력해주세요. 영문,숫자,특수기호,_,-만 사용 가능"
-      );
+    if (!/^[a-zA-Z0-9_-]{4,10}$/.test(id)) {
+      setMessage1("4~10자 내외 영문,숫자,특수기호,_,-만 사용 가능합니다.");
       return;
     } else {
       setMessage1("");
     }
-    if (nick.length > 12) {
-      setMessage2("닉네임은 12자 이하로 입력하세요.");
+    if (!/^[a-zA-Z0-9가-힣\u4E00-\u9FFF_-]{1,10}$/.test(nick)) {
+      setMessage2("닉네임은 10자 이내로 입력하세요.");
       return;
     } else {
       setMessage2("");
     }
-    if (password.length < 4) {
-      setMessage3("4자이상 입력해주세요.");
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+        password
+      )
+    ) {
+      setMessage3("영문,숫자,특수문자를 포함한 8자이상 입력해주세요");
       return;
     } else {
       setMessage3("");
     }
     if (password !== pdcon) {
-      setMessage4("재확인이 필요합니다.");
+      setMessage4("동일한 패스워드를 입력하세요");
       return;
     } else {
       setMessage4("");
@@ -45,13 +47,14 @@ const SignUpPage = () => {
     //백엔드로 POST 요청 및 응답
     const response = await fetch("http://localhost:8000/user/register", {
       method: "POST",
-      body: JSON.stringify({ id, nick, password }),
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, nick, password }),
     });
-    console.log(response);
+    console.log(await response.json());
+
     if (response.status === 200) {
       //회원가입완료
-      window.location.href = "/SignInPage";
+      // window.location.href = "/SignInPage";
     } else {
       alert("이미 존재하는 아이디 입니다.");
     }
@@ -61,7 +64,7 @@ const SignUpPage = () => {
     <main className={`mw ${style.register}`}>
       <form onSubmit={register}>
         <h2>회원가입</h2>
-        <section>이메일 아이디</section>
+        <section>아이디입력(4~10자)</section>
         <input
           type="text"
           placeholder="아이디"
