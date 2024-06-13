@@ -4,7 +4,7 @@ import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import style from '../css/Search.module.css';
 const Search = () => {
   const [climbingGyms, setClimbingGyms] = useState([]);
-  const [favorites, setFavorites] = useState([]);
+  // const [favorites, setFavorites] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('서울특별시');
   const [selectedDistrict, setSelectedDistrict] = useState('강남구');
@@ -17,13 +17,13 @@ const Search = () => {
       .catch((error) => console.error(error));
   }, []);
 
-  const toggleFavorite = (gym) => {
-    if (favorites.includes(gym)) {
-      setFavorites(favorites.filter((fav) => fav !== gym));
-    } else {
-      setFavorites([...favorites, gym]);
-    }
-  };
+  // const toggleFavorite = (gym) => {
+  //   if (favorites.includes(gym)) {
+  //     setFavorites(favorites.filter((fav) => fav !== gym));
+  //   } else {
+  //     setFavorites([...favorites, gym]);
+  //   }
+  // };
 
   useEffect(() => {
     const selectedGym = climbingGyms.find((gym) =>
@@ -34,9 +34,9 @@ const Search = () => {
     }
   }, [searchTerm, climbingGyms]);
 
-  const filteredGyms = climbingGyms.filter(
-    (gym) => gym.name.includes(searchTerm) || gym.location.includes(searchTerm)
-  );
+  // const filteredGyms = climbingGyms.filter(
+  //   (gym) => gym.name.includes(searchTerm) || gym.location.includes(searchTerm)
+  // );
 
   const handleDistrictChange = (event) => {
     setSelectedDistrict(event.target.value);
@@ -91,20 +91,22 @@ const Search = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
-          <i class="fa-solid fa-magnifying-glass"></i>
+          <i
+            className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
+          ></i>
         </div>
 
         <h2>즐겨찾기 목록</h2>
-        <ul className={style.list}>
+        {/* <ul className={style.list}>
           {favorites.map((gym) => (
             <li key={gym.id} className={style.listItem}>
               {gym.name}
             </li>
           ))}
-        </ul>
+        </ul> */}
         <div>
           목록 리스트
-          <ul className={style.list}>
+          {/* <ul className={style.list}>
             {filteredGyms.map((gym) => (
               <li key={gym.id} className={style.listItem}>
                 <img src={gym.image} alt={gym.name} />
@@ -122,7 +124,7 @@ const Search = () => {
                 </button>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
       <div className={style.mapContainer}>
@@ -147,7 +149,7 @@ const Search = () => {
           style={{ width: '100%', height: '100%' }}
           level={3}
         >
-          {climbingGyms.map((gym) => (
+          {/* {climbingGyms.map((gym) => (
             <MapMarker
               key={gym.id}
               position={{ lat: gym.lat, lng: gym.lng }}
@@ -159,7 +161,7 @@ const Search = () => {
               }}
               title={gym.name}
             />
-          ))}
+          ))} */}
         </Map>
       </div>
     </main>
