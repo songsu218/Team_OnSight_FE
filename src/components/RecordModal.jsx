@@ -1,3 +1,5 @@
+// 1234
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -162,12 +164,12 @@ function RecordModal() {
               )}
             </div>
             <div className={style.diffiCon}>
-              {selectedDiffis.map((diffi, index) => (
-                <div className={style.diffiCountList} key={index}>
+              {selectedDiffis.map((diffi) => (
+                <div className={style.diffiCountList} key={diffi}>
                   <span>{diffi}</span>
                   <div>
                     <CounterButton action={decrease} diffi={diffi} label="-" />
-                    {counts[diffi] || 0}
+                    {counts[diffi]}
                     <CounterButton action={increase} diffi={diffi} label="+" />
                     <i
                       className="fa-solid fa-xmark"
