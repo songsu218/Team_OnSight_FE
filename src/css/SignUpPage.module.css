@@ -1,0 +1,65 @@
+@charset 'utf-8';
+
+.register {
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
+
+.register h2 {
+  margin-bottom: 60px;
+  text-align: left;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.register form {
+  max-width: 400px;
+  width: calc(100% - 2rem);
+  margin: auto;
+  text-align: center;
+}
+.register form > section {
+  font-size: 0.7rem;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.register input {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  /* border: 1px solid red; */
+}
+
+.register button {
+  margin-top: 20px;
+  margin-bottom: 50px;
+  padding: 0.5rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 1rem;
+  background-color: #ffffff;
+  transition: background-color 0.3s, font-weight 0.3s;
+}
+.register button:hover {
+  background-color: #f6f6f695;
+}
+
+.register > p {
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.7rem;
+}
+.register > p a {
+  color: tomato;
+}
+.register form > span {
+  display: block;
+  font-size: 0.7rem;
+  color: tomato;
+  text-align: left;
+  padding-top: 0.25rem;
+}
