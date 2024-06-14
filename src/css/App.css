@@ -4,7 +4,10 @@
   overflow: hidden;
 }
 
-.mw {
+.viewCon {
   width: calc(100% - 240px);
   margin-left: auto;
+}
+
+.mw {
 }
