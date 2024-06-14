@@ -1,16 +1,18 @@
 .gnb {
   position: fixed;
   top: 0;
-  width: 230px;
+  width: 188px;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 5px 0 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .gnb h1 {
   padding: 1rem 1rem 3rem 1rem;
+  width: 150px;
+  margin: auto;
 }
 
 .gnb h1 img {
@@ -45,7 +47,8 @@
   transform: translateX(-50%) translateY(-50%);
   font-family: 'Gaegu', sans-serif;
   font-weight: bold;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  white-space: nowrap;
 }
 
 .gnb .viewMore {
