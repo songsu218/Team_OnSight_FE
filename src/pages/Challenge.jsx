@@ -1,63 +1,119 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
-import style from "../css/Challenge.module.css";
 import "swiper/css";
 import ChallengeBox from "../components/challenge/ChallengeBox";
-import { Button, Container, Grid, Typography } from "@mui/material";
+import { Button, Container, Grid, IconButton, Typography } from "@mui/material";
+import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
 
 const Challenge = () => {
-  const line = { border: "1px solid red" };
   return (
-    // <Container sx={{ border: "1px solid red", width: '100%'}}>
-    //   <Grid Container display="flex" sx={{height: '50vh' , width: '100%', borderBottom: '1px solid black'}}>
-    //     <Grid item sx={line}>
-    //       <Typography>진행 중인 챌린지에요</Typography>
-    //     </Grid>
-    //     <Grid item xs></Grid>
-    //     <Grid item sx={line}>
-    //       <Button> 나의 챌린지 {">"}</Button>
-    //     </Grid>
-    //   </Grid>
-    //   <Grid Container sx={{height: '50vh'}}>
-    //     <Grid item xs={12} sx={line}>
-    //       <Typography>지난 챌린지에요</Typography>
-    //     </Grid>
-    //   </Grid>
-    // </Container>
-    <main className={`${style.mw} ${style.container}`}>
-      <div className={style.top_section}>
-        <div className={`${style.inner_container}`}>
-
-          <div className={style.inner_top}>
-            <div className={`${style.subject}`}>진행 중인 챌린지에요</div>
-            <button className={`${style.myCh}`}>나의 챌린지 {">"} </button>
-          </div>
-          <div className={style.inner_bottom}>
-            <button className={style.leftButton} />
-            <div className={style.inner_bottom_item}>
-              <ChallengeBox isVisible = {true}></ChallengeBox>
-            </div>
-            <button className={style.rightButton} />
-          </div>
-        상단
-        </div>
-      </div>
-      <div className={style.bottom_section}>
-        <div className={`${style.inner_container}`}>
-          하단
-          <div className={style.inner_top}>
-            <div className={`${style.subject}`}>지난 챌린지에요</div>
-          </div>
-          <div className={style.inner_bottom}>
-            <button className={style.leftButton} />
-            <div className={style.inner_bottom_item}>
-              <ChallengeBox></ChallengeBox>
-            </div>
-            <button className={style.rightButton} />
-          </div>
-        </div>
-      </div>
-    </main>
+    <>
+      <Grid
+        container
+        sx={{
+          height: "50vh",
+          borderBottom: "1px solid black",
+        }}
+      >
+        <Grid item xs={12} sx={{ display: "flex", marginTop: "15vh" }}>
+          <Grid item xs={4} sx={{ display: "flex" }}>
+            <Grid item xs={3.5}></Grid>
+            <Grid item xs>
+              <Grid item xs={12} sx={{}}>
+                <Typography
+                  sx={{
+                    fontFamily: "Roboto",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    fontSize: "2.5rem",
+                  }}
+                >
+                  진행 중인 챌린지에요
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs></Grid>
+          <Grid item xs={2} sx={{ display: "flex" }}>
+            <Grid item xs={12} sx={{}}>
+              <Grid item xs={3.5}></Grid>
+              <Button
+                sx={{
+                  fontfamily: "Roboto",
+                  fontstyle: "normal",
+                  fontsize: "2rem",
+                  color: "#000000",
+                }}
+              >
+                {" "}
+                나의 챌린지 {">"}
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sx={{ display: "flex", alignItems: "center" }}>
+          <Grid item xs>
+            <ChallengeBox
+              takeButtonVisible={true}
+              slidesPerViewCount={2}
+            ></ChallengeBox>
+          </Grid>
+        </Grid>
+      </Grid>
+      <Grid
+        container
+        sx={{
+          height: "50vh",
+          marginBottom: "5vh",
+        }}
+      >
+        <Grid item xs={12} sx={{ display: "flex", marginTop: "10vh" }}>
+          <Grid item xs={4} sx={{ display: "flex" }}>
+            <Grid item xs={3.5}></Grid>
+            <Grid item xs>
+              <Grid item xs={12} sx={{}}>
+                <Typography
+                  sx={{
+                    fontFamily: "Roboto",
+                    fontStyle: "normal",
+                    fontWeight: "400",
+                    fontSize: "2.5rem",
+                  }}
+                >
+                  지난 챌린지에요
+                </Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid item xs></Grid>
+          <Grid item xs={2} sx={{ display: "flex" }}>
+            <Grid item xs={12} sx={{}}>
+              <Grid item xs={3.5}></Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sx={{ display: "flex", alignItems: "start" }}>
+          <Grid item xs>
+            <ChallengeBox
+              takeButtonVisible={false}
+              slidesPerViewCount={2}
+            ></ChallengeBox>
+          </Grid>
+        </Grid>
+        <Grid item xs={12} sx={{display:'flex'}}>
+          <Grid item xs>1</Grid>
+          <Grid item xs={1}>
+            <IconButton
+              aria-label="+"
+              sx={{ width: "70px", height: "70px"}}
+              onClick={()=>{}}
+            >
+              <ControlPointOutlinedIcon sx={{ fontSize: '3rem' }}/>
+            </IconButton>
+          </Grid>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 export default Challenge;
