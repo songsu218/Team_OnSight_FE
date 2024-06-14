@@ -1,0 +1,151 @@
+.line {
+    border: 1px solid rgb(0, 26, 255);
+}
+
+.top_section {
+    background-color: #f0f0f0;
+    height: 50vh;
+    display: flex;
+    justify-content: center; 
+    align-items: end; 
+    border-bottom: 1px solid black;
+}
+
+.inner_container {
+    height: 40vh;
+    width: 100%;
+}
+  
+.bottom_section {
+    background-color: #e0e0e0;
+    height: 50vh;
+    display: flex;
+    justify-content: center; 
+    align-items: start; 
+}
+
+.mw {
+    width: calc(100% - 240px);
+    margin-left: auto;
+    border: 1px solid red;
+}
+
+.container {
+    border: 3px solid red;
+    /* display: flex;
+    flex-direction: column; */
+    height: 100%;
+}
+
+.sidebar {
+    border: 1px solid red;
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.sidebar h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.starButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.subject {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    /* line-height: 140%; */
+    color: #000000;
+    margin-left: 10%;
+}
+
+.myCh {
+    /* 나의 챌린지 > */
+    border: none;
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    margin-right: 200px;
+    /* color: #000000; */
+  }
+
+.inner_top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    flex: 1;
+    /* width: 100%; */
+}
+
+.inner_bottom {
+    /* border: 4px solid green; */
+    /* width: 100%; */
+    display: flex;
+    align-items: center;
+}
+
+.inner_bottom_item {
+    flex: 1;
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
+    border: 3px solid violet; 
+}
+
+.leftButton {
+    background-color: black; 
+    color: white; 
+    padding: 10px 20px;
+    border: none; 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer; 
+    position: relative; 
+    overflow: hidden;
+    margin:80px;
+  }
+
+  .leftButton:before {
+    content: '<'; 
+    position: absolute; 
+    top: 50%;
+    left: 13px;
+    transform: translateY(-55%); 
+    font-size: 1.5em;
+  }
+
+  
+.rightButton {
+    background-color: black; 
+    color: white; 
+    padding: 10px 20px;
+    border: none; 
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer; 
+    position: relative; 
+    overflow: hidden;
+    margin:80px;
+  }
+
+  .rightButton:before {
+    content: '>'; 
+    position: absolute; 
+    top: 50%;
+    left: 13px;
+    transform: translateY(-55%); 
+    font-size: 1.5em;
+  }
+

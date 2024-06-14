@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from '../css/Header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [hoverImg, setHoverImg] = useState({
@@ -10,7 +10,7 @@ const Header = () => {
     link4: false,
     link5: false,
   });
-
+  const navigate = useNavigate();
   const MouseHover = (link) => {
     setHoverImg((prevState) => ({ ...prevState, [link]: true }));
   };
@@ -71,9 +71,10 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/Challenge"
               onMouseEnter={() => MouseHover('link4')}
               onMouseLeave={() => MouseLeave('link4')}
+              // onClick={()=> {navigate('/Challenge');}}
             >
               <img
                 src={hoverImg.link4 ? '/img/eholdg.png' : '/img/holdg.png'}
