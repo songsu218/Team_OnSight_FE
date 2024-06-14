@@ -45,7 +45,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/Search"
               onMouseEnter={() => MouseHover('link2')}
               onMouseLeave={() => MouseLeave('link2')}
             >
@@ -58,7 +58,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/Crew"
               onMouseEnter={() => MouseHover('link3')}
               onMouseLeave={() => MouseLeave('link3')}
             >
@@ -85,7 +85,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/mypage"
               onMouseEnter={() => MouseHover('link5')}
               onMouseLeave={() => MouseLeave('link5')}
             >
@@ -101,7 +101,10 @@ const Header = () => {
         </nav>
       </div>
       <div className={style.viewMore}>
-        <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
+        <Link
+          to="/signinpage"
+          style={{ color: 'black', textDecoration: 'none' }}
+        >
           <i className="fa-solid fa-gear"></i>
           <span>로그인</span>
         </Link>

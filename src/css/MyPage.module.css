@@ -1,0 +1,51 @@
+.my {
+  width: 100%;
+  height: 100vh;
+}
+
+.my > section {
+  width: calc(100% - 5rem);
+  margin: auto;
+}
+
+.myCon {
+  padding: 30px 20px 0;
+}
+
+.my h2 {
+  display: none;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.imgSec {
+  grid-row-start: 1;
+  grid-row-end: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info .imgBox {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.info .imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nickSec h3 {
+  display: block;
+  font-size: 20px;
+}
+
+.summmarySec {
+}
