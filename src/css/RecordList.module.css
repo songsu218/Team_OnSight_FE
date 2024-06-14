@@ -16,6 +16,7 @@
 }
 .upperBox img {
   width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -26,6 +27,7 @@
 
 .lowerBox img {
   width: 150px;
+  height: 150px;
   border-radius: 1rem;
 }
 
@@ -37,7 +39,7 @@
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
 }
 
-.lowerBox .levelBox strong {
+.lowerBox .levelBox h3 {
   font-size: 1.25rem;
   white-space: nowrap;
 }
