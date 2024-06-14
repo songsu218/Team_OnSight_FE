@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import style from '../css/Header.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [hoverImg, setHoverImg] = useState({
@@ -10,7 +10,7 @@ const Header = () => {
     link4: false,
     link5: false,
   });
-
+  const navigate = useNavigate();
   const MouseHover = (link) => {
     setHoverImg((prevState) => ({ ...prevState, [link]: true }));
   };
@@ -45,7 +45,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/Search"
               onMouseEnter={() => MouseHover('link2')}
               onMouseLeave={() => MouseLeave('link2')}
             >
@@ -58,7 +58,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/Crew"
               onMouseEnter={() => MouseHover('link3')}
               onMouseLeave={() => MouseLeave('link3')}
             >
@@ -71,9 +71,10 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/Challenge"
               onMouseEnter={() => MouseHover('link4')}
               onMouseLeave={() => MouseLeave('link4')}
+              // onClick={()=> {navigate('/Challenge');}}
             >
               <img
                 src={hoverImg.link4 ? '/img/eholdg.png' : '/img/holdg.png'}
@@ -84,7 +85,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/mypage"
               onMouseEnter={() => MouseHover('link5')}
               onMouseLeave={() => MouseLeave('link5')}
             >
@@ -100,7 +101,10 @@ const Header = () => {
         </nav>
       </div>
       <div className={style.viewMore}>
-        <Link to="/" style={{ color: 'black', textDecoration: 'none' }}>
+        <Link
+          to="/signinpage"
+          style={{ color: 'black', textDecoration: 'none' }}
+        >
           <i className="fa-solid fa-gear"></i>
           <span>로그인</span>
         </Link>

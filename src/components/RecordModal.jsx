@@ -1,14 +1,26 @@
+// 1234
+
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import style from '../css/RecordModal.module.css';
-import DatePicker from 'react-datepicker';
+import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+
+import ko from 'date-fns/locale/ko';
+
+registerLocale('ko', ko);
 
 function RecordModal() {
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setSelectedFile(null);
+    setSelectedDiffis([]);
+    setCounts({});
+    setSelectedPlace(null);
+  };
   const handleShow = () => setShow(true);
   const [startDate, setStartDate] = useState(new Date());
   const [openPlace, setOpenPlace] = useState(false);
@@ -22,11 +34,27 @@ function RecordModal() {
   const [openDiffi, setOpenDiffi] = useState(false);
   const [selectedDiffis, setSelectedDiffis] = useState([]);
   const toggleDiffi = () => setOpenDiffi(!openDiffi);
+
   const handleDiffiClick = (diffi) => {
-    setSelectedDiffis((prevSelectedDiffis) => [...prevSelectedDiffis, diffi]);
-    setOpenDiffi(false);
+    if (!selectedDiffis.includes(diffi)) {
+      setSelectedDiffis((prevSelectedDiffis) => [...prevSelectedDiffis, diffi]);
+      setCounts((prevCounts) => ({
+        ...prevCounts,
+        [diffi]: 0,
+      }));
+      setOpenDiffi(false);
+    } else {
+      alert('이미 선택된 난이도입니다.');
+    }
   };
-  const diffi = ['난이도 (v1)', '난이도 (v2)', '난이도 (v3)'];
+
+  const diffi = [
+    '난이도 (v1)',
+    '난이도 (v2)',
+    '난이도 (v3)',
+    '난이도 (v4)',
+    '난이도 (v5)',
+  ];
   const [counts, setCounts] = useState({});
   const increase = (diffi) => {
     setCounts((prevCounts) => ({
@@ -54,6 +82,30 @@ function RecordModal() {
     </button>
   );
 
+  const handleRemoveDiffi = (diffiToRemove) => {
+    setSelectedDiffis((prevSelectedDiffis) =>
+      prevSelectedDiffis.filter((diffi) => diffi !== diffiToRemove)
+    );
+    setCounts((prevCounts) => {
+      const newCounts = { ...prevCounts };
+      delete newCounts[diffiToRemove];
+      return newCounts;
+    });
+  };
+
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setSelectedFile(reader.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <>
       <button onClick={handleShow} className={style.addBtn}>
@@ -67,18 +119,19 @@ function RecordModal() {
           <form className={style.recordCon}>
             <label htmlFor="title">제목</label>
             <input type="text" />
-            <label htmlFor="title">상세내용</label>
+            <label htmlFor="detail">상세내용</label>
             <input type="text" />
-            <label htmlFor="title">날짜 선택</label>
+            <label htmlFor="date">날짜 선택</label>
             <div className={style.dateWrap}>
               <DatePicker
                 dateFormat="yyyy.MM.dd"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
+                maxDate={new Date()}
+                locale="ko"
               />
             </div>
-            <label htmlFor="title"></label>
-            <label htmlFor="title">운동 장소</label>
+            <label htmlFor="place">운동 장소</label>
             <div className={style.placeC}>
               <div onClick={togglePlace}>
                 <span>{selectedPlace || '장소 선택'}</span>
@@ -94,14 +147,10 @@ function RecordModal() {
                 </ul>
               )}
             </div>
-            <label htmlFor="title">운동 난이도</label>
+            <label htmlFor="difficulty">운동 난이도</label>
             <div className={style.diffiC}>
               <div onClick={toggleDiffi}>
-                <span>
-                  {selectedDiffis.length > 0
-                    ? selectedDiffis.join(', ')
-                    : '난이도 선택'}
-                </span>
+                <span>난이도 선택</span>
                 <i className="fa-solid fa-chevron-down"></i>
               </div>
               {openDiffi && (
@@ -115,11 +164,27 @@ function RecordModal() {
               )}
             </div>
             <div className={style.diffiCon}>
-              {selectedDiffis.map((diffi, index) => (
-                <span key={index}>{diffi}</span>
+              {selectedDiffis.map((diffi) => (
+                <div className={style.diffiCountList} key={diffi}>
+                  <span>{diffi}</span>
+                  <div>
+                    <CounterButton action={decrease} diffi={diffi} label="-" />
+                    {counts[diffi]}
+                    <CounterButton action={increase} diffi={diffi} label="+" />
+                    <i
+                      className="fa-solid fa-xmark"
+                      onClick={() => handleRemoveDiffi(diffi)}
+                    ></i>
+                  </div>
+                </div>
               ))}
             </div>
-            <input type="file" />
+            <input type="file" onChange={handleFileChange} />
+            {selectedFile && (
+              <div className={style.preview}>
+                <img src={selectedFile} alt="preview" />
+              </div>
+            )}
           </form>
         </Modal.Body>
         <Modal.Footer className={style.ModalFt}>

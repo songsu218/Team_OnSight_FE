@@ -15,15 +15,17 @@ function App() {
   return (
     <div>
       <Header />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signinpage" element={<SignInPage />} />
-        <Route path="/signuppage" element={<SignUpPage />} />
-        <Route path="/mypage" element={<MyPage />} />
-        <Route path="/Search" element={<SearchPage />} />
-        <Route path="/Crew" element={<Crew />} />
-        <Route path="/Challenge" element={<Challenge />} />
-      </Routes>
+      <div className="viewCon">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signinpage" element={<SignInPage />} />
+          <Route path="/signuppage" element={<SignUpPage />} />
+          <Route path="/mypage" element={<MyPage />} />
+          <Route path="/Search" element={<SearchPage />} />
+          <Route path="/Crew" element={<Crew />} />
+          <Route path="/Challenge" element={<Challenge />} />
+        </Routes>
+      </div>
     </div>
   );
 }
