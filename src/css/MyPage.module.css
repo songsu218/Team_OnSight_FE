@@ -4,12 +4,13 @@
 }
 
 .my > section {
+  max-width: 1040px;
   width: calc(100% - 5rem);
-  margin: auto;
+  margin: 0 auto 30px;
+  padding: 30px 20px 0;
 }
 
 .myCon {
-  padding: 30px 20px 0;
 }
 
 .my h2 {
@@ -42,10 +43,32 @@
   object-fit: cover;
 }
 
+.nickSec {
+  display: flex;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
 .nickSec h3 {
   display: block;
-  font-size: 20px;
+  font-size: 1.25rem;
+  margin-right: 1.25rem;
+}
+
+.nickSec i {
+  font-size: 1.5rem;
+  color: black;
 }
 
 .summmarySec {
+  align-items: center;
+}
+
+.summmarySec ul {
+  display: flex;
+  flex-direction: row;
+}
+
+.summmarySec ul > li {
+  margin-right: 40px;
 }
