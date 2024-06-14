@@ -1,0 +1,26 @@
+.swiperBox {
+  display: flex;
+  gap: 7rem;
+  width: 70%;
+  margin: auto;
+  border: 3px solid gray;
+  border-radius: 20px;
+}
+.areaBox .innerBox {
+  display: flex;
+  flex-direction: column;
+
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+}
+.areaBox span {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.innerBox img {
+  width: 120px;
+  border: 1px solid black;
+}
+
+.swiperBox button {
+  width: 50px;
+}

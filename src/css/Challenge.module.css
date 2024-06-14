@@ -1,0 +1,38 @@
+.main {
+  margin-top: 4vw;
+  border: 1px solid red;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  margin-bottom: 40px;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-size: 2.5rem;
+}
+.challengeArea {
+  width: 90%;
+  border: 1px solid blue;
+  margin: auto;
+}
+.swiperSection {
+  margin-bottom: 20px; /* 각 스와이퍼 섹션 사이의 간격 */
+}
+
+.addButton {
+  text-align: right;
+  margin-top: 20px;
+}
+
+.addButton button {
+  font-size: 30px;
+  background-color: #a5a7a9;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.addButton button:hover {
+  background-color: #1f2021;
+}
