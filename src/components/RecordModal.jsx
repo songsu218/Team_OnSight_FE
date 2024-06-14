@@ -1,5 +1,3 @@
-// 1234
-
 import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
@@ -7,8 +5,8 @@ import Modal from 'react-bootstrap/Modal';
 import style from '../css/RecordModal.module.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-
 import ko from 'date-fns/locale/ko';
+import axios from 'axios';
 
 registerLocale('ko', ko);
 
@@ -20,6 +18,8 @@ function RecordModal() {
     setSelectedDiffis([]);
     setCounts({});
     setSelectedPlace(null);
+    setTitle('');
+    setDetail('');
   };
   const handleShow = () => setShow(true);
   const [startDate, setStartDate] = useState(new Date());
@@ -56,18 +56,12 @@ function RecordModal() {
     '난이도 (v5)',
   ];
   const [counts, setCounts] = useState({});
-  const increase = (diffi) => {
-    setCounts((prevCounts) => ({
-      ...prevCounts,
-      [diffi]: (prevCounts[diffi] || 0) + 1,
-    }));
-  };
-  const decrease = (diffi) => {
-    setCounts((prevCounts) => ({
-      ...prevCounts,
-      [diffi]: Math.max((prevCounts[diffi] || 0) - 1, 0),
-    }));
-  };
+
+  const increase = (diffi) =>
+    setCounts({ ...counts, [diffi]: counts[diffi] + 1 });
+  const decrease = (diffi) =>
+    setCounts({ ...counts, [diffi]: Math.max(counts[diffi] - 1, 0) });
+
   const handleClick = (e, action, diffi) => {
     e.stopPropagation();
     action(diffi);
@@ -96,13 +90,43 @@ function RecordModal() {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setSelectedFile(reader.result);
-      };
-      reader.readAsDataURL(file);
+    setSelectedFile(e.target.files[0]);
+  };
+
+  const [title, setTitle] = useState('');
+  const [detail, setDetail] = useState('');
+
+  const handleSubmit = async () => {
+    const level = selectedDiffis.reduce((acc, diffi) => {
+      const diffiNum = diffi.match(/\(v(\d+)\)/)[1];
+      acc[diffiNum] = counts[diffi];
+      return acc;
+    }, {});
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('detail', detail);
+    formData.append('center', selectedPlace);
+    formData.append('date', startDate.toISOString().split('T')[0]);
+    formData.append('level', JSON.stringify(level));
+    if (selectedFile) {
+      formData.append('thumbnail', selectedFile);
+    }
+
+    try {
+      const response = await axios.post(
+        'http://localhost:8000/record',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        }
+      );
+      console.log('response.data', response.data);
+      handleClose();
+    } catch (error) {
+      console.error('error', error);
     }
   };
 
@@ -118,9 +142,21 @@ function RecordModal() {
         <Modal.Body className={style.modalBody}>
           <form className={style.recordCon}>
             <label htmlFor="title">제목</label>
-            <input type="text" />
+            <input
+              type="text"
+              name="title"
+              id="title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
             <label htmlFor="detail">상세내용</label>
-            <input type="text" />
+            <input
+              type="text"
+              name="detail"
+              id="detail"
+              value={detail}
+              onChange={(e) => setDetail(e.target.value)}
+            />
             <label htmlFor="date">날짜 선택</label>
             <div className={style.dateWrap}>
               <DatePicker
@@ -179,10 +215,15 @@ function RecordModal() {
                 </div>
               ))}
             </div>
-            <input type="file" onChange={handleFileChange} />
+            <input
+              type="file"
+              name="thumbnail"
+              id="thumbnail"
+              onChange={handleFileChange}
+            />
             {selectedFile && (
               <div className={style.preview}>
-                <img src={selectedFile} alt="preview" />
+                <img src={URL.createObjectURL(selectedFile)} alt="preview" />
               </div>
             )}
           </form>
@@ -191,7 +232,7 @@ function RecordModal() {
           <Button
             className={style.saveBtn}
             variant="primary"
-            onClick={handleClose}
+            onClick={handleSubmit}
           >
             기록하기
           </Button>
