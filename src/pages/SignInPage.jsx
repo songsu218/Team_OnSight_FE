@@ -73,7 +73,9 @@ const SignInPage = () => {
       <button className={style.kakaoButtom} onClick={kakaoLogin}>
         카카오로 로그인
       </button>
-      <Link to="/user/register">계정이 없으신가요?</Link>
+      <div>
+        계정이 없으신가요? <Link to="/user/signinpage">회원가입</Link>
+      </div>
     </main>
   );
 };
