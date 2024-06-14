@@ -1,9 +1,11 @@
 .my {
+  width: 100%;
+  height: 100vh;
 }
 
 .my > section {
-  width: 100%;
-  height: 100vh;
+  width: calc(100% - 5rem);
+  margin: auto;
 }
 
 .myCon {

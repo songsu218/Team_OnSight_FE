@@ -2,7 +2,7 @@ import style from '../css/MyPage.module.css';
 
 const MyPage = () => {
   return (
-    <main className={`mw ${style.my}`}>
+    <main className={style.my}>
       <section>
         <div className={style.myCon}>
           <div>
