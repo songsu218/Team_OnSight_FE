@@ -24,12 +24,12 @@ const MyPage = () => {
               <ul>
                 <li>
                   <div>
-                    기록 수<span></span>
+                    기록 수 <span>0</span>
                   </div>
                 </li>
                 <li>
                   <div>
-                    피드 수<span></span>
+                    피드 수 <span>0</span>
                   </div>
                 </li>
               </ul>
