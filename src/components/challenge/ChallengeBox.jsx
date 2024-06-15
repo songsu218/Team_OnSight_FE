@@ -8,14 +8,16 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosOutlinedIcon from "@mui/icons-material/ArrowForwardIosOutlined";
+import { useNavigate } from "react-router-dom";
 
 // import 'swiper/swiper-bundle.min.css';
 // import 'swiper/css';
 // import 'swiper/css/navigation';
 const ChallengeBox = (props) => {
-  const { dataLIst, takeButtonVisible, slidesPerViewCount } = {
+  const { dataList, showJoinButton, hideslideButton, slidesPerViewCount } = {
     ...props,
   };
+  const navigate = useNavigate();
   const swiperRef = useRef(null);
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
@@ -28,38 +30,9 @@ const ChallengeBox = (props) => {
       swiperRef.current.swiper.slidePrev();
     }
   };
-  const data = [
-    {
-      id: 1,
-      src: "/img/gyeonggi.png",
-      title: "경기도 어찌구 챌린지",
-      description: "경기 클라이밍장 이름",
-    },
-    {
-      id: 2,
-      src: "/img/seoul.png",
-      title: "서울 어찌구 챌린지",
-      description: "서울 클라이밍장 이름",
-    },
-    {
-      id: 3,
-      src: "/img/gangwon.png",
-      title: "강원도 어찌구 챌린지",
-      description: "강원 클라이밍장 이름",
-    },
-  ];
-
-  // const navigationPrevRef = useRef(null);
-  // const navigationNextRef = useRef(null);
-
-  // const [swiper, setSwiper] = useState(null);
-  // const [mainImageIndex, setMainImageIndex] = useState(0);
-
-  // const swiperParams = {
-  //   navigation : true,
-  //   onSwiper : setSwiper,
-  //   onSlideChange: (e) => setMainImageIndex(e.activeIndex),
-  // }
+  const handleCardClick = (item) => {
+    navigate(`/challenge/${item.id}/${item.title}`, { state: { detailData:item } });
+  };
 
   return (
     <Container>
@@ -70,6 +43,7 @@ const ChallengeBox = (props) => {
               aria-label="<"
               sx={{ width: "70px", height: "70px" }}
               onClick={goPrev}
+              hidden={hideslideButton}
             >
               <ArrowBackIosNewIcon />
             </IconButton>
@@ -85,7 +59,7 @@ const ChallengeBox = (props) => {
               pagination={{ clickable: true }}
               // {...swiperParams} ref={setSwiper}
             >
-              {data.map((item) => (
+              {dataList.length == 0 ? '' : dataList.map((item) => (
                 <SwiperSlide key={item.id}>
                   <Card
                     orientation="horizontal"
@@ -93,6 +67,7 @@ const ChallengeBox = (props) => {
                     key={item.title}
                     variant="outlined"
                     sx={{ borderRadius: "1rem" }}
+                    onClick={()=> handleCardClick(item)}
                   >
                     <Grid container>
                       <Grid item xs={7}>
@@ -117,7 +92,7 @@ const ChallengeBox = (props) => {
                               textAlign: "left",
                             }}
                           >
-                            {item.description}
+                            {item.center}
                           </Typography>
                         </Box>
                       </Grid>
@@ -125,11 +100,10 @@ const ChallengeBox = (props) => {
                         <AspectRatio
                           ratio="1"
                           sx={{ minHeight: 120, minWidth: 120 }}
-                          onClick={()=>{debugger}}
                         >
                           <img
-                            srcSet={`${item.src}?h=120&fit=crop&auto=format&dpr=2 2x`}
-                            src={`${item.src}?h=120&fit=crop&auto=format`}
+                            srcSet={`${item.images}?h=120&fit=crop&auto=format&dpr=2 2x`}
+                            src={`${item.images}?h=120&fit=crop&auto=format`}
                             alt={item.title}
                           />
                         </AspectRatio>
@@ -142,9 +116,10 @@ const ChallengeBox = (props) => {
                           alignItems: "end",
                           justifyContent: "flex-end",
                         }}
+                        onClick={(e) => {debugger; e.stopPropagation();}}
                       >
                         <Grid item>
-                          {takeButtonVisible ? (
+                          {showJoinButton ? (
                             <Button
                               variant="contained"
                               sx={{
@@ -179,6 +154,7 @@ const ChallengeBox = (props) => {
               aria-label=">"
               sx={{ width: "70px", height: "70px" }}
               onClick={goNext}
+              hidden={hideslideButton}
             >
               <ArrowForwardIosOutlinedIcon />
             </IconButton>

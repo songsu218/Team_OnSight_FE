@@ -58,7 +58,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/Crew"
+              to="/crew"
               onMouseEnter={() => MouseHover('link3')}
               onMouseLeave={() => MouseLeave('link3')}
             >
@@ -71,7 +71,7 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/Challenge"
+              to="/challenge"
               onMouseEnter={() => MouseHover('link4')}
               onMouseLeave={() => MouseLeave('link4')}
               // onClick={()=> {navigate('/Challenge');}}

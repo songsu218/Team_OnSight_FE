@@ -10,6 +10,7 @@ import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
 import Crew from './pages/Crew';
 import Challenge from './pages/Challenge';
+import ChallengeDetail from './pages/ChallengeDetail';
 
 function App() {
   return (
@@ -22,8 +23,9 @@ function App() {
           <Route path="/signuppage" element={<SignUpPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/Search" element={<SearchPage />} />
-          <Route path="/Crew" element={<Crew />} />
-          <Route path="/Challenge" element={<Challenge />} />
+          <Route path="/crew" element={<Crew />} />
+          <Route path="/challenge" element={<Challenge />} />
+          <Route path="/challenge/:challenge_id/:challenge_name" element={<ChallengeDetail />} />
         </Routes>
       </div>
     </div>
