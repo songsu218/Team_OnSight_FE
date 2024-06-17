@@ -30,7 +30,13 @@ function RecordModal() {
     setSelectedPlace(place);
     setOpenPlace(false);
   };
-  const place = ['무슨클라이밍장1', '무슨클라이밍장2', '무슨클라이밍장3'];
+  const place = [
+    '광교스포츠클라이밍장',
+    '클라이밍파크 성수점',
+    '클라이밍파크 강남점',
+    '볼더프렌즈 클라이밍',
+    '더플라스틱클라이밍',
+  ];
   const [openDiffi, setOpenDiffi] = useState(false);
   const [selectedDiffis, setSelectedDiffis] = useState([]);
   const toggleDiffi = () => setOpenDiffi(!openDiffi);

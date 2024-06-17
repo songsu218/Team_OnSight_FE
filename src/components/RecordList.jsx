@@ -34,7 +34,7 @@ const RecordList = () => {
     <Swiper
       slidesPerView={3}
       loop={true}
-      spaceBetween={30}
+      spaceBetween={50}
       breakpoints={{
         320: {
           slidesPerView: 1,
@@ -59,29 +59,19 @@ const RecordList = () => {
       {records.map((record) => (
         <SwiperSlide key={record._id}>
           <div className={style.swiperBox}>
-            <div className={style.upperBox}>
-              <img src="/img/test.jpg" alt="profile" />
-              <span>닉네임</span>
-            </div>
-            <div className={style.lowerBox}>
-              <img
-                src={`http://localhost:8000/uploads/${record.thumbnail}`}
-                alt="thumbnail"
-              />
-              <div className={style.levelBox}>
-                <h3>{restrictText(record.title, 10)}</h3>
-                <span>{record.center}</span>
-                <div className={style.levelArea}>
-                  <div
-                    style={{
-                      width: '10px',
-                      height: '10px',
-                      backgroundColor: 'red',
-                      borderRadius: '2px',
-                    }}
-                  ></div>
-                </div>
+            <div className={style.swiperCon}>
+              <div className={style.imgCon}>
+                <img
+                  src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                  alt="thumbnail"
+                />
               </div>
+              <span>
+                <img src="/img/test.jpg" alt="profile" />
+                <strong>닉네임</strong>
+              </span>
+              <h3>{restrictText(record.title, 15)}</h3>
+              <span>{record.center}</span>
             </div>
           </div>
         </SwiperSlide>
