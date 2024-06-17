@@ -4,10 +4,21 @@ import "swiper/css";
 import ChallengeBox from "../components/challenge/ChallengeBox";
 import { Button, Container, Grid, IconButton, Typography } from "@mui/material";
 import ControlPointOutlinedIcon from "@mui/icons-material/ControlPointOutlined";
+import { ch } from "../api";
 
 const Challenge = () => {
   const [ongoingChallenges, setOngoingChallenges] = useState([]);
   const [pastChallenges, setPastChallenges] = useState([]);
+  const test = () => {
+    ch.chCurrentList(new Date())
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+      });
+  };
+
   const data = [
     {
       id: 1,
