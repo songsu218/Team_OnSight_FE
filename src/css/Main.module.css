@@ -29,33 +29,53 @@
   position: absolute;
   left: 0;
   width: 5%;
+  transition: 0.3s;
+  cursor: pointer;
 }
 .main .personBox img:nth-of-type(1) {
   top: 10%;
   left: 34%;
 }
+.main .personBox img:nth-of-type(1):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
+
 .main .personBox img:nth-of-type(2) {
   top: 40%;
   left: 40%;
+}
+.main .personBox img:nth-of-type(2):hover {
+  transform: scale(1.1);
+  rotate: -5deg;
 }
 .main .personBox img:nth-of-type(3) {
   width: 4%;
   top: 50%;
   left: 60%;
 }
-
+.main .personBox img:nth-of-type(3):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
 .main .personBox img:nth-of-type(4) {
   width: 6%;
   top: 75%;
   left: 75%;
 }
-
+.main .personBox img:nth-of-type(4):hover {
+  transform: scale(1.1);
+  rotate: -5deg;
+}
 .main .personBox img:nth-of-type(5) {
   width: 6%;
   top: 90%;
   left: 87%;
 }
-
+.main .personBox img:nth-of-type(5):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
 .main .recordArea h2 {
   font-family: 'Montserrat', sans-serif;
   font-size: 3.5rem;
