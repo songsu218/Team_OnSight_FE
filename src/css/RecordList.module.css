@@ -1,5 +1,11 @@
+.mw {
+  width: 400px;
+  margin: auto;
+  padding-bottom: 3rem;
+  position: relative;
+}
+
 .swiperBox {
-  /* border: 1px solid blue; */
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   display: flex;
   justify-content: center;
@@ -45,6 +51,7 @@
 
 .swiperCon span:nth-of-type(1) {
   margin-bottom: 2rem;
+  padding-left: 1rem;
 }
 
 .swiperBox span img {
@@ -60,14 +67,15 @@
 .swiperBox h3 {
   font-size: 1.25rem;
   white-space: nowrap;
-  padding-left: 0.5rem;
+  padding-left: 1.5rem;
+  font-weight: bold;
 }
 
 .swiperBox span:nth-of-type(2) {
   white-space: nowrap;
   position: absolute;
-  bottom: 15%;
-  right: 0;
+  bottom: 19%;
+  right: 4%;
 }
 
 .swiperBox span:nth-of-type(2)::before {
