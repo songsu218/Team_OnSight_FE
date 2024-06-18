@@ -1,0 +1,93 @@
+.rankListCon {
+  position: absolute;
+  width: 50%;
+  top: 40%;
+  left: 174px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rankListCard {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 200px;
+  padding: 24px 32px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.rankListCon .rankListCard > strong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 2.5rem;
+  background-color: #d3a428;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.75rem;
+}
+
+.rankListCon .rankListCard:nth-of-type(2) > strong {
+  background-color: #a3a3a3;
+}
+.rankListCon .rankListCard:nth-of-type(3) > strong {
+  background-color: #936840;
+}
+.rankListCon .rankListCard:nth-of-type(4) > strong,
+.rankListCon .rankListCard:nth-of-type(5) > strong {
+  background-color: transparent;
+  color: #000000;
+}
+
+.rankListCard span {
+  text-align: center;
+  font-size: 2.25rem;
+  white-space: nowrap;
+}
+
+.rankListCard span img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 0.25rem;
+}
+
+.rankListCard span strong {
+  font-size: 1.25rem;
+}
+
+.rankListCard:nth-of-type(1) {
+  z-index: 5;
+  top: 0;
+  left: 0;
+}
+
+.rankListCard:nth-of-type(2) {
+  top: 50px;
+  left: 20%;
+  z-index: 4;
+}
+
+.rankListCard:nth-of-type(3) {
+  top: 100px;
+  left: 40%;
+  z-index: 3;
+}
+
+.rankListCard:nth-of-type(4) {
+  top: 150px;
+  left: 60%;
+  z-index: 2;
+}
+
+.rankListCard:nth-of-type(5) {
+  top: 200px;
+  left: 80%;
+  z-index: 1;
+}

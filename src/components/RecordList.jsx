@@ -71,8 +71,11 @@ const RecordList = () => {
                   <img src="/img/test.jpg" alt="profile" />
                   <strong>닉네임</strong>
                 </span>
-                <h3>{restrictText(record.title, 15)}</h3>
                 <span>{record.center}</span>
+                <div className={style.textBox}>
+                  <h3>{restrictText(record.title, 15)}</h3>
+                  <p>{record.detail}</p>
+                </div>
               </div>
             </div>
           </div>

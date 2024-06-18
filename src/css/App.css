@@ -20,5 +20,12 @@
 .mw {
   width: calc(100% - 348px);
   margin: auto;
-  padding: 106px 0;
+  padding: 106px 0 50px;
+}
+
+@media (max-width: 1440px) {
+  .viewCon {
+    width: 100%;
+    margin: auto;
+  }
 }

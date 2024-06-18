@@ -1,7 +1,7 @@
 .mw {
   width: 400px;
   margin: auto;
-  padding-bottom: 3rem;
+  padding-bottom: 1rem;
   position: relative;
 }
 
@@ -20,7 +20,7 @@
   right: 0;
   top: 16rem;
   bottom: 0;
-  background: #b9b9b9;
+  background: #eaeaea;
   opacity: 0.3;
   z-index: -1;
 }
@@ -64,17 +64,23 @@
   padding-left: 0.5rem;
 }
 
+.swiperBox .textBox {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .swiperBox h3 {
   font-size: 1.25rem;
   white-space: nowrap;
-  padding-left: 1.5rem;
   font-weight: bold;
 }
 
 .swiperBox span:nth-of-type(2) {
   white-space: nowrap;
   position: absolute;
-  bottom: 19%;
+  bottom: 25%;
   right: 4%;
 }
 
