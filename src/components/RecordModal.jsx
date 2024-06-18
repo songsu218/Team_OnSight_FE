@@ -139,7 +139,7 @@ function RecordModal() {
   return (
     <>
       <button onClick={handleShow} className={style.addBtn}>
-        <i className="fa-solid fa-plus"></i>
+        <span>내 기록 추가하기</span>
       </button>
       <Modal className={style.modalRe} show={show} onHide={handleClose}>
         <Modal.Header closeButton>

@@ -4,10 +4,21 @@
   overflow: hidden;
 }
 
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .viewCon {
   width: calc(100% - 192px);
   margin-left: auto;
 }
 
 .mw {
+  width: calc(100% - 348px);
+  margin: auto;
+  padding: 106px 0;
 }
