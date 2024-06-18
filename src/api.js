@@ -23,7 +23,7 @@ import axios from 'axios';
  * };
  */
 
-const baseURL = 'http://localhost:5000/api';
+const baseURL = 'http://localhost:8000';
 
 // axios 인스턴스를 생성합니다.
 const instance = axios.create({
