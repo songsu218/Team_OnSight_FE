@@ -58,3 +58,29 @@
 .gnb .viewMore i {
   padding: 0 0.5rem 1rem 2rem;
 }
+
+@media (max-width: 1440px) {
+  .gnb {
+    position: static;
+    width: 100%;
+    height: 8vh;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .holdBar > a {
+    display: none;
+  }
+
+  .gnb h1 {
+    padding: 1rem;
+  }
+
+  .gnb .viewMore i {
+    padding: 0.5rem;
+  }
+
+  .gnb .viewMore span {
+    margin-right: 1rem;
+  }
+}

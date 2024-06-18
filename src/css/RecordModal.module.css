@@ -1,12 +1,8 @@
 .addBtn {
-  width: 50px;
+  width: 150px;
   height: 50px;
-  border-radius: 50%;
   background-color: #000000;
-  position: absolute;
   border: none;
-  bottom: 5%;
-  right: 5%;
   transition: 0.3s;
   display: flex;
   align-items: center;
@@ -18,9 +14,9 @@
   transform: scale(1.2);
 }
 
-.addBtn > i {
+.addBtn > span {
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
-  font-size: 2.5rem;
+  font-size: 1rem;
   color: #ffffff;
 }
 
