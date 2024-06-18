@@ -81,8 +81,27 @@ const Search = () => {
   ] || { lat: 37.5665, lng: 126.978 };
 
   return (
-    <main className={`${style.mw} ${style.search}`}>
+    <main className={style.search}>
       <div className={style.sidebar}>
+        <h2>암장 찾기</h2>
+
+        <div className={style.selectCity}>
+          <select
+            value={selectedCity}
+            onChange={(e) => setSelectedCity(e.target.value)}
+          >
+            <option value="서울특별시">서울특별시</option>
+          </select>
+          <select value={selectedDistrict} onChange={handleDistrictChange}>
+            {Object.keys(districtCoordinates[selectedCity] || {}).map(
+              (district) => (
+                <option key={district} value={district}>
+                  {district}
+                </option>
+              )
+            )}
+          </select>
+        </div>
         <div>
           <input
             type="text"
@@ -94,9 +113,10 @@ const Search = () => {
           <i
             className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
           ></i>
+          <i class={`fa-solid fa-rotate-left ${style.rotate}`}></i>
         </div>
 
-        <h2>즐겨찾기 목록</h2>
+        <h3>즐겨찾기 목록</h3>
         {/* <ul className={style.list}>
           {favorites.map((gym) => (
             <li key={gym.id} className={style.listItem}>
@@ -128,22 +148,6 @@ const Search = () => {
         </div>
       </div>
       <div className={style.mapContainer}>
-        <select
-          value={selectedCity}
-          onChange={(e) => setSelectedCity(e.target.value)}
-        >
-          <option value="서울특별시">서울특별시</option>
-        </select>
-        <select value={selectedDistrict} onChange={handleDistrictChange}>
-          {Object.keys(districtCoordinates[selectedCity] || {}).map(
-            (district) => (
-              <option key={district} value={district}>
-                {district}
-              </option>
-            )
-          )}
-        </select>
-
         <Map
           center={selectedCoordinates}
           style={{ width: '100%', height: '100%' }}
