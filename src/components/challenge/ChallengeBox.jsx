@@ -53,10 +53,12 @@ const ChallengeBox = (props) => {
               ref={swiperRef}
               spaceBetween={50}
               slidesPerView={slidesPerViewCount}
-              navigation
+              // navigation
+              navigation={{ prevEl: '.swiper-button-prev', nextEl: '.swiper-button-next' }}
               autoplay={{ delay: 3000 }}
               modules={[Navigation, Pagination, Autoplay]}
               pagination={{ clickable: true }}
+              
               // {...swiperParams} ref={setSwiper}
             >
               {dataList.length == 0 ? '' : dataList.map((item) => (

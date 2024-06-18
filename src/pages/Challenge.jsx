@@ -1,204 +1,189 @@
 import style from "../css/challenge.module.css";
-import React from "react";
+import React, { useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
 import "swiper/css";
 
-const Challenge = () => {
+const Challenge = (props) => {
+  const { showJoinButton, hideslideButton, slidesPerViewCount } = {
+    ...props,
+  };
+
+  const navigate = useNavigate();
+  const swiperRef = useRef(null);
+  const [swiper, setSwiper] = useState(null);
+  const [totalSlides, setTotalSlides] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goNext = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slideNext();
+    }
+  };
+
+  const goPrev = () => {
+    if (swiperRef.current && swiperRef.current.swiper) {
+      swiperRef.current.swiper.slidePrev();
+    }
+  };
+  const handleCardClick = (item) => {
+    navigate(`/challenge/${item.id}/${item.title}`, {
+      state: { detailData: item },
+    });
+  };
+  const handleSlideChange = () => {
+    if (swiper !== null) {
+      setCurrentIndex(swiper.realIndex);
+    }
+  };
+  const handleSwiper = (swiper) => {
+    setSwiper(swiper);
+    if (swiper) {
+      setTotalSlides(swiper.slides.length);
+    }
+  };
+
+  const dataList = [
+    {
+      id: 1,
+      title: "경기도 어찌구 챌린지",
+      center: "경기 클라이밍장 이름",
+      date: "20240714",
+      images: "/img/gyeonggi.png",
+    },
+    {
+      id: 2,
+      title: "서울 어찌구 챌린지",
+      center: "서울 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/seoul.png",
+    },
+    {
+      id: 3,
+      title: "경기2 어찌구 챌린지",
+      center: "경기2 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/gyeonggi.png",
+    },
+    {
+      id: 4,
+      title: "서울2 어찌구 챌린지",
+      center: "서울2 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/seoul.png",
+    },
+    {
+      id: 5,
+      images: "/img/gangwon.png",
+      title: "강원도 어찌구 챌린지",
+      date: "20240519",
+      center: "강원 클라이밍장 이름",
+    },
+    {
+      id: 6,
+      images: "/img/gangwon.png",
+      title: "강원도2 어찌구 챌린지",
+      date: "20240519",
+      center: "강원2 클라이밍장 이름",
+    },
+    {
+      id: 7,
+      images: "/img/gangwon.png",
+      title: "강원도3 어찌구 챌린지",
+      date: "20240519",
+      center: "강원3 클라이밍장 이름",
+    },
+  ];
+
   return (
     <>
-      <>
-        <meta charSet="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <style
-          dangerouslySetInnerHTML={{
-            __html:
-              ".page-tit-area {\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n      margin: 0 0 5.6rem;\n    }",
-          }}
-        />
-        <title>Document</title>
-        {/* <link
-          rel="stylesheet"
-          href={style}
-        /> */}
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
-        />
-
-        <main id={style.container}>
-          <div className={style.content}>
-            {/* h1은 로고(사이트명)이라 가정하고 */}
-            <div className="page-tit-area">
-              <h2 className="page-tit">챌린지 일정</h2>
-              <nav className="page-nav">
-                <ul>
-                  <li className="active">
-                    <a
-                      href="#"
-                      className="page-link"
-                      title="나의 챌린지 만들기 페이지 이동 링크"
-                    >
-                      나의 챌린지 만들기
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="#"
-                      className="page-link"
-                      title="나의 챌린지 보기 페이지 이동 링크"
-                    >
-                      나의 챌린지 보기
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div className="sub-tit-area">
-              <h3 className="sub-tit">2024</h3>
-            </div>
-            <div className="filter-option">
-              <label htmlFor="challengeOption1" className="option-label">
-                <span>상태</span>
-              </label>
-              <select id="challengeOption1" className="option-list">
-                <option>선택</option>
-                <option value={1}>진행 중</option>
-                <option value={2}>진행 끝</option>
-              </select>
-            </div>
-            <div className="challenge-wrap">
-              <div className="swiper mySwiper">
-                <div className="swiper-wrapper">
-                  <div className="swiper-slide">
-                    <a
-                      href="https://www.naver.com"
-                      title="해당 챌린지 상세 페이지로 이동"
-                      className="challenge-link"
-                      target="_blank"
-                    >
-                      <div className="challenge-img">
-                        <img
-                          src="https://ojsfile.ohmynews.com/PHT_IMG_FILE/2023/0525/IE003155586_PHT.jpg"
-                          alt="A챌린지"
-                        />
-                      </div>
-                      <span className="challenge-cate">클라이밍장 이름</span>
-                      <em className="challenge-tit">C챌린지</em>
-                      <span className="challenge-txt">
-                        2024.06.20(목) ~ 2024.06.23(일)
-                        <p />
-                      </span>
-                    </a>
-                  </div>
-                  <div className="swiper-slide">
-                    <a
-                      href="#"
-                      title="해당 챌린지 상세 페이지로 이동"
-                      className="challenge-link"
-                    >
-                      <div className="challenge-img">
-                        <img
-                          src="https://mblogthumb-phinf.pstatic.net/MjAxODExMDFfODMg/MDAxNTQxMDQ5NTQ4MDM1.HTE_ClokpSF4eWutgUkimC8L8qU4WdgCayAfSDfY1NQg.Vv6m5UgI_1kXKBIgrdRIlznAyTh3ng9mGMtAv8Ccdcog.JPEG.jung_nang_gu/%ED%99%8D%EB%B3%B4%ED%8F%AC%EC%8A%A4%ED%84%B0.jpg?type=w800"
-                          alt="A챌린지"
-                        />
-                      </div>
-                      <span className="challenge-cate">연극</span>
-                      <em className="challenge-tit">B챌린지B챌린지B챌린지</em>
-                      <span className="challenge-txt">
-                        2024.06.20(목) ~ 2024.06.23(일)
-                        <p />
-                      </span>
-                    </a>
-                  </div>
-                  <div className={'swiper-slide'}> 
-                    <a
-                      href="#"
-                      title="해당 챌린지 상세 페이지로 이동"
-                      className="challenge-link"
-                    >
-                      <div className="challenge-img">
-                        <img
-                          src="https://ojsfile.ohmynews.com/PHT_IMG_FILE/2023/0525/IE003155586_PHT.jpg"
-                          alt="A챌린지"
-                        />
-                      </div>
-                      <span className="challenge-cate">연극 이름</span>
-                      <em className="challenge-tit">A챌린지</em>
-                      <span className="challenge-txt">
-                        2024.06.20(목) ~ 2024.06.23(일)
-                        <p />
-                      </span>
-                    </a>
-                  </div>
-                  <div className="swiper-slide">
-                    <a
-                      href="#"
-                      title="해당 챌린지 상세 페이지로 이동"
-                      className="challenge-link"
-                    >
-                      <div className="challenge-img">
-                        <img
-                          src="https://ojsfile.ohmynews.com/PHT_IMG_FILE/2023/0525/IE003155586_PHT.jpg"
-                          alt="A챌린지"
-                        />
-                      </div>
-                      <span className="challenge-cate">클라이밍장 이름</span>
-                      <em className="challenge-tit">A챌린지</em>
-                      <span className="challenge-txt">
-                        2024.06.20(목) ~ 2024.06.23(일)
-                        <p />
-                      </span>
-                    </a>
-                  </div>
-                  <div className="swiper-slide">
-                    <a
-                      href="#"
-                      title="해당 챌린지 상세 페이지로 이동"
-                      className="challenge-link"
-                    >
-                      <div className="challenge-img">
-                        <img
-                          src="https://ojsfile.ohmynews.com/PHT_IMG_FILE/2023/0525/IE003155586_PHT.jpg"
-                          alt="A챌린지"
-                        />
-                      </div>
-                      <span className="challenge-cate">클라이밍장 이름</span>
-                      <em className="challenge-tit">A챌린지</em>
-                      <span className="challenge-txt">
-                        2024.06.20(목) ~ 2024.06.23(일)
-                        <p />
-                      </span>
-                    </a>
-                  </div>
-                </div>
-                <div className="control">
-                  <div className="swiper-button-prev" />
-                  <div className="swiper-pagination" />
-                  <div className="autoplay-progress">
-                    <svg viewBox="0 0 48 48">
-                      <circle cx={24} cy={24} r={20} />
-                    </svg>
-                    <button
-                      type="button"
-                      className="control-btn btn-stop"
-                      title="정지 버튼"
-                    >
-                      자동재생 정지 버튼
-                    </button>
-                    <button
-                      type="button"
-                      className="control-btn btn-play"
-                      title="재생 버튼"
-                    >
-                      재생 버튼
-                    </button>
-                  </div>
-                  <div className="swiper-button-next" />
-                </div>
-              </div>
-            </div>
+      <main id={style.container}>
+        <div className={style.content}>
+          <div className={style.page_tit_area}>
+            <h2 className={style.page_tit}>챌린지 일정</h2>
+            <nav className={style.page_nav}>
+              <ul>
+                <li className={style.active}>
+                  <a
+                    href="#"
+                    className={style.page_link}
+                    title="나의 챌린지 만들기 페이지 이동 링크"
+                  >
+                    나의 챌린지 만들기
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className={style.page_link}
+                    title="나의 챌린지 보기 페이지 이동 링크"
+                  >
+                    나의 챌린지 보기
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
-        </main>
-      </>
+          <div className={style.sub_tit_area}>
+            <h3 className={style.sub_tit}>2024</h3>
+          </div>
+          <div className={style.filter_option}>
+            <label htmlFor="challengeOption1" className={style.option_label}>
+              <span>상태</span>
+            </label>
+            <select id={style.challengeOption1} className={style.option_list}>
+              <option>선택</option>
+              <option value={1}>진행 중</option>
+              <option value={2}>진행 끝</option>
+            </select>
+          </div>
+          <div className={style.challenge_wrap}>
+            <Swiper
+              ref={swiperRef}
+              spaceBetween={50}
+              slidesPerView={4}
+              navigation
+              autoplay={{ delay: 3000 }}
+              modules={[Navigation, Pagination, Autoplay]}
+              pagination={{ clickable: true }}
+              onSwiper={handleSwiper}
+              onSlideChange={handleSlideChange}
+            >
+              {dataList.length == 0
+                ? ""
+                : dataList.map((item) => (
+                    <SwiperSlide
+                      key={item.id}
+                      onClick={() => handleCardClick(item)}
+                    >
+                      <div className={style.challenge_link}>
+                        <div className={style.challenge_img}>
+                          <img
+                            srcSet={`${item.images}?h=120&fit=crop&auto=format&dpr=2 2x`}
+                            src={`${item.images}?h=120&fit=crop&auto=format`}
+                            alt={item.title}
+                          />
+                        </div>
+                        <span className={style.challenge_cate}>
+                          {item.center}
+                        </span>
+                        <em className={style.challenge_tit}>{item.title}</em>
+                        <span className={style.challenge_txt}>
+                          {item.date}
+                          <p />
+                        </span>
+                      </div>
+                    </SwiperSlide>
+                  ))}
+              <div className={style.swiper_button_prev} />
+              {currentIndex} / {totalSlides}
+              <div className={style.swiper_button_next} />
+
+            </Swiper>
+          </div>
+        </div>
+      </main>
     </>
   );
 };
