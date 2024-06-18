@@ -2,45 +2,39 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import style from '../css/Search.module.css';
+
+const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
+
 const Search = () => {
-  const [climbingGyms, setClimbingGyms] = useState([]);
-  // const [favorites, setFavorites] = useState([]);
+  const [climbingCenters, setClimbingCenters] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCity, setSelectedCity] = useState('서울특별시');
-  const [selectedDistrict, setSelectedDistrict] = useState('강남구');
-  const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
+  const [selectedDistrict, setSelectedDistrict] = useState('구로구');
+  const [mapCenter, setMapCenter] = useState({ lat: 37.4955, lng: 126.8875 });
+  const [selectedCenterInfo, setSelectedCenterInfo] = useState(null);
 
   useEffect(() => {
     axios
-      .get('/api/climbing-gyms')
-      .then((response) => setClimbingGyms(response.data))
-      .catch((error) => console.error(error));
+      .get('http://localhost:8000/api/center')
+      .then((response) => setClimbingCenters(response.data))
+      .catch((error) => console.error('API 요청 에러:', error));
   }, []);
 
-  // const toggleFavorite = (gym) => {
-  //   if (favorites.includes(gym)) {
-  //     setFavorites(favorites.filter((fav) => fav !== gym));
-  //   } else {
-  //     setFavorites([...favorites, gym]);
-  //   }
-  // };
-
   useEffect(() => {
-    const selectedGym = climbingGyms.find((gym) =>
-      gym.name.includes(searchTerm)
+    const selectedCenter = climbingCenters.find((center) =>
+      center.center.includes(searchTerm)
     );
-    if (selectedGym) {
-      setMapCenter({ lat: selectedGym.lat, lng: selectedGym.lng });
+    if (selectedCenter) {
+      setMapCenter({
+        lat: selectedCenter.latlng.lat,
+        lng: selectedCenter.latlng.lng,
+      });
     }
-  }, [searchTerm, climbingGyms]);
-
-  // const filteredGyms = climbingGyms.filter(
-  //   (gym) => gym.name.includes(searchTerm) || gym.location.includes(searchTerm)
-  // );
+  }, [searchTerm, climbingCenters]);
 
   const handleDistrictChange = (event) => {
     setSelectedDistrict(event.target.value);
-    const coordinates = districtCoordinates[event.target.value];
+    const coordinates = districtCoordinates[selectedCity]?.[event.target.value];
     if (coordinates) {
       setMapCenter(coordinates);
     }
@@ -76,6 +70,23 @@ const Search = () => {
     },
   };
 
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&autoload=false`;
+    script.async = true;
+    document.head.appendChild(script);
+
+    script.onload = () => {
+      window.kakao.maps.load(() => {
+        console.log('Kakao maps loaded');
+      });
+    };
+
+    return () => {
+      script.remove();
+    };
+  }, []);
+
   const selectedCoordinates = districtCoordinates[selectedCity]?.[
     selectedDistrict
   ] || { lat: 37.5665, lng: 126.978 };
@@ -83,7 +94,7 @@ const Search = () => {
   return (
     <main className={style.search}>
       <div className={style.sidebar}>
-        <h2>암장 찾기</h2>
+        <h3>암장 찾기</h3>
 
         <div className={style.selectCity}>
           <select
@@ -113,62 +124,50 @@ const Search = () => {
           <i
             className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
           ></i>
-          <i class={`fa-solid fa-rotate-left ${style.rotate}`}></i>
+          <i className={`fa-solid fa-rotate-left ${style.rotate}`}></i>
         </div>
 
-        <h3>즐겨찾기 목록</h3>
-        {/* <ul className={style.list}>
-          {favorites.map((gym) => (
-            <li key={gym.id} className={style.listItem}>
-              {gym.name}
-            </li>
-          ))}
-        </ul> */}
-        <div>
-          목록 리스트
-          {/* <ul className={style.list}>
-            {filteredGyms.map((gym) => (
-              <li key={gym.id} className={style.listItem}>
-                <img src={gym.image} alt={gym.name} />
-                <div>{gym.name}</div>
-                <div>{gym.location}</div>
-                <button
-                  className={style.starButton}
-                  onClick={() => toggleFavorite(gym)}
-                >
-                  {favorites.includes(gym) ? (
-                    <i class="fa-solid fa-star"></i>
-                  ) : (
-                    <i class="fa-regular fa-star"></i>
-                  )}
-                </button>
-              </li>
-            ))}
-          </ul> */}
-        </div>
+        {selectedCenterInfo && (
+          <div className={style.centerList}>
+            <img
+              src={selectedCenterInfo.thumbnail}
+              alt={selectedCenterInfo.center}
+            />
+            <div className={style.centerInfo}>
+              <h4>{selectedCenterInfo.center}</h4>
+              <p>{selectedCenterInfo.gu}</p>
+              {/* 즐겨찾기 */}
+            </div>
+            <p className={style.centerDetail}>{selectedCenterInfo.detail}</p>
+
+            <p className={style.centerRecord}>기록 3000</p>
+          </div>
+        )}
       </div>
       <div className={style.mapContainer}>
         <Map
-          center={selectedCoordinates}
+          center={mapCenter}
           style={{ width: '100%', height: '100%' }}
           level={3}
         >
-          {/* {climbingGyms.map((gym) => (
-            <MapMarker
-              key={gym.id}
-              position={{ lat: gym.lat, lng: gym.lng }}
-              image={{
-                src: favorites.includes(gym)
-                  ? 'yellow-marker.png'
-                  : 'blue-marker.png',
-                size: { width: 24, height: 35 },
-              }}
-              title={gym.name}
-            />
-          ))} */}
+          {climbingCenters
+            .filter(
+              (center) =>
+                center.si === selectedCity && center.gu === selectedDistrict
+            )
+            .map((center) => (
+              <MapMarker
+                key={center._id}
+                position={{ lat: center.latlng.lat, lng: center.latlng.lng }}
+                onClick={() => setSelectedCenterInfo(center)}
+              >
+                <div className={style.centerName}>{center.center}</div>
+              </MapMarker>
+            ))}
         </Map>
       </div>
     </main>
   );
 };
+
 export default Search;
