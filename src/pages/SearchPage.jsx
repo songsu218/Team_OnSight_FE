@@ -12,6 +12,9 @@ const Search = () => {
   const [selectedDistrict, setSelectedDistrict] = useState('구로구');
   const [mapCenter, setMapCenter] = useState({ lat: 37.4955, lng: 126.8875 });
   const [selectedCenterInfo, setSelectedCenterInfo] = useState(null);
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDetails, setShowDetails] = useState(false);
+const [currentCenter, setCurrentCenter] = useState(null);
 
   useEffect(() => {
     axios
@@ -20,17 +23,43 @@ const Search = () => {
       .catch((error) => console.error('API 요청 에러:', error));
   }, []);
 
+  // 한글 초성 분리 함수
+  const getInitials = (str) => {
+    const INITIALS = [
+      'ㄱ', 'ㄲ', 'ㄴ', 'ㄷ', 'ㄸ', 'ㄹ', 'ㅁ', 'ㅂ', 'ㅃ', 'ㅅ', 'ㅆ',
+      'ㅇ', 'ㅈ', 'ㅉ', 'ㅊ', 'ㅋ', 'ㅌ', 'ㅍ', 'ㅎ'
+    ];
+    return str.split('').map((char) => {
+      const code = char.charCodeAt(0) - 44032;
+      if (code >= 0 && code <= 11171) {
+        return INITIALS[Math.floor(code / 588)];
+      }
+      return char;
+    }).join('');
+  };
+
+  const handleSearch = () => {
+    const termInitials = getInitials(searchTerm);
+    const results = climbingCenters.filter((center) => {
+      const centerInitials = getInitials(center.center);
+      return center.center.includes(searchTerm) || centerInitials.includes(termInitials);
+    });
+    setSearchResults(results);
+    if (results.length === 1) {
+      setSelectedCenterInfo(results[0]);
+    } else {
+      setSelectedCenterInfo(null);
+    }
+  };
+
   useEffect(() => {
-    const selectedCenter = climbingCenters.find((center) =>
-      center.center.includes(searchTerm)
-    );
-    if (selectedCenter) {
+    if (selectedCenterInfo) {
       setMapCenter({
-        lat: selectedCenter.latlng.lat,
-        lng: selectedCenter.latlng.lng,
+        lat: selectedCenterInfo.latlng.lat,
+        lng: selectedCenterInfo.latlng.lng,
       });
     }
-  }, [searchTerm, climbingCenters]);
+  }, [selectedCenterInfo]);
 
   const handleDistrictChange = (event) => {
     setSelectedDistrict(event.target.value);
@@ -38,6 +67,15 @@ const Search = () => {
     if (coordinates) {
       setMapCenter(coordinates);
     }
+  };
+
+  const handleRefresh = () => {
+    setSearchTerm('');
+    setSelectedCity('서울특별시');
+    setSelectedDistrict('구로구');
+    setMapCenter({ lat: 37.4955, lng: 126.8875 });
+    setSelectedCenterInfo(null);
+    setSearchResults([]);
   };
 
   const districtCoordinates = {
@@ -70,6 +108,20 @@ const Search = () => {
     },
   };
 
+  const handleMarkerClick = (center) => {
+    setCurrentCenter(center);
+    setShowDetails(true);
+  };
+  
+  const handleListClick = (center) => {
+    setCurrentCenter(center);
+    setShowDetails(true);
+  };
+  const handleCloseDetails = () => {
+    setShowDetails(false);
+    setCurrentCenter(null);
+  };
+  
   useEffect(() => {
     const script = document.createElement('script');
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&autoload=false`;
@@ -92,58 +144,119 @@ const Search = () => {
   ] || { lat: 37.5665, lng: 126.978 };
 
   return (
-    <main className={style.search}>
-      <div className={style.sidebar}>
-        <h3>암장 찾기</h3>
+    <main className={`${style.search} viewCon`}>
+     <div className={`${style.sidebar} ${showDetails ? style.sidebarDetails : ''}`}>
+  {showDetails && currentCenter ? (
+    <div className={style.centerDetails}>
+      <i
+        className={`fa-solid fa-xmark ${style.iconX}`}  
+        onClick={handleCloseDetails}
+      ></i>
+      <img src={currentCenter.thumbnail} alt={currentCenter.center} />
 
-        <div className={style.selectCity}>
-          <select
-            value={selectedCity}
-            onChange={(e) => setSelectedCity(e.target.value)}
-          >
-            <option value="서울특별시">서울특별시</option>
-          </select>
-          <select value={selectedDistrict} onChange={handleDistrictChange}>
-            {Object.keys(districtCoordinates[selectedCity] || {}).map(
-              (district) => (
-                <option key={district} value={district}>
-                  {district}
-                </option>
-              )
-            )}
-          </select>
+      <div className={style.centerDetailInfo}>
+        <h4>{currentCenter.center}</h4>
+        <p>{currentCenter.gu}</p>
+        {/* 즐겨찾기 */}
+      </div>
+
+      <div className={style.centerHome}>
+        <div className={style.centerAddress}>
+          <i className="fa-solid fa-location-pin"></i>
+          {currentCenter.si} {currentCenter.gu} {currentCenter.address}
         </div>
         <div>
-          <input
-            type="text"
-            className={style.searchInput}
-            placeholder="검색창"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <i
-            className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
-          ></i>
-          <i className={`fa-solid fa-rotate-left ${style.rotate}`}></i>
+          <i className="fa-solid fa-phone"></i>
+          {currentCenter.contact}
         </div>
-
-        {selectedCenterInfo && (
-          <div className={style.centerList}>
-            <img
-              src={selectedCenterInfo.thumbnail}
-              alt={selectedCenterInfo.center}
-            />
-            <div className={style.centerInfo}>
-              <h4>{selectedCenterInfo.center}</h4>
-              <p>{selectedCenterInfo.gu}</p>
-              {/* 즐겨찾기 */}
+        <div>
+          <i className="fa-solid fa-globe"></i>
+          <a href={currentCenter.website} target="_blank" rel="noopener noreferrer">
+            {currentCenter.website}
+          </a>
+        </div>
+        <div className={style.levelContainer}>난이도
+          {Object.entries(currentCenter.level).map(([key, value]) => (
+            <div 
+              key={key} 
+              className={style.levelBox} 
+              style={{ backgroundColor: value }}
+            > 
             </div>
-            <p className={style.centerDetail}>{selectedCenterInfo.detail}</p>
-
-            <p className={style.centerRecord}>기록 3000</p>
-          </div>
-        )}
+          ))}
+        </div>
+        <div>소개글: {currentCenter.detail}</div>
       </div>
+    </div>
+  ) : (
+    <>
+      <h3>암장 찾기</h3>
+      <div className={style.selectCity}>
+        <select
+          value={selectedCity}
+          onChange={(e) => setSelectedCity(e.target.value)}
+        >
+          <option value="서울특별시">서울특별시</option>
+        </select>
+        <select value={selectedDistrict} onChange={handleDistrictChange}>
+          {Object.keys(districtCoordinates[selectedCity] || {}).map(
+            (district) => (
+              <option key={district} value={district}>
+                {district}
+              </option>
+            )
+          )}
+        </select>
+      </div>
+      <div className={style.searchCon}>
+        <input
+          type="text"
+          className={style.searchInput}
+          placeholder="검색창"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
+        />
+        <i
+          className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
+          onClick={handleSearch}
+        ></i>
+        <i
+          className={`fa-solid fa-rotate-left ${style.rotate}`}
+          onClick={handleRefresh}
+        ></i>
+      </div>
+
+      {searchResults.length > 0 && (
+        <div className={style.searchResults}>
+          {searchResults.map((center) => (
+            <div
+              key={center._id}
+              className={style.centerList}
+              onClick={() => handleListClick(center)}
+            >
+              <img
+                src={center.thumbnail}
+                alt={center.center}
+              />
+              <div className={style.centerInfo}>
+                <h4>{center.center}</h4>
+                <p>{center.gu}</p>
+              </div>
+              <p className={style.centerDetail}>{center.detail}</p>
+              <p className={style.centerRecord}>기록 3000</p>
+            </div>
+          ))}
+        </div>
+      )}
+    </>
+  )}
+</div>
+
       <div className={style.mapContainer}>
         <Map
           center={mapCenter}
@@ -159,7 +272,7 @@ const Search = () => {
               <MapMarker
                 key={center._id}
                 position={{ lat: center.latlng.lat, lng: center.latlng.lng }}
-                onClick={() => setSelectedCenterInfo(center)}
+                onClick={() => handleMarkerClick(center)}
               >
                 <div className={style.centerName}>{center.center}</div>
               </MapMarker>
@@ -168,6 +281,7 @@ const Search = () => {
       </div>
     </main>
   );
+  
 };
 
 export default Search;

@@ -36,7 +36,9 @@
   margin-bottom: 3rem;
 }
 
-button {
+.SignInPage form button,
+.SignInPage>button
+ {
   border: 3px solid black;
   font-size: 1.25rem;
   font-weight: 900;
