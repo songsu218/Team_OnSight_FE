@@ -10,18 +10,18 @@ import { Autoplay } from 'swiper/modules';
 const RecordList = () => {
   const [records, setRecords] = useState([]);
 
-  useEffect(() => {
-    const fetchRecords = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/record');
-        setRecords(response.data);
-      } catch (error) {
-        console.error('error', error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchRecords = async () => {
+  //     try {
+  //       const response = await axios.get('http://localhost:8000/record');
+  //       setRecords(response.data);
+  //     } catch (error) {
+  //       console.error('error', error);
+  //     }
+  //   };
 
-    fetchRecords();
-  }, []);
+  //   fetchRecords();
+  // }, []);
 
   const restrictText = (text, maxLength) => {
     if (text.length > maxLength) {

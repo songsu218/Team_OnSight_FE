@@ -10,23 +10,30 @@ import MyPage from "./pages/MyPage";
 import SearchPage from "./pages/SearchPage";
 import Crew from "./pages/Crew";
 import Challenge from "./pages/Challenge";
+import ChallengeDetail from "./pages/ChallengeDetail";
 import CreateCrew from "./pages/CreateCrew";
 
 function App() {
   return (
     <div>
       <Header />
+      <div className="viewCon">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signinpage" element={<SignInPage />} />
           <Route path="/signuppage" element={<SignUpPage />} />
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/Search" element={<SearchPage />} />
-          <Route path="/Crew" element={<Crew />} />
+          <Route path="/crew" element={<Crew />} />
           <Route path="/CreateCrew" element={<CreateCrew />} />
-          <Route path="/Challenge" element={<Challenge />} />
+          <Route path="/challenge" element={<Challenge />} />
+          <Route
+            path="/challenge/:challenge_id/:challenge_name"
+            element={<ChallengeDetail />}
+          />
         </Routes>
       </div>
+    </div>
   );
 }
 
