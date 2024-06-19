@@ -16,7 +16,7 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="viewCon">
+      <div className="con">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signinpage" element={<SignInPage />} />
