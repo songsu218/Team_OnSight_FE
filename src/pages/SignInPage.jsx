@@ -53,8 +53,6 @@ const SignInPage = () => {
     });
   };
 
-  // 카카오 닉네임 프로필 사진 받기
-
   if (redirect) {
     //   return <Navigate to="/" />;
   }
@@ -66,15 +64,21 @@ const SignInPage = () => {
         <label>아이디</label>
         <input type="text" value={id} onChange={(e) => setId(e.target.value)} />
         <label>비밀번호</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        <input
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
         <span className={style.errorMessage}>{message1}</span>
         <button type="submit">로그인</button>
       </form>
       <button className={style.kakaoButtom} onClick={kakaoLogin}>
         카카오로 로그인
       </button>
-      <div>
-        계정이 없으신가요? <Link to="/user/signinpage">회원가입</Link>
+      <div className={style.moveSigninpage}>
+        <p>
+          계정이 없으신가요? <Link to="/signuppage">회원가입</Link>
+        </p>
       </div>
     </main>
   );

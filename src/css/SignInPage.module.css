@@ -50,13 +50,13 @@ button {
   margin-bottom: 3rem;
 }
 
-.SignInPage > button {
+.SignInPage>button {
   position: relative;
   background-color: #fdcf3e;
   width: 100%;
 }
 
-.SignInPage > button::after {
+.SignInPage>button::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -65,11 +65,10 @@ button {
   left: 0;
 }
 
-.SignInPage a {
-  display: block;
-  margin-top: 6rem;
-}
-
 .errorMessage {
   color: red;
+}
+
+.moveSigninpage>p:last-of-type {
+  margin-top: 100px;
 }

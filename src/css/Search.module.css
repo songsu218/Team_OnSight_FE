@@ -1,42 +1,75 @@
-.mw {
-    width: calc(100% - 240px);
-    margin-left: auto;
-    border: 1px solid red;
-}
-
-
 .search {
     display: flex;
     height: 100vh;
 }
 
 .sidebar {
-    border: 1px solid red;
+    background-color: #F1F1F1;
     width: 400px;
     padding: 20px;
     box-sizing: border-box;
     overflow-y: auto;
 }
 
-.sidebar h2 {
-    font-size: 1.5rem;
+.sidebar>h3 {
+    margin: 46px 0 50px 0;
+    text-align: center;
+    font-family: 'S-CoreDream-3Light';
+    font-size: 26px;
     font-weight: bold;
 }
+
+.selectCity {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.selectCity select {
+
+    width: 170px;
+    height: 36px;
+    margin-bottom: 10px;
+    padding-left: 10px;
+    border: 1px solid #DEE2E6;
+    border-radius: 0.5rem;
+    z-index: 2;
+}
+
+.sidebar div:nth-of-type(2) {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.sidebar .searchInput {
+    width: 260px;
+    height: 36px;
+    border: 1px solid #DEE2E6;
+    border-radius: 0.5rem;
+    padding-left: 10px;
+}
+
+
+.sidebar .readingGlasses,
+.sidebar .rotate {
+    width: 38px;
+    height: 38px;
+    background-color: white;
+    text-align: center;
+    line-height: 38px;
+    border-radius: 4px;
+    border: 1px solid #DEE2E6;
+}
+
 
 .mapContainer {
     flex: 1;
 }
 
-.searchInput {
-    width: 90%;
-    height: 1.5rem;
-    padding: 8px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-}
+
 
 .list {
-
     list-style: none;
     padding: 0;
 }
@@ -64,4 +97,48 @@
     border: none;
     cursor: pointer;
     font-size: 20px;
+}
+
+
+.centerName {
+    font-size: 0.8rem;
+
+}
+
+.centerList {
+    width: 347px;
+    height: 278px;
+    background-color: #fff;
+    padding: 10px;
+    margin-top: 20px;
+}
+
+.centerList img {
+    width: 306px;
+    height: 132px;
+
+}
+
+.centerInfo {
+    margin-top: 100px;
+    /* 임시 */
+    display: flex;
+}
+
+.centerInfo h4 {
+    font-size: 18px;
+}
+
+.centerInfo p {
+    font-size: 14px;
+    opacity: 0.5;
+}
+
+.centerDetail {
+    margin-top: 30px;
+}
+
+.centerRecord {
+
+    margin-top: 30px;
 }

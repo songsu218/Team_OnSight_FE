@@ -1,0 +1,155 @@
+.rankListCon {
+  position: absolute;
+  width: 50%;
+  top: 60%;
+  left: 174px;
+  display: flex;
+  flex-direction: column;
+}
+
+.rankListCard {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 200px;
+  padding: 24px 32px 24px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.rankListCon .rankListCard > strong {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 2.5rem;
+  background-color: #d3a428;
+  width: 50px;
+  height: 50px;
+  border-radius: 0.75rem;
+}
+
+.rankListCon .rankListCard:nth-of-type(2) > strong {
+  background-color: #a3a3a3;
+}
+.rankListCon .rankListCard:nth-of-type(3) > strong {
+  background-color: #936840;
+}
+.rankListCon .rankListCard:nth-of-type(4) > strong,
+.rankListCon .rankListCard:nth-of-type(5) > strong {
+  background-color: transparent;
+  color: #000000;
+}
+
+.rankListCard span {
+  text-align: center;
+  font-size: 2.25rem;
+  white-space: nowrap;
+}
+
+.rankListCard span img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 0.25rem;
+}
+
+.rankListCard span strong {
+  font-size: 1.25rem;
+}
+
+.rankListCard:nth-of-type(1) {
+  left: 0;
+  z-index: 5;
+}
+
+.rankListCard:nth-of-type(2) {
+  left: 22%;
+  z-index: 4;
+}
+
+.rankListCard:nth-of-type(3) {
+  left: 44%;
+  z-index: 3;
+}
+
+.rankListCard:nth-of-type(4) {
+  left: 66%;
+  z-index: 2;
+}
+
+.rankListCard:nth-of-type(5) {
+  left: 88%;
+  z-index: 1;
+}
+
+.rankListCard:nth-of-type(1):hover,
+.rankListCard:nth-of-type(2):hover,
+.rankListCard:nth-of-type(3):hover,
+.rankListCard:nth-of-type(4):hover,
+.rankListCard:nth-of-type(5):hover {
+  animation-play-state: paused;
+  top: -50px;
+}
+
+.rankListCard:nth-of-type(2):hover {
+  z-index: 6;
+}
+.rankListCard:nth-of-type(3):hover {
+  z-index: 6;
+}
+.rankListCard:nth-of-type(4):hover {
+  z-index: 6;
+}
+.rankListCard:nth-of-type(5):hover {
+  z-index: 6;
+}
+@keyframes moveUp {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-10px);
+  }
+  75% {
+    transform: translateY(10px);
+  }
+}
+
+@keyframes moveDown {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(10px);
+  }
+  75% {
+    transform: translateY(-10px);
+  }
+}
+
+.rankListCard:nth-of-type(1),
+.rankListCard:nth-of-type(3),
+.rankListCard:nth-of-type(5) {
+  animation: moveUp 8s linear infinite;
+}
+
+.rankListCard:nth-of-type(2),
+.rankListCard:nth-of-type(4) {
+  animation: moveDown 8s linear infinite;
+}
+
+.rankListCard.hover {
+  animation-play-state: paused;
+  top: -50px;
+  z-index: 6;
+}
