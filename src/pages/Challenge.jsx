@@ -2,17 +2,16 @@ import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import "swiper/css";
-import "swiper/css/pagination";
-// import "./styles.css";
+// import "swiper/css";
+// import "swiper/css/pagination";
 import style from "../css/challenge.module.css";
 
 // import 'swiper/css/navigation';
 const Challenge = (props) => {
-  const { showJoinButton, hideslideButton, slidesPerViewCount } = {
+  const { showJoinButton, hideslideButton } = {
     ...props,
   };
-
+  const slidesPerViewCount = 4;
   const navigate = useNavigate();
   const swiperRef = useRef(null);
   const [swiper, setSwiper] = useState(null);
@@ -150,8 +149,8 @@ const Challenge = (props) => {
             <Swiper
               ref={swiperRef}
               spaceBetween={50}
-              slidesPerView={4}
-              navigation
+              slidesPerView={slidesPerViewCount}
+              // navigation
               autoplay={{ delay: 3000, disableOnInteraction: false }}
               modules={[Navigation, Pagination, Autoplay]}
               // pagination={{ clickable: true, type: "fraction" }}
@@ -191,7 +190,7 @@ const Challenge = (props) => {
               <div class={style.control}>
                 <div className={style.swiper_button_prev} onClick={goPrev} />
                 <div className={style.swiper_pagination}>
-                  {currentIndex} / {totalSlides - 4}
+                {currentIndex} / {(totalSlides - slidesPerViewCount + 1) > 0 ? totalSlides - slidesPerViewCount + 1 : 1 }
                 </div>
                 <div className={style.autoplay_progress} slot="container-end">
                   <svg viewBox="0 0 48 48" ref={progressCircle}>
