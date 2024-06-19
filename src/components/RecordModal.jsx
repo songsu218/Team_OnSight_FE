@@ -25,7 +25,11 @@ function RecordModal() {
   const [startDate, setStartDate] = useState(new Date());
   const [openPlace, setOpenPlace] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
-  const togglePlace = () => setOpenPlace(!openPlace);
+  const togglePlace = () => {
+    setOpenDiffi(false);
+    setOpenPlace(!openPlace);
+  };
+
   const handlePlaceClick = (place) => {
     setSelectedPlace(place);
     setOpenPlace(false);
@@ -36,10 +40,18 @@ function RecordModal() {
     '클라이밍파크 강남점',
     '볼더프렌즈 클라이밍',
     '더플라스틱클라이밍',
+    '도레미파클라이밍',
+    '솔라시도클라이밍',
+    '도시라솔클라이밍',
+    '파미레도클라이밍',
+    
   ];
   const [openDiffi, setOpenDiffi] = useState(false);
   const [selectedDiffis, setSelectedDiffis] = useState([]);
-  const toggleDiffi = () => setOpenDiffi(!openDiffi);
+  const toggleDiffi = () => {
+    setOpenPlace(false);
+    setOpenDiffi(!openDiffi);
+  };
 
   const handleDiffiClick = (diffi) => {
     if (!selectedDiffis.includes(diffi)) {
@@ -60,6 +72,11 @@ function RecordModal() {
     '난이도 (v3)',
     '난이도 (v4)',
     '난이도 (v5)',
+    '난이도 (v6)',
+    '난이도 (v7)',
+    '난이도 (v8)',
+    '난이도 (v9)',
+    '난이도 (v10)',
   ];
   const [counts, setCounts] = useState({});
 
@@ -72,6 +89,7 @@ function RecordModal() {
     e.stopPropagation();
     action(diffi);
   };
+  
   const CounterButton = ({ action, diffi, label }) => (
     <button
       className={style.inDeBtn}
