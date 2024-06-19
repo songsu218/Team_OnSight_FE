@@ -98,9 +98,9 @@ const CreateCrew = () => {
       <form Submit="createCrew" className={style.createCrew}>
         <h2>나의 크루생성</h2>
         <img src="/img/noimg.jpg" alt="미리보기" />
-        <div className={style.imgBtn}>
+        <div className={style.imgBtnCon}>
           <input type="file" name="crewImg" id="crewImg" />
-          <button>사진삭제</button>
+          <button className="Btn">사진삭제</button>
         </div>
 
         <section>크루명</section>
@@ -125,7 +125,7 @@ const CreateCrew = () => {
           </select>
         </div>
         <div className={style.saBtn}>
-          <button type="submit">저장</button>
+          <button className="Btn" type="submit">저장</button>
         </div>
       </form>
     </main>
