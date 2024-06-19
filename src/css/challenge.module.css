@@ -144,6 +144,7 @@ html {
 	.challenge_wrap {
 	padding-top: 4.0rem;
 	border-top: 0.3rem solid #000;
+	text-align: center;
 	}
 
 	/* .challenge_list {
@@ -222,6 +223,7 @@ html {
 	}
 
 	/* swiper */
+
 	.swiper {
 	position: relative;
 	width: 100%;
@@ -241,7 +243,7 @@ html {
 	text-align: center;
 	}
 
-	.autoplay-progress {
+	.autoplay_progress {
 	position: absolute;
 	right: 16px;
 	bottom: 16px;
@@ -256,7 +258,7 @@ html {
 	color: #000;
 	} 
 
-	.autoplay-progress:before {
+	.autoplay_progress:before {
 	content: '';
 	position: absolute;
 	left: 0;
@@ -269,7 +271,7 @@ html {
 	opacity: 0.3;
 	}
 
-	.autoplay-progress svg {
+	.autoplay_progress svg {
 	--progress: 0;
 	position: absolute;
 	left: 0;
@@ -286,46 +288,47 @@ html {
 	}
 
 	.control {
+	padding-top: 7rem;
 	display: inline-flex;
 	justify-content: center;
 	align-items: center;
 	}
 
-	.swiper-pagination {
+	.swiper_pagination {
 	margin-right: 1em;
-	}
-
-	.autoplay-progress,
-	.swiper-pagination,
-	.swiper_button_prev,
-	.swiper_button_next {
+	} 
+	
+	.autoplay_progress,
+	.swiper_pagination,
+	.swiper_button-prev,
+	.swiper_button-next {
 	display: inline-block;
 	position: relative;
 	top: auto;
 	bottom: auto;
 	left: auto;
 	right: auto;
-	}
+	} 
 
-	.swiper-pagination,
-	.swiper_button_prev,
-	.swiper_button_next {
-	margin-top: 0;
-	width: auto;
-	}
+    .swiper_pagination,
+    .swiper_button-prev,
+    .swiper_button-next {
+      margin-top: 0;
+      width: auto;
+    }
 
-	.swiper_button_prev,
-	.swiper_button_next {
-	width: 101px;
-	height: 28px;
-	cursor: pointer;
-	}
+    .swiper_button_prev,
+    .swiper_button_next {
+      width: 101px;
+      height: 28px;
+      cursor: pointer;
+    }
 
 	.swiper_button_prev:after,
 	.swiper_button_next:after {
 	content: "";
 	display: none;
-	}
+	} 
 
 	.swiper_button_prev {
 	margin-right: 3rem;
@@ -338,12 +341,12 @@ html {
 	transform: rotateY(180deg);
 	}
 
-	.swiper-pagination {
+	.swiper_pagination {
 	font-size: 1.8rem;
 	line-height: 3.4rem;
 	}
 
-	.control-btn {
+	.control_btn {
 	z-index: 10;
 	position: absolute;
 	top: 50%;
@@ -358,13 +361,13 @@ html {
 	cursor: pointer;
 	}
 
-	.control-btn.btn-stop {
+	.control_btn.btn_stop {
 	width: 1rem;
 	height: 1rem;
 	background: #000;
 	}
 
-	.control-btn.btn-play {
+	.control_btn.btn_play {
 	width: 0;
 	height: 0;
 	border-left: 1.0rem solid #000;

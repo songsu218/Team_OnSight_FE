@@ -1,10 +1,13 @@
-import style from "../css/challenge.module.css";
 import React, { useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import "swiper/css";
+import "swiper/css/pagination";
+// import "./styles.css";
+import style from "../css/challenge.module.css";
 
+// import 'swiper/css/navigation';
 const Challenge = (props) => {
   const { showJoinButton, hideslideButton, slidesPerViewCount } = {
     ...props,
@@ -14,8 +17,13 @@ const Challenge = (props) => {
   const swiperRef = useRef(null);
   const [swiper, setSwiper] = useState(null);
   const [totalSlides, setTotalSlides] = useState(0);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+  const onAutoplayTimeLeft = (s, time, progress) => {
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
+    progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
+  };
   const goNext = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.slideNext();
@@ -91,7 +99,7 @@ const Challenge = (props) => {
       id: 7,
       images: "/img/gangwon.png",
       title: "강원도3 어찌구 챌린지",
-      date: "20240519",
+      date: "20240519 - 12312",
       center: "강원3 클라이밍장 이름",
     },
   ];
@@ -144,11 +152,12 @@ const Challenge = (props) => {
               spaceBetween={50}
               slidesPerView={4}
               navigation
-              autoplay={{ delay: 3000 }}
+              autoplay={{ delay: 3000, disableOnInteraction: false }}
               modules={[Navigation, Pagination, Autoplay]}
-              pagination={{ clickable: true }}
+              // pagination={{ clickable: true, type: "fraction" }}
               onSwiper={handleSwiper}
               onSlideChange={handleSlideChange}
+              onAutoplayTimeLeft={onAutoplayTimeLeft}
             >
               {dataList.length == 0
                 ? ""
@@ -176,10 +185,36 @@ const Challenge = (props) => {
                       </div>
                     </SwiperSlide>
                   ))}
-              <div className={style.swiper_button_prev} />
-              {currentIndex} / {totalSlides}
-              <div className={style.swiper_button_next} />
-
+              {/* <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-next"></div> */}
+              <div class={style.control}>
+                <div className={style.swiper_button_prev} onClick={goPrev} />
+                <div className={style.swiper_pagination}>
+                  {currentIndex} / {totalSlides - 4}
+                </div>
+                <div className={style.autoplay_progress} slot="container-end">
+                  <svg viewBox="0 0 48 48" ref={progressCircle}>
+                    <circle cx="24" cy="24" r="20"></circle>
+                  </svg>
+                  <button
+                    type="button"
+                    class={`${style.control_btn} ${style.btn_stop}`}
+                    title="정지 버튼"
+                  >
+                    자동재생 정지 버튼
+                  </button>
+                  <button
+                    type="button"
+                    class={`${style.control_btn} ${style.btn_play}`}
+                    title="재생 버튼"
+                  >
+                    재생 버튼
+                  </button>
+                  <span ref={progressContent}></span>
+                </div>
+                <div className={style.swiper_button_next} onClick={goNext} />
+              </div>
             </Swiper>
           </div>
         </div>
