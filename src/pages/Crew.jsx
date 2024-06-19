@@ -66,7 +66,7 @@ const Crew = () => {
   };
 
   return (
-    <main className={`${style.mainCrew}`}>
+    <main className={`${style.mainCrew} mw`}>
       <article>
         <div className={style.leftCon}>
           <span>나의크루 리스트</span>
