@@ -12,25 +12,28 @@ import Crew from "./pages/Crew";
 import Challenge from "./pages/Challenge";
 import ChallengeDetail from "./pages/ChallengeDetail";
 import CreateCrew from "./pages/CreateCrew";
+import CrewDetail from "./pages/CrewDetail";
+
 
 function App() {
   return (
     <div>
       <Header />
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/signinpage" element={<SignInPage />} />
-          <Route path="/signuppage" element={<SignUpPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/Search" element={<SearchPage />} />
-          <Route path="/crew" element={<Crew />} />
-          <Route path="/CreateCrew" element={<CreateCrew />} />
-          <Route path="/challenge" element={<Challenge />} />
-          <Route
-            path="/challenge/:challenge_id/:challenge_name"
-            element={<ChallengeDetail />}
-          />
-        </Routes>
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path='/signinpage' element={<SignInPage />} />
+        <Route path='/signuppage' element={<SignUpPage />} />
+        <Route path='/mypage' element={<MyPage />} />
+        <Route path='/Search' element={<SearchPage />} />
+        <Route path='/crew' element={<Crew />} />
+        <Route path='/CreateCrew' element={<CreateCrew />} />
+        <Route path="/CrewDetail" element={<CrewDetail />} />
+        <Route path='/challenge' element={<Challenge />} />
+        <Route
+          path='/challenge/:challenge_id/:challenge_name'
+          element={<ChallengeDetail />}
+        />
+      </Routes>
     </div>
   );
 }

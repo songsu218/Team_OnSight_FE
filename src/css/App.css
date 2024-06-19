@@ -12,6 +12,9 @@
   overflow: hidden;
 }
 
+body {
+  letter-spacing: -0.055em;
+}
 
 .con1 {
   padding: 96px 31px 136px;

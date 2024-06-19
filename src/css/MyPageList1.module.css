@@ -1,15 +1,14 @@
 .sec {
   position: relative;
-  overflow: hidden;
 }
 
 .sub {
   display: flex;
+  flex-wrap: wrap;
   justify-content: start;
   align-items: center;
   margin: 0 0 2rem;
   font-weight: 800;
-  flex-wrap: wrap;
   font-size: 28px;
   line-height: 33px;
 }
@@ -18,42 +17,7 @@
   gap: 0 8px;
 }
 
-.listData {
-  font-size: 1rem;
-  line-height: 1.5rem;
-  max-height: 1200px;
-}
-
-.listData > div {
-  overflow: visible;
-}
-
-.listData > div > div {
-  flex-wrap: wrap;
-  gap: 4rem 2rem;
-}
-
-.listData > div > div > div {
-  position: relative;
-  flex-basis: calc(50% - 1rem);
-}
-
-.listData > div > div:last-child {
-  position: absolute;
-  top: -60px;
-  right: -400px;
-  border: 1px solid red;
-  z-index: -1;
-}
-
 @media (min-width: 768px) {
-  .listData > div > div {
-    gap: 36px;
-  }
-
-  .listData > div > div > div {
-    flex-basis: calc(50% - 18px);
-  }
 }
 
 @media (min-width: 1080px) {
@@ -61,26 +25,7 @@
     font-size: 32px;
     line-height: 48px;
   }
-
-  .listData > div > div {
-    flex-wrap: nowrap;
-    gap: 36px;
-  }
-
-  .listData > div > div:last-child {
-    top: -70px;
-  }
-
-  .listData > div > div > div {
-    flex-basis: calc(25% - 27px);
-  }
 }
 
 @media (min-width: 1680px) {
-  .listData > div > div {
-    gap: 68px;
-  }
-  .listData > div > div > div {
-    flex-basis: calc(25% - 51px);
-  }
 }
