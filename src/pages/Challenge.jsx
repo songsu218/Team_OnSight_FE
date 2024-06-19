@@ -8,9 +8,78 @@ import style from "../css/challenge.module.css";
 
 // import 'swiper/css/navigation';
 const Challenge = (props) => {
+  const dataList = [
+    {
+      id: 1,
+      title: "경기도 어찌구 챌린지",
+      center: "경기 클라이밍장 이름",
+      date: "20240714",
+      images: "/img/gyeonggi.png",
+      state: "NOW",
+    },
+    {
+      id: 2,
+      title: "서울 어찌구 챌린지",
+      center: "서울 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/seoul.png",
+      state: "NOW",
+    },
+    {
+      id: 3,
+      title: "경기2 어찌구 챌린지",
+      center: "경기2 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/gyeonggi.png",
+      state: "NOW",
+    },
+    {
+      id: 4,
+      title: "서울2 어찌구 챌린지",
+      center: "서울2 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/seoul.png",
+      state: "NOW",
+    },
+    {
+      id: 5,
+      images: "/img/gangwon.png",
+      title: "강원도 어찌구 챌린지",
+      date: "20240519",
+      center: "강원 클라이밍장 이름",
+      state: "PAST",
+    },
+    {
+      id: 6,
+      images: "/img/gangwon.png",
+      title: "강원도2 어찌구 챌린지",
+      date: "20240519",
+      center: "강원2 클라이밍장 이름",
+      state: "PAST",
+    },
+    {
+      id: 7,
+      images: "/img/gangwon.png",
+      title: "강원도3 어찌구 챌린지",
+      date: "20240519 - 12312",
+      center: "강원3 클라이밍장 이름",
+      state: "PAST",
+    },
+    {
+      id: 8,
+      title: "서울3 어찌구 챌린지",
+      center: "서울3 클라이밍장 이름",
+      date: "20240715",
+      images: "/img/seoul.png",
+      state: "NOW",
+    },
+  ];
+
   const { showJoinButton, hideslideButton } = {
     ...props,
   };
+  const nowList = dataList.filter((item) => item.state === "NOW");
+  const pastList = dataList.filter((item) => item.state === "PAST");
   const slidesPerViewCount = 4;
   const navigate = useNavigate();
   const swiperRef = useRef(null);
@@ -19,6 +88,24 @@ const Challenge = (props) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
+  const [selectedOption, setSelectedOption] = useState("");
+  const [printData, setPrintData] = useState(dataList);
+
+  const handleSelectChange = (event) => {
+    const target = event.target.value;
+    const instance =
+      target == "선택"
+        ? dataList
+        : target == 1
+        ? nowList
+        : target == 2
+        ? pastList
+        : "";
+    setSelectedOption(target);
+    setPrintData(instance);
+    setTotalSlides(instance.length);
+  };
+
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
@@ -50,65 +137,6 @@ const Challenge = (props) => {
       setTotalSlides(swiper.slides.length);
     }
   };
-
-  const dataList = [
-    {
-      id: 1,
-      title: "경기도 어찌구 챌린지",
-      center: "경기 클라이밍장 이름",
-      date: "20240714",
-      images: "/img/gyeonggi.png",
-      state: "NOW"
-    },
-    {
-      id: 2,
-      title: "서울 어찌구 챌린지",
-      center: "서울 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/seoul.png",
-      state: "NOW"
-    },
-    {
-      id: 3,
-      title: "경기2 어찌구 챌린지",
-      center: "경기2 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/gyeonggi.png",
-      state: "NOW"
-    },
-    {
-      id: 4,
-      title: "서울2 어찌구 챌린지",
-      center: "서울2 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/seoul.png",
-      state: "NOW"
-    },
-    {
-      id: 5,
-      images: "/img/gangwon.png",
-      title: "강원도 어찌구 챌린지",
-      date: "20240519",
-      center: "강원 클라이밍장 이름",
-      state: "PAST"
-    },
-    {
-      id: 6,
-      images: "/img/gangwon.png",
-      title: "강원도2 어찌구 챌린지",
-      date: "20240519",
-      center: "강원2 클라이밍장 이름",
-      state: "PAST"
-    },
-    {
-      id: 7,
-      images: "/img/gangwon.png",
-      title: "강원도3 어찌구 챌린지",
-      date: "20240519 - 12312",
-      center: "강원3 클라이밍장 이름",
-      state: "PAST"
-    },
-  ];
 
   return (
     <>
@@ -147,7 +175,12 @@ const Challenge = (props) => {
               <label htmlFor="challengeOption1" className={style.option_label}>
                 <span>상태</span>
               </label>
-              <select id={style.challengeOption1} className={style.option_list}>
+              <select
+                id={style.challengeOption1}
+                className={style.option_list}
+                value={selectedOption}
+                onChange={handleSelectChange}
+              >
                 <option>선택</option>
                 <option value={1}>진행 중</option>
                 <option value={2}>진행 끝</option>
@@ -166,9 +199,9 @@ const Challenge = (props) => {
                 onSlideChange={handleSlideChange}
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
               >
-                {dataList.length == 0
+                {printData.length == 0
                   ? ""
-                  : dataList.map((item) => (
+                  : printData.map((item) => (
                       <SwiperSlide
                         key={item.id}
                         onClick={() => handleCardClick(item)}
@@ -195,7 +228,7 @@ const Challenge = (props) => {
                 {/* <div class="swiper-button-prev"></div>
                 <div class="swiper-pagination"></div>
                 <div class="swiper-button-next"></div> */}
-                <div class={style.control}>
+                <div className={style.control}>
                   <div className={style.swiper_button_prev} onClick={goPrev} />
                   <div className={style.swiper_pagination}>
                     {currentIndex} /{" "}
@@ -209,14 +242,14 @@ const Challenge = (props) => {
                     </svg>
                     <button
                       type="button"
-                      class={`${style.control_btn} ${style.btn_stop}`}
+                      className={`${style.control_btn} ${style.btn_stop}`}
                       title="정지 버튼"
                     >
                       자동재생 정지 버튼
                     </button>
                     <button
                       type="button"
-                      class={`${style.control_btn} ${style.btn_play}`}
+                      className={`${style.control_btn} ${style.btn_play}`}
                       title="재생 버튼"
                     >
                       재생 버튼
