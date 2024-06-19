@@ -41,7 +41,7 @@ const Challenge = (props) => {
   };
   const handleSlideChange = () => {
     if (swiper !== null) {
-      setCurrentIndex(swiper.realIndex);
+      setCurrentIndex(swiper.realIndex + 1);
     }
   };
   const handleSwiper = (swiper) => {
