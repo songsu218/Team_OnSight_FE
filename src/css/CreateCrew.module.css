@@ -36,6 +36,10 @@
   width: 128px;
 }
 
+.selectBox{
+  display: flex;
+}
+
 .saBtn {
   display: flex;
   justify-content: center;
