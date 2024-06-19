@@ -17,22 +17,20 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="viewCon">
-        <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/signinpage" element={<SignInPage />} />
-          <Route path="/signuppage" element={<SignUpPage />} />
-          <Route path="/mypage" element={<MyPage />} />
-          <Route path="/Search" element={<SearchPage />} />
-          <Route path="/crew" element={<Crew />} />
-          <Route path="/CreateCrew" element={<CreateCrew />} />
-          <Route path="/challenge" element={<Challenge />} />
-          <Route
-            path="/challenge/:challenge_id/:challenge_name"
-            element={<ChallengeDetail />}
-          />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path='/' element={<Main />} />
+        <Route path='/signinpage' element={<SignInPage />} />
+        <Route path='/signuppage' element={<SignUpPage />} />
+        <Route path='/mypage' element={<MyPage />} />
+        <Route path='/Search' element={<SearchPage />} />
+        <Route path='/crew' element={<Crew />} />
+        <Route path='/CreateCrew' element={<CreateCrew />} />
+        <Route path='/challenge' element={<Challenge />} />
+        <Route
+          path='/challenge/:challenge_id/:challenge_name'
+          element={<ChallengeDetail />}
+        />
+      </Routes>
     </div>
   );
 }
