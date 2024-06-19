@@ -370,3 +370,24 @@
 	height: 4rem;
 	background: url("https://png.pngtree.com/png-vector/20230509/ourmid/pngtree-trophy-flat-icon-vector-png-image_7092605.png") no-repeat 50% / 4rem;
 	}
+
+	.pagination {
+		margin-top: 20px;
+		text-align: center;
+	}
+	.pagination button {
+	background-color: white;
+	color: black;
+	border: none;
+	padding: 10px 15px;
+	margin: 0 5px;
+	cursor: pointer;
+	border-radius: 4px;
+	}
+	.pagination button:hover {
+	background-color: #0056b3;
+	}
+	.pagination .active {
+	color: white;
+	background-color: black;
+	}

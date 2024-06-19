@@ -58,6 +58,7 @@ const Challenge = (props) => {
       center: "경기 클라이밍장 이름",
       date: "20240714",
       images: "/img/gyeonggi.png",
+      state: "NOW"
     },
     {
       id: 2,
@@ -65,6 +66,7 @@ const Challenge = (props) => {
       center: "서울 클라이밍장 이름",
       date: "20240715",
       images: "/img/seoul.png",
+      state: "NOW"
     },
     {
       id: 3,
@@ -72,6 +74,7 @@ const Challenge = (props) => {
       center: "경기2 클라이밍장 이름",
       date: "20240715",
       images: "/img/gyeonggi.png",
+      state: "NOW"
     },
     {
       id: 4,
@@ -79,6 +82,7 @@ const Challenge = (props) => {
       center: "서울2 클라이밍장 이름",
       date: "20240715",
       images: "/img/seoul.png",
+      state: "NOW"
     },
     {
       id: 5,
@@ -86,6 +90,7 @@ const Challenge = (props) => {
       title: "강원도 어찌구 챌린지",
       date: "20240519",
       center: "강원 클라이밍장 이름",
+      state: "PAST"
     },
     {
       id: 6,
@@ -93,6 +98,7 @@ const Challenge = (props) => {
       title: "강원도2 어찌구 챌린지",
       date: "20240519",
       center: "강원2 클라이밍장 이름",
+      state: "PAST"
     },
     {
       id: 7,
@@ -100,6 +106,7 @@ const Challenge = (props) => {
       title: "강원도3 어찌구 챌린지",
       date: "20240519 - 12312",
       center: "강원3 클라이밍장 이름",
+      state: "PAST"
     },
   ];
 
