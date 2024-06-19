@@ -1,5 +1,11 @@
+.mw {
+  width: 400px;
+  margin: auto;
+  padding-bottom: 1rem;
+  position: relative;
+}
+
 .swiperBox {
-  /* border: 1px solid blue; */
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   display: flex;
   justify-content: center;
@@ -14,7 +20,7 @@
   right: 0;
   top: 16rem;
   bottom: 0;
-  background: #b9b9b9;
+  background: #eaeaea;
   opacity: 0.3;
   z-index: -1;
 }
@@ -45,6 +51,7 @@
 
 .swiperCon span:nth-of-type(1) {
   margin-bottom: 2rem;
+  padding-left: 1rem;
 }
 
 .swiperBox span img {
@@ -57,17 +64,24 @@
   padding-left: 0.5rem;
 }
 
+.swiperBox .textBox {
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
 .swiperBox h3 {
   font-size: 1.25rem;
   white-space: nowrap;
-  padding-left: 0.5rem;
+  font-weight: bold;
 }
 
 .swiperBox span:nth-of-type(2) {
   white-space: nowrap;
   position: absolute;
-  bottom: 15%;
-  right: 0;
+  bottom: 25%;
+  right: 4%;
 }
 
 .swiperBox span:nth-of-type(2)::before {

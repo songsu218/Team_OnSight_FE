@@ -1,7 +1,7 @@
-import './css/my_reset.css';
-import './css/App.css';
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
+import "./css/my_reset.css";
+import "./css/App.css";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
 
 import Main from './pages/Main';
 import SignInPage from './pages/SignInPage';
@@ -11,12 +11,12 @@ import SearchPage from './pages/SearchPage';
 import Crew from './pages/Crew';
 import Challenge from './pages/Challenge';
 import ChallengeDetail from './pages/ChallengeDetail';
+import CreateCrew from "./pages/CreateCrew";
 
 function App() {
   return (
     <div>
       <Header />
-      <div className="viewCon">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signinpage" element={<SignInPage />} />
@@ -24,11 +24,11 @@ function App() {
           <Route path="/mypage" element={<MyPage />} />
           <Route path="/Search" element={<SearchPage />} />
           <Route path="/crew" element={<Crew />} />
+          <Route path="/CreateCrew" element={<CreateCrew />} />
           <Route path="/challenge" element={<Challenge />} />
           <Route path="/challenge/:challenge_id/:challenge_name" element={<ChallengeDetail />} />
         </Routes>
       </div>
-    </div>
   );
 }
 

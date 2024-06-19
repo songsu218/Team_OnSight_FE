@@ -118,7 +118,6 @@ function RecordModal() {
     if (selectedFile) {
       formData.append('thumbnail', selectedFile);
     }
-
     try {
       const response = await axios.post(
         'http://localhost:8000/record',
@@ -139,7 +138,7 @@ function RecordModal() {
   return (
     <>
       <button onClick={handleShow} className={style.addBtn}>
-        <i className="fa-solid fa-plus"></i>
+        <span>추가하기</span>
       </button>
       <Modal className={style.modalRe} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
