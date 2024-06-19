@@ -1,9 +1,5 @@
 @charset "UTF-8";
 
-.App {
-  overflow: hidden;
-}
-
 @font-face {
   font-family: 'S-CoreDream-3Light';
   src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
@@ -12,12 +8,63 @@
   font-style: normal;
 }
 
+.App {
+  overflow: hidden;
+}
+
+body {
+  letter-spacing: -0.055em;
+}
+
+.con1 {
+  padding: 96px 31px 136px;
+}
+
+.mw {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .con1 {
+    padding: 96px 0 136px;
+  }
+  .mw {
+    width: 633px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .con1 {
+    padding: 140px 0 135px;
+  }
+  .mw {
+    width: 1003px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .con1 {
+    padding: 140px 0 135px 210px;
+  }
+
+  .con2 {
+    padding: 0 0 135px 210px ;
+  }
+}
+
+@media (min-width: 1680px) {
+  .mw {
+    width: 1396px;
+  }
+}
+
 .viewCon {
   width: calc(100% - 210px);
   margin-left: auto;
 }
 
-.mw {
+/* .mw {
   width: calc(100% - 348px);
   margin: auto;
   padding: 106px 0 50px;
@@ -28,4 +75,4 @@
     width: 100%;
     margin: auto;
   }
-}
+} */

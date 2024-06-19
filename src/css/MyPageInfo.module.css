@@ -1,0 +1,125 @@
+.infoCon {
+  padding: 0 0 40px;
+  border-bottom: 3px solid #000000;
+  font-size: 18px;
+  line-height: 1.38;
+}
+
+.infoCon p {
+  position: relative;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 33px;
+}
+
+.infoCon p::before {
+  content: '';
+  position: absolute;
+  display: block;
+  width: 80px;
+  height: 80px;
+  background: url(../../public/img/test.jpg);
+  background-size: cover;
+  border-radius: 50%;
+}
+
+.tit {
+  display: flex;
+}
+
+.tit:not(div) {
+  align-items: center;
+  justify-content: start;
+  gap: 0 8px;
+}
+
+.infoCon a {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  vertical-align: top;
+  text-align: left;
+  min-width: 130px;
+  height: 39px;
+  padding: 0 29px 0 1rem;
+  font-size: 16px;
+  line-height: 39px;
+  font-weight: 700;
+  color: #000000;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px inset #b9b9b9;
+  transition: box-shadow 0.1s ease-out;
+  outline: 0;
+}
+
+.infoCon a:hover,
+.infoCon a:focus {
+  box-shadow: 0 0 0 3px inset #b9b9b9;
+  outline: 0;
+}
+
+.infoCon a::after {
+  content: '';
+  display: inline-block;
+  position: absolute;
+  vertical-align: top;
+  top: 50%;
+  right: 15px;
+  width: 0;
+  height: 0;
+  margin: -5px 0 0;
+  border-left: 5px solid #000000;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+}
+
+@media (max-width: 1079px) {
+  .infoCon {
+    margin: 0 0 40px;
+  }
+
+  .infoCon p {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-right: 120px;
+  }
+
+  .infoCon p::before {
+    right: 0;
+    margin: -1rem 0 0;
+  }
+
+  .infoCon a {
+    margin: 16px 0 0;
+  }
+}
+
+@media (min-width: 1080px) {
+  .infoCon {
+    display: flex;
+    margin: 0 0 56px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .infoCon p {
+    margin: 0;
+    padding: 0 0 0 6rem;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 32px;
+    line-height: 48px;
+  }
+
+  .infoCon p::before {
+    left: 0;
+    top: 50%;
+    margin: -44px 0 0;
+  }
+
+  .infoCon a {
+    margin: 0 0 0 1rem;
+  }
+}

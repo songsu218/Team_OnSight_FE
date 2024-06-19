@@ -1,0 +1,46 @@
+.createpage {
+  /* border: 1px dotted red; */
+  width: 720px;
+  margin: 98px auto;
+}
+
+.createCrew > h2 {
+  font-size: 3.5rem;
+  font-weight: bold;
+}
+
+.createCrew > img {
+  margin-top: 45px;
+  width: 720px;
+  height: 265px;
+  border: 1px dotted lightgray;
+}
+
+.imgBtnCon {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imgBtnCon > input,
+.Btn {
+  /* border: 1px solid #f1f1f1; */
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 14px;
+}
+.Btn {
+  width: 128px;
+}
+
+.selectBox{
+  display: flex;
+}
+
+.saBtn {
+  display: flex;
+  justify-content: center;
+}

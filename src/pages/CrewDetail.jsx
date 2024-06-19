@@ -1,64 +1,57 @@
-import React from "react";
-import style from "../css/CrewDetail.module.css";
+import { Link } from 'react-router-dom';
+import style from '../css/CrewDetail.module.css'
 
-export const CrewDetail = () => {
-  return (
-    <div>
-      <aside className={style.detailCon}></aside>
-      <div className={style.topCon}>
-        <img src="/img/bol.jpg" alt="#" />
-        <div className={style.Crewname}>
-          <h2>크루명</h2>
-          <button>가입하기</button>
-          <button>글쓰기</button>
-        </div>
-        <div className={style.introCon}>
-          <p>
-            소개문구: Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-            Voluptate magni illum adipisci dicta itaque, nobis repellendus ab
-            sint explicabo quo non ducimus numquam, ea incidunt saepe laudantium
-            magnam quidem. Asperiores.
-          </p>
-        </div>
-        <div className={style.feednum}>
-          <span>피드수 : ㅇㅇ 개</span>
-          <hr />
-        </div>
-      </div>
-      <div className={style.feeds}>
-        <ul className={style.feedsul}>
-          <li>
-            <img src="/img/imgsample.jpg" alt="" />
-            <span>피드제목</span>
-            <i class="fa-solid fa-ellipsis"></i>
-          </li>
-          <li>
-            <img src="/img/imgsample.jpg" alt="" />
-            <span>피드제목</span>
-            <i class="fa-solid fa-ellipsis"></i>
-          </li>
-          <li>
-            <img src="/img/imgsample.jpg" alt="" />
-            <span>피드제목</span>
-            <i class="fa-solid fa-ellipsis"></i>
-          </li>
-          <li>
-            <img src="/img/imgsample.jpg" alt="" />
-            <span>피드제목</span>
-            <i class="fa-solid fa-ellipsis"></i>
-          </li>
-          <li>
-            <img src="/img/imgsample.jpg" alt="" />
-            <span>피드제목</span>
-            <i class="fa-solid fa-ellipsis"></i>
-          </li>
-          <li>
-            <img src="/img/imgsample.jpg" alt="" />
-            <span>피드제목</span>
-            <i class="fa-solid fa-ellipsis"></i>
-          </li>
-        </ul>
-      </div>
-    </div>
-  );
+
+const CrewDetail = () => {
+    return (
+        <main className={`${style.mainCrew}`}>
+        <article>
+          <div className={style.leftCon}>
+            <span>크루원 찾기</span>
+            <div className={style.searchCon
+            }>
+            <input
+              type="text"
+              className={style.search}
+              placeholder="크루원 검색"
+            />
+
+<form action="/submit" method="POST">
+        <button type="submit" class={style.iconButton}>
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+    </form>
+            
+          </div>
+            <ul className={style.mycrewCon}>
+              <li>
+             
+              </li>
+           
+            </ul>
+          </div>
+        </article>
+        <section className={style.rightCon}>
+          <div className={style.righttxt}>
+            <div className={style.crewName}>
+            <h2>크루명</h2>
+            <span>활동지역</span>
+            </div>
+            <div className={style.Menu}>
+            <Link to="/Write">
+              <button>글쓰기</button>
+            </Link>
+            <Link to="/ManageCrew">
+              <button>크루관리</button>
+            </Link>
+            </div>
+          </div>
+          <img src="on_sight" alt="크루이미지" />
+          <p>소개문구 : Lorem ipsum dolor sit amet consectetur adipisicing elit. Non officiis, quia suscipit provident earum at, quam veniam temporibus fugiat, harum quis dignissimos nisi possimus nemo beatae laboriosam quasi totam cumque.</p>
+        
+        </section>
+      </main>
+    );
 };
+
+export default CrewDetail;
