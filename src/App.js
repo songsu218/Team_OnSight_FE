@@ -17,7 +17,6 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="viewCon">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signinpage" element={<SignInPage />} />
@@ -32,7 +31,6 @@ function App() {
             element={<ChallengeDetail />}
           />
         </Routes>
-      </div>
     </div>
   );
 }
