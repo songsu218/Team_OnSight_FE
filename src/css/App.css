@@ -4,10 +4,41 @@
   overflow: hidden;
 }
 
-.viewCon {
-  width: calc(100% - 192px);
-  margin-left: auto;
+.con {
+  padding: 96px 31px 136px;
 }
 
 .mw {
+  width: 100%;
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .con {
+    padding: 96px 0 136px;
+  }
+  .mw {
+    width: 633px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .con {
+    padding: 140px 0 135px;
+  }
+  .mw {
+    width: 1003px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .con {
+    padding: 140px 0 135px 210px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .mw {
+    width: 1396px;
+  }
 }

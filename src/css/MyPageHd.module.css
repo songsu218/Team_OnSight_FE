@@ -1,0 +1,110 @@
+.hdSec {
+  margin: 0 0 56px;
+}
+
+.hdSec > h2 {
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+.hdSec .navSec {
+  position: relative;
+  margin: 0 -31px 54px;
+}
+
+.navSec::before {
+  border-top: 1px solid #b9b9b9;
+  border-bottom: 1px solid #b9b9b9;
+  z-index: -1;
+}
+
+.navSec::before,
+.navSec > ul > li > a::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.navSec > ul {
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding: 0 31px;
+}
+
+.navSec > ul > li {
+  font-size: 20px;
+  line-height: 56px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.navSec > ul > li > a {
+  position: relative;
+  display: block;
+  padding: 0 1rem;
+  transition: all 0.3s;
+}
+
+/* a 선택 */
+.navSec > ul > li > a::before {
+  /* border-color: #000000; */
+}
+
+.navSec > ul > li > a::before {
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+
+/* a 선택 */
+.navSec > ul > li > a:focus,
+.navSec > ul > li > a:hover {
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .hdSec .navSec {
+    margin: 0 0 54px;
+  }
+}
+
+@media (max-width: 1079px) {
+  .hdSec {
+    text-align: center;
+  }
+  .hdSec > h2 {
+    margin: 0 0 24px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .hdSec {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .hdSec > h2 {
+    width: 365px;
+  }
+
+  .hdSec > h2 {
+    font-size: 56px;
+    line-height: 68px;
+  }
+
+  .hdSec .navSec {
+    width: 640px;
+    margin: 0;
+  }
+
+  .navSec > ul {
+    justify-content: flex-end;
+  }
+}
