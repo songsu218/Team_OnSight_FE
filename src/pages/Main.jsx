@@ -9,7 +9,7 @@ const Main = () => {
 
   return (
     <main className={style.main}>
-      <div className={style.rankArea}>
+      <div className={`${style.rankArea} viewCon`}>
         <div className={style.imgBox}>
           <img src="/img/climb.png" alt="wall" />
           <div className={style.personBox}>
@@ -47,7 +47,8 @@ const Main = () => {
         </div>
         <RankList hoveredCard={hoveredCard} />
       </div>
-      <div className={`${style.recordArea} mw`}>
+      <div className={`${style.recordArea} con2`}>
+        <div className='mw'>
         <h2>
           모두의 기록
           <RecordModal />
@@ -55,6 +56,7 @@ const Main = () => {
         <section>
           <RecordList />
         </section>
+        </div>
       </div>
     </main>
   );

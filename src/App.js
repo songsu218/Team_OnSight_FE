@@ -16,7 +16,6 @@ function App() {
   return (
     <div>
       <Header />
-      <div className="con">
         <Routes>
           <Route path="/" element={<Main />} />
           <Route path="/signinpage" element={<SignInPage />} />
@@ -28,7 +27,6 @@ function App() {
           <Route path="/Challenge" element={<Challenge />} />
         </Routes>
       </div>
-    </div>
   );
 }
 
