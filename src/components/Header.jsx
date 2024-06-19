@@ -57,9 +57,10 @@ const Header = () => {
               </span>
             </Link>
             <Link
-              to="/Challenge"
-              onMouseEnter={() => MouseHover('link3')}
-              onMouseLeave={() => MouseLeave('link3')}
+              to="/challenge"
+              onMouseEnter={() => MouseHover('link4')}
+              onMouseLeave={() => MouseLeave('link4')}
+              // onClick={()=> {navigate('/Challenge');}}
             >
               <img
                 src={hoverImg.link3 ? '/img/eholdg.png' : '/img/holdg.png'}
