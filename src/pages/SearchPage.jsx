@@ -40,6 +40,14 @@ const Search = () => {
     }
   };
 
+  const handleRefresh = () => {
+    setSearchTerm('');
+    setSelectedCity('서울특별시');
+    setSelectedDistrict('구로구');
+    setMapCenter({ lat: 37.4955, lng: 126.8875 });
+    setSelectedCenterInfo(null);
+  };
+
   const districtCoordinates = {
     서울특별시: {
       강남구: { lat: 37.5172, lng: 127.0473 },
@@ -124,23 +132,24 @@ const Search = () => {
           <i
             className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
           ></i>
-          <i className={`fa-solid fa-rotate-left ${style.rotate}`}></i>
+          <i
+            className={`fa-solid fa-rotate-left ${style.rotate}`}
+            onClick={handleRefresh}
+          ></i>
         </div>
 
+        <h4>즐겨찾기 목록</h4>
         {selectedCenterInfo && (
-          <div className={style.centerList}>
+          <div className={style.centerInfo}>
             <img
               src={selectedCenterInfo.thumbnail}
               alt={selectedCenterInfo.center}
+              width="350"
+              height="200"
             />
-            <div className={style.centerInfo}>
-              <h4>{selectedCenterInfo.center}</h4>
-              <p>{selectedCenterInfo.gu}</p>
-              {/* 즐겨찾기 */}
-            </div>
-            <p className={style.centerDetail}>{selectedCenterInfo.detail}</p>
-
-            <p className={style.centerRecord}>기록 3000</p>
+            <h4>{selectedCenterInfo.center}</h4>
+            <p>{selectedCenterInfo.gu}</p>
+            <p>{selectedCenterInfo.detail}</p>
           </div>
         )}
       </div>
