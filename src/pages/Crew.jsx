@@ -66,7 +66,7 @@ const Crew = () => {
   };
 
   return (
-    <main className={`${style.mainCrew} mw`}>
+    <main className={`${style.mainCrew} viewCon`}>
       <article>
         <div className={style.leftCon}>
           <span>나의크루 리스트</span>
@@ -84,13 +84,13 @@ const Crew = () => {
               </div>
             </li>
             <li>
-              <img src="/img/noimg.jpg" alt="img" />
+              <img src="/img/no_img.jpg" alt="img" />
               <div className={style.mycrew}>
                 <div className={style.adress}>
-                  <span>크루명</span>
-                  <p> 종로구 </p>
+                  <span>name</span>
+                  <p> gu구 </p>
                 </div>
-                <p>다같이 돌자 동네한바퀴</p>
+                <p>content</p>
                 <p>인원 : x명</p>
               </div>
             </li>
@@ -148,37 +148,37 @@ const Crew = () => {
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
@@ -189,13 +189,13 @@ const Crew = () => {
               ratione, repudiandae ad suscipit voluptatum. Tenetur rerum sunt
               dicta voluptates temporibus officiis ducimus?
             </p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
         </ul>
       </section>

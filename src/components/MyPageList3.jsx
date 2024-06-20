@@ -3,19 +3,20 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import style from '../css/MyPageList1.module.css';
 import List from './list/List';
+import FeedList from './list/FeedList';
 
-const MyPageList1 = () => {
+const MyPageList3 = () => {
   return (
     <section className={style.sec}>
       <div>
         <h3 className={style.sub}>
-          <span>참여한</span>
-          <span>챌린지</span>
+          <span>내</span>
+          <span>피드</span>
         </h3>
       </div>
-      <List />
+      <FeedList />
     </section>
   );
 };
 
-export default MyPageList1;
+export default MyPageList3;

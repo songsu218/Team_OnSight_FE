@@ -1,11 +1,11 @@
-import style from '../css/RecordList.module.css';
+import style from "../css/RecordList.module.css";
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
 
 const RecordList = () => {
   const [records, setRecords] = useState([]);
@@ -71,7 +71,7 @@ const RecordList = () => {
 
   const restrictText = (text, maxLength) => {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+      return text.substring(0, maxLength) + "...";
     }
     return text;
   };
@@ -100,7 +100,7 @@ const RecordList = () => {
         disableOnInteraction: false,
       }}
       modules={[Autoplay]}
-      className="mySwiper"
+      className='mySwiper'
       onSwiper={(swiper) => setSwiperRef(swiper)}
       onSlideChange={() => swiperRef && setCurrentPage(swiperRef.realIndex + 1)}
     >
@@ -112,11 +112,11 @@ const RecordList = () => {
                 <div className={style.imgCon}>
                   <img
                     src={`http://localhost:8000/uploads/${record.thumbnail}`}
-                    alt="thumbnail"
+                    alt='thumbnail'
                   />
                 </div>
                 <span>
-                  <img src="/img/test.jpg" alt="profile" />
+                  <img src='/img/test.jpg' alt='profile' />
                   <strong>닉네임</strong>
                 </span>
                 <span>{record.center}</span>
@@ -132,6 +132,7 @@ const RecordList = () => {
       <div className={style.pageBox}>
         <button onClick={prevHandler}>
           <i className="fa-solid fa-arrow-left"></i>
+
         </button>
         <div>
           {currentPage} / {records.length}
