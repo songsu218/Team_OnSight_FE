@@ -2,11 +2,13 @@ import style from '../css/MyPage.module.css';
 import styleHd from '../css/MyPageHd.module.css';
 import styleInfo from '../css/MyPageInfo.module.css';
 import MyPageList1 from '../components/MyPageList1';
+import MyPageList2 from '../components/MyPageList2';
+import MyPageList3 from '../components/MyPageList3';
 
 const MyPage = () => {
   return (
     <div className={`con1`}>
-      <main className={`mw ${style.div}`}>
+      <main className={`mw`}>
         <section className={styleHd.hdSec}>
           <h2>마이페이지</h2>
           <nav className={styleHd.navSec}>
@@ -33,7 +35,7 @@ const MyPage = () => {
             </p>
           </div>
         </div>
-        <MyPageList1 />
+        <MyPageList2 />
       </main>
     </div>
   );

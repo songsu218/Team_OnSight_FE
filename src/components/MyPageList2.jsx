@@ -4,18 +4,19 @@ import 'swiper/css/navigation';
 import style from '../css/MyPageList1.module.css';
 import List from './list/List';
 
-const MyPageList1 = () => {
+const MyPageList2 = () => {
   return (
     <section className={style.sec}>
       <div>
         <h3 className={style.sub}>
-          <span>참여한</span>
-          <span>챌린지</span>
+          <span>내</span>
+          <span>기록</span>
         </h3>
+        <button className={style.btn}>기록추가</button>
       </div>
       <List />
     </section>
   );
 };
 
-export default MyPageList1;
+export default MyPageList2;
