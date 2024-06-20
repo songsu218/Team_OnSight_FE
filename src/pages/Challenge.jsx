@@ -1,95 +1,50 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
+import { ch } from "../api.js";
 // import "swiper/css";
 // import "swiper/css/pagination";
 import style from "../css/challenge.module.css";
 
 // import 'swiper/css/navigation';
 const Challenge = (props) => {
-  const dataList = [
-    {
-      id: 1,
-      title: "경기도 어찌구 챌린지",
-      center: "경기 클라이밍장 이름",
-      date: "20240714",
-      images: "/img/gyeonggi.png",
-      state: "NOW",
-    },
-    {
-      id: 2,
-      title: "서울 어찌구 챌린지",
-      center: "서울 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/seoul.png",
-      state: "NOW",
-    },
-    {
-      id: 3,
-      title: "경기2 어찌구 챌린지",
-      center: "경기2 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/gyeonggi.png",
-      state: "NOW",
-    },
-    {
-      id: 4,
-      title: "서울2 어찌구 챌린지",
-      center: "서울2 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/seoul.png",
-      state: "NOW",
-    },
-    {
-      id: 5,
-      images: "/img/gangwon.png",
-      title: "강원도 어찌구 챌린지",
-      date: "20240519",
-      center: "강원 클라이밍장 이름",
-      state: "PAST",
-    },
-    {
-      id: 6,
-      images: "/img/gangwon.png",
-      title: "강원도2 어찌구 챌린지",
-      date: "20240519",
-      center: "강원2 클라이밍장 이름",
-      state: "PAST",
-    },
-    {
-      id: 7,
-      images: "/img/gangwon.png",
-      title: "강원도3 어찌구 챌린지",
-      date: "20240519 - 12312",
-      center: "강원3 클라이밍장 이름",
-      state: "PAST",
-    },
-    {
-      id: 8,
-      title: "서울3 어찌구 챌린지",
-      center: "서울3 클라이밍장 이름",
-      date: "20240715",
-      images: "/img/seoul.png",
-      state: "NOW",
-    },
-  ];
-
-  const { showJoinButton, hideslideButton } = {
+  //#region 변수,Hook
+  const { props1, props2 } = {
     ...props,
   };
-  const nowList = dataList.filter((item) => item.state === "NOW");
-  const pastList = dataList.filter((item) => item.state === "PAST");
-  const slidesPerViewCount = 4;
   const navigate = useNavigate();
   const swiperRef = useRef(null);
+  const progressCircle = useRef(null);
+  const progressContent = useRef(null);
+  const [dataList, setDataList] = useState([]);
+  const [nowList, setNowList] = useState([]);
+  const [pastList, setPastList] = useState([]);
   const [swiper, setSwiper] = useState(null);
   const [totalSlides, setTotalSlides] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
-  const progressCircle = useRef(null);
-  const progressContent = useRef(null);
   const [selectedOption, setSelectedOption] = useState("");
-  const [printData, setPrintData] = useState(dataList);
+  const [printData, setPrintData] = useState([]);
+  const slidesPerViewCount = 4;
+  //#endregion 변수,Hook
+
+  //#region init
+  useEffect(() => {
+    ch.chTotalList("")
+      .then((result) => {
+        setDataList(result.data);
+        setNowList(result.data.filter((item) => item.state === "NOW"));
+        setPastList(result.data.filter((item) => item.state === "PAST"));
+        setPrintData(result.data);
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+      });
+  }, []);
+  //#endregion init
+
+  //#region 함수
 
   const handleSelectChange = (event) => {
     const target = event.target.value;
@@ -105,7 +60,6 @@ const Challenge = (props) => {
     setPrintData(instance);
     setTotalSlides(instance.length);
   };
-
   const onAutoplayTimeLeft = (s, time, progress) => {
     progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
@@ -115,14 +69,13 @@ const Challenge = (props) => {
       swiperRef.current.swiper.slideNext();
     }
   };
-
   const goPrev = () => {
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.slidePrev();
     }
   };
   const handleCardClick = (item) => {
-    navigate(`/challenge/${item.id}/${item.title}`, {
+    navigate(`/challenge/${item._id}/${item.challengename}`, {
       state: { detailData: item },
     });
   };
@@ -137,7 +90,9 @@ const Challenge = (props) => {
       setTotalSlides(swiper.slides.length);
     }
   };
+  //#endregion 함수
 
+  //#region return
   return (
     <>
       <div className="con1">
@@ -203,7 +158,7 @@ const Challenge = (props) => {
                   ? ""
                   : printData.map((item) => (
                       <SwiperSlide
-                        key={item.id}
+                        key={item._id}
                         onClick={() => handleCardClick(item)}
                       >
                         <div className={style.challenge_link}>
@@ -211,15 +166,17 @@ const Challenge = (props) => {
                             <img
                               srcSet={`${item.images}?h=120&fit=crop&auto=format&dpr=2 2x`}
                               src={`${item.images}?h=120&fit=crop&auto=format`}
-                              alt={item.title}
+                              alt={item.challengename}
                             />
                           </div>
                           <span className={style.challenge_cate}>
                             {item.center}
                           </span>
-                          <em className={style.challenge_tit}>{item.title}</em>
+                          <em className={style.challenge_tit}>
+                            {item.challengename}
+                          </em>
                           <span className={style.challenge_txt}>
-                            {item.date}
+                            {item.date_string}
                             <p />
                           </span>
                         </div>
@@ -265,5 +222,6 @@ const Challenge = (props) => {
       </div>
     </>
   );
+  //#endregion return
 };
 export default Challenge;

@@ -2,117 +2,152 @@ import style from "../css/challengeDetail.module.css";
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import ChallengeJoinUser from "../components/challenge/ChallengeJoinUser";
+import { ch } from "../api.js";
 
 const ChallengeDetail = () => {
-  // 참여자 테스트용
-  const [names, setNames] = useState([
-    "Alice",
-    "Bob",
-    "Charlie",
-    "David",
-    "Emma",
-    "Frank",
-    "Grace",
-    "Henry",
-    "Ivy",
-    "Jac",
-  ]);
-
-  const rank = [
-    {
-      rank: 1,
-      nick: "Alice",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 1500,
-    },
-    {
-      rank: 2,
-      nick: "Bob",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 1400,
-    },
-    {
-      rank: 3,
-      nick: "Charlie",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 1300,
-    },
-    {
-      rank: 4,
-      nick: "David",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 1200,
-    },
-    {
-      rank: 5,
-      nick: "Emma",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 1100,
-    },
-    {
-      rank: 6,
-      nick: "Frank",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 1000,
-    },
-    {
-      rank: 7,
-      nick: "Grace",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 900,
-    },
-    {
-      rank: 8,
-      nick: "Henry",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 800,
-    },
-    {
-      rank: 9,
-      nick: "Ivy",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 700,
-    },
-    {
-      rank: 10,
-      nick: "Jac",
-      thumbnail:
-        "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-      total: 600,
-    },
-  ];
-  const { challenge_id, challenge_name } = useParams(); // 챌린지 제목
+  //#region 변수,Hook
   const location = useLocation();
   const { detailData } = location.state || {}; // 파라미터
-
   // const [ongoing, setOngoing] = useState(false); //detailData에서 state가 넘어와서 해당기능 주석.
   const [wrapClass, setWrapClass] = useState(style.challenge_detail_wrap);
   const [challenge_img, setChallenge_img] = useState(detailData.images); // 챌린지 이미지
-  const [challenge_period, setChallenge_period] = useState(detailData.date); // 챌린지 기간
+  const [challenge_period, setChallenge_period] = useState(
+    detailData.date_string
+  ); // 챌린지 기간
   const [challenge_center, setChallenge_center] = useState(detailData.center); // 챌린지 장소
+  const [joinList, setJoinList] = useState([]);
+  const [rank, setRank] = useState([]);
   const itemsPerPage = 3;
   const [currentPage, setCurrentPage] = useState(1);
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = rank.slice(indexOfFirstItem, indexOfLastItem);
-  const totalPages = Math.ceil(rank.length / itemsPerPage);
 
+  const [currentItems, setCurrentItems] = useState([]);
+  const [totalPages, setTotalPages] = useState();
+
+  //#endregion 변수,Hook
+
+  //#region init
   useEffect(() => {
-    if (detailData.state === 'PAST') {
-      setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
-    } else if (detailData.state === 'NOW') {
+    console.log(detailData.state);
+    ch.chJoinList(detailData.challengename)
+      .then((result) => {
+        console.log('참여자 목록');
+        console.log(result.data);
+        setJoinList(result.data);
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+      });
+      if (detailData.state === "PAST") {
+        setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
+        console.log(detailData.challengename);
+        ch.chRank(detailData.challengename)
+        .then((result) => {
+          console.log('랭킹데이터');
+          console.log(result.data);
+          setRank(result.data);
+
+          setCurrentItems(result.data.slice(indexOfFirstItem, indexOfLastItem));
+          setTotalPages(Math.ceil(result.data.length / itemsPerPage));
+        })
+        .catch((error) => {
+          console.log(`${error}`);
+        });
+    } else if (detailData.state === "NOW") {
       setWrapClass(style.challenge_detail_wrap);
     }
-  }, [detailData.state]);
+
+  }, []);
+  //#endregion init
+
+  // 참여자 테스트용
+  // const [joinList, setJoinList] = useState([
+  //   "Alice",
+  //   "Bob",
+  //   "Charlie",
+  //   "David",
+  //   "Emma",
+  //   "Frank",
+  //   "Grace",
+  //   "Henry",
+  //   "Ivy",
+  //   "Jac",
+  // ]);
+
+  // const rank = [
+  //   {
+  //     rank: 1,
+  //     nick: "Alice",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 1500,
+  //   },
+  //   {
+  //     rank: 2,
+  //     nick: "Bob",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 1400,
+  //   },
+  //   {
+  //     rank: 3,
+  //     nick: "Charlie",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 1300,
+  //   },
+  //   {
+  //     rank: 4,
+  //     nick: "David",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 1200,
+  //   },
+  //   {
+  //     rank: 5,
+  //     nick: "Emma",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 1100,
+  //   },
+  //   {
+  //     rank: 6,
+  //     nick: "Frank",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 1000,
+  //   },
+  //   {
+  //     rank: 7,
+  //     nick: "Grace",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 900,
+  //   },
+  //   {
+  //     rank: 8,
+  //     nick: "Henry",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 800,
+  //   },
+  //   {
+  //     rank: 9,
+  //     nick: "Ivy",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 700,
+  //   },
+  //   {
+  //     rank: 10,
+  //     nick: "Jac",
+  //     thumbnail:
+  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
+  //     total: 600,
+  //   },
+  // ];
+  const { challenge_id, challenge_name } = useParams(); // 챌린지 제목
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -207,13 +242,13 @@ const ChallengeDetail = () => {
                 <div className={style.challenge_detail}>
                   <div className={style.sub_tit_area}>
                     <h3 className={style.sub_tit}>
-                      A챌린지A챌린지A챌린지A챌린지A챌린지A챌린지A챌린지A챌린지
+                      {detailData.challengename}
                     </h3>
                     <ul className={style.detail_list}>
                       <li>
                         <span className={style.bold}>기간</span>
                         <span>{challenge_period}</span>
-                        {detailData.state ? (
+                        {detailData.STATE ? (
                           <span className={`${style.status} ${style.ing}`}>
                             진행중
                           </span>
@@ -233,8 +268,12 @@ const ChallengeDetail = () => {
                         챌린지 참여자
                       </button>
                       <ul className={style.entry_list}>
-                        {names.map((name, index) => (
-                          <ChallengeJoinUser key={index} user_name={name} />
+                        {joinList.map((data, index) => (
+                          <ChallengeJoinUser
+                            key={index}
+                            user_name={data.nick}
+                            thumbnail={data.thumbnail}
+                          />
                         ))}
                       </ul>
                     </div>
@@ -257,7 +296,7 @@ const ChallengeDetail = () => {
                     </thead>
                     <tbody>
                       {currentItems.map((item, index) => (
-                        <tr  key={index}>
+                        <tr key={index}>
                           <td>
                             <div className={style.rank_profile}>
                               <img src={item.thumbnail} alt="Profile" />

@@ -38,7 +38,7 @@ const ch = {
    * @returns  챌린지목록
    */
   chEnter: (challengename, members) => {
-    return instance.get("/challengeEnter", {
+    return instance.get("/challenge/challengeEnter", {
       params: { challengename: challengename, members: members },
     });
   },
@@ -49,17 +49,23 @@ const ch = {
    * @returns challenge Collection, 썸네일
    */
   chTotalList: (tag) => {
-    return instance.get("/challengeTotalList", { params: { tag: tag } });
+    return instance.post(
+      "/challenge/challengeTotList",
+      { STATE: tag },
+      { headers: { "Content-Type": "application/json" } }
+    );
   },
 
   /**
    * challenge 나의목록
    * @param {string} tag ('TOT','NOW','PAST')
-   * @param {string} member_id 
+   * @param {string} member_id
    * @returns challenge Collection, 썸네일
    */
-  chPastedList: (tag,member_id) => {
-    return instance.get("/challengeMyList", { params: { tag: tag , member_id: member_id} });
+  chMyList: (tag, member_id) => {
+    return instance.post("/challenge/challengeMyList", {
+      params: { STATE: tag, member_id: member_id },
+    });
   },
 
   /**
@@ -67,9 +73,9 @@ const ch = {
    * @param {string} challengename
    * @returns {*} id.nick,썸네일
    */
-  chCurrentMyList: (challengename) => {
-    return instance.get("/challengeMemberList", {
-      params: { challengename: challengename },
+  chJoinList: (challengename) => {
+    return instance.post("/challenge/challengeMemberList", {
+      challengename: challengename ,
     });
   },
 
@@ -78,9 +84,9 @@ const ch = {
    * @param {string} challengename
    * @returns {*} (순위),id.nick,썸네일,total
    */
-  chPastedMyList: (challengename) => {
-    return instance.get("/challengeRanking", {
-      params: { challengename: challengename },
+  chRank: (challengename) => {
+    return instance.post("/challenge/challengeRanking", {
+      challengename: challengename,
     });
   },
 };
