@@ -1,7 +1,7 @@
-import './css/my_reset.css';
-import './css/App.css';
-import { Route, Routes } from 'react-router-dom';
-import Header from './components/Header';
+import "./css/my_reset.css";
+import "./css/App.css";
+import { Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
 import Main from "./pages/Main";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -25,7 +25,7 @@ function App() {
         <Route path='/Search' element={<SearchPage />} />
         <Route path='/crew' element={<Crew />} />
         <Route path='/CreateCrew' element={<CreateCrew />} />
-        <Route path="/CrewDetail" element={<CrewDetail />} />
+        <Route path='/CrewDetail' element={<CrewDetail />} />
         <Route path='/challenge' element={<Challenge />} />
         <Route
           path='/challenge/:challenge_id/:challenge_name'
