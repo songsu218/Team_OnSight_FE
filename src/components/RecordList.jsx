@@ -36,10 +36,13 @@ const RecordList = () => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/record");
-        setRecords(response.data);
+        const response = await axios.get('http://localhost:8000/record');
+        const sortedRecords = response.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setRecords(sortedRecords);
       } catch (error) {
-        console.error("error", error);
+        console.error('Error', error);
       }
     };
 
@@ -128,24 +131,25 @@ const RecordList = () => {
       ))}
       <div className={style.pageBox}>
         <button onClick={prevHandler}>
-          <i className='fa-solid fa-arrow-left'></i>
+          <i className="fa-solid fa-arrow-left"></i>
+
         </button>
         <div>
           {currentPage} / {records.length}
         </div>
         <div className={style.autoProgress}>
           <div className={style.svgWrapper}>
-            <svg viewBox='0 0 48 48'>
+            <svg viewBox="0 0 48 48">
               <circle
                 cx={24}
                 cy={24}
                 r={20}
-                strokeDasharray='126'
+                strokeDasharray="126"
                 strokeDashoffset={`${126 * (progress / 100)}`}
               />
             </svg>
             <i
-              className={`fa-solid ${isAutoplay ? "fa-stop" : "fa-play"} ${
+              className={`fa-solid ${isAutoplay ? 'fa-stop' : 'fa-play'} ${
                 style.iconCenter
               }`}
               onClick={toggleAutoplay}
@@ -153,7 +157,7 @@ const RecordList = () => {
           </div>
         </div>
         <button onClick={nextHandler}>
-          <i class='fa-solid fa-arrow-right'></i>
+          <i class="fa-solid fa-arrow-right"></i>
         </button>
       </div>
     </Swiper>
