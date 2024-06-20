@@ -1,4 +1,4 @@
-/* 참고사이트 기준이고 여기서부터 */
+
 /* html {
 font-size: 62.5%;
 } */
@@ -22,11 +22,6 @@ font-size: 62.5%;
 #container {padding:14.0rem 0 13.6rem;}
 #container, #footer {margin: 0 auto;}
 } */
-
-/* 여기까지 공통쪽에서 작업되어 적용되었다 가정
-
-
-/* 우리처럼 페이지ID로 감싸서 스타일 중복되지 않게 하는게 좋을 것 같음. */
 
 .page_tit_area {
 	position: absolute;

@@ -26,13 +26,33 @@ const Challenge = (props) => {
   const [selectedOption, setSelectedOption] = useState("");
   const [printData, setPrintData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
-  const slidesPerViewCount = 4;
+  const [slidesPerViewCount, setSlidesPerViewCount] = useState(4);
+  const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth <= 1079)
+console.log(totalSlides - slidesPerViewCount + 1 > 0
+  ? totalSlides - slidesPerViewCount + 1
+  : 1);
+  console.log(totalSlides);
+  console.log(slidesPerViewCount);
   //#endregion 변수,Hook
 
   //#region init
   useEffect(() => {
     setAllChData("TOT");
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+
   }, []);
+
+  useEffect(()=>{
+    setTotalSlides(printData.length);
+    if(isNarrowScreen){
+      setSlidesPerViewCount(2);
+    }else {
+      setSlidesPerViewCount(4);
+    }
+  }, [isNarrowScreen])
   //#endregion init
 
   //#region 함수
@@ -93,6 +113,10 @@ const Challenge = (props) => {
       swiperRef.current.swiper.slidePrev();
     }
   };
+  const handleResize = () => {
+    setIsNarrowScreen(window.innerWidth <= 1079);
+  };
+
   const handleCardClick = (item) => {
     navigate(`/challenge/${item._id}/${item.challengename}`, {
       state: { detailData: item },
