@@ -13,7 +13,7 @@
 
 .leftCon > span {
   /* border: 1px solid red; */
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
   font-size: 1.625rem;
   font-weight: bold;
 }
@@ -23,21 +23,42 @@
   height: 256px;
   margin: auto;
   background-color: white;
-  /* padding-top: 10px; */
   margin-top: 30px;
+  overflow: hidden;
+}
+
+.mycrewCon li img {
+  border-radius: 6px 6px 0 0;
+  width: 347px;
+  height: 160px;
+  object-fit: cover;
+}
+
+.mycrew {
+  font-family: "맑은 고딕";
+  padding-top: 10px;
+  padding-left: 20px;
+  text-align: left;
+  /* border: 1px solid red; */
+  line-height: 1.5;
 }
 
 .mycrew > * {
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
+}
+
+.adress {
+  display: flex;
 }
 
 .adress > span {
   font-weight: bold;
   position: relative;
+  padding-right: 20px;
 }
 
 .adress span::after {
-  content: '';
+  content: "";
   display: inline-block;
   width: 2px;
   height: 60%;
@@ -49,30 +70,6 @@
 
 .mycrew > p {
   color: darkgray;
-}
-
-.mycrewCon img {
-  /* margin-top: 20px; */
-  width: 347px;
-  height: 160px;
-  object-fit: cover;
-}
-
-.mycrew {
-  font-family: '맑은 고딕';
-  padding-top: 10px;
-  padding-left: 20px;
-  text-align: left;
-  /* border: 1px solid red; */
-  line-height: 1.5;
-}
-
-.adress {
-  display: flex;
-}
-
-.adress > span {
-  padding-right: 20px;
 }
 
 /* 추천크루 영역 */
@@ -93,6 +90,8 @@
 
 .righttxt button {
   border: none;
+  height: 54px;
+  width: 142px;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   background-color: white;
@@ -130,8 +129,12 @@ select {
   /* border: 1px solid blue; */
   list-style: none;
   width: 300px;
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
   line-height: 1.2;
+}
+
+.crewList > li > * {
+  padding-top: 1rem;
 }
 
 .crewList > li > img {
@@ -140,12 +143,24 @@ select {
 }
 
 .crewList > li > h5 {
-  padding-top: 5px;
+  padding-top: 15px;
   font-weight: bold;
+  position: relative;
+  display: inline-block;
 }
 
+.crewList > li > h5::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: black;
+  bottom: -5px;
+  left: 0;
+}
 .crewList > li > p {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding-bottom: 0.5rem;
 }
