@@ -1,0 +1,145 @@
+.listData2 {
+  position: relative;
+}
+
+.listData2 > ul {
+  border-top: 3px solid #000000;
+}
+
+.listData2 > ul > li {
+  display: flex;
+  padding: 38px 0;
+  border-bottom: 1px solid #cdcdcd;
+}
+
+.listData2 > ul > li > span {
+  font-size: 20px;
+  line-height: 26px;
+  font-weight: 800;
+}
+
+.listData2 > ul > li .listTitle,
+.listData2 > ul > li .listCrew {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.listData2 > ul > li .listDate,
+.listData2 > ul > li .listCnt {
+  font-weight: 300;
+}
+
+.listData2 > ul > li > div {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@media (max-width: 1079px) {
+  .label {
+    display: none;
+  }
+
+  .listData2 .span:not(.listTitle) {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .listData2 .label .lbListCnt,
+  .listData2 .listCnt {
+    display: none;
+  }
+
+  .listData2 > ul > li {
+    position: relative;
+    padding-left: 56px;
+    gap: 12px;
+    flex-direction: column;
+  }
+
+  .listData2 > span:not(.listTitle) {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  .listData2 .listNo {
+    position: absolute;
+    left: 0;
+    top: 38px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .listData2 {
+    position: relative;
+    padding-top: 72px;
+  }
+
+  .listData2 > ul > li {
+    text-align: left;
+    padding: 38px 32px;
+  }
+
+  .listData2 > ul > li,
+  .listData2 .label {
+    gap: 32px;
+  }
+
+  .listData2 .label {
+    display: flex;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    padding: 0 2rem;
+    font-size: 1rem;
+    line-height: 72px;
+    font-weight: 800;
+  }
+
+  .listData2 .label .lbListNo,
+  .listData2 .listNo,
+  .listData2 .label .lbListCnt,
+  .listData2 .listCnt {
+    width: 4rem;
+  }
+
+  .listData2 .label .lbListCrew,
+  .listData2 .listCrew,
+  .listData2 .label .lbListDate,
+  .listData2 .listDate {
+    width: 120px;
+  }
+
+  .listData2 .label .lbListTitle,
+  .listData2 .listTitle {
+    flex: 1;
+  }
+
+  .listData2 > ul > li > span {
+    font-size: 20px;
+    line-height: 26px;
+    font-weight: 800;
+    padding: 0;
+  }
+}
+
+@media (min-width: 1680px) {
+  .listData2 .label {
+    padding: 0 56px;
+  }
+
+  .listData2 > ul > li,
+  .listData2 .label {
+    gap: 56px;
+  }
+  .listData2 > ul > li {
+    padding: 38px 56px;
+  }
+}
