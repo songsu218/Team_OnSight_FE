@@ -1,8 +1,7 @@
-import "./css/my_reset.css";
-import "./css/App.css";
-import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-
+import './css/my_reset.css';
+import './css/App.css';
+import { Route, Routes } from 'react-router-dom';
+import Header from './components/Header';
 import Main from "./pages/Main";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
@@ -13,7 +12,6 @@ import Challenge from "./pages/Challenge";
 import ChallengeDetail from "./pages/ChallengeDetail";
 import CreateCrew from "./pages/CreateCrew";
 import CrewDetail from "./pages/CrewDetail";
-
 
 function App() {
   return (

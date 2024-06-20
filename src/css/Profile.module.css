@@ -1,0 +1,276 @@
+.tit {
+  margin: 0 0 56px;
+}
+
+.tit > h2 {
+  font-size: 2rem;
+  line-height: 40px;
+  font-weight: 800;
+}
+
+.navCon > ol {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  line-height: 40px;
+}
+
+.navCon > ol > li {
+  position: relative;
+}
+
+.navCon > ol > li + li::before {
+  content: '';
+  display: block;
+  position: absolute;
+  margin: -4px 0 0 0;
+  top: 50%;
+  left: -20%;
+  width: 6px;
+  height: 6px;
+  border-left: 2px solid #000000;
+  border-bottom: 2px solid #000000;
+  transform: rotate(-135deg);
+}
+
+.navCon > ol > li a {
+  display: block;
+}
+
+.sec {
+  position: relative;
+  border: 1px solid #b9b9b9;
+}
+
+.titSub1 {
+  display: flex;
+  margin: 0 0 2rem;
+  font-weight: 800;
+  font-size: 28px;
+  line-height: 33px;
+  align-items: center;
+}
+
+.area {
+  position: relative;
+}
+
+.area > li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+  font-size: 20px;
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.area > li + li {
+  margin: 4px 0 0;
+}
+
+.area > li > div:nth-child(1) {
+  width: 90px;
+  font-weight: 800;
+}
+
+.area > li > div:last-of-type {
+  flex: 1;
+  word-break: break-all;
+}
+
+.info1 img {
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+}
+
+.areaBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin: 0;
+}
+
+.areaBtn button {
+  height: 39px;
+  margin: 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px inset #b9b9b9;
+  font-size: 1rem;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+}
+
+.tit.titPw {
+  margin: 0;
+}
+
+.titSub1.titPwSub1 {
+  margin: 0;
+}
+
+.pw {
+  flex: 1;
+  margin: 0 0 0 1rem;
+  font-size: 20px;
+  line-height: 1.8;
+}
+
+.subCon2 {
+  display: flex;
+  margin: 36px 0 0;
+  align-items: center;
+  gap: 34px;
+  font-size: 18px;
+  line-height: 1.33;
+}
+
+.linkBtn {
+  position: relative;
+  display: inline-block;
+  padding: 0;
+  border: 0;
+  background: none;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  font-size: 18px;
+  line-height: 1.5rem;
+  font-weight: normal;
+  text-decoration: underline;
+  padding-right: 27px;
+}
+
+.linkBtn::before {
+  content: '';
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  top: 4px;
+  right: 0;
+  width: 17px;
+  height: 14px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px;
+}
+
+.linkBtn::after {
+  content: '';
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  margin: 4px;
+  top: 4px;
+  right: 0;
+  width: 17px;
+  height: 14px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px;
+}
+
+@media (max-width: 767px) {
+  .sec {
+    margin: 0 -24px;
+    padding: 40px 24px;
+    background: #ffffff;
+  }
+
+  .areaBtn {
+    margin: 38px 1.5rem;
+  }
+
+  .sec + .sec {
+    margin: 1rem -1.5rem 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .sec {
+    padding: 2rem;
+  }
+
+  .areaBtn {
+    margin: 1.5rem 2rem;
+  }
+
+  .sec + .sec {
+    margin: 1rem 0 0;
+  }
+}
+
+@media (max-width: 1079px) {
+  .tit {
+    text-align: center;
+  }
+
+  .tit {
+    margin: 0 0 24px;
+  }
+
+  .navCon {
+    padding: 0 24px;
+    border-bottom: 1px solid #b9b9b9;
+  }
+
+  .subCon2 {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1080px) {
+  .tit {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .tit > h1 {
+    font-size: 56px;
+    line-height: 68px;
+    width: 365px;
+  }
+
+  .navCon > ol {
+    gap: 56px;
+    font-size: 1rem;
+  }
+
+  .navCon > ol > li + li::before {
+    margin: -6px 0 0 0;
+    left: -38%;
+  }
+
+  .sec {
+    padding: 32px 54px;
+  }
+
+  .titSub1 {
+    font-size: 2rem;
+    line-height: 3rem;
+  }
+
+  .areaBtn {
+    margin: 38px 54px;
+  }
+
+  .pw {
+    margin: 0 0 0 3rem;
+  }
+}
+
+@media (min-width: 1680px) {
+  .info1 {
+    position: absolute;
+    top: -16%;
+  }
+
+  .area > li + li {
+    margin-left: 130px;
+  }
+}
