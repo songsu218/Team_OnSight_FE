@@ -186,7 +186,7 @@ const ChallengeDetail = () => {
   return (
     <>
       <div className="con1">
-        <main id={style.container}>
+        <main id={style.container} className="mw">
           <div className={style.content}>
             {/* h1은 로고(사이트명)이라 가정하고 */}
             {/* 아래 타이틀 및 페이지 네비 영역은 들어가야 챌린지 일정과 헤딩 태그 레벨이 맞음. */}

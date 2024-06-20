@@ -22,11 +22,11 @@ const ChallengeJoinUser = (props) => {
     }
 
     const entry = {
-        margin: '0 0 0 1em',
-        fontSize: '1.5rem',
-        fontStyle: 'normal',
-        fontWeight: 'bold',
-        color: '#000',
+      margin: '0 0 0 10px',
+      fontSize: '15px',
+      fontStyle: 'normal',
+      fontWeight: 'bold',
+      color: '#000',
     }
 
   return (

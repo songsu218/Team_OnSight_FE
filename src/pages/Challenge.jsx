@@ -25,26 +25,45 @@ const Challenge = (props) => {
   const [currentIndex, setCurrentIndex] = useState(1);
   const [selectedOption, setSelectedOption] = useState("");
   const [printData, setPrintData] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
   const slidesPerViewCount = 4;
   //#endregion 변수,Hook
 
   //#region init
   useEffect(() => {
-    ch.chTotalList("")
-      .then((result) => {
-        setDataList(result.data);
-        setNowList(result.data.filter((item) => item.state === "NOW"));
-        setPastList(result.data.filter((item) => item.state === "PAST"));
-        setPrintData(result.data);
-        console.log(result.data);
-      })
-      .catch((error) => {
-        console.log(`${error}`);
-      });
+    setAllChData("TOT");
   }, []);
   //#endregion init
 
   //#region 함수
+
+  const setAllChData = (tag) => {
+    ch.chTotalList(tag)
+    .then((result) => {
+      setDataList(result.data);
+      setNowList(result.data.filter((item) => item.state === "NOW"));
+      setPastList(result.data.filter((item) => item.state === "PAST"));
+      setPrintData(result.data);
+      console.log(result.data);
+    })
+    .catch((error) => {
+      console.log(`${error}`);
+    });
+  }
+
+  const setMyChData = (tag,id) => {
+    ch.chMyList(tag,id)
+    .then((result) => {
+      setDataList(result.data);
+      setNowList(result.data.filter((item) => item.state === "NOW"));
+      setPastList(result.data.filter((item) => item.state === "PAST"));
+      setPrintData(result.data);
+      console.log(result.data);
+    })
+    .catch((error) => {
+      console.log(`${error}`);
+    });
+  }
 
   const handleSelectChange = (event) => {
     const target = event.target.value;
@@ -90,31 +109,46 @@ const Challenge = (props) => {
       setTotalSlides(swiper.slides.length);
     }
   };
+
+  const handleClick = (index, event) => {
+    event.preventDefault(); 
+    setActiveIndex(index);
+    const type = selectedOption == '선택' ? 'TOT' : selectedOption;
+    if (index === 0){
+      //나의 챌린지 만들기
+      setAllChData(type);
+    }else if(index === 1){
+      //나의 챌린지 보기
+      setMyChData(type,'qwer1234');
+    }
+  };
   //#endregion 함수
 
   //#region return
   return (
     <>
       <div className="con1">
-        <main id={style.container}>
+        <main id={style.container} className="mw">
           <div className={style.content}>
             <div className={style.page_tit_area}>
               <h2 className={style.page_tit}>챌린지 일정</h2>
               <nav className={style.page_nav}>
                 <ul>
-                  <li className={style.active}>
+                <li className={activeIndex === 0 ? style.active : ''}>
                     <a
                       href="#"
                       className={style.page_link}
+                      onClick={(event) => handleClick(0, event)}
                       title="나의 챌린지 만들기 페이지 이동 링크"
                     >
                       나의 챌린지 만들기
                     </a>
                   </li>
-                  <li>
+                  <li className={activeIndex === 1 ? style.active : ''}>
                     <a
                       href="#"
-                      className={style.page_link}
+                      className={`${style.page_link}`}
+                      onClick={(event) => handleClick(1, event)}
                       title="나의 챌린지 보기 페이지 이동 링크"
                     >
                       나의 챌린지 보기

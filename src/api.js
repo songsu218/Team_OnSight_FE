@@ -39,7 +39,8 @@ const ch = {
    */
   chEnter: (challengename, members) => {
     return instance.get("/challenge/challengeEnter", {
-      params: { challengename: challengename, members: members },
+      challengename: challengename,
+      members: members,
     });
   },
 
@@ -64,7 +65,8 @@ const ch = {
    */
   chMyList: (tag, member_id) => {
     return instance.post("/challenge/challengeMyList", {
-      params: { STATE: tag, member_id: member_id },
+      STATE: tag,
+      member_id: member_id,
     });
   },
 
@@ -75,7 +77,7 @@ const ch = {
    */
   chJoinList: (challengename) => {
     return instance.post("/challenge/challengeMemberList", {
-      challengename: challengename ,
+      challengename: challengename,
     });
   },
 
