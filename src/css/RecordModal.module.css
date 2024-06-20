@@ -55,44 +55,74 @@
   margin-bottom: 2rem;
   padding: 1rem 0 0.5rem 1rem;
   box-shadow: 0 3px 3px -3px #777777;
-}
-
-.recordCon .placeC > div,
-.recordCon .diffiC > div {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-size: 0.9rem;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   user-select: none;
+  font-size: 0.9rem;
+}
+
+.recordCon .placeC .placeView,
+.recordCon .diffiC .diffiView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   cursor: pointer;
+}
+
+.recordCon .placeC .searchCon {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recordCon .placeC .searchCon input {
+  width: 80%;
+}
+
+.recordCon .placeC .searchCon i {
+  padding: 0 0.5rem;
 }
 
 .recordCon .placeList,
 .recordCon .diffiList {
   padding: 1rem;
   position: absolute;
+  gap: 1rem;
   top: 120%;
   left: 0;
   width: 100%;
-  height: 200px;
+  height: 260px;
   overflow-y: scroll;
   background-color: #ffffff;
   z-index: 10;
   box-shadow: 0px 0px 5px #777777;
 }
 
-.recordCon .placeList > li,
-.recordCon .diffiList > li {
-  padding: 0.5rem 0.25rem ;
+.recordCon .placeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+}
+
+.recordCon .placeList li,
+.recordCon .diffiList li {
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
 }
 
 .recordCon .diffiList > li {
   display: flex;
   justify-content: space-between;
+  cursor: pointer;
+}
+
+.recordCon .placeResult {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 90%;
 }
 
 .modalBody input {
