@@ -6,7 +6,26 @@ const CreateCrew = () => {
   const [selectedDistrict, setSelectedDistrict] = useState("");
   const [districts, setDistricts] = useState([]);
 
-  const handleCityChange = (event) => {
+  
+//img 미리보기 부분
+      const [previewSrc, setPreviewSrc] = useState('/img/noimg.jpg');
+    
+      const handleFileChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const fileUrl = URL.createObjectURL(file);
+          setPreviewSrc(fileUrl);
+        }
+      };
+    
+      const handleRemoveImage = () => {
+        setPreviewSrc('/img/on_sight.jpg');
+        document.getElementById('crewImg').value = null;
+      };
+    
+
+    // 지역 검색부분
+    const handleCityChange = (event) => {
     const city = event.target.value;
     setSelectedCity(city);
 
@@ -66,6 +85,8 @@ const CreateCrew = () => {
     setSelectedDistrict(event.target.value);
   };
 
+
+  //DB Post부분
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -97,10 +118,10 @@ const CreateCrew = () => {
     <main className={style.createpage}>
       <form Submit="createCrew" className={style.createCrew}>
         <h2>나의 크루생성</h2>
-        <img src="/img/noimg.jpg" alt="미리보기" />
-        <div className={style.imgBtn}>
-          <input type="file" name="crewImg" id="crewImg" />
-          <button>사진삭제</button>
+        <img src={previewSrc} alt="미리보기" />
+        <div className={style.imgBtnCon}>
+          <input type="file" name="crewImg" id="crewImg"  onChange={handleFileChange}/>
+          <button className={style.Btn} onClick={handleRemoveImage}>사진삭제</button>
         </div>
 
         <section>크루명</section>
@@ -113,7 +134,6 @@ const CreateCrew = () => {
             <option value="">선택</option>
             <option value="seoul">서울특별시</option>
             <option value="busan">부산광역시</option>
-            {/* 추가 도시 옵션 */}
           </select>
           <select value={selectedDistrict} onChange={handleDistrictChange}>
             <option value="">선택</option>
@@ -124,8 +144,19 @@ const CreateCrew = () => {
             ))}
           </select>
         </div>
+    
+        <div className={style.selectBox}>
+        <section>인원제한</section>
+        <select name="limit" id="">
+        <option value="10" selected>10</option>
+        <option value="20">20</option>
+        <option value="30">30</option>
+        <option value="40">40</option>
+        <option value="50">50</option>
+        </select>
+        </div>
         <div className={style.saBtn}>
-          <button type="submit">저장</button>
+          <button className={style.Btn} type="submit">저장</button>
         </div>
       </form>
     </main>

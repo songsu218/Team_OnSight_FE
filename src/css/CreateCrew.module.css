@@ -16,13 +16,13 @@
   border: 1px dotted lightgray;
 }
 
-.imgBtn {
+.imgBtnCon {
   display: flex;
   justify-content: flex-end;
 }
 
-.imgBtn > input,
-button {
+.imgBtnCon > input,
+.Btn {
   /* border: 1px solid #f1f1f1; */
   border: 1px solid lightgray;
   background-color: white;
@@ -32,8 +32,12 @@ button {
   margin-left: 10px;
   font-size: 14px;
 }
-button {
+.Btn {
   width: 128px;
+}
+
+.selectBox{
+  display: flex;
 }
 
 .saBtn {
