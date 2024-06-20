@@ -2,30 +2,36 @@ import { useState } from "react";
 import style from "../css/CreateCrew.module.css";
 
 const CreateCrew = () => {
-  const [selectedCity, setSelectedCity] = useState("");
-  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [id, setId] = useState("");
+  const [name, setName] = useState("");
+  const [content, setContent] = useState("");
+  const [crewImg, setCrewImg] = useState("");
+  const [members, setMembers] = useState("");
+  const [memberLimit, setMemberLimit] = useState("");
+  const [membercount, setMembercount] = useState("");
+  const [feedcount, setFeedcount] = useState("");
+  const [selectedCity, setSelectedCity] = useState(""); //시
+  const [selectedDistrict, setSelectedDistrict] = useState(""); //구
   const [districts, setDistricts] = useState([]);
 
-  
-//img 미리보기 부분
-      const [previewSrc, setPreviewSrc] = useState('/img/noimg.jpg');
-    
-      const handleFileChange = (e) => {
-        const file = e.target.files[0];
-        if (file) {
-          const fileUrl = URL.createObjectURL(file);
-          setPreviewSrc(fileUrl);
-        }
-      };
-    
-      const handleRemoveImage = () => {
-        setPreviewSrc('/img/on_sight.jpg');
-        document.getElementById('crewImg').value = null;
-      };
-    
+  //img 미리보기 부분
+  const [previewSrc, setPreviewSrc] = useState("/img/noimg.jpg");
 
-    // 지역 검색부분
-    const handleCityChange = (event) => {
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const fileUrl = URL.createObjectURL(file);
+      setPreviewSrc(fileUrl);
+    }
+  };
+
+  const handleRemoveImage = () => {
+    setPreviewSrc("/img/on_sight.jpg");
+    document.getElementById("crewImg").value = null;
+  };
+
+  // 지역 검색부분
+  const handleCityChange = (event) => {
     const city = event.target.value;
     setSelectedCity(city);
 
@@ -85,18 +91,25 @@ const CreateCrew = () => {
     setSelectedDistrict(event.target.value);
   };
 
-
   //DB Post부분
-  const handleSubmit = async (event) => {
+  const handleSubmitcrew = async (event) => {
     event.preventDefault();
 
     const data = {
-      si: selectedCity,
-      gu: selectedDistrict,
+      id,
+      name,
+      selectedCity,
+      selectedDistrict,
+      content,
+      crewImg,
+      members,
+      memberLimit,
+      membercount,
+      feedcount,
     };
 
     try {
-      const response = await fetch("/api/save-location", {
+      const response = await fetch("http://localhost:8000/createCrew", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -120,14 +133,33 @@ const CreateCrew = () => {
         <h2>나의 크루생성</h2>
         <img src={previewSrc} alt="미리보기" />
         <div className={style.imgBtnCon}>
-          <input type="file" name="crewImg" id="crewImg"  onChange={handleFileChange}/>
-          <button className={style.Btn} onClick={handleRemoveImage}>사진삭제</button>
+          <input
+            type="file"
+            name="crewImg"
+            id="crewImg"
+            onChange={handleFileChange}
+          />
+          <button className={style.Btn} onClick={handleRemoveImage}>
+            사진삭제
+          </button>
         </div>
 
         <section>크루명</section>
-        <input type="text" placeholder="name" required />
+        <input
+          type="text"
+          placeholder="name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          required
+        />
         <section>소개 글</section>
-        <input type="text" placeholder="content" required />
+        <input
+          type="text"
+          placeholder="content"
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          required
+        />
         <section>활동지역</section>
         <div className="selectBox">
           <select value={selectedCity} onChange={handleCityChange}>
@@ -144,19 +176,32 @@ const CreateCrew = () => {
             ))}
           </select>
         </div>
-    
+
         <div className={style.selectBox}>
-        <section>인원제한</section>
-        <select name="limit" id="">
-        <option value="10" selected>10</option>
-        <option value="20">20</option>
-        <option value="30">30</option>
-        <option value="40">40</option>
-        <option value="50">50</option>
-        </select>
+          <section>인원제한</section>
+          <select
+            name="limit"
+            id="limit"
+            value={memberLimit}
+            onChange={(e) => setMemberLimit(e.target.value)}
+          >
+            <option value="10" selected>
+              10
+            </option>
+            <option value="20">20</option>
+            <option value="30">30</option>
+            <option value="40">40</option>
+            <option value="50">50</option>
+          </select>
         </div>
         <div className={style.saBtn}>
-          <button className={style.Btn} type="submit">저장</button>
+          <button
+            className={style.Btn}
+            type="submit"
+            onClick={handleSubmitcrew}
+          >
+            저장
+          </button>
         </div>
       </form>
     </main>
