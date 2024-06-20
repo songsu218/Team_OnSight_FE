@@ -13,7 +13,7 @@
 
 .leftCon > span {
   /* border: 1px solid red; */
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
   font-size: 1.625rem;
   font-weight: bold;
 }
@@ -28,7 +28,7 @@
 }
 
 .mycrew > * {
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
 }
 
 .adress > span {
@@ -37,7 +37,7 @@
 }
 
 .adress span::after {
-  content: "";
+  content: '';
   display: inline-block;
   width: 2px;
   height: 60%;
@@ -59,7 +59,7 @@
 }
 
 .mycrew {
-  font-family: "맑은 고딕";
+  font-family: '맑은 고딕';
   padding-top: 10px;
   padding-left: 20px;
   text-align: left;
@@ -130,7 +130,7 @@ select {
   /* border: 1px solid blue; */
   list-style: none;
   width: 300px;
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
   line-height: 1.2;
 }
 
