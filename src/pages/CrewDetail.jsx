@@ -1,6 +1,6 @@
 // import { Link } from "react-router-dom";
 import style from "../css/CrewDetail.module.css";
-import CrewFeedlist from "../components/list/CrewFeedlist";
+import CrewGroupfeed from "../components/list/CrewGroupfeed";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -37,13 +37,13 @@ const CrewDetail = () => {
             <span>활동지역</span>
           </div>
           <div className={style.Menu}>
-            {/* <Link to="/Write">
+            <Link to="/Write">
               <button>글쓰기</button>
             </Link>
             <Link to="/ManageCrew">
               <button>크루관리</button>
-            </Link> */}
-            <ul>
+            </Link>
+            {/* <ul>
               <li>
                 <a href="">
                   <Link to="/Write"> 글쓰기</Link>
@@ -52,7 +52,7 @@ const CrewDetail = () => {
               <li>
                 <a href="">크루관리</a>
               </li>
-            </ul>
+            </ul> */}
           </div>
         </div>
         <div className={style.introCrew}>
@@ -65,7 +65,7 @@ const CrewDetail = () => {
           </p>
           <span>피드</span>
         </div>
-        <CrewFeedlist />
+        <CrewGroupfeed />
       </section>
     </main>
   );
