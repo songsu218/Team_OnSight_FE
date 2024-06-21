@@ -121,37 +121,37 @@ const Header = () => {
               onMouseLeave={() => MouseLeave("link3")}
             >
               <img
-                src={hoverImg.link3 ? "/img/eholdg.png" : "/img/holdg.png"}
+                src={hoverImg.link3 ? '/img/eholdy.png' : '/img/holdy.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link3 ? "#A2D262" : "#FFFFFF" }}>
+              <span style={{ color: hoverImg.link3 ? '#FFD02C' : '#FFFFFF' }}>
                 챌린지
               </span>
             </Link>
             <Link
-              to="/mypage"
-              onMouseEnter={() => MouseHover("link4")}
-              onMouseLeave={() => MouseLeave("link4")}
+              to="/rank"
+              onMouseEnter={() => MouseHover('link4')}
+              onMouseLeave={() => MouseLeave('link4')}
             >
               <img
-                src={hoverImg.link4 ? "/img/eholdp.png" : "/img/holdp.png"}
+                src={hoverImg.link4 ? '/img/eholdg.png' : '/img/holdg.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link4 ? "#BE65FF" : "#FFFFFF" }}>
-                MY
+              <span style={{ color: hoverImg.link4 ? '#A2D262' : '#FFFFFF' }}>
+                랭킹
               </span>
             </Link>
             <Link
-              to="/rank"
-              onMouseEnter={() => MouseHover("link5")}
-              onMouseLeave={() => MouseLeave("link5")}
+              to="/mypage"
+              onMouseEnter={() => MouseHover('link5')}
+              onMouseLeave={() => MouseLeave('link5')}
             >
               <img
-                src={hoverImg.link5 ? "/img/eholdr.png" : "/img/holdr.png"}
+                src={hoverImg.link5 ? '/img/eholdp.png' : '/img/holdp.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link5 ? "#FF454A" : "#FFFFFF" }}>
-                랭킹
+              <span style={{ color: hoverImg.link5 ? '#BE65FF' : '#FFFFFF' }}>
+                MY
               </span>
             </Link>
           </div>

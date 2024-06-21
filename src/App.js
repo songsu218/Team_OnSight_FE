@@ -12,6 +12,8 @@ import Challenge from "./pages/Challenge";
 import ChallengeDetail from "./pages/ChallengeDetail";
 import CreateCrew from "./pages/CreateCrew";
 import CrewDetail from "./pages/CrewDetail";
+import Write from "./pages/Write";
+import ManageCrew from "./pages/ManageCrew";
 import Profile from "./pages/Profile";
 import Ranking from "./pages/Ranking";
 
@@ -26,8 +28,10 @@ function App() {
         <Route path="/mypage/*" element={<MyPage />} />
         <Route path="/Search" element={<SearchPage />} />
         <Route path="/crew" element={<Crew />} />
-        <Route path="/CreateCrew" element={<CreateCrew />} />
-        <Route path="/CrewDetail" element={<CrewDetail />} />
+        <Route path="/createCrew" element={<CreateCrew />} />
+        <Route path="/crewDetail" element={<CrewDetail />} />
+        <Route path="/ManageCrew" element={<ManageCrew />} />
+        <Route path="/write" element={<Write />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route
           path="/challenge/:challenge_id/:challenge_name"
