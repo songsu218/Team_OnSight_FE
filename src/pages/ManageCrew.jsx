@@ -1,5 +1,5 @@
 import { useState } from "react";
-import style from "../css/CreateCrew.module.css";
+import style from "../css/ManageCrew.module.css";
 
 const CreateCrew = () => {
   const [id, setId] = useState("");
@@ -14,11 +14,13 @@ const CreateCrew = () => {
   const [selectedDistrict, setSelectedDistrict] = useState(""); //구
   const [districts, setDistricts] = useState([]);
 
-  // img 미리보기 부분
+  //img 미리보기 부분
   const [previewSrc, setPreviewSrc] = useState("/img/noimg.jpg");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = () => {
-    document.getElementById("crewImgInput").click();
+    setIsModalOpen(true);
+    document.getElementById("crewImgInput").click(); // Trigger the file input click
   };
 
   const handleFileChange = (e) => {
@@ -28,6 +30,11 @@ const CreateCrew = () => {
       setPreviewSrc(fileUrl);
       setCrewImg(file); // Save the selected file to state
     }
+    setIsModalOpen(false); // 파일 선택 후 모달 닫기
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const handleRemoveImage = () => {
@@ -136,7 +143,7 @@ const CreateCrew = () => {
   return (
     <main className={style.createpage}>
       <form Submit="createCrew" className={style.createCrew}>
-        <h2>나의 크루생성</h2>
+        <h2>크루 정보수정</h2>
         <img src={previewSrc} alt="미리보기" />
         <div className={style.imgBtnCon}>
           <input
@@ -144,7 +151,7 @@ const CreateCrew = () => {
             name="crewImg"
             id="crewImgInput"
             onChange={handleFileChange}
-            style={{ display: "none" }} // 첨부파일 팝업
+            style={{ display: "none" }} // Hide the file input
           />
           <button
             type="button"
@@ -162,17 +169,9 @@ const CreateCrew = () => {
         <section>
           크루명 <p>· 크루명은 변경되지 않습니다.</p>
         </section>
-        <input
-          className={style.formList}
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
+        <div className={style.crewName}>기존에 작성한 크루명</div>
         <section>소개 글</section>
-        <textarea
-          className={style.longList}
+        <input
           type="text"
           placeholder="content"
           value={content}
