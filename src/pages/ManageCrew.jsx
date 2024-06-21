@@ -16,11 +16,9 @@ const CreateCrew = () => {
 
   //img 미리보기 부분
   const [previewSrc, setPreviewSrc] = useState("/img/noimg.jpg");
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleButtonClick = () => {
-    setIsModalOpen(true);
-    document.getElementById("crewImgInput").click(); // Trigger the file input click
+    document.getElementById("crewImgInput").click();
   };
 
   const handleFileChange = (e) => {
@@ -28,18 +26,13 @@ const CreateCrew = () => {
     if (file) {
       const fileUrl = URL.createObjectURL(file);
       setPreviewSrc(fileUrl);
-      setCrewImg(file); // Save the selected file to state
+      setCrewImg(file);
     }
-    setIsModalOpen(false); // 파일 선택 후 모달 닫기
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   const handleRemoveImage = () => {
-    setPreviewSrc("/img/noimg.jpg");
-    setCrewImg(""); // Clear the selected file from state
+    setPreviewSrc("/img/noimg.jpg"); //미리보기 이미지
+    setCrewImg("");
     document.getElementById("crewImgInput").value = null;
   };
 
@@ -151,7 +144,7 @@ const CreateCrew = () => {
             name="crewImg"
             id="crewImgInput"
             onChange={handleFileChange}
-            style={{ display: "none" }} // Hide the file input
+            style={{ display: "none" }}
           />
           <button
             type="button"

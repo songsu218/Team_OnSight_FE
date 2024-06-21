@@ -1,4 +1,4 @@
-import style from "../css/Writemodule.css";
+import style from "../css/Write.module.css";
 
 const Write = () => {
   return <main id={style.container} className="mw"></main>;
