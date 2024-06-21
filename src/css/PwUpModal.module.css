@@ -1,0 +1,344 @@
+.popModal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.popModal::before {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.popModal > section {
+  display: flex;
+  position: fixed;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 460px;
+  width: calc(100% - 1rem);
+  left: 0;
+  right: 0;
+  top: 50%;
+  margin: auto;
+  transform: translate(0, -50%);
+  background: #ffffff;
+  outline: 0;
+}
+
+.popModal > section > header {
+  width: 100%;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.popModal header > h2 {
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 56px;
+  color: #000000;
+}
+
+.popModal header > button {
+  overflow: hidden;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 56px;
+  height: 56px;
+  color: transparent;
+  padding: 0;
+  background: none;
+  border: 0 none;
+}
+
+.popModal header > button::before,
+.popModal header > button::after {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 18px;
+  height: 2px;
+  margin: -1px 0 0 -9px;
+  background: #000000;
+}
+
+.popModal header > button::before {
+  transform: rotate(-45deg);
+}
+
+.popModal header > button::after {
+  transform: rotate(45deg);
+}
+
+.navBack {
+  position: sticky;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 56px;
+  border-bottom: 1px solid #b9b9b9;
+  font-size: 20px;
+  line-height: 56px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.navBack a {
+  display: block;
+  position: relative;
+}
+
+.navBack a::before {
+  content: '<';
+  position: absolute;
+  left: 12px;
+  top: 0;
+  display: block;
+  width: 20px;
+  height: 40px;
+  font-size: 32px;
+}
+
+.content {
+  width: 100%;
+  max-width: 360px;
+  max-height: calc(100vh - 168px);
+  margin: 0 auto;
+  padding: 40px calc((100% - 300px) / 2) 56px;
+  max-width: 100%;
+  overflow-y: auto;
+}
+
+.tit {
+  display: flex;
+  margin: 0 0 2rem;
+  font-size: 28px;
+  line-height: 33px;
+  font-weight: 800;
+}
+
+.txt {
+  margin: -8px 0 24px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.formBox {
+  padding: 40px 0;
+  border-top: 3px solid #000000;
+  border-bottom: 3px solid #000000;
+}
+
+.formBox fieldset > legend {
+  position: absolute;
+  overflow: hidden;
+  width: 1px;
+  height: 1px;
+  margin: -1px 0 0 -1px;
+  font-size: 1px;
+  opacity: 0;
+  white-space: nowrap;
+}
+
+.form > dt {
+  margin: 0 0 1rem;
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 800;
+}
+
+.form2 {
+  position: relative;
+  display: inline-block;
+  background: #ffffff;
+  width: 100%;
+}
+
+.form2::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border: 1px solid #b9b9b9;
+  pointer-events: none;
+}
+
+.inputTxt {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  height: 40px;
+  padding: 5px 1rem;
+  font-size: 18px;
+  line-height: 30px;
+  color: #000000;
+  background: transparent;
+  border: 0;
+}
+
+.btnIcon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  display: block;
+  overflow: hidden;
+  width: 40px;
+  height: 40px;
+  font-size: 1px;
+  color: transparent;
+  border: 0 none;
+  background: none;
+  padding: 0;
+  transform: translateY(-50%);
+}
+
+.btnIcon.ic1::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: url(../../public/img/eye-slash.png);
+  background-size: 20px 20px;
+  background-position: center;
+}
+
+.btnIcon.ic2::before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 20px;
+  height: 20px;
+  background: url(../../public/img/eye.png);
+  background-size: 20px 20px;
+  background-position: center;
+}
+
+.btnIcon[data-mode='hidden'] {
+  display: none;
+}
+.btnIcon[data-mode='visible'] {
+  display: block;
+}
+
+.form + .form {
+  margin: 36px 0 0;
+}
+
+.actionBox {
+  display: flex;
+  justify-content: center;
+  margin: 40px 0 0;
+}
+
+.btnSub {
+  position: relative;
+  display: inline-block;
+  min-width: 140px;
+  width: 140px;
+  height: 48px;
+  line-height: 48px;
+  padding: 0 22px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #000000;
+  background: #ffffff;
+  box-shadow: 0 0 0 1px inset #b9b9b9;
+  transition: box-shadow 0.1s ease-out;
+  outline: 0;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: top;
+  border: 0 none;
+}
+
+@media (max-width: 767px) {
+  .popModal {
+    bottom: unset;
+    height: 100%;
+  }
+
+  .popModal > section {
+    max-width: 100vw;
+    width: 100%;
+    height: 100%;
+    align-items: start;
+  }
+
+  .popModal > section > header {
+    padding: 0 56px;
+    text-align: center;
+  }
+
+  .popModal > section > header[data-ui-mode='pc'] {
+    display: none !important;
+  }
+
+  .popModal header > h2 {
+    overflow: hidden;
+    position: absolute;
+    left: -1px;
+    top: -1px;
+    width: 1px;
+    height: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+
+  .popModal header button {
+    right: calc(100% - 56px);
+  }
+
+  .navBack a::before {
+    left: 22px;
+  }
+
+  .content {
+    max-width: calc(100% - 96px);
+    height: calc(100% - 96px);
+    padding: 40px 22px 56px;
+  }
+}
+
+@media (min-width: 768px) {
+  .popModal > section > header {
+    padding: 0 31px;
+  }
+
+  .popModal > section > header[data-ui-mode='mb'] {
+    display: none !important;
+  }
+
+  .navBack {
+    display: none;
+  }
+
+  .content {
+    max-height: calc(100vh - 112px);
+    padding: 40px calc((100% - 316px) / 2) 56px;
+  }
+}

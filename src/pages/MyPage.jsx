@@ -31,7 +31,7 @@ const MyPage = () => {
               <span>
                 <i>류규환</i> 님,
               </span>{' '}
-              반갑습니다! <a href="">나의 정보관리</a>
+              반갑습니다! <a href="/Profile">나의 정보관리</a>
             </p>
           </div>
         </div>
