@@ -213,7 +213,7 @@ function RecordModal() {
   return (
     <>
       <button onClick={handleShow} className={style.addBtn}>
-        <span>추가하기</span>
+        <span>내 기록 추가하기</span>
       </button>
       <Modal className={style.modalRe} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
