@@ -12,6 +12,7 @@ import Challenge from "./pages/Challenge";
 import ChallengeDetail from "./pages/ChallengeDetail";
 import CreateCrew from "./pages/CreateCrew";
 import CrewDetail from "./pages/CrewDetail";
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -27,10 +28,8 @@ function App() {
         <Route path='/CreateCrew' element={<CreateCrew />} />
         <Route path='/CrewDetail' element={<CrewDetail />} />
         <Route path='/challenge' element={<Challenge />} />
-        <Route
-          path='/challenge/:challenge_id/:challenge_name'
-          element={<ChallengeDetail />}
-        />
+          <Route path="/challenge/:challenge_id/:challenge_name" element={<ChallengeDetail />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   );
