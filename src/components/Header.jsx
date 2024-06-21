@@ -38,8 +38,8 @@ const Header = () => {
 
   const user = useSelector((state) => state.user.user);
   console.log('유저 정보:', user);
-  const username = user.id;
-  const nickname = user.nick;
+  const username = user ? user.id : null;
+  const nickname = user ? user.nick : null;
 
   const signout = async (e) => {
     e.preventDefault();
