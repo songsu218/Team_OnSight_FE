@@ -21,69 +21,82 @@ const Challenge = (props) => {
   const [nowList, setNowList] = useState([]);
   const [pastList, setPastList] = useState([]);
   const [swiper, setSwiper] = useState(null);
+  const [isAutoplay, setIsAutoplay] = useState(true);
   const [totalSlides, setTotalSlides] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
   const [selectedOption, setSelectedOption] = useState("");
   const [printData, setPrintData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerViewCount, setSlidesPerViewCount] = useState(4);
-  const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth <= 1079)
-console.log(totalSlides - slidesPerViewCount + 1 > 0
-  ? totalSlides - slidesPerViewCount + 1
-  : 1);
+  const [isNarrowScreen, setIsNarrowScreen] = useState(
+    window.innerWidth <= 1079
+  );
+  console.log(
+    totalSlides - slidesPerViewCount + 1 > 0
+      ? totalSlides - slidesPerViewCount + 1
+      : 1
+  );
   console.log(totalSlides);
   console.log(slidesPerViewCount);
   //#endregion 변수,Hook
-
+  const handleAutoplayToggle = () => {
+    if (swiper) {
+      if (isAutoplay) {
+        swiper.autoplay.stop();
+      } else {
+        swiper.autoplay.start();
+      }
+      setIsAutoplay(!isAutoplay);
+    }
+  };
   //#region init
   useEffect(() => {
     setAllChData("TOT");
-    window.addEventListener('resize', handleResize);
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
-
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     setTotalSlides(printData.length);
-    if(isNarrowScreen){
+    if (isNarrowScreen) {
       setSlidesPerViewCount(2);
-    }else {
+    } else {
       setSlidesPerViewCount(4);
     }
-  }, [isNarrowScreen])
+  }, [isNarrowScreen]);
   //#endregion init
 
   //#region 함수
 
   const setAllChData = (tag) => {
     ch.chTotalList(tag)
-    .then((result) => {
-      setDataList(result.data);
-      setNowList(result.data.filter((item) => item.state === "NOW"));
-      setPastList(result.data.filter((item) => item.state === "PAST"));
-      setPrintData(result.data);
-      console.log(result.data);
-    })
-    .catch((error) => {
-      console.log(`${error}`);
-    });
-  }
+      .then((result) => {
+        setDataList(result.data);
+        setNowList(result.data.filter((item) => item.state === "NOW"));
+        setPastList(result.data.filter((item) => item.state === "PAST"));
+        setPrintData(result.data);
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+      });
+  };
 
-  const setMyChData = (tag,id) => {
-    ch.chMyList(tag,id)
-    .then((result) => {
-      setDataList(result.data);
-      setNowList(result.data.filter((item) => item.state === "NOW"));
-      setPastList(result.data.filter((item) => item.state === "PAST"));
-      setPrintData(result.data);
-      console.log(result.data);
-    })
-    .catch((error) => {
-      console.log(`${error}`);
-    });
-  }
+  const setMyChData = (tag, id) => {
+    ch.chMyList(tag, id)
+      .then((result) => {
+        setDataList(result.data);
+        setNowList(result.data.filter((item) => item.state === "NOW"));
+        setPastList(result.data.filter((item) => item.state === "PAST"));
+        setPrintData(result.data);
+        console.log(result.data);
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+      });
+  };
 
   const handleSelectChange = (event) => {
     const target = event.target.value;
@@ -135,15 +148,15 @@ console.log(totalSlides - slidesPerViewCount + 1 > 0
   };
 
   const handleClick = (index, event) => {
-    event.preventDefault(); 
+    event.preventDefault();
     setActiveIndex(index);
-    const type = selectedOption == '선택' ? 'TOT' : selectedOption;
-    if (index === 0){
+    const type = selectedOption == "선택" ? "TOT" : selectedOption;
+    if (index === 0) {
       //나의 챌린지 만들기
       setAllChData(type);
-    }else if(index === 1){
+    } else if (index === 1) {
       //나의 챌린지 보기
-      setMyChData(type,'qwer1234');
+      setMyChData(type, "qwer1234");
     }
   };
   //#endregion 함수
@@ -151,31 +164,41 @@ console.log(totalSlides - slidesPerViewCount + 1 > 0
   //#region return
   return (
     <>
-      <div className="con1">
-        <main id={style.container} className="mw">
+      <div className='con1'>
+        <main id={style.container} className='mw'>
           <div className={style.content}>
             <div className={style.page_tit_area}>
               <h2 className={style.page_tit}>챌린지 일정</h2>
               <nav className={style.page_nav}>
                 <ul>
-                <li className={activeIndex === 0 ? style.active : ''}>
+                  <li className={activeIndex === 0 ? style.active : ""}>
                     <a
-                      href="#"
+                      href='#'
                       className={style.page_link}
                       onClick={(event) => handleClick(0, event)}
-                      title="나의 챌린지 만들기 페이지 이동 링크"
+                      title='챌린지 일정 페이지 이동 링크'
                     >
-                      나의 챌린지 만들기
+                      챌린지 일정
                     </a>
                   </li>
-                  <li className={activeIndex === 1 ? style.active : ''}>
+                  <li className={activeIndex === 1 ? style.active : ""}>
                     <a
-                      href="#"
+                      href='#'
                       className={`${style.page_link}`}
                       onClick={(event) => handleClick(1, event)}
-                      title="나의 챌린지 보기 페이지 이동 링크"
+                      title='나의 챌린지 보기 페이지 이동 링크'
                     >
                       나의 챌린지 보기
+                    </a>
+                  </li>
+                  <li className={activeIndex === 2 ? style.active : ""}>
+                    <a
+                      href='#'
+                      className={style.page_link}
+                      onClick={(event) => handleClick(2, event)}
+                      title='나의 챌린지 만들기 페이지 이동 링크'
+                    >
+                      나의 챌린지 만들기
                     </a>
                   </li>
                 </ul>
@@ -185,7 +208,7 @@ console.log(totalSlides - slidesPerViewCount + 1 > 0
               <h3 className={style.sub_tit}>2024</h3>
             </div>
             <div className={style.filter_option}>
-              <label htmlFor="challengeOption1" className={style.option_label}>
+              <label htmlFor='challengeOption1' className={style.option_label}>
                 <span>상태</span>
               </label>
               <select
@@ -251,23 +274,19 @@ console.log(totalSlides - slidesPerViewCount + 1 > 0
                       ? totalSlides - slidesPerViewCount + 1
                       : 1}
                   </div>
-                  <div className={style.autoplay_progress} slot="container-end">
-                    <svg viewBox="0 0 48 48" ref={progressCircle}>
-                      <circle cx="24" cy="24" r="20"></circle>
+                  <div className={style.autoplay_progress} slot='container-end'>
+                    <svg viewBox='0 0 48 48' ref={progressCircle}>
+                      <circle cx='24' cy='24' r='20'></circle>
                     </svg>
                     <button
-                      type="button"
-                      className={`${style.control_btn} ${style.btn_stop}`}
-                      title="정지 버튼"
+                      type='button'
+                      className={`${style.control_btn} ${
+                        isAutoplay ? style.btn_stop : style.btn_play
+                      }`}
+                      title={isAutoplay ? "정지 버튼" : "재생 버튼"}
+                      onClick={handleAutoplayToggle}
                     >
-                      자동재생 정지 버튼
-                    </button>
-                    <button
-                      type="button"
-                      className={`${style.control_btn} ${style.btn_play}`}
-                      title="재생 버튼"
-                    >
-                      재생 버튼
+                      {isAutoplay ? "자동재생 정지 버튼" : "재생 버튼"}
                     </button>
                     <span ref={progressContent}></span>
                   </div>
