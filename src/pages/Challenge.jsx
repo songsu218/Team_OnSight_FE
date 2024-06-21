@@ -222,8 +222,8 @@ console.log(totalSlides - slidesPerViewCount + 1 > 0
                         <div className={style.challenge_link}>
                           <div className={style.challenge_img}>
                             <img
-                              srcSet={`${item.images}?h=120&fit=crop&auto=format&dpr=2 2x`}
-                              src={`${item.images}?h=120&fit=crop&auto=format`}
+                              srcSet={`${item.thumbnail}`}
+                              src={`${item.thumbnail}`}
                               alt={item.challengename}
                             />
                           </div>

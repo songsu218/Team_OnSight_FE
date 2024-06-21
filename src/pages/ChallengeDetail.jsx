@@ -10,7 +10,7 @@ const ChallengeDetail = () => {
   const { detailData } = location.state || {}; // 파라미터
   // const [ongoing, setOngoing] = useState(false); //detailData에서 state가 넘어와서 해당기능 주석.
   const [wrapClass, setWrapClass] = useState(style.challenge_detail_wrap);
-  const [challenge_img, setChallenge_img] = useState(detailData.images); // 챌린지 이미지
+  const [challenge_img, setChallenge_img] = useState(detailData.thumbnail); // 챌린지 이미지
   const [challenge_period, setChallenge_period] = useState(
     detailData.date_string
   ); // 챌린지 기간
