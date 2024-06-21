@@ -6,7 +6,7 @@
 .leftCon {
   width: 400px;
   height: 100%;
-  padding-top: 50px;
+  padding-top: 65px;
   text-align: center;
   background-color: #f1f1f1;
 }
@@ -25,13 +25,19 @@
   background-color: white;
   margin-top: 30px;
   overflow: hidden;
+  border-radius: 10px;
 }
 
+/* 이미지사이즈 수정 */
 .mycrewCon li img {
-  border-radius: 6px 6px 0 0;
-  width: 347px;
-  height: 160px;
+  /* border-radius: 6px 6px 0 0; */
+  /* width: 347px; */
+  /* height: 160px; */
+  margin-top: 25px;
+  width: 300px;
+  height: 132px;
   object-fit: cover;
+  border-radius: 5px;
 }
 
 .mycrew {
@@ -72,10 +78,12 @@
   color: darkgray;
 }
 
-/* 추천크루 영역 */
+/* 추천크루 리스트 영역 */
 .rightCon {
-  width: calc(100% - 714px);
-  margin: 98px auto;
+  width: calc(100% - 620px);
+  margin: 140px auto;
+  padding-top: 6px;
+  /* 사이즈맞추기 */
 }
 
 .righttxt {
@@ -90,32 +98,56 @@
 
 .righttxt button {
   border: none;
-  height: 54px;
+  height: 56px;
   width: 142px;
-  border-top: 2px solid black;
-  border-bottom: 2px solid black;
+  border-top: 1px solid #b9b9b9;
+  border-bottom: 2px solid #b9b9b9;
   background-color: white;
-  border-radius: 0;
+  font-size: 20px;
+}
+
+.righttxt button:hover {
+  border-top: 0.3rem solid black;
+  border-bottom: 0.3rem solid black;
+  font-weight: bold;
 }
 
 .rightmenu {
-  margin-top: 40px;
+  margin-top: 90px;
   display: flex;
   border-bottom: 1px solid black;
   padding-bottom: 20px;
   margin-bottom: 20px;
 }
 
-/* 크루 리스트 */
+.rightmenu div {
+  font-weight: bold;
+  font-size: 20px;
+}
 
-select {
+.rightmenu div select {
+  width: 120px;
+  padding-left: 20px;
   border: none;
 }
 
-.search {
-  border: none;
+.selectBox::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 80%;
+  background-color: lightgray;
+  margin-left: 33px;
+  margin-right: 33px;
 }
 
+.searchBox,
+.mag {
+  border: none;
+  background-color: white;
+}
+
+/* 검색 및 추천된 크루 목록 영역 */
 .crewList {
   padding-top: 25px;
   /* border: 1px solid red; */

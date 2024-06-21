@@ -73,15 +73,17 @@ const Crew = () => {
           {/* <p>{nick}님이 가입된 크루가 없습니다.</p> */}
           <ul className={style.mycrewCon}>
             <li>
-              <img src="/img/imgsample.jpg" alt="img" />
-              <div className={style.mycrew}>
-                <div className={style.adress}>
-                  <span>name</span>
-                  <p> gu구 </p>
+              <Link to="/CrewDetail">
+                <img src="/img/imgsample.jpg" alt="img" />
+                <div className={style.mycrew}>
+                  <div className={style.adress}>
+                    <span>name</span>
+                    <p> gu구 </p>
+                  </div>
+                  <p>content</p>
+                  <p>참가자수 : x명</p>
                 </div>
-                <p>content</p>
-                <p>인원 : x명</p>
-              </div>
+              </Link>
             </li>
             <li>
               <img src="/img/no_img.jpg" alt="img" />
@@ -91,7 +93,7 @@ const Crew = () => {
                   <p> gu구 </p>
                 </div>
                 <p>content</p>
-                <p>인원 : x명</p>
+                <p>참가자수 : x명</p>
               </div>
             </li>
           </ul>
@@ -105,7 +107,7 @@ const Crew = () => {
           </Link>
         </div>
         <div className={style.rightmenu}>
-          <div>
+          <div className={style.selectBox}>
             <label for="region-select">
               <span>지역</span>
             </label>
@@ -136,7 +138,7 @@ const Crew = () => {
           <div>
             <input
               type="text"
-              className={style.search}
+              className={style.searchBox}
               placeholder="크루검색"
             />
             <i class="fa-solid fa-magnifying-glass"></i>
