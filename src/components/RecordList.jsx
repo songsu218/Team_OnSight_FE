@@ -1,11 +1,11 @@
-import style from '../css/RecordList.module.css';
+import style from "../css/RecordList.module.css";
 
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from "axios";
 
-import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
-import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import { Autoplay } from "swiper/modules";
 
 const RecordList = () => {
   const [records, setRecords] = useState([]);
@@ -33,23 +33,29 @@ const RecordList = () => {
     }
   };
 
-  // useEffect(() => {
-  //   const fetchRecords = async () => {
-  //     try {
-  //       const response = await axios.get('http://localhost:8000/record');
-  //       setRecords(response.data);
-  //     } catch (error) {
-  //       console.error('error', error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchRecords = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/record');
+        const sortedRecords = response.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setRecords(sortedRecords);
+      } catch (error) {
+        console.error('Error', error);
+      }
+    };
 
-  //   fetchRecords();
-  // }, []);
+    fetchRecords();
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
       if (swiperRef && isAutoplay) {
-        const currentProgress = (swiperRef.autoplay.running ? (swiperRef.autoplay.timeLeft / 4500) : 1) * 100;
+        const currentProgress =
+          (swiperRef.autoplay.running
+            ? swiperRef.autoplay.timeLeft / 4500
+            : 1) * 100;
         setProgress(100 - currentProgress);
       }
     }, 100);
@@ -65,7 +71,7 @@ const RecordList = () => {
 
   const restrictText = (text, maxLength) => {
     if (text.length > maxLength) {
-      return text.substring(0, maxLength) + '...';
+      return text.substring(0, maxLength) + "...";
     }
     return text;
   };
@@ -94,7 +100,7 @@ const RecordList = () => {
         disableOnInteraction: false,
       }}
       modules={[Autoplay]}
-      className="mySwiper"
+      className='mySwiper'
       onSwiper={(swiper) => setSwiperRef(swiper)}
       onSlideChange={() => swiperRef && setCurrentPage(swiperRef.realIndex + 1)}
     >
@@ -106,11 +112,11 @@ const RecordList = () => {
                 <div className={style.imgCon}>
                   <img
                     src={`http://localhost:8000/uploads/${record.thumbnail}`}
-                    alt="thumbnail"
+                    alt='thumbnail'
                   />
                 </div>
                 <span>
-                  <img src="/img/test.jpg" alt="profile" />
+                  <img src='/img/test.jpg' alt='profile' />
                   <strong>닉네임</strong>
                 </span>
                 <span>{record.center}</span>
@@ -119,24 +125,40 @@ const RecordList = () => {
                   <p>{record.detail}</p>
                 </div>
               </div>
-             </div>
+            </div>
           </div>
         </SwiperSlide>
       ))}
       <div className={style.pageBox}>
-        <button onClick={prevHandler}><i className="fa-solid fa-arrow-left"></i></button>
+        <button onClick={prevHandler}>
+          <i className="fa-solid fa-arrow-left"></i>
+
+        </button>
         <div>
           {currentPage} / {records.length}
         </div>
         <div className={style.autoProgress}>
           <div className={style.svgWrapper}>
-            <svg viewBox='0 0 48 48'>
-              <circle cx={24} cy={24} r={20} strokeDasharray="126" strokeDashoffset={`${(126 * (progress / 100))}`} />
+            <svg viewBox="0 0 48 48">
+              <circle
+                cx={24}
+                cy={24}
+                r={20}
+                strokeDasharray="126"
+                strokeDashoffset={`${126 * (progress / 100)}`}
+              />
             </svg>
-            <i className={`fa-solid ${isAutoplay ? 'fa-stop' : 'fa-play'} ${style.iconCenter}`} onClick={toggleAutoplay}></i>
+            <i
+              className={`fa-solid ${isAutoplay ? 'fa-stop' : 'fa-play'} ${
+                style.iconCenter
+              }`}
+              onClick={toggleAutoplay}
+            ></i>
           </div>
         </div>
-        <button onClick={nextHandler}><i class="fa-solid fa-arrow-right"></i></button>
+        <button onClick={nextHandler}>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
       </div>
     </Swiper>
   );
