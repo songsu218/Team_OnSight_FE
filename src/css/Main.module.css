@@ -1,106 +1,14 @@
 .main {
-  margin: auto;
-  margin-top: 5vw;
-  margin: 0 auto;
   display: flex;
-  flex-direction: column;
 }
 
-.main .rankArea {
-  position: relative;
-  height: 100vh;
-  margin-bottom: 10rem;
-}
-
-.main .imgBox {
+.main .recordArea {
   width: 100%;
-  height: 80%;
-  display: flex;
-  justify-content: end;
-  position: relative;
 }
 
-.main .imgBox > img {
-  width: 65%;
-  height: 100%;
-}
-
-.main .personBox img {
-  position: absolute;
-  left: 0;
-  width: 5%;
-  transition: 0.3s;
-  cursor: pointer;
-}
-.main .personBox img:nth-of-type(1) {
-  top: 10%;
-  left: 34%;
-}
-.main .personBox img:nth-of-type(1):hover {
-  transform: scale(1.1);
-  rotate: 5deg;
-}
-
-.main .personBox img:nth-of-type(2) {
-  top: 40%;
-  left: 40%;
-}
-.main .personBox img:nth-of-type(2):hover {
-  transform: scale(1.1);
-  rotate: -5deg;
-}
-.main .personBox img:nth-of-type(3) {
-  width: 4%;
-  top: 50%;
-  left: 60%;
-}
-.main .personBox img:nth-of-type(3):hover {
-  transform: scale(1.1);
-  rotate: 5deg;
-}
-.main .personBox img:nth-of-type(4) {
-  width: 6%;
-  top: 75%;
-  left: 75%;
-}
-.main .personBox img:nth-of-type(4):hover {
-  transform: scale(1.1);
-  rotate: -5deg;
-}
-.main .personBox img:nth-of-type(5) {
-  width: 6%;
-  top: 90%;
-  left: 87%;
-}
-.main .personBox img:nth-of-type(5):hover {
-  transform: scale(1.1);
-  rotate: 5deg;
-}
-.main .recordArea h2 {
+.main .btnArea {
   font-family: 'Montserrat', sans-serif;
   font-size: 3.5rem;
   font-weight: 800;
-  margin-bottom: 5rem;
-  display: flex;
-  justify-content: space-between;
-}
-
-@media (max-width: 1440px) {
-  .main .imgBox > img {
-    width: 70%;
-    height: 100%;
-  }
-
-  .main .personBox img:nth-of-type(1) {
-    top: 10%;
-    left: 30%;
-  }
-  .main .personBox img:nth-of-type(2) {
-    top: 40%;
-    left: 35%;
-  }
-  .main .personBox img:nth-of-type(3) {
-    top: 52%;
-    left: 57%;
-  }
+  border: 1px solid red;
 }
