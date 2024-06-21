@@ -3,7 +3,9 @@ import style from '../css/SignInPage.module.css';
 import { Link } from 'react-router-dom';
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
+const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
+const link = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoApiKey}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 const SignInPage = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
@@ -38,19 +40,22 @@ const SignInPage = () => {
       setMessage1('로그인 중 오류가 발생했습니다.');
     }
   };
-  const kakaoLogin = () => {
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init(kakaoApiKey);
-    }
 
-    window.Kakao.Auth.login({
-      success: function (authObj) {
-        setRedirect(true);
-      },
-      fail: function (err) {
-        console.error(err);
-      },
-    });
+  const kakaoLoginHandler = () => {
+    // if (!window.Kakao.isInitialized()) {
+    //   window.Kakao.init(kakaoApiKey);
+    // }
+
+    // window.Kakao.Auth.login({
+    //   success: function (authObj) {
+    //     setRedirect(true);
+    //   },
+    //   fail: function (err) {
+    //     console.error(err);
+    //   },
+    // });
+    console.log('카카오 로그인');
+    window.location.href = link;
   };
 
   if (redirect) {
@@ -72,7 +77,7 @@ const SignInPage = () => {
         <span className={style.errorMessage}>{message1}</span>
         <button type="submit">로그인</button>
       </form>
-      <button className={style.kakaoButtom} onClick={kakaoLogin}>
+      <button className={style.kakaoButtom} onClick={kakaoLoginHandler}>
         카카오로 로그인
       </button>
       <div className={style.moveSigninpage}>
