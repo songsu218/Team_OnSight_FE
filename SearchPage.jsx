@@ -242,7 +242,10 @@ const SearchPage = () => {
                 ))}
               </div>
 
-              <div>소개글: {currentCenter.detail}</div>
+              <div>
+                <p>소개글</p>
+                {currentCenter.detail}
+              </div>
             </div>
           </div>
         ) : (

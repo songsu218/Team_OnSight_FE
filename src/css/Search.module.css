@@ -119,14 +119,14 @@
     /* width: 306px; */
     width: 100%;
     height: 132px;
-    /* object-fit: cover; */
+    object-fit: cover;
 }
 
 .centerInfo {
     margin-top: 10px;
     /* 임시 */
     display: flex;
-    
+
 }
 
 .centerInfo h4 {
@@ -151,59 +151,77 @@
             (암장이름 구 즐찾)
             (.centerHome - .centerAddress 번호 사이트 레벨 소개글)
              */
-.centerDetails { 
+.centerDetails {
     position: relative;
-  }
-  .centerDetails > * {
+}
+
+.centerDetails>* {
     margin-bottom: 20px;
-  }
-  .centerDetails img {
+}
+
+.centerDetails img {
     width: 100%;
-    height: auto;
-  }
-  
-  .centerDetails .iconX {
+    height: 300px;
+    object-fit: contain;
+}
+
+.centerDetails .iconX {
     /* 위치 수정 예정 */
-    position: absolute; 
+    position: absolute;
     top: -10px;
     right: -10px;
     cursor: pointer;
-  }
+}
 
-  .centerDetails .centerDetailInfo {
-    margin-top: 290px;
-    display: flex; 
-  }
+.centerDetails .centerDetailInfo {
+    margin-top: 10px;
+    display: flex;
+}
 
-  .centerDetailInfo h4{
-font-size: 20px;
-  }
-  .centerDetailInfo p {
+.centerDetailInfo h4 {
+    font-size: 20px;
+}
+
+.centerDetailInfo p {
     opacity: 0.5;
-  }
+}
+
 .centerHome {
     display: flex;
     flex-direction: column;
 }
 
-.centerHome > * {
+.centerHome>* {
     margin-bottom: 20px;
-    
+
 }
+
 .centerHome i {
-    margin-right: 10px;  
+    margin-right: 10px;
 }
+
 .levelContainer {
     display: flex;
     align-items: center;
-  }
-  
-  .levelBox { 
+
+}
+
+
+.levelBox {
+    border-top: 1px solid #DEE2E6;
+    border-bottom: 1px solid #DEE2E6;
     width: 30px;
     height: 30px;
-  }
+}
 
-  .sidebarDetails {
+.levelBox:first-of-type {
+    border-left: 1px solid #DEE2E6;
+}
+
+.levelBox:last-of-type {
+    border-right: 1px solid #DEE2E6;
+}
+
+.sidebarDetails {
     background-color: #fff;
-  }
-  
+}

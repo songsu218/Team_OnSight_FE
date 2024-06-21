@@ -31,7 +31,7 @@ const Header = () => {
         <nav>
           <div className={style.holdBar}>
             <Link
-              to="/Search"
+              to="/SearchPage"
               onMouseEnter={() => MouseHover('link1')}
               onMouseLeave={() => MouseLeave('link1')}
             >
