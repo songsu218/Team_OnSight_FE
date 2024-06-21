@@ -1,25 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../css/SignInPage.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
-
+// 카카오 로그인 인증 코드 요청
 const link = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoApiKey}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+
 const SignInPage = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [message1, setMessage1] = useState('');
   const [redirect, setRedirect] = useState(false);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('Kakao API Key:', kakaoApiKey);
+    console.log('Redirect URI:', REDIRECT_URI);
+  }, []);
 
   const SignIn = async (e) => {
     e.preventDefault();
     console.log(id, password);
 
     try {
+      const token = JSON.parse(localStorage.getItem('token')).access_token;
       const response = await fetch(`http://localhost:8000/user/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ id, password }),
         credentials: 'include',
       });
@@ -33,8 +44,6 @@ const SignInPage = () => {
       if (data.message === 'nouser' || data.message === 'failed') {
         setMessage1('아이디 또는 비밀번호가 맞지 않습니다.');
       }
-
-      // 나중에 한줄로
     } catch (error) {
       console.error('Error:', error);
       setMessage1('로그인 중 오류가 발생했습니다.');
@@ -42,24 +51,11 @@ const SignInPage = () => {
   };
 
   const kakaoLoginHandler = () => {
-    // if (!window.Kakao.isInitialized()) {
-    //   window.Kakao.init(kakaoApiKey);
-    // }
-
-    // window.Kakao.Auth.login({
-    //   success: function (authObj) {
-    //     setRedirect(true);
-    //   },
-    //   fail: function (err) {
-    //     console.error(err);
-    //   },
-    // });
-    console.log('카카오 로그인');
     window.location.href = link;
   };
 
   if (redirect) {
-    //   return <Navigate to="/" />;
+    navigate('/');
   }
 
   return (

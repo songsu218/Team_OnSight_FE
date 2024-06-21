@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-function Auth() {
+function Oauth() {
   const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
@@ -27,6 +27,16 @@ function Auth() {
     return res.json();
   };
 
+  const getUserInfo = async (token) => {
+    const res = await fetch('https://kapi.kakao.com/v2/user/me', {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return res.json();
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       // 1. 카카오 로그인 버튼을 클릭하면 인증코드를 받아옴 code=xxxx
@@ -37,17 +47,28 @@ function Auth() {
       }
       try {
         // 2. 코드를 잘 받아왔다면 토큰을 받아옴
-        const res = await getToken(code);
-        if (res) {
-          // 3. 인증코드를 localStorage에 저장 'token'명으로 저장
-          localStorage.setItem('token', JSON.stringify(res.access_token));
-          console.log(res);
-          // 4. 메인 페이지로 이동
-          navigate('/');
-          // 5. 토큰을 이용하여 사용자 정보를 받아올 수 있음 Header or Nav에 사용자 정보 표시
+        const tokenRes = await getToken(code);
+        if (tokenRes.error) {
+          console.error('토큰 요청 에러:', tokenRes.error_description);
+          alert('토큰 요청 에러: ' + tokenRes.error_description);
+          return;
         }
+        // 3. 인증코드를 localStorage에 저장 'token'명으로 저장
+        localStorage.setItem('token', JSON.stringify(tokenRes));
+        console.log('토큰 저장 완료:', tokenRes);
+
+        // 사용자 정보 가져오기
+        const userInfo = await getUserInfo(tokenRes.access_token);
+        console.log('사용자 정보:', userInfo);
+
+        // 사용자 정보를 localStorage에 저장 (필요에 따라)
+        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        // 4. 메인 페이지로 이동
+        navigate('/');
+        // 5. 토큰을 이용하여 사용자 정보를 받아올 수 있음 Header or Nav에 사용자 정보 표시
       } catch (err) {
-        console.log(err);
+        console.log('토큰 요청 중 에러 발생:', err);
+        alert('토큰 요청 중 에러 발생: ' + err.message);
       }
     };
     fetchData();
@@ -56,4 +77,4 @@ function Auth() {
   return <></>;
 }
 
-export default Auth;
+export default Oauth;

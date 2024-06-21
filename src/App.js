@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import Main from './pages/Main';
 import SignInPage from './pages/SignInPage';
-import Auth from './pages/Auth';
+import Oauth from './pages/Oauth';
 import SignUpPage from './pages/SignUpPage';
 import MyPage from './pages/MyPage';
 import SearchPage from './pages/SearchPage';
@@ -22,7 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signinpage" element={<SignInPage />} />
-        <Route path="/oauth/kakao" element={<Auth />} />
+        <Route path="/oauth/kakao" element={<Oauth />} />
         <Route path="/signuppage" element={<SignUpPage />} />
         <Route path="/mypage" element={<MyPage />} />
         <Route path="/Search" element={<SearchPage />} />
