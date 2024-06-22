@@ -3,87 +3,72 @@
 }
 
 /* 나의 크루 리스트 영역 */
-.leftCon {
+.myCrewCon {
   width: 400px;
-  height: 100%;
-  padding-top: 65px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
   text-align: center;
   background-color: #f1f1f1;
+  z-index: -1;
+  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
 }
 
-.leftCon > span {
-  /* border: 1px solid red; */
-  font-family: "S-CoreDream-3Light";
-  font-size: 1.625rem;
+.myCrewCon h3 {
+  padding: 22px 0 52px;
+  font-family: 'S-CoreDream-3Light';
+  font-size: 26px;
   font-weight: bold;
 }
 
-.mycrewCon li {
-  width: 347px;
-  height: 256px;
+.myCrewListCon .crewListCard {
   margin: auto;
-  background-color: white;
-  margin-top: 30px;
-  overflow: hidden;
-  border-radius: 10px;
-}
-
-/* 이미지사이즈 수정 */
-.mycrewCon li img {
-  /* border-radius: 6px 6px 0 0; */
-  /* width: 347px; */
-  /* height: 160px; */
-  margin-top: 25px;
-  width: 300px;
-  height: 132px;
-  object-fit: cover;
-  border-radius: 5px;
-}
-
-.mycrew {
-  font-family: "맑은 고딕";
-  padding-top: 10px;
-  padding-left: 20px;
-  text-align: left;
-  /* border: 1px solid red; */
-  line-height: 1.5;
-}
-
-.mycrew > * {
-  font-family: "S-CoreDream-3Light";
-}
-
-.adress {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  width: 350px;
+  height: 300px;
+  background-color: white;
+  border-radius: 1rem;
 }
 
-.adress > span {
+.myCrewListCon .crewImgBox {
+  width: 300px;
+  height: 150px;
+}
+
+.myCrewListCon .crewImgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.myCrewListCon .crewListCard .crewTextBox {
+  margin-top: 1.5rem;
+  margin-left: 0.5rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: baseline;
+}
+
+.crewListCard .crewTextBox .crewNameBox strong {
   font-weight: bold;
-  position: relative;
-  padding-right: 20px;
+  font-size: 1.5rem;
+  margin-right: 0.5rem;
 }
 
-.adress span::after {
-  content: "";
-  display: inline-block;
-  width: 2px;
-  height: 60%;
-  background-color: gray;
-  position: absolute;
-  right: 7px;
-  bottom: 5px;
-}
-
-.mycrew > p {
-  color: darkgray;
+.crewListCard .crewTextBox .crewNameBox span {
+  color: #b9b9b9;
 }
 
 /* 추천크루 리스트 영역 */
 .rightCon {
-  width: calc(100% - 620px);
-  margin: 140px auto;
-  padding-top: 6px;
-  /* 사이즈맞추기 */
+  width: calc(100% - 400px);
+  margin-left: auto;
+  padding: 96px 80px 136px;
 }
 
 .righttxt {
@@ -96,103 +81,117 @@
   font-weight: bold;
 }
 
-.righttxt button {
+.righttxt .crewCreateBtn {
   border: none;
   height: 56px;
   width: 142px;
   border-top: 1px solid #b9b9b9;
-  border-bottom: 2px solid #b9b9b9;
-  background-color: white;
+  border-bottom: 1px solid #b9b9b9;
+  background-color: transparent;
   font-size: 20px;
 }
 
 .righttxt button:hover {
-  border-top: 0.3rem solid black;
-  border-bottom: 0.3rem solid black;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .rightmenu {
   margin-top: 90px;
   display: flex;
-  border-bottom: 1px solid black;
+  align-items: center;
+  border-bottom: 3px solid black;
   padding-bottom: 20px;
   margin-bottom: 20px;
-}
-
-.rightmenu div {
   font-weight: bold;
   font-size: 20px;
 }
 
-.rightmenu div select {
-  width: 120px;
+.rightmenu span {
+  margin-right: 1.5rem;
+}
+
+.rightmenu select {
+  width: 100px;
   padding-left: 20px;
   border: none;
+  font-weight: bold;
 }
 
-.selectBox::after {
-  content: "";
-  display: inline-block;
+.searchBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-left: 3rem;
+}
+
+.searchBox::after {
+  content: '';
   width: 2px;
-  height: 80%;
-  background-color: lightgray;
-  margin-left: 33px;
-  margin-right: 33px;
+  height: 20px;
+  position: absolute;
+  left: -10%;
+  background-color: black;
 }
 
-.searchBox,
-.mag {
+.searchBox input {
   border: none;
-  background-color: white;
+  width: 150px;
+  font-size: 20px;
+  font-weight: bold;
 }
 
 /* 검색 및 추천된 크루 목록 영역 */
 .crewList {
   padding-top: 25px;
-  /* border: 1px solid red; */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  justify-items: center;
+  grid-template-columns: repeat(auto-fit, 360px);
   gap: 1.5rem;
 }
 
-.crewList li {
+.crewList .crewListCard {
   /* border: 1px solid blue; */
-  list-style: none;
-  width: 300px;
-  font-family: "S-CoreDream-3Light";
-  line-height: 1.2;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  padding: 2rem;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  border-radius: 1rem;
 }
 
-.crewList > li > * {
-  padding-top: 1rem;
-}
-
-.crewList > li > img {
+.crewList .recCrewImgBox {
   width: 100%;
-  height: 230px;
+  height: 200px;
 }
 
-.crewList > li > h5 {
-  padding-top: 15px;
-  font-weight: bold;
+.crewList .crewListCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.crewList .crewListCard .crewListTextBox {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  align-self: baseline;
+  padding-left: 0.5rem;
   position: relative;
-  display: inline-block;
 }
 
-.crewList > li > h5::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 2px;
-  background-color: black;
-  bottom: -5px;
-  left: 0;
+.crewList .crewListCard strong {
+  font-size: 20px;
+  font-weight: bold;
 }
-.crewList > li > p {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  padding-bottom: 0.5rem;
+
+.crewList .crewListCard .crewListTextBox span {
+  position: absolute;
+  top: -24px;
+  right: 0;
+  padding-bottom: 5px;
+  font-weight: bold;
+  border-bottom: 3px solid black;
 }
