@@ -2,7 +2,7 @@
   display: flex;
 }
 
-/* 나의 크루 리스트 영역 */
+/* 크루원 영역 */
 .leftCon {
   width: 400px;
   height: 100%;
@@ -117,6 +117,73 @@
   margin-right: 10px;
 }
 
+/* nav 영역 */
+.page_tit_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 56px;
+}
+
+.page_tit {
+  margin: 0;
+  font-size: 56px;
+  line-height: 68px;
+  font-weight: 800;
+}
+
+.page_nav {
+  position: relative;
+  width: 640px;
+}
+
+.page_nav:before,
+.page_nav .active .page_link:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.page_nav:before {
+  border-top: 0.1rem solid #b9b9b9;
+  border-bottom: 0.1rem solid #b9b9b9;
+}
+
+.page_nav > ul {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0 31px;
+  list-style: none;
+}
+
+.page_nav > ul > li {
+  font-size: 20px;
+  line-height: 56px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.page_nav > ul > li > a {
+  position: relative;
+  display: block;
+  padding: 0 1rem;
+  transition: all 0.3s;
+}
+
+.page_nav .page_link:before {
+  border-top: 0.3rem solid transparent;
+  border-bottom: 0.3rem solid transparent;
+}
+.page_nav .active .page_link:before {
+  border-color: #000;
+}
+
+/* 크루이미지영역 */
 .introCrew > img {
   margin-top: 50px;
   width: 910px;
@@ -134,65 +201,4 @@
 .introCrew > span {
   font-size: 32px;
   font-weight: bold;
-}
-
-/* nav 영역 */
-.Menu {
-  position: relative;
-  margin: 0 -31px 54px;
-}
-
-.Menu::before {
-  border-top: 1px solid #b9b9b9;
-  border-bottom: 1px solid #b9b9b9;
-  z-index: -1;
-}
-
-.Menu::before,
-.Menu > ul > li > a::before {
-  content: "";
-  display: block;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-}
-
-.Menu > ul {
-  display: flex;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  overflow-x: auto;
-  padding: 0 31px;
-}
-
-.Menu > ul > li {
-  font-size: 20px;
-  line-height: 56px;
-  text-align: center;
-  font-weight: 300;
-}
-
-.Menu > ul > li > a {
-  position: relative;
-  display: block;
-  padding: 0 1rem;
-  transition: all 0.3s;
-}
-
-/* a 선택 */
-/* .Menu > ul > li > a::before { */
-/* border-color: #000000; */
-/* } */
-
-.Menu > ul > li > a::before {
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-}
-
-/* a 선택 */
-.Menu > ul > li > a:focus,
-.Menu > ul > li > a:hover {
-  font-weight: 800;
 }
