@@ -1,22 +1,28 @@
 import { useState, useEffect } from "react";
 import style from "../../css/List.module.css";
-import MyListCard from "../ListCard";
 import ListPagnation from "./ListPagnation";
+import ListCard from "../ListCard";
 
-const List = ({ items }) => {
+const List = ({ items, itemType }) => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 4;
 
-  // MyListCard를 임시 데이터로 대체 (실제 데이터로 변경 필요)
-  const myListCards = Array.from({ length: 20 }, (_, index) => (
-    <MyListCard key={index} />
-  ));
-
-  const totalPages = Math.ceil(myListCards.length / itemsPerPage);
+  const totalPages = Math.ceil(items.length / itemsPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+
+  useEffect(() => {
+    setCurrentItems(items.slice(0, itemsPerPage)); // 첫 페이지 아이템 설정
+  }, [items]);
+
+  useEffect(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    setCurrentItems(items.slice(startIndex, endIndex));
+  }, [currentPage, totalPages]);
 
   useEffect(() => {
     if (currentPage > totalPages) {
@@ -24,17 +30,22 @@ const List = ({ items }) => {
     }
   }, [currentPage, totalPages]);
 
-  const currentItems = myListCards.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage
-  );
-
   return (
     <div>
       <div className={`${style.listData1} ${style.ssw1}`}>
         <ul>
           {currentItems.map((item, index) => (
-            <li key={index}>{item}</li>
+            <li key={index}>
+              <ListCard
+                title={
+                  itemType === "challenge" ? item.challengename : item.title
+                }
+                center={item.center}
+                date={item.date}
+                thumbnail={item.thumbnail}
+                itemType={itemType}
+              />
+            </li>
           ))}
         </ul>
       </div>
