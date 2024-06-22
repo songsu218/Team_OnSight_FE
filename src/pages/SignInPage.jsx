@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import style from '../css/SignInPage.module.css';
-import { Link, Navigate } from 'react-router-dom';
+import { useState } from "react";
+import style from "../css/SignInPage.module.css";
+import { Link, Navigate } from "react-router-dom";
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
@@ -38,6 +38,10 @@ const SignInPage = () => {
       console.error('Error:', error);
       setMessage1('로그인 중 오류가 발생했습니다.');
     }
+  };
+
+  const kakaoLoginHandler = () => {
+    window.location.href = link;
   };
 
   if (redirect) {

@@ -51,9 +51,9 @@ const CrewDetail = () => {
                     href="#"
                     className={style.page_link}
                     onClick={(event) => handleClick(0, event)}
-                    title="챌린지 일정 페이지 이동 링크"
+                    title="크루 가입하기"
                   >
-                    글쓰기
+                    가입하기
                   </a>
                 </li>
                 <li className={activeIndex === 1 ? style.active : ""}>
@@ -61,7 +61,17 @@ const CrewDetail = () => {
                     href="#"
                     className={`${style.page_link}`}
                     onClick={(event) => handleClick(1, event)}
-                    title="나의 챌린지 보기 페이지 이동 링크"
+                    title="크루 피드 글쓰기"
+                  >
+                    글쓰기
+                  </a>
+                </li>
+                <li className={activeIndex === 2 ? style.active : ""}>
+                  <a
+                    href="#"
+                    className={`${style.page_link}`}
+                    onClick={(event) => handleClick(2, event)}
+                    title="크루 정보수정 페이지"
                   >
                     크루관리
                   </a>

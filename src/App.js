@@ -19,7 +19,6 @@ import ManageCrew from "./pages/ManageCrew";
 import Profile from "./pages/Profile";
 import Ranking from "./pages/Ranking";
 
-
 function App() {
   return (
     <div>
@@ -30,7 +29,7 @@ function App() {
         <Route path="/oauth/kakao" element={<Oauth />} />
         <Route path="/signuppage" element={<SignUpPage />} />
         <Route path="/mypage/*" element={<MyPage />} />
-        <Route path="/Search" element={<SearchPage />} />
+        <Route path="/SearchPage" element={<SearchPage />} />
         <Route path="/crew" element={<Crew />} />
         <Route path="/createCrew" element={<CreateCrew />} />
         <Route path="/crewDetail" element={<CrewDetail />} />

@@ -15,7 +15,6 @@ const SearchPage = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
   const [currentCenter, setCurrentCenter] = useState(null);
-  const [activeTab, setActiveTab] = useState('home');
 
   useEffect(() => {
     axios
@@ -115,7 +114,7 @@ const SearchPage = () => {
     setSelectedCenterInfo(null);
     setSearchResults([]);
   };
-  // 추후 몽고DB에 저장 예정
+  // 추후 몽고db에 저장 예정
   const districtCoordinates = {
     서울특별시: {
       강남구: { lat: 37.5172, lng: 127.0473 },
@@ -145,21 +144,19 @@ const SearchPage = () => {
       중랑구: { lat: 37.6063, lng: 127.0924 },
     },
   };
-  // 맵마커 클릭 시 디테일 보여주기
+  // 맵마커 클릭시 디테일 보여주기
   const handleMarkerClick = (center) => {
     setCurrentCenter(center);
     setShowDetails(true);
-    setActiveTab('home'); // "홈" 탭을 기본으로 설정
   };
-  // 리스트 클릭 시 지도 이동, 디테일 보여주기
+  // 리스트 클릭시 지도 이동, 디테일 보여주기
   const handleListClick = (center) => {
     setCurrentCenter(center);
     setMapCenter({ lat: center.latlng.lat, lng: center.latlng.lng });
     setShowDetails(true);
-    setActiveTab('home'); // "홈" 탭을 기본으로 설정
   };
 
-  // X 눌렀을 때
+  // X눌렀을 때
   const handleCloseDetails = () => {
     setShowDetails(false);
     setCurrentCenter(null);
@@ -215,73 +212,40 @@ const SearchPage = () => {
               {/* 즐겨찾기 */}
             </div>
 
-            <div className={style.tabContainer}>
-              <button
-                className={`${style.tabButtonHome} ${
-                  activeTab === 'home' ? style.activeTab : ''
-                }`}
-                onClick={() => setActiveTab('home')}
-              >
-                홈
-              </button>
-              <button
-                className={`${style.tabButtonRecode} ${
-                  activeTab === 'records' ? style.activeTab : ''
-                }`}
-                onClick={() => setActiveTab('records')}
-              >
-                기록
-              </button>
-            </div>
+            <div className={style.centerHome}>
+              <div className={style.centerAddress}>
+                <i className="fa-solid fa-location-pin"></i>
+                {currentCenter.si} {currentCenter.gu} {currentCenter.address}
+              </div>
+              <div>
+                <i className="fa-solid fa-phone"></i>
+                {currentCenter.contact}
+              </div>
+              <div>
+                <i className="fa-solid fa-globe"></i>
+                <a
+                  href={currentCenter.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {currentCenter.website}
+                </a>
+              </div>
+              <p>난이도</p>
+              <div className={style.levelContainer}>
+                {Object.entries(currentCenter.level).map(([key, value]) => (
+                  <div
+                    key={key}
+                    className={style.levelBox}
+                    style={{ backgroundColor: value }}
+                  ></div>
+                ))}
+              </div>
 
-            <div className={style.tabContent}>
-              {activeTab === 'home' && (
-                <div className={style.centerHome}>
-                  <div className={style.centerAddress}>
-                    <i className="fa-solid fa-location-pin"></i>
-                    {currentCenter.si} {currentCenter.gu}{' '}
-                    {currentCenter.address}
-                  </div>
-                  <div>
-                    <i className="fa-solid fa-phone"></i>
-                    {currentCenter.contact}
-                  </div>
-                  <div>
-                    <i className="fa-solid fa-globe"></i>
-                    <a
-                      href={currentCenter.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {currentCenter.website}
-                    </a>
-                  </div>
-                  <div>
-                    <p>난이도</p>
-                    <div className={style.levelContainer}>
-                      {Object.entries(currentCenter.level).map(
-                        ([key, value]) => (
-                          <div
-                            key={key}
-                            className={style.levelBox}
-                            style={{ backgroundColor: value }}
-                          ></div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                  <div>
-                    <p className={style.centerDesc}>소개글</p>
-                    {currentCenter.detail}
-                  </div>
-                </div>
-              )}
-              {activeTab === 'records' && (
-                <div className={style.centerRecords}>
-                  <h4>기록 탭 내용</h4>
-                  <p>여기에 기록 정보를 입력하세요.</p>
-                </div>
-              )}
+              <div>
+                <p>소개글</p>
+                {currentCenter.detail}
+              </div>
             </div>
           </div>
         ) : (
