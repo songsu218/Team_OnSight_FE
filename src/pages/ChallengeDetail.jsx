@@ -32,19 +32,19 @@ const ChallengeDetail = () => {
     console.log(detailData.state);
     ch.chJoinList(detailData.challengename)
       .then((result) => {
-        console.log('참여자 목록');
+        console.log("참여자 목록");
         console.log(result.data);
         setJoinList(result.data);
       })
       .catch((error) => {
         console.log(`${error}`);
       });
-      if (detailData.state === "PAST") {
-        setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
-        console.log(detailData.challengename);
-        ch.chRank(detailData.challengename)
+    if (detailData.state === "PAST") {
+      setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
+      console.log(detailData.challengename);
+      ch.chRank(detailData.challengename)
         .then((result) => {
-          console.log('랭킹데이터');
+          console.log("랭킹데이터");
           console.log(result.data);
           setRank(result.data);
 
@@ -57,7 +57,6 @@ const ChallengeDetail = () => {
     } else if (detailData.state === "NOW") {
       setWrapClass(style.challenge_detail_wrap);
     }
-
   }, []);
   //#endregion init
 
@@ -185,8 +184,8 @@ const ChallengeDetail = () => {
 
   return (
     <>
-      <div className="con1">
-        <main id={style.container} className="mw">
+      <div className='con1'>
+        <main id={style.container} className='mw'>
           <div className={style.content}>
             {/* h1은 로고(사이트명)이라 가정하고 */}
             {/* 아래 타이틀 및 페이지 네비 영역은 들어가야 챌린지 일정과 헤딩 태그 레벨이 맞음. */}
@@ -196,18 +195,18 @@ const ChallengeDetail = () => {
                 <ul>
                   <li className={style.active}>
                     <a
-                      href="#"
+                      href='#'
                       className={style.page_link}
-                      title="나의 챌린지 만들기 페이지 이동 링크"
+                      title='나의 챌린지 만들기 페이지 이동 링크'
                     >
                       나의 챌린지 만들기
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href='#'
                       className={style.page_link}
-                      title="나의 챌린지 보기 페이지 이동 링크"
+                      title='나의 챌린지 보기 페이지 이동 링크'
                     >
                       나의 챌린지 보기
                     </a>
@@ -223,12 +222,12 @@ const ChallengeDetail = () => {
                     <img
                       srcSet={`${challenge_img}`}
                       src={`${challenge_img}`}
-                      alt="A챌린지 이미지"
+                      alt='A챌린지 이미지'
                     />
                   </div>
                   <div className={style.apply_btn_wrap}>
                     <button
-                      type="button"
+                      type='button'
                       id={style.applyBtn}
                       className={style.apply_btn}
                       onClick={() => {
@@ -264,7 +263,7 @@ const ChallengeDetail = () => {
                       </li>
                     </ul>
                     <div className={style.entry_list_wrap}>
-                      <button type="button" className={style.entry_list_btn}>
+                      <button type='button' className={style.entry_list_btn}>
                         챌린지 참여자
                       </button>
                       <ul className={style.entry_list}>
@@ -281,9 +280,9 @@ const ChallengeDetail = () => {
                 </div>
               </div>
               <div className={style.detail_contents}>
-                <div className={style.noti_txt}>
+                {/* <div className={style.noti_txt}>
                   * 집계는 <em>챌린지가 끝난 후</em> 결정돼요.
-                </div>
+                </div> */}
                 <div className={style.rank_table_wrap}>
                   <table className={style.rank_table}>
                     <thead>
@@ -299,7 +298,7 @@ const ChallengeDetail = () => {
                         <tr key={index}>
                           <td>
                             <div className={style.rank_profile}>
-                              <img src={item.thumbnail} alt="Profile" />
+                              <img src={item.thumbnail} alt='Profile' />
                               <span className={style.trophy} />
                             </div>
                           </td>
@@ -322,6 +321,9 @@ const ChallengeDetail = () => {
                         {index + 1}
                       </button>
                     ))}
+                  </div>
+                  <div className={style.noti_txt}>
+                    * 집계는 <em>챌린지가 끝난 후</em> 결정돼요.
                   </div>
                 </div>
               </div>

@@ -6,7 +6,7 @@ import { ch } from "../api.js";
 // import "swiper/css";
 // import "swiper/css/pagination";
 import style from "../css/challenge.module.css";
-
+// import ChallengeModal from "../components/challenge/ChallengeModal";
 // import 'swiper/css/navigation';
 const Challenge = (props) => {
   //#region 변수,Hook
@@ -31,13 +31,16 @@ const Challenge = (props) => {
   const [isNarrowScreen, setIsNarrowScreen] = useState(
     window.innerWidth <= 1079
   );
-  console.log(
-    totalSlides - slidesPerViewCount + 1 > 0
-      ? totalSlides - slidesPerViewCount + 1
-      : 1
-  );
-  console.log(totalSlides);
-  console.log(slidesPerViewCount);
+  const [showModal, setShowModal] = useState(false);
+
+  // 위치 옮김
+  // console.log(
+  //   totalSlides - slidesPerViewCount + 1 > 0
+  //     ? totalSlides - slidesPerViewCount + 1
+  //     : 1
+  // );
+  // console.log(totalSlides);
+  // console.log(slidesPerViewCount);
   //#endregion 변수,Hook
   const handleAutoplayToggle = () => {
     if (swiper) {
@@ -47,11 +50,25 @@ const Challenge = (props) => {
         swiper.autoplay.start();
       }
       setIsAutoplay(!isAutoplay);
+    } else {
+      console.error("Swiper가 초기화되지 않았습니다.");
     }
   };
+
+  console.log(
+    totalSlides - slidesPerViewCount + 1 > 0
+      ? totalSlides - slidesPerViewCount + 1
+      : 1
+  );
+  console.log(totalSlides);
+  console.log(slidesPerViewCount);
+
   //#region init
   useEffect(() => {
     setAllChData("TOT");
+    const handleResize = () => {
+      // resize 이벤트 핸들러 로직
+    };
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -60,13 +77,15 @@ const Challenge = (props) => {
 
   useEffect(() => {
     setTotalSlides(printData.length);
+  }, [printData]);
+
+  useEffect(() => {
     if (isNarrowScreen) {
       setSlidesPerViewCount(2);
     } else {
       setSlidesPerViewCount(4);
     }
   }, [isNarrowScreen]);
-  //#endregion init
 
   //#region 함수
 
@@ -152,11 +171,13 @@ const Challenge = (props) => {
     setActiveIndex(index);
     const type = selectedOption == "선택" ? "TOT" : selectedOption;
     if (index === 0) {
-      //나의 챌린지 만들기
+      //챌린지 일정
       setAllChData(type);
     } else if (index === 1) {
       //나의 챌린지 보기
       setMyChData(type, "qwer1234");
+    } else if (index === 2) {
+      setShowModal(true); //나의 챌린지 만들기
     }
   };
   //#endregion 함수
