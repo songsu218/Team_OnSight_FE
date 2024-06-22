@@ -66,6 +66,16 @@ const CrewDetail = () => {
                     크루관리
                   </a>
                 </li>
+                <li className={activeIndex === 2 ? style.active : ""}>
+                  <a
+                    href="#"
+                    className={`${style.page_link}`}
+                    onClick={(event) => handleClick(2, event)}
+                    title="나의 챌린지 보기 페이지 이동 링크"
+                  >
+                    크루관리
+                  </a>
+                </li>
               </ul>
             </nav>
           </div>
