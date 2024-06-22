@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import style from '../css/SignInPage.module.css';
 import { Link, useNavigate } from 'react-router-dom';
 
-
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 // 카카오 로그인 인증 코드 요청
@@ -13,14 +12,12 @@ const SignInPage = () => {
   const [password, setPassword] = useState('');
   const [message1, setMessage1] = useState('');
   const [redirect, setRedirect] = useState(false);
-
   const navigate = useNavigate();
 
   useEffect(() => {
     console.log('Kakao API Key:', kakaoApiKey);
     console.log('Redirect URI:', REDIRECT_URI);
   }, []);
-
 
   const SignIn = async (e) => {
     e.preventDefault();
@@ -42,9 +39,9 @@ const SignInPage = () => {
       console.log(data.id);
 
       if (data.id) {
-        dispatch(setUserAllInfo(data));
         setRedirect(true);
-      } else if (data.message === 'nouser' || data.message === 'failed') {
+      }
+      if (data.message === 'nouser' || data.message === 'failed') {
         setMessage1('아이디 또는 비밀번호가 맞지 않습니다.');
       }
     } catch (error) {
@@ -52,13 +49,6 @@ const SignInPage = () => {
       setMessage1('로그인 중 오류가 발생했습니다.');
     }
   };
-
-
-  const kakaoLogin = () => {
-    if (!window.Kakao.isInitialized()) {
-      window.Kakao.init(kakaoApiKey);
-    }
-
 
   const kakaoLoginHandler = () => {
     window.location.href = link;
