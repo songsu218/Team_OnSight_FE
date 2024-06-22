@@ -1,0 +1,37 @@
+/* 재목설정 */
+.page_tit_area {
+  /* display: flex; */
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 56px;
+}
+
+.page_tit {
+  margin: 0;
+  font-size: 56px;
+  line-height: 68px;
+  font-weight: 800;
+}
+
+/* 피드작성페이지 */
+.writeCon {
+  width: 1400px;
+  margin: auto;
+}
+
+.writeCon > div {
+  display: flex;
+}
+
+.titleCon {
+  width: 100%;
+  border-top: 0.3rem solid black;
+  border-bottom: 1px solid lightgray;
+}
+
+.contentCon {
+  height: 500px;
+}
+
+/* .fileCon {
+  } */
