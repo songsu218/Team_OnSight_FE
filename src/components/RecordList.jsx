@@ -7,6 +7,7 @@ const RecordList = () => {
   const [records, setRecords] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [currentCenter, setCurrentCenter] = useState(`'클라이밍장' `);
+  const [currentNick, setCurrentNick] = useState(`'클라이머' `);
   const containerRef = useRef(null);
   const swiperConRef = useRef(null);
 
@@ -14,9 +15,7 @@ const RecordList = () => {
     const fetchRecords = async () => {
       try {
         const response = await axios.get('http://localhost:8000/record');
-        const sortedRecords = response.data
-          .sort((a, b) => new Date(b.date) - new Date(a.date))
-          .slice(0, 21);
+        const sortedRecords = response.data.slice(0, 21);
         setRecords(sortedRecords);
       } catch (error) {
         console.error('Error', error);
@@ -60,9 +59,10 @@ const RecordList = () => {
     handleScroll();
   }, [records, handleScroll]);
 
-  const handleMouseEnter = (index, center) => {
+  const handleMouseEnter = (index, center, nick) => {
     setHoveredIndex(index);
     setCurrentCenter(`'${center}' `);
+    setCurrentNick(`'${nick}' `);
   };
 
   return (
@@ -73,7 +73,9 @@ const RecordList = () => {
             <div
               key={record._id}
               className={style.swiperBox}
-              onMouseEnter={() => handleMouseEnter(index, record.center)}
+              onMouseEnter={() =>
+                handleMouseEnter(index, record.center, record.nick)
+              }
               onMouseLeave={() => setHoveredIndex(null)}
             >
               <img
@@ -88,7 +90,7 @@ const RecordList = () => {
             <span>{currentCenter}</span>
             에서의
             <br />
-            <span>'클라이머'</span> 님의 기록입니다
+            <span>{currentNick}</span> 님의 기록입니다
           </p>
           <div className={style.btnBox}>
             <RecordModal />
