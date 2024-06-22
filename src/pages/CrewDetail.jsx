@@ -2,10 +2,17 @@
 import style from "../css/CrewDetail.module.css";
 import CrewGroupfeed from "../components/list/CrewGroupfeed";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const CrewDetail = () => {
+  // const navigate = useNavigate();
   const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleClick = (index, event) => {
+    event.preventDefault();
+    setActiveIndex(index);
+    // 예: navigate(`/somepath/${index}`);
+  };
 
   return (
     <main className={`${style.mainCrew} viewCon`}>
@@ -37,22 +44,30 @@ const CrewDetail = () => {
             <span>활동지역</span>
           </div>
           <div className={style.Menu}>
-            <Link to="/Write">
-              <button>글쓰기</button>
-            </Link>
-            <Link to="/ManageCrew">
-              <button>크루관리</button>
-            </Link>
-            {/* <ul>
-              <li>
-                <a href="">
-                  <Link to="/Write"> 글쓰기</Link>
-                </a>
-              </li>
-              <li>
-                <a href="">크루관리</a>
-              </li>
-            </ul> */}
+            <nav className={style.page_nav}>
+              <ul>
+                <li className={activeIndex === 0 ? style.active : ""}>
+                  <a
+                    href="#"
+                    className={style.page_link}
+                    onClick={(event) => handleClick(0, event)}
+                    title="챌린지 일정 페이지 이동 링크"
+                  >
+                    글쓰기
+                  </a>
+                </li>
+                <li className={activeIndex === 1 ? style.active : ""}>
+                  <a
+                    href="#"
+                    className={`${style.page_link}`}
+                    onClick={(event) => handleClick(1, event)}
+                    title="나의 챌린지 보기 페이지 이동 링크"
+                  >
+                    크루관리
+                  </a>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
         <div className={style.introCrew}>
