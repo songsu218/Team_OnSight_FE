@@ -1,26 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import style from '../css/SignInPage.module.css';
-import { Link, Navigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { setUserAllInfo } from '../store/userStore';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
+const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
+// 카카오 로그인 인증 코드 요청
+const link = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoApiKey}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const SignInPage = () => {
   const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const [message1, setMessage1] = useState('');
   const [redirect, setRedirect] = useState(false);
-  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log('Kakao API Key:', kakaoApiKey);
+    console.log('Redirect URI:', REDIRECT_URI);
+  }, []);
+
 
   const SignIn = async (e) => {
     e.preventDefault();
     console.log(id, password);
 
     try {
+      const token = JSON.parse(localStorage.getItem('token')).access_token;
       const response = await fetch(`http://localhost:8000/user/login`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify({ id, password }),
         credentials: 'include',
       });
@@ -40,23 +53,19 @@ const SignInPage = () => {
     }
   };
 
+
   const kakaoLogin = () => {
     if (!window.Kakao.isInitialized()) {
       window.Kakao.init(kakaoApiKey);
     }
 
-    window.Kakao.Auth.login({
-      success: function (authObj) {
-        setRedirect(true);
-      },
-      fail: function (err) {
-        console.error(err);
-      },
-    });
+
+  const kakaoLoginHandler = () => {
+    window.location.href = link;
   };
 
   if (redirect) {
-    return <Navigate to="/" />;
+    navigate('/');
   }
 
   return (
@@ -74,7 +83,7 @@ const SignInPage = () => {
         <span className={style.errorMessage}>{message1}</span>
         <button type="submit">로그인</button>
       </form>
-      <button className={style.kakaoButtom} onClick={kakaoLogin}>
+      <button className={style.kakaoButtom} onClick={kakaoLoginHandler}>
         카카오로 로그인
       </button>
       <div className={style.moveSigninpage}>
