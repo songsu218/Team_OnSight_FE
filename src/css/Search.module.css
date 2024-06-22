@@ -173,6 +173,48 @@
     cursor: pointer;
 }
 
+.tabContainer {
+    display: flex;
+    justify-content: left;
+    margin-top: 20px;
+    /* 생략가능할지도 추후고민 */
+}
+
+.tabButtonHome,
+.tabButtonRecode {
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+    position: relative;
+    color: grey;
+}
+
+.tabButtonHome.activeTab,
+.tabButtonRecode.activeTab,
+.tabButtonHome:hover,
+.tabButtonRecode:hover {
+    color: black;
+}
+
+.tabButtonHome.activeTab::after,
+.tabButtonRecode.activeTab::after {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    border-bottom: 3px solid black;
+}
+
+
+.tabContent {
+    margin-top: 20px;
+}
+
 .centerDetails .centerDetailInfo {
     margin-top: 10px;
     display: flex;
@@ -203,9 +245,8 @@
 .levelContainer {
     display: flex;
     align-items: center;
-
+    margin-top: 10px;
 }
-
 
 .levelBox {
     border-top: 1px solid #DEE2E6;
@@ -224,4 +265,8 @@
 
 .sidebarDetails {
     background-color: #fff;
+}
+
+.centerHome .centerDesc {
+    margin-bottom: 10px;
 }
