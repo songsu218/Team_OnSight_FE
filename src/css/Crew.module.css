@@ -10,12 +10,11 @@
   top: 0;
   text-align: center;
   background-color: #f1f1f1;
-  z-index: -1;
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
 }
 
 .myCrewCon h3 {
-  padding: 22px 0 52px;
+  padding: 22px 0 70px;
   font-family: 'S-CoreDream-3Light';
   font-size: 26px;
   font-weight: bold;

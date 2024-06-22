@@ -1,0 +1,101 @@
+.allCon {
+  display: flex;
+  flex-direction: column;
+}
+
+.allCon button {
+  background-color: transparent;
+  border: 3px solid black;
+  padding: 0.5rem;
+}
+
+.topCon {
+  border-bottom: 3px solid black;
+}
+.topCon .backBtn {
+  border: none;
+  font-size: 2rem;
+  padding-top: 3rem;
+  margin-bottom: 2rem;
+}
+
+.topCon .profileBox {
+  display: flex;
+  align-items: end;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.topCon .imgBox {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.topCon .imgBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.topCon .profileBox span {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.outPutArea {
+  padding: 3rem;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.outPutArea .middelBtnBox {
+  align-self: flex-end;
+  display: flex;
+  gap: 1rem;
+}
+
+.bottomCon {
+  border-top: 3px solid black;
+  padding: 2rem 1rem;
+}
+
+.bottomCon h3 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+}
+
+.bottomCon ul {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.bottomCon ul li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bottomCon ul li p {
+  width: 80%;
+}
+
+.bottomCon ul li > button {
+  border: none;
+}
+
+.bottomCon .commentInputArea {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bottomCon .commentInputArea input {
+  width: 78%;
+}

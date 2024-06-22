@@ -1,98 +1,91 @@
-// import { Link } from "react-router-dom";
-import style from "../css/CrewDetail.module.css";
-import CrewGroupfeed from "../components/list/CrewGroupfeed";
-import { useState } from "react";
-// import { Link } from "react-router-dom";
+import style from '../css/CrewDetail.module.css';
+import { NavLink, Routes, Route } from 'react-router-dom';
+
+import CrewHome from '../components/CrewHome';
+import CrewWrite from '../components/CrewWrite';
+import CrewManage from '../components/CrewManage';
 
 const CrewDetail = () => {
-  // const navigate = useNavigate();
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleClick = (index, event) => {
-    event.preventDefault();
-    setActiveIndex(index);
-    // 예: navigate(`/somepath/${index}`);
-  };
-
   return (
-    <main className={`${style.mainCrew} viewCon`}>
-      <article>
-        <div className={style.leftCon}>
-          <span>크루원 찾기</span>
+    <div className={`${style.mainCrew} viewCon`}>
+      <div className={style.leftCon}>
+        <h3>크루원 찾기</h3>
+        <div className={style.leftConinner}>
           <div className={style.searchCon}>
-            <input
-              type="text"
-              className={style.search}
-              placeholder="크루원 검색"
-            />
-
-            <form action="/submit" method="POST">
-              <button type="submit" class={style.iconButton}>
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </form>
+            <input type="text" placeholder=" 크루원 검색" />
+            <button className={style.iconButton}>
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
           </div>
-          <ul className={style.mycrewCon}>
-            <li></li>
+          <ul className={style.memberCon}>
+            <li>
+              <div className={style.profileBox}>
+                <img src="/img/test.jpg" alt="" />
+              </div>
+              <span>닉네임</span>
+            </li>
+            <li>
+              <div className={style.profileBox}>
+                <img src="/img/test.jpg" alt="" />
+              </div>
+              <span>닉네임</span>
+            </li>
           </ul>
         </div>
-      </article>
+      </div>
       <section className={style.rightCon}>
         <div className={style.righttxt}>
           <div className={style.crewName}>
             <h2>크루명</h2>
             <span>활동지역</span>
           </div>
-          <div className={style.Menu}>
+          <div className={style.menu}>
             <nav className={style.page_nav}>
               <ul>
-                <li className={activeIndex === 0 ? style.active : ""}>
-                  <a
-                    href="#"
-                    className={style.page_link}
-                    onClick={(event) => handleClick(0, event)}
-                    title="크루 가입하기"
+                <li>
+                  <NavLink
+                    to="crewhome"
+                    aria-current={({ isActive }) =>
+                      isActive ? 'page' : undefined
+                    }
                   >
-                    가입하기
-                  </a>
+                    크루홈
+                  </NavLink>
                 </li>
-                <li className={activeIndex === 1 ? style.active : ""}>
-                  <a
-                    href="#"
-                    className={`${style.page_link}`}
-                    onClick={(event) => handleClick(1, event)}
-                    title="크루 피드 글쓰기"
+                <li>
+                  <NavLink
+                    to="crewwrite"
+                    aria-current={({ isActive }) =>
+                      isActive ? 'page' : undefined
+                    }
                   >
                     글쓰기
-                  </a>
+                  </NavLink>
                 </li>
-                <li className={activeIndex === 2 ? style.active : ""}>
-                  <a
-                    href="#"
-                    className={`${style.page_link}`}
-                    onClick={(event) => handleClick(2, event)}
-                    title="크루 정보수정 페이지"
+                <li>
+                  <NavLink
+                    to="crewmanage"
+                    aria-current={({ isActive }) =>
+                      isActive ? 'page' : undefined
+                    }
                   >
-                    크루관리
-                  </a>
+                    관리하기
+                  </NavLink>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
-        <div className={style.introCrew}>
-          <img src="img/on_sight.jpg" alt="크루이미지" />
-          <p>
-            소개문구 : Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Non officiis, quia suscipit provident earum at, quam veniam
-            temporibus fugiat, harum quis dignissimos nisi possimus nemo beatae
-            laboriosam quasi totam cumque.
-          </p>
-          <span>피드</span>
+        <div>
+          <Routes>
+            <Route path="crewhome" element={<CrewHome />} />
+            <Route path="crewwrite" element={<CrewWrite />} />
+            <Route path="crewmanage" element={<CrewManage />} />
+            <Route path="*" element={<CrewHome />} />
+          </Routes>
         </div>
-        <CrewGroupfeed />
       </section>
-    </main>
+    </div>
   );
 };
 

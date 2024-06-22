@@ -104,7 +104,7 @@ const Crew = () => {
           <h3>나의크루 리스트</h3>
           <ul className={style.myCrewListCon}>
             <li className={style.crewListCard}>
-              <Link to="/CrewDetail">
+              <Link to="/crewdetail">
                 <div className={style.crewImgBox}>
                   <img src="/img/imgsample.png" alt="img" />
                 </div>
