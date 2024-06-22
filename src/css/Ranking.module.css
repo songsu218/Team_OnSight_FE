@@ -1,0 +1,70 @@
+.rankArea {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.imgBox {
+  width: 30%;
+  height: 100vh;
+  display: flex;
+  justify-content: end;
+  position: relative;
+}
+
+.imgBox > img {
+  height: 100%;
+}
+
+.personBox img {
+  position: absolute;
+  left: 0;
+  height: 100px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.personBox img:nth-of-type(1) {
+  height: 130px;
+  bottom: 70vh;
+  left: 10vw;
+}
+.personBox img:nth-of-type(1):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
+
+.personBox img:nth-of-type(2) {
+  bottom: 45vh;
+  left: 5vw;
+}
+.personBox img:nth-of-type(2):hover {
+  transform: scale(1.1);
+  rotate: -5deg;
+}
+.personBox img:nth-of-type(3) {
+  height: 120px;
+  left: 5vw;
+  bottom: 10vh;
+}
+.personBox img:nth-of-type(3):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
+.personBox img:nth-of-type(4) {
+  left: 15vw;
+  bottom: 0;
+}
+.personBox img:nth-of-type(4):hover {
+  transform: scale(1.1);
+  rotate: -5deg;
+}
+.personBox img:nth-of-type(5) {
+  left: 20vw;
+  bottom: 0;
+}
+.personBox img:nth-of-type(5):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}

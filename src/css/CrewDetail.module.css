@@ -1,118 +1,204 @@
 .mainCrew {
-    display: flex;
-  }
-  
-  /* 나의 크루 리스트 영역 */
-  .leftCon {
-    width: 400px;
-    height: 100%;
-    padding-top: 50px;
-    text-align: center;
-    background-color: #f1f1f1;
-  }
-  
-  .leftCon > span {
-    /* border: 1px solid red; */
-    font-family: "S-CoreDream-3Light";
-    font-size: 1.625rem;
-    font-weight: bold;
-  }
+  display: flex;
+}
 
-  .searchCon{
-    display: flex;
-  }
-  
-  .mycrewCon li {
-    width: 347px;
-    height: 256px;
-    margin: auto;
-    background-color: white;
-    /* padding-top: 10px; */
-    margin-top: 30px;
-  }
-  
-  .mycrew > * {
-    font-family: "S-CoreDream-3Light";
-  }
-  
-  .adress > span {
-    font-weight: bold;
-    position: relative;
-  }
-  
-  .adress span::after {
-    content: "";
-    display: inline-block;
-    width: 2px;
-    height: 60%;
-    background-color: gray;
-    position: absolute;
-    right: 7px;
-    bottom: 5px;
-  }
-  
-  .mycrew > p {
-    color: darkgray;
-  }
-  
-  .mycrewCon img {
-    /* margin-top: 20px; */
-    width: 347px;
-    height: 160px;
-    object-fit: cover;
-  }
-  
-  .mycrew {
-    font-family: "맑은 고딕";
-    padding-top: 10px;
-    padding-left: 20px;
-    text-align: left;
-    /* border: 1px solid red; */
-    line-height: 1.5;
-  }
-  
-  .adress {
-    display: flex;
-  }
-  
-  .adress > span {
-    padding-right: 20px;
-  }
-  
-  /* 추천크루 영역 */
-  .rightCon {
-    width: calc(100% - 714px);
-    margin: 98px auto;
-  }
-  
-  .righttxt{
-    display: flex;
-    justify-content: space-between;
-  }
+/* 크루원 영역 */
+.leftCon {
+  width: 400px;
+  height: 100%;
+  padding-top: 65px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
 
-  
-  .crewName {
-    display: flex;
-    justify-content: space-between;
+.leftCon > span {
+  /* border: 1px solid red; */
+  font-family: "S-CoreDream-3Light";
+  font-size: 1.625rem;
+  font-weight: bold;
+}
 
-  }
-  
-  .crewName h2 {
-    font-size: 3.5rem;
-    font-weight: bold;
-  }
-  
-  .crewName button {
-    border: none;
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    background-color: white;
-    border-radius: 0;
-  }
+.searchCon {
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
 
-  .iconButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 24px; /* 아이콘 크기 조절 */
+.searchCon > input {
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  width: 260px;
+  height: 38px;
+}
+
+.iconButton {
+  width: 38px;
+  height: 38px;
+  background-color: white;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+  margin-left: 15px;
+}
+
+.mycrewCon li {
+  width: 347px;
+  height: 256px;
+  margin: auto;
+  background-color: white;
+  /* padding-top: 10px; */
+  margin-top: 30px;
+}
+
+.mycrew {
+  font-family: "맑은 고딕";
+  padding-top: 10px;
+  padding-left: 20px;
+  text-align: left;
+  /* border: 1px solid red; */
+  line-height: 1.5;
+}
+
+.mycrew > * {
+  font-family: "S-CoreDream-3Light";
+}
+
+.adress > span {
+  font-weight: bold;
+  position: relative;
+}
+
+.adress span::after {
+  content: "";
+  display: inline-block;
+  width: 2px;
+  height: 60%;
+  background-color: gray;
+  position: absolute;
+  right: 7px;
+  bottom: 5px;
+}
+
+.mycrew > p {
+  color: darkgray;
+}
+
+/* 크루상세 영역 */
+.rightCon {
+  width: calc(100% - 714px);
+  margin: 140px auto;
+}
+
+.righttxt {
+  display: flex;
+  justify-content: space-between;
+}
+
+.righttxt button {
+  border: none;
+  height: 54px;
+  width: 142px;
+  border-top: 0.3rem solid black;
+  border-bottom: 0.3rem solid black;
+  background-color: white;
+  border-radius: 0;
+  margin-left: 20px;
+}
+
+.crewName {
+  display: flex;
+  align-items: end;
+}
+
+.crewName h2 {
+  font-size: 3.5rem;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+/* nav 영역 */
+.page_tit_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 56px;
+}
+
+.page_tit {
+  margin: 0;
+  font-size: 56px;
+  line-height: 68px;
+  font-weight: 800;
+}
+
+.page_nav {
+  position: relative;
+  width: 640px;
+}
+
+.page_nav:before,
+.page_nav .active .page_link:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.page_nav:before {
+  border-top: 0.1rem solid #b9b9b9;
+  border-bottom: 0.1rem solid #b9b9b9;
+}
+
+.page_nav > ul {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0 31px;
+  list-style: none;
+}
+
+.page_nav > ul > li {
+  font-size: 20px;
+  line-height: 56px;
+  text-align: center;
+  font-weight: 300;
+}
+
+.page_nav > ul > li > a {
+  position: relative;
+  display: block;
+  padding: 0 1rem;
+  transition: all 0.3s;
+}
+
+.page_nav .page_link:before {
+  border-top: 0.3rem solid transparent;
+  border-bottom: 0.3rem solid transparent;
+}
+.page_nav .active .page_link:before {
+  border-color: #000;
+}
+
+/* 크루이미지영역 */
+.introCrew > img {
+  margin-top: 50px;
+  width: 910px;
+  height: 300px;
+  margin-bottom: 30px;
+}
+.introCrew > p {
+  height: 114px;
+  width: 910px;
+  align-content: center;
+  background-color: #f1f1f1;
+  padding: 20px;
+  margin-bottom: 77px;
+}
+.introCrew > span {
+  font-size: 32px;
+  font-weight: bold;
 }

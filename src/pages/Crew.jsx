@@ -66,32 +66,34 @@ const Crew = () => {
   };
 
   return (
-    <main className={`${style.mainCrew} mw`}>
+    <main className={`${style.mainCrew} viewCon`}>
       <article>
         <div className={style.leftCon}>
           <span>나의크루 리스트</span>
           {/* <p>{nick}님이 가입된 크루가 없습니다.</p> */}
           <ul className={style.mycrewCon}>
             <li>
-              <img src="/img/imgsample.jpg" alt="img" />
+              <Link to="/CrewDetail">
+                <img src="/img/imgsample.jpg" alt="img" />
+                <div className={style.mycrew}>
+                  <div className={style.adress}>
+                    <span>name</span>
+                    <p> gu구 </p>
+                  </div>
+                  <p>content</p>
+                  <p>참가자수 : x명</p>
+                </div>
+              </Link>
+            </li>
+            <li>
+              <img src="/img/no_img.jpg" alt="img" />
               <div className={style.mycrew}>
                 <div className={style.adress}>
                   <span>name</span>
                   <p> gu구 </p>
                 </div>
                 <p>content</p>
-                <p>인원 : x명</p>
-              </div>
-            </li>
-            <li>
-              <img src="/img/noimg.jpg" alt="img" />
-              <div className={style.mycrew}>
-                <div className={style.adress}>
-                  <span>크루명</span>
-                  <p> 종로구 </p>
-                </div>
-                <p>다같이 돌자 동네한바퀴</p>
-                <p>인원 : x명</p>
+                <p>참가자수 : x명</p>
               </div>
             </li>
           </ul>
@@ -105,7 +107,7 @@ const Crew = () => {
           </Link>
         </div>
         <div className={style.rightmenu}>
-          <div>
+          <div className={style.selectBox}>
             <label for="region-select">
               <span>지역</span>
             </label>
@@ -136,7 +138,7 @@ const Crew = () => {
           <div>
             <input
               type="text"
-              className={style.search}
+              className={style.searchBox}
               placeholder="크루검색"
             />
             <i class="fa-solid fa-magnifying-glass"></i>
@@ -148,37 +150,37 @@ const Crew = () => {
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
@@ -189,13 +191,13 @@ const Crew = () => {
               ratione, repudiandae ad suscipit voluptatum. Tenetur rerum sunt
               dicta voluptates temporibus officiis ducimus?
             </p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
           <li>
             <img src="/img/bol.jpg" alt="크루" />
             <h5>크루명</h5>
             <p>content</p>
-            <span>인원수 : xx명</span>
+            <span>참가인원 : xx명</span>
           </li>
         </ul>
       </section>

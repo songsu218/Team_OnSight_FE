@@ -1,10 +1,25 @@
 .rankListCon {
+  position: relative;
+  height: 237px;
+  width: 200px;
+  margin-top: 250px;
+  margin-left: 200px;
+}
+
+.rankListCon .btnBox {
   position: absolute;
-  width: 50%;
-  top: 60%;
-  left: 150px;
+  top: 120%;
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
+}
+
+.rankListCon .btnBox button {
+  border: none;
+  background-color: transparent;
+  font-family: 'S-CoreDream-3Light';
+  font-weight: bold;
+  font-size: 1.5rem;
+  white-space: nowrap;
 }
 
 .rankListCard {
@@ -63,6 +78,7 @@
 
 .rankListCard span strong {
   font-size: 1.25rem;
+  font-family: 'S-CoreDream-3Light';
 }
 
 .rankListCard:nth-of-type(1) {
@@ -71,22 +87,22 @@
 }
 
 .rankListCard:nth-of-type(2) {
-  left: 22%;
+  left: 95%;
   z-index: 4;
 }
 
 .rankListCard:nth-of-type(3) {
-  left: 44%;
+  left: 190%;
   z-index: 3;
 }
 
 .rankListCard:nth-of-type(4) {
-  left: 66%;
+  left: 285%;
   z-index: 2;
 }
 
 .rankListCard:nth-of-type(5) {
-  left: 88%;
+  left: 380%;
   z-index: 1;
 }
 
@@ -95,61 +111,11 @@
 .rankListCard:nth-of-type(3):hover,
 .rankListCard:nth-of-type(4):hover,
 .rankListCard:nth-of-type(5):hover {
-  animation-play-state: paused;
-  top: -50px;
-}
-
-.rankListCard:nth-of-type(2):hover {
+  top: -20px;
   z-index: 6;
-}
-.rankListCard:nth-of-type(3):hover {
-  z-index: 6;
-}
-.rankListCard:nth-of-type(4):hover {
-  z-index: 6;
-}
-.rankListCard:nth-of-type(5):hover {
-  z-index: 6;
-}
-@keyframes moveUp {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(-10px);
-  }
-  75% {
-    transform: translateY(10px);
-  }
-}
-
-@keyframes moveDown {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  25% {
-    transform: translateY(10px);
-  }
-  75% {
-    transform: translateY(-10px);
-  }
-}
-
-.rankListCard:nth-of-type(1),
-.rankListCard:nth-of-type(3),
-.rankListCard:nth-of-type(5) {
-  animation: moveUp 8s linear infinite;
-}
-
-.rankListCard:nth-of-type(2),
-.rankListCard:nth-of-type(4) {
-  animation: moveDown 8s linear infinite;
 }
 
 .rankListCard.hover {
-  animation-play-state: paused;
-  top: -50px;
+  top: -20px;
   z-index: 6;
 }
