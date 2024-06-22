@@ -21,7 +21,7 @@
 
 .navSec::before,
 .navSec > ul > li > a::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   left: 0;
@@ -53,8 +53,8 @@
 }
 
 /* a 선택 */
-.navSec > ul > li > a::before {
-  /* border-color: #000000; */
+.navSec > ul > li > a[aria-current="page"]::before {
+  border-color: #000000;
 }
 
 .navSec > ul > li > a::before {
@@ -63,6 +63,7 @@
 }
 
 /* a 선택 */
+.navSec > ul > li > a[aria-current="page"],
 .navSec > ul > li > a:focus,
 .navSec > ul > li > a:hover {
   font-weight: 800;

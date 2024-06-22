@@ -1,8 +1,12 @@
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import style from "../css/CrewDetail.module.css";
-import CrewFeedlist from "../components/list/CrewFeedlist";
+import CrewGroupfeed from "../components/list/CrewGroupfeed";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const CrewDetail = () => {
+  const [activeIndex, setActiveIndex] = useState(0);
+
   return (
     <main className={`${style.mainCrew} viewCon`}>
       <article>
@@ -39,6 +43,16 @@ const CrewDetail = () => {
             <Link to="/ManageCrew">
               <button>크루관리</button>
             </Link>
+            {/* <ul>
+              <li>
+                <a href="">
+                  <Link to="/Write"> 글쓰기</Link>
+                </a>
+              </li>
+              <li>
+                <a href="">크루관리</a>
+              </li>
+            </ul> */}
           </div>
         </div>
         <div className={style.introCrew}>
@@ -49,8 +63,9 @@ const CrewDetail = () => {
             temporibus fugiat, harum quis dignissimos nisi possimus nemo beatae
             laboriosam quasi totam cumque.
           </p>
+          <span>피드</span>
         </div>
-        <CrewFeedlist />
+        <CrewGroupfeed />
       </section>
     </main>
   );
