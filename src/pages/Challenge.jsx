@@ -31,9 +31,7 @@ const Challenge = (props) => {
   const [isNarrowScreen, setIsNarrowScreen] = useState(
     window.innerWidth <= 1079
   );
-  const [showModal, setShowModal] = useState(false);
 
-  // 위치 옮김
   // console.log(
   //   totalSlides - slidesPerViewCount + 1 > 0
   //     ? totalSlides - slidesPerViewCount + 1
@@ -66,9 +64,6 @@ const Challenge = (props) => {
   //#region init
   useEffect(() => {
     setAllChData("TOT");
-    const handleResize = () => {
-      // resize 이벤트 핸들러 로직
-    };
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
@@ -177,7 +172,7 @@ const Challenge = (props) => {
       //나의 챌린지 보기
       setMyChData(type, "qwer1234");
     } else if (index === 2) {
-      setShowModal(true); //나의 챌린지 만들기
+      // setShowModal(true); //나의 챌린지 만들기
     }
   };
   //#endregion 함수
