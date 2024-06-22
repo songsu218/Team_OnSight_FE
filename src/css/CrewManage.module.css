@@ -1,23 +1,17 @@
 .createpage {
-  /* border: 1px dotted red; */
-  width: 720px;
-  margin: 146px auto auto;
-}
-
-.createCrew > h2 {
-  font-size: 3.5rem;
-  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .createCrew > img {
-  margin-top: 45px;
+  margin-top: 60px;
   width: 720px;
   height: 265px;
   border: 1px dotted lightgray;
 }
 
 .createCrew > section {
-  font-family: "S-CoreDream-3Light";
   font-size: 2rem;
   font-weight: bold;
   display: flex;
@@ -26,8 +20,8 @@
 }
 
 .createCrew p {
-  font-size: 10px;
-  color: gray;
+  font-size: 1rem;
+  color: #777777;
   padding-left: 10px;
 }
 
@@ -41,8 +35,8 @@
 }
 
 .crewName {
-  padding: 20px 0 0 10px;
-  background-color: lightgrey;
+  padding: 1rem;
+  background-color: #f1f1f1f1;
   font-weight: 500;
 }
 
@@ -56,23 +50,25 @@
 
 .imgBtnCon {
   display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
   justify-content: flex-end;
 }
 
 .imgBtnCon > input,
 .Btn {
-  /* border: 1px solid #f1f1f1; */
-  border: 1px solid lightgray;
-  background-color: white;
+  border: 3px solid #000000;
+  background-color: transparent;
   border-radius: 5px;
-  padding: 10px;
-  margin-top: 20px;
-  margin-left: 10px;
-  font-size: 14px;
-  margin-bottom: 30px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.3s;
 }
-.Btn {
-  width: 128px;
+
+.Btn:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
 
 .selectBox {
@@ -82,4 +78,5 @@
 .saBtn {
   display: flex;
   justify-content: center;
+  margin-top: 2rem;
 }
