@@ -1,12 +1,15 @@
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import RecordModal from "../components/RecordModal";
 import style from "../css/MyPageList1.module.css";
 import List from "./list/List";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const MyPageList2 = () => {
+  const [isModalOpen, setModalOpen] = useState(false);
+
+  const openModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
+
   const [recodes, setRecodes] = useState([]);
   const user = useSelector((state) => state.user.userInfo);
 
@@ -35,7 +38,7 @@ const MyPageList2 = () => {
     if (user) {
       fetchRecodes();
     }
-  }, []);
+  }, [user]);
 
   return (
     <section className={style.sec}>
@@ -44,9 +47,12 @@ const MyPageList2 = () => {
           <span>내</span>
           <span>기록</span>
         </h3>
-        <button className={style.btn}>기록추가</button>
+        <button className={style.btn} onClick={openModal}>
+          기록추가
+        </button>
       </div>
       <List items={recodes} itemType="recode" />
+      {isModalOpen && <RecordModal closeModal={closeModal} />}
     </section>
   );
 };
