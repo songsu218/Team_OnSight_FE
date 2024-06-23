@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUserAllInfo } from "../store/userStore";
 import style from "../css/Profile.module.css";
 import InfoModal from "../components/modal/InfoModal";
 import InfoUpModal from "../components/modal/InfoUpModal";
@@ -10,7 +11,26 @@ import WithdrawalModal from "../components/modal/WithdrawalModal";
 const Profile = () => {
   const [modalType, setModalType] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user.userInfo);
+
+  const logout = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/user/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      dispatch(clearUserAllInfo());
+    } catch (err) {
+      console.error("로그아웃 실패:", err);
+    }
+  };
+
+  const handleWithdrawSuccess = async () => {
+    await logout();
+    navigate("/");
+  };
 
   const maskString = (str) => {
     if (str.length <= 1) return str;
@@ -126,7 +146,12 @@ const Profile = () => {
       )}
       {modalType === "infoUpdate" && <InfoUpModal onClose={closeModal} />}
       {modalType === "password" && <PwUpModal onClose={closeModal} />}
-      {modalType === "withdrawal" && <WithdrawalModal onClose={closeModal} />}
+      {modalType === "withdrawal" && (
+        <WithdrawalModal
+          onClose={closeModal}
+          onWithdrawSuccess={handleWithdrawSuccess}
+        />
+      )}
     </div>
   );
 };

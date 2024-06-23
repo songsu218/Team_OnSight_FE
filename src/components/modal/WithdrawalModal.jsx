@@ -1,27 +1,13 @@
 import style from "../../css/Withdrawal.module.css";
 import { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { clearUserAllInfo } from "../../store/userStore";
+import { useSelector } from "react-redux";
 
-const WithdrawalModal = ({ onClose }) => {
-  const dispatch = useDispatch();
+const WithdrawalModal = ({ onClose, onWithdrawSuccess }) => {
   const user = useSelector((state) => state.user.userInfo);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const passwordRef = useRef(null);
-
-  const logout = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/user/logout", {
-        method: "POST",
-        credentials: "include",
-      });
-      dispatch(clearUserAllInfo());
-    } catch (err) {
-      console.error("로그아웃 실패:", err);
-    }
-  };
 
   const withdrawal = async () => {
     try {
@@ -40,8 +26,8 @@ const WithdrawalModal = ({ onClose }) => {
 
       if (response.ok) {
         alert("회원 탈퇴가 성공적으로 완료되었습니다.");
-        await logout(); // 로그아웃 처리
         onClose();
+        onWithdrawSuccess();
       } else {
         alert(data.message || "회원 탈퇴에 실패했습니다.");
       }
