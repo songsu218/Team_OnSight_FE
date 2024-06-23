@@ -51,14 +51,6 @@ const Challenge = (props) => {
     }
   };
 
-  console.log(
-    totalSlides - slidesPerViewCount + 1 > 0
-      ? totalSlides - slidesPerViewCount + 1
-      : 1
-  );
-  console.log(totalSlides);
-  console.log(slidesPerViewCount);
-
   //#region init
   useEffect(() => {
     setAllChData("TOT");
@@ -86,8 +78,10 @@ const Challenge = (props) => {
     ch.chTotalList(tag)
       .then((result) => {
         setDataList(result.data);
-        setNowList(result.data.filter((item) => item.state === "NOW"));
-        setPastList(result.data.filter((item) => item.state === "PAST"));
+        // setNowList(result.data.filter((item) => item.state === "NOW"));
+        // setPastList(result.data.filter((item) => item.state === "PAST"));
+        setNowList(result.data.filter((item) => item.state === true));
+        setPastList(result.data.filter((item) => item.state === false));
         setPrintData(result.data);
         console.log(result.data);
       })
@@ -100,8 +94,10 @@ const Challenge = (props) => {
     ch.chMyList(tag, id)
       .then((result) => {
         setDataList(result.data);
-        setNowList(result.data.filter((item) => item.state === "NOW"));
-        setPastList(result.data.filter((item) => item.state === "PAST"));
+        // setNowList(result.data.filter((item) => item.state === "NOW"));
+        // setPastList(result.data.filter((item) => item.state === "PAST"));
+        setNowList(result.data.filter((item) => item.state === true));
+        setPastList(result.data.filter((item) => item.state === false));
         setPrintData(result.data);
         console.log(result.data);
       })
