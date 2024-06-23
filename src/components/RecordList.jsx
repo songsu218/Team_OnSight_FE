@@ -2,28 +2,31 @@ import style from '../css/RecordList.module.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
 import RecordModal from './RecordModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRecordAllInfo } from '../store/recordStore';
 
 const RecordList = () => {
-  const [records, setRecords] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [currentCenter, setCurrentCenter] = useState(`'클라이밍장' `);
   const [currentNick, setCurrentNick] = useState(`'클라이머' `);
   const containerRef = useRef(null);
   const swiperConRef = useRef(null);
 
+  const dispatch = useDispatch();
+  const records = useSelector((state) => state.record.recordInfo);
+
   useEffect(() => {
     const fetchRecords = async () => {
       try {
         const response = await axios.get('http://localhost:8000/record');
-        const sortedRecords = response.data.slice(0, 21);
-        setRecords(sortedRecords);
+        dispatch(setRecordAllInfo(response.data));
       } catch (error) {
         console.error('Error', error);
       }
     };
 
     fetchRecords();
-  }, []);
+  }, [dispatch]);
 
   const handleScroll = useCallback(() => {
     const swiperCon = swiperConRef.current;
@@ -69,21 +72,22 @@ const RecordList = () => {
     <div>
       <div className={style.listCon} ref={containerRef}>
         <div className={style.swiperCon} ref={swiperConRef}>
-          {records.map((record, index) => (
-            <div
-              key={record._id}
-              className={style.swiperBox}
-              onMouseEnter={() =>
-                handleMouseEnter(index, record.center, record.nick)
-              }
-              onMouseLeave={() => setHoveredIndex(null)}
-            >
-              <img
-                src={`http://localhost:8000/uploads/${record.thumbnail}`}
-                alt="thumbnail"
-              />
-            </div>
-          ))}
+          {records &&
+            records.map((record, index) => (
+              <div
+                key={record._id}
+                className={style.swiperBox}
+                onMouseEnter={() =>
+                  handleMouseEnter(index, record.center, record.nick)
+                }
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <img
+                  src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                  alt="thumbnail"
+                />
+              </div>
+            ))}
         </div>
         <div className={style.textBox}>
           <p>
