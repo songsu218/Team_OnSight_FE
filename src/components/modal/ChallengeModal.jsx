@@ -6,6 +6,7 @@ import DatePicker, { registerLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import ko from "date-fns/locale/ko";
 import axios from "axios";
+import { ch } from "../../api.js";
 
 registerLocale("ko", ko);
 
@@ -54,17 +55,16 @@ function ChallengeModal({onClose}) {
     formData.append("center", selectedPlace);
     formData.append("date", startDate.toISOString().split("T")[0]);
 
-    try {
-      await axios.post("http://localhost:8000/Challenge", formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      handleClose();
-    } catch (error) {
-      console.error("error", error);
-    }
-  };
+    console.log(formData);
+    // ch.chEnter()
+    // .then((result) => {
+
+    // }).catch((error) => {
+    //   console.log(`${error}`);
+    // });
+
+    handleClose();
+  }
 
   useEffect(() => {
     axios
