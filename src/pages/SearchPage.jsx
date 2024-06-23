@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Map, MapMarker } from 'react-kakao-maps-sdk';
 import style from '../css/Search.module.css';
-
+import RecordModal from '../components/RecordModal';
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 
 const SearchPage = () => {
@@ -16,6 +16,8 @@ const SearchPage = () => {
   const [showDetails, setShowDetails] = useState(false);
   const [currentCenter, setCurrentCenter] = useState(null);
   const [activeTab, setActiveTab] = useState('home');
+  const [records, setRecords] = useState([]);
+  const [userLikes, setUserLikes] = useState([]);
 
   useEffect(() => {
     axios
@@ -26,7 +28,30 @@ const SearchPage = () => {
       .catch((error) => console.error('API 요청 에러:', error));
   }, []);
 
-  // 초성 검색을 위해
+  useEffect(() => {
+    if (currentCenter) {
+      axios
+        .get(
+          `http://localhost:8000/record/center?center=${currentCenter.center}`
+        )
+        .then((response) => {
+          setRecords(response.data);
+        })
+        .catch((error) => console.error('기록 데이터 요청 에러:', error));
+    }
+  }, [currentCenter]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8000/user/likes', { withCredentials: true })
+      .then((response) => {
+        setUserLikes(response.data.likes.map((like) => like._id));
+      })
+      .catch((error) => {
+        console.error('즐겨찾기 데이터 요청 에러:', error);
+      });
+  }, []);
+
   const getInitials = (str) => {
     const INITIALS = [
       'ㄱ',
@@ -165,6 +190,20 @@ const SearchPage = () => {
     setCurrentCenter(null);
   };
 
+  const toggleFavorite = (centerId) => {
+    const isFavorite = userLikes.includes(centerId);
+    axios
+      .post(
+        `http://localhost:8000/user/${isFavorite ? 'unlike' : 'like'}`,
+        { centerId },
+        { withCredentials: true }
+      )
+      .then((response) => {
+        setUserLikes(response.data.likes);
+      })
+      .catch((error) => console.error('즐겨찾기 변경 에러:', error));
+  };
+
   useEffect(() => {
     const script = document.createElement('script');
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&autoload=false`;
@@ -182,17 +221,12 @@ const SearchPage = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (currentCenter) {
-    }
-  }, [currentCenter]);
-
   const selectedCoordinates = districtCoordinates[selectedCity]?.[
     selectedDistrict
   ] || { lat: 37.573, lng: 126.9794 };
 
   return (
-    <main className={`${style.search} viewCon`}>
+    <main className={`${style.search} ${style.viewCon}`}>
       <div
         className={`${style.sidebar} ${
           showDetails ? style.sidebarDetails : ''
@@ -208,13 +242,20 @@ const SearchPage = () => {
               src={currentCenter.thumbnail.trim()}
               alt={currentCenter.center}
             />
-
             <div className={style.centerDetailInfo}>
-              <h4>{currentCenter.center}</h4>
-              <p>{currentCenter.gu}</p>
-              {/* 즐겨찾기 */}
+              <div>
+                <h4>{currentCenter.center}</h4>
+                <p>{currentCenter.gu}</p>
+              </div>
+              <i
+                className={
+                  userLikes.includes(currentCenter._id)
+                    ? `fa-solid fa-star ${style.likeStar}`
+                    : 'fa-regular fa-star'
+                }
+                onClick={() => toggleFavorite(currentCenter._id)}
+              ></i>
             </div>
-
             <div className={style.tabContainer}>
               <button
                 className={`${style.tabButtonHome} ${
@@ -233,7 +274,6 @@ const SearchPage = () => {
                 기록
               </button>
             </div>
-
             <div className={style.tabContent}>
               {activeTab === 'home' && (
                 <div className={style.centerHome}>
@@ -246,7 +286,7 @@ const SearchPage = () => {
                     <i className="fa-solid fa-phone"></i>
                     {currentCenter.contact}
                   </div>
-                  <div>
+                  <div className={style.websiteContainer}>
                     <i className="fa-solid fa-globe"></i>
                     <a
                       href={currentCenter.website}
@@ -272,14 +312,61 @@ const SearchPage = () => {
                   </div>
                   <div>
                     <p className={style.centerDesc}>소개글</p>
-                    {currentCenter.detail}
+                    <p className={style.centerDetail}>{currentCenter.detail}</p>
                   </div>
                 </div>
               )}
               {activeTab === 'records' && (
                 <div className={style.centerRecords}>
-                  <h4>기록 탭 내용</h4>
-                  <p>여기에 기록 정보를 입력하세요.</p>
+                  <div className={style.centerRecordNav}>
+                    <p>기록해주세요</p>
+                    <div className={style.btnBox}>
+                      <RecordModal
+                        currentCenter={currentCenter}
+                        buttonText="기록 추가"
+                        buttonClass={style.customButton}
+                      />
+                    </div>
+                  </div>
+                  <div>
+                    {records.length > 0 ? (
+                      records.map((record) => (
+                        <div key={record._id} className={style.recordItem}>
+                          <div className={style.recordHeader}>
+                            <img
+                              src={`http://localhost:8000/uploads/${record.userId.thumbnail}`}
+                              alt="프로필"
+                              className={style.profileImage}
+                            />
+                            <div className={style.recordUserInfo}>
+                              <div className={style.recordNickname}>
+                                {record.nick}
+                              </div>
+                              <div className={style.recordCount}>
+                                기록수 {record.userId.recordcount || 0}
+                              </div>
+                            </div>
+                          </div>
+                          <div className={style.recordContent}>
+                            <img
+                              src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                              alt="기록 이미지"
+                              className={style.recordImage}
+                            />
+                            <div className={style.recordText}>
+                              <h5>{record.title}</h5>
+                              <p>{record.content}</p>
+                              <div className={style.recordDate}>
+                                {new Date(record.date).toLocaleDateString()}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <p>기록이 없습니다. 기록을 추가해보세요.</p>
+                    )}
+                  </div>
                 </div>
               )}
             </div>
@@ -328,7 +415,7 @@ const SearchPage = () => {
               ></i>
             </div>
 
-            {searchResults.length > 0 && (
+            {searchResults.length > 0 ? (
               <div className={style.searchResults}>
                 {searchResults.map((center) => (
                   <div
@@ -338,19 +425,64 @@ const SearchPage = () => {
                   >
                     <img src={center.thumbnail} alt={center.center} />
                     <div className={style.centerInfo}>
-                      <h4>{center.center}</h4>
-                      <p>{center.gu}</p>
+                      <div>
+                        <h4>{center.center}</h4>
+                        <p>{center.gu}</p>
+                      </div>
+                      <i
+                        className={
+                          userLikes.includes(center._id)
+                            ? `fa-solid fa-star ${style.likeStar}`
+                            : 'fa-regular fa-star'
+                        }
+                        onClick={(e) => {
+                          e.stopPropagation(); // 아이콘 클릭 시 페이지 이동 방지
+                          toggleFavorite(center._id);
+                        }}
+                      ></i>
                     </div>
                     <p className={style.centerDetail}>{center.detail}</p>
                     <p className={style.centerRecord}>기록 3000</p>
                   </div>
                 ))}
               </div>
+            ) : (
+              <div className={style.searchResults}>
+                {climbingCenters
+                  .filter((center) => userLikes.includes(center._id))
+                  .map((center) => (
+                    <div
+                      key={center._id}
+                      className={style.centerList}
+                      onClick={() => handleListClick(center)}
+                    >
+                      <img src={center.thumbnail} alt={center.center} />
+                      <div className={style.centerInfo}>
+                        <div>
+                          <h4>{center.center}</h4>
+                          <p>{center.gu}</p>
+                        </div>
+                        <i
+                          className={
+                            userLikes.includes(center._id)
+                              ? `fa-solid fa-star ${style.likeStar}`
+                              : 'fa-regular fa-star'
+                          }
+                          onClick={(e) => {
+                            e.stopPropagation(); // 아이콘 클릭 시 페이지 이동 방지
+                            toggleFavorite(center._id);
+                          }}
+                        ></i>
+                      </div>
+                      <p className={style.centerDetail}>{center.detail}</p>
+                      <p className={style.centerRecord}>기록 3000</p>
+                    </div>
+                  ))}
+              </div>
             )}
           </>
         )}
       </div>
-
       <div className={style.mapContainer}>
         <Map
           center={mapCenter}
