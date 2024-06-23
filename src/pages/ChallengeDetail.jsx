@@ -3,11 +3,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import ChallengeJoinUser from "../components/challenge/ChallengeJoinUser";
 import { ch } from "../api.js";
+import { useSelector } from "react-redux";
 
 const ChallengeDetail = () => {
   //#region 변수,Hook
   const location = useLocation();
   const { detailData } = location.state || {}; // 파라미터
+  const user = useSelector((state) => state.user.userInfo);
+  const username = user ? user.id : null;
+  const nickname = user ? user.nick : null;
   // const [ongoing, setOngoing] = useState(false); //detailData에서 state가 넘어와서 해당기능 주석.
   const [wrapClass, setWrapClass] = useState(style.challenge_detail_wrap);
   const [challenge_img, setChallenge_img] = useState(detailData.images); // 챌린지 이미지
@@ -24,12 +28,15 @@ const ChallengeDetail = () => {
 
   const [currentItems, setCurrentItems] = useState([]);
   const [totalPages, setTotalPages] = useState();
-
   //#endregion 변수,Hook
+  console.log('detailData');
+  console.log(detailData);
+  console.log('user');
+  console.log(username);
+  console.log(nickname);
 
   //#region init
   useEffect(() => {
-    console.log(detailData.state);
     ch.chJoinList(detailData.challengename)
       .then((result) => {
         console.log("참여자 목록");
@@ -41,7 +48,6 @@ const ChallengeDetail = () => {
       });
     if (detailData.state === "PAST") {
       setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
-      console.log(detailData.challengename);
       ch.chRank(detailData.challengename)
         .then((result) => {
           console.log("랭킹데이터");
@@ -152,7 +158,17 @@ const ChallengeDetail = () => {
     setCurrentPage(pageNumber);
   };
   const handleJoinClick = () => {
-    alert("참가하기 버튼 클릭");
+    ch.chEnter(detailData.challengename,'tester') //username
+    .then((result) => {
+      console.log(result.data);
+      alert("참가하기 등록 성공");
+      window.location.reload();
+    })
+    .catch((error) => {
+      console.log(`${error}`);
+      alert("참가하기 등록 실패");
+    });
+
   };
   const today = () => {
     const today = new Date();
