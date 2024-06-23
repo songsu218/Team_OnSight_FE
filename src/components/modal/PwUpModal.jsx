@@ -1,4 +1,4 @@
-import style from '../../css/PwUpModal.module.css';
+import style from "../../css/PwUpModal.module.css";
 
 const PwUpModal = ({ onClose }) => {
   return (
@@ -17,7 +17,8 @@ const PwUpModal = ({ onClose }) => {
         <div className={style.content}>
           <h2 className={style.tit}>비밀번호 변경</h2>
           <p className={style.txt}>
-            회원님의 소중한 정보를 보호하기 위해 비밀번호를 암호화하여 관리합니다.
+            회원님의 소중한 정보를 보호하기 위해 비밀번호를 암호화하여
+            관리합니다.
             <br />
             새로운 비밀번호를 입력하여 주시기 바랍니다.
           </p>

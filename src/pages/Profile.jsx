@@ -1,28 +1,57 @@
-import React, { useState, useEffect } from 'react';
-import style from '../css/Profile.module.css';
-import InfoModal from '../components/modal/InfoModal';
-import InfoUpModal from '../components/modal/InfoUpModal';
-import PwUpModal from '../components/modal/PwUpModal';
-import WithdrawalModal from '../components/modal/WithdrawalModal';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import style from "../css/Profile.module.css";
+import InfoModal from "../components/modal/InfoModal";
+import InfoUpModal from "../components/modal/InfoUpModal";
+import PwUpModal from "../components/modal/PwUpModal";
+import WithdrawalModal from "../components/modal/WithdrawalModal";
 
 const Profile = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [modalType, setModalType] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const user = useSelector((state) => state.user.userInfo);
+
+  const maskString = (str) => {
+    if (str.length <= 1) return str;
+    const visibleLength = 2; // 표시할 문자 수
+    const maskedLength = str.length - visibleLength;
+    return str.substring(0, visibleLength) + "*".repeat(maskedLength);
+  };
 
   useEffect(() => {
-    const storedUserInfo = localStorage.getItem('userInfo');
-    if (storedUserInfo) {
-      setUserInfo(JSON.parse(storedUserInfo));
-    }
-  }, []);
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/user/info`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user }),
+        });
 
-  const openModal = (e) => {
-    e.preventDefault();
-    setIsOpenModal(true);
+        if (response.ok) {
+          const data = await response.json();
+          setUserInfo(data);
+        } else {
+          console.error("Failed to fetch user info");
+        }
+      } catch (err) {
+        console.error("Error fetching user info", err);
+      }
+    };
+
+    if (user) {
+      fetchUserInfo();
+    }
+  }, [user]);
+
+  const openModal = (type, e) => {
+    setModalType(type);
   };
 
   const closeModal = () => {
-    setIsOpenModal(false);
+    setModalType(null);
   };
 
   return (
@@ -34,7 +63,7 @@ const Profile = () => {
             <nav className={style.navCon}>
               <ol>
                 <li>
-                  <a href="">마이홈</a>
+                  <Link to="/mypage">마이홈</Link>
                 </li>
                 <li>나의 정보관리</li>
               </ol>
@@ -47,25 +76,25 @@ const Profile = () => {
                 <li className={style.info1}>
                   <div>
                     <img
-                      src={userInfo.properties.profile_image}
+                      src={`http://localhost:8000${userInfo.thumbnail}`}
                       alt="프로필 사진"
                     />
                   </div>
                 </li>
                 <li>
                   <div>아이디</div>
-                  <div>{userInfo.id}</div>
+                  <div>{maskString(userInfo.id)}</div>
                 </li>
                 <li>
                   <div>닉네임</div>
-                  <div>{userInfo.properties.nickname}</div>
+                  <div>{maskString(userInfo.nick)}</div>
                 </li>
               </ul>
             ) : (
               <p>사용자 정보를 불러오는 중입니다...</p>
             )}
             <div className={style.areaBtn}>
-              <button onClick={openModal}>수정하기</button>
+              <button onClick={() => openModal("info")}>수정하기</button>
             </div>
           </section>
           <section className={style.sec}>
@@ -76,17 +105,28 @@ const Profile = () => {
               <p className={style.pw}>********</p>
             </div>
             <div className={style.areaBtn}>
-              <button>수정하기</button>
+              <button onClick={() => openModal("password")}>수정하기</button>
             </div>
           </section>
           <div className={style.subCon2}>
-            <button className={style.linkBtn}>회원 탈퇴하기</button>
+            <button
+              className={style.linkBtn}
+              onClick={() => openModal("withdrawal")}
+            >
+              회원 탈퇴하기
+            </button>
           </div>
         </main>
       </div>
-      {/* {isOpenModal && <InfoModal onClose={closeModal} />} */}
-      {/* {isOpenModal && <InfoUpModal onClose={closeModal} />} */}
-      {isOpenModal && <WithdrawalModal onClose={closeModal} />}
+      {modalType === "info" && (
+        <InfoModal
+          onClose={closeModal}
+          onPwCheck={() => openModal("infoUpdate")}
+        />
+      )}
+      {modalType === "infoUpdate" && <InfoUpModal onClose={closeModal} />}
+      {modalType === "password" && <PwUpModal onClose={closeModal} />}
+      {modalType === "withdrawal" && <WithdrawalModal onClose={closeModal} />}
     </div>
   );
 };

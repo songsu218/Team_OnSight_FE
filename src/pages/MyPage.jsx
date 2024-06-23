@@ -1,11 +1,10 @@
-import style from "../css/MyPage.module.css";
 import styleHd from "../css/MyPageHd.module.css";
 import styleInfo from "../css/MyPageInfo.module.css";
 import MyPageList1 from "../components/MyPageList1";
 import MyPageList2 from "../components/MyPageList2";
 import MyPageList3 from "../components/MyPageList3";
 import { useSelector } from "react-redux";
-import { useNavigate, NavLink, Routes, Route } from "react-router-dom";
+import { useNavigate, NavLink, Link, Routes, Route } from "react-router-dom";
 import { useEffect } from "react";
 
 const MyPage = () => {
@@ -65,7 +64,7 @@ const MyPage = () => {
               <span>
                 <i>{user ? user.nick : "null"}</i> 님,
               </span>{" "}
-              반갑습니다! <a href="/Profile">나의 정보관리</a>
+              반갑습니다! <Link to="/Profile">나의 정보관리</Link>
             </p>
           </div>
         </div>

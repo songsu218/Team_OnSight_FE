@@ -15,14 +15,12 @@ const List = ({ items, itemType }) => {
   };
 
   useEffect(() => {
-    setCurrentItems(items.slice(0, itemsPerPage)); // 첫 페이지 아이템 설정
-  }, [items]);
-
-  useEffect(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    const endIndex = startIndex + itemsPerPage;
-    setCurrentItems(items.slice(startIndex, endIndex));
-  }, [currentPage, totalPages]);
+    if (items.length > 0) {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setCurrentItems(items.slice(startIndex, endIndex));
+    }
+  }, [currentPage, items]);
 
   useEffect(() => {
     if (currentPage > totalPages) {
@@ -30,23 +28,38 @@ const List = ({ items, itemType }) => {
     }
   }, [currentPage, totalPages]);
 
+  useEffect(() => {
+    if (items.length > 0) {
+      setCurrentPage(1); // items가 변경될 때 첫 페이지로 리셋
+    }
+  }, [items]);
+
   return (
     <div>
       <div className={`${style.listData1} ${style.ssw1}`}>
         <ul>
-          {currentItems.map((item, index) => (
-            <li key={index}>
-              <ListCard
-                title={
-                  itemType === "challenge" ? item.challengename : item.title
-                }
-                center={item.center}
-                date={item.date}
-                thumbnail={item.thumbnail}
-                itemType={itemType}
-              />
-            </li>
-          ))}
+          {currentItems.length > 0 ? (
+            currentItems.map((item, index) => (
+              <li key={index}>
+                <ListCard
+                  title={
+                    itemType === "challenge" ? item.challengename : item.title
+                  }
+                  center={item.center}
+                  date={item.date}
+                  thumbnail={item.thumbnail}
+                  itemType={itemType}
+                />
+              </li>
+            ))
+          ) : (
+            <p className={style.p}>
+              {" "}
+              {itemType === "challenge"
+                ? "참여한 챌린저가 없습니다."
+                : "기록한 기록이 없습니다."}
+            </p>
+          )}
         </ul>
       </div>
       <div>

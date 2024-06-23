@@ -1,6 +1,3 @@
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
 import style from "../css/MyPageList1.module.css";
 import List from "./list/List";
 import { useEffect, useState } from "react";
@@ -35,7 +32,7 @@ const MyPageList1 = () => {
     if (user) {
       fetchChallenges();
     }
-  }, []);
+  }, [user]);
 
   return (
     <section className={style.sec}>

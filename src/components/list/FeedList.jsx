@@ -1,45 +1,88 @@
-import style from '../../css/FeedList.module.css';
+import { useState, useEffect } from "react";
+import ListPagnation from "./ListPagnation";
+import style from "../../css/FeedList.module.css";
+const formatDate = (date) => {
+  const options = {
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  };
+  let formattedDate = new Intl.DateTimeFormat("ko-KR", options).format(
+    new Date(date)
+  );
+  formattedDate = formattedDate.replace(/\./g, ".");
+  if (formattedDate.endsWith(".")) {
+    formattedDate = formattedDate.slice(0, -1);
+  }
+  return formattedDate;
+};
 
-const FeedList = () => {
+const FeedList = ({ items }) => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentItems, setCurrentItems] = useState([]);
+  const itemsPerPage = 5;
+
+  const totalPages = Math.ceil(items.length / itemsPerPage);
+
+  const handlePageChange = (page) => {
+    setCurrentPage(page);
+  };
+
+  useEffect(() => {
+    if (items.length > 0) {
+      const startIndex = (currentPage - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+      setCurrentItems(items.slice(startIndex, endIndex));
+    }
+  }, [currentPage, items]);
+
+  useEffect(() => {
+    if (currentPage > totalPages) {
+      setCurrentPage(totalPages);
+    }
+  }, [currentPage, totalPages]);
+
+  useEffect(() => {
+    if (items.length > 0) {
+      setCurrentPage(1); // items가 변경될 때 첫 페이지로 리셋
+    }
+  }, [items]);
+
   return (
-    <div className={style.listData2}>
-      <p className={style.label}>
-        <span className={style.lbListNo}>번호</span>
-        <span className={style.lbListCrew}>크루</span>
-        <span className={style.lbListTitle}>제목</span>
-        <span className={style.lbListDate}>등록일</span>
-        <span className={style.lbListCnt}>조회수</span>
-      </p>
-      <ul>
-        <li>
-          <div id="listNo"></div>
-          <span className={style.listNo}>1</span>
-          <div id="listCrew"></div>
-          <span className={style.listCrew}>크루크루크루크루크루</span>
-          <div id="listTitle"></div>
-          <span className={style.listTitle}>
-            슈퍼노바슈퍼노바슈퍼노바슈퍼노바슈퍼노바슈퍼노바슈퍼노바
-          </span>
-          <div id="listDate"></div>
-          <span className={style.listDate}>2024.06.19</span>
-          <div id="listCnt"></div>
-          <span className={style.listCnt}>105</span>
-        </li>
-        <li>
-          <div id="listNo"></div>
-          <span className={style.listNo}>1</span>
-          <div id="listCrew"></div>
-          <span className={style.listCrew}>크루크루크루크루크루</span>
-          <div id="listTitle"></div>
-          <span className={style.listTitle}>
-            슈퍼노바슈퍼노바슈퍼노바슈퍼노바슈퍼노바슈퍼노바슈퍼노바
-          </span>
-          <div id="listDate"></div>
-          <span className={style.listDate}>2024.06.19</span>
-          <div id="listCnt"></div>
-          <span className={style.listCnt}>105</span>
-        </li>
-      </ul>
+    <div>
+      <div className={style.listData2}>
+        <p className={style.label}>
+          <span className={style.lbListNo}>번호</span>
+          <span className={style.lbListCrew}>크루</span>
+          <span className={style.lbListTitle}>제목</span>
+          <span className={style.lbListDate}>등록일</span>
+          <span className={style.lbListCnt}>조회수</span>
+        </p>
+        <ul>
+          {currentItems.length > 0 ? (
+            currentItems.map((item, index) => (
+              <li key={index}>
+                <span className={style.listNo}>
+                  {index + 1 + (currentPage - 1) * itemsPerPage}
+                </span>
+                <span className={style.listCrew}>{item.crewName}</span>
+                <span className={style.listTitle}>{item.title}</span>
+                <span className={style.listDate}>{formatDate(item.date)}</span>
+                <span className={style.listCnt}>{item.views}</span>
+              </li>
+            ))
+          ) : (
+            <p className={style.p}> 참여한 챌린저가 없습니다.</p>
+          )}
+        </ul>
+      </div>
+      <div>
+        <ListPagnation
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
+      </div>
     </div>
   );
 };
