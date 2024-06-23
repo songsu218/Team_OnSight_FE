@@ -3,11 +3,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { ch } from "../api.js";
-// import "swiper/css";
+import "swiper/css";
 // import "swiper/css/pagination";
-import style from "../css/challenge.module.css";
-// import ChallengeModal from "../components/challenge/ChallengeModal";
 // import 'swiper/css/navigation';
+import style from "../css/challenge.module.css";
+import ChallengeModal from "../components/modal/ChallengeModal";
+
 const Challenge = (props) => {
   //#region 변수,Hook
   const { props1, props2 } = {
@@ -31,15 +32,12 @@ const Challenge = (props) => {
   const [isNarrowScreen, setIsNarrowScreen] = useState(
     window.innerWidth <= 1079
   );
+  const [showModal, setShowModal] = useState(false);
 
-  // console.log(
-  //   totalSlides - slidesPerViewCount + 1 > 0
-  //     ? totalSlides - slidesPerViewCount + 1
-  //     : 1
-  // );
-  // console.log(totalSlides);
-  // console.log(slidesPerViewCount);
   //#endregion 변수,Hook
+  const closeModal = () => {
+    setShowModal(false);
+  };
   const handleAutoplayToggle = () => {
     if (swiper) {
       if (isAutoplay) {
@@ -173,6 +171,7 @@ const Challenge = (props) => {
       setMyChData(type, "qwer1234");
     } else if (index === 2) {
       // setShowModal(true); //나의 챌린지 만들기
+      setShowModal(true);
     }
   };
   //#endregion 함수
@@ -213,9 +212,10 @@ const Challenge = (props) => {
                       className={style.page_link}
                       onClick={(event) => handleClick(2, event)}
                       title="나의 챌린지 만들기 페이지 이동 링크"
-                    >
+                      >
                       나의 챌린지 만들기
                     </a>
+                      {showModal && <ChallengeModal onClose={closeModal} />}
                     {/* <ChallengeModal /> */}
                   </li>
                 </ul>
