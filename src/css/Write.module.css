@@ -1,9 +1,9 @@
 /* 재목설정 */
-.page_tit_area {
-  /* display: flex; */
+/* .page_tit_area {
+  display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin: 0 0 56px; */
+  margin: 0 0 56px;
 }
 
 .page_tit {
@@ -11,7 +11,7 @@
   font-size: 56px;
   line-height: 68px;
   font-weight: 800;
-}
+} */
 
 /* 피드작성페이지 */
 .writeCon {
