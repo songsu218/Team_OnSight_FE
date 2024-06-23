@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
-import style from "../css/Header.module.css";
-import { Link, useLocation } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { clearUserAllInfo, setUserAllInfo } from "../store/userStore";
+import { useEffect, useState } from 'react';
+import style from '../css/Header.module.css';
+import { Link, useLocation } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUserAllInfo, setUserAllInfo } from '../store/userStore';
 
 const Header = () => {
   const [hoverImg, setHoverImg] = useState({
@@ -20,7 +20,7 @@ const Header = () => {
     const fetchProfile = async () => {
       try {
         const response = await fetch(`http://localhost:8000/user/profile`, {
-          credentials: "include",
+          credentials: 'include',
         });
         if (response.ok) {
           const userInfo = await response.json();
@@ -29,13 +29,13 @@ const Header = () => {
           dispatch(clearUserAllInfo());
         }
       } catch (error) {
-        console.error("error", error);
+        console.error('error', error);
         dispatch(clearUserAllInfo());
       }
     };
 
-    const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-      const [key, value] = cookie.trim().split("=");
+    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+      const [key, value] = cookie.trim().split('=');
       acc[key] = value;
       return acc;
     }, []);
@@ -56,16 +56,16 @@ const Header = () => {
     e.preventDefault();
     try {
       const response = await fetch(`http://localhost:8000/user/logout`, {
-        method: "POST",
-        credentials: "include",
+        method: 'POST',
+        credentials: 'include',
       });
       if (response.ok) {
         dispatch(setUserAllInfo(null));
       } else {
-        console.error("fail", response.statusText);
+        console.error('fail', response.statusText);
       }
     } catch (error) {
-      console.error("error", error);
+      console.error('error', error);
     }
   };
 
@@ -91,34 +91,34 @@ const Header = () => {
           <div className={style.holdBar}>
             <Link
               to="/SearchPage"
-              onMouseEnter={() => MouseHover("link1")}
-              onMouseLeave={() => MouseLeave("link1")}
+              onMouseEnter={() => MouseHover('link1')}
+              onMouseLeave={() => MouseLeave('link1')}
             >
               <img
-                src={hoverImg.link1 ? "/img/eholdr.png" : "/img/holdr.png"}
+                src={hoverImg.link1 ? '/img/eholdr.png' : '/img/holdr.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link1 ? "#FF454A" : "#FFFFFF" }}>
+              <span style={{ color: hoverImg.link1 ? '#FF454A' : '#FFFFFF' }}>
                 암장찾기
               </span>
             </Link>
             <Link
               to="/crew"
-              onMouseEnter={() => MouseHover("link2")}
-              onMouseLeave={() => MouseLeave("link2")}
+              onMouseEnter={() => MouseHover('link2')}
+              onMouseLeave={() => MouseLeave('link2')}
             >
               <img
-                src={hoverImg.link2 ? "/img/eholdb.png" : "/img/holdb.png"}
+                src={hoverImg.link2 ? '/img/eholdb.png' : '/img/holdb.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link2 ? "#0295CF" : "#FFFFFF" }}>
+              <span style={{ color: hoverImg.link2 ? '#0295CF' : '#FFFFFF' }}>
                 크루
               </span>
             </Link>
             <Link
               to="/challenge"
-              onMouseEnter={() => MouseHover("link3")}
-              onMouseLeave={() => MouseLeave("link3")}
+              onMouseEnter={() => MouseHover('link3')}
+              onMouseLeave={() => MouseLeave('link3')}
             >
               <img
                 src={hoverImg.link3 ? '/img/eholdy.png' : '/img/holdy.png'}
@@ -161,8 +161,10 @@ const Header = () => {
         {username ? (
           <Link to="/" onClick={signout}>
             <i className="fa-solid fa-sign-out-alt"></i>
-            <span>{nickname}님</span>
-            <span>로그아웃</span>
+            <div className={style.nickBox}>
+              <span>{nickname}님</span>
+              <span>로그아웃</span>
+            </div>
           </Link>
         ) : (
           <Link to="/signinpage">
