@@ -5,33 +5,33 @@ import { useSelector } from "react-redux";
 const InfoUpModal = ({ onClose }) => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const [nickname, setNickname] = useState(userInfo.nick);
-  const [profileImage, setProfileImage] = useState(userInfo.thumbnail);
-  const [preImg, setPreImg] = useState(null);
   const [imgUrl, setImgUrl] = useState(
     `http://localhost:8000${userInfo.thumbnail}`
   );
+  const [preImg, setPreImg] = useState(null);
+
+  const formData = new FormData();
+  formData.append("id", userInfo.id);
+  formData.append("nick", nickname);
+  if (preImg) {
+    formData.append("thumbnail", preImg);
+  }
 
   const userPwCheck = async () => {
     try {
       const response = await fetch(`http://localhost:8000/user/infoUpdate`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          userId: userInfo.id,
-          updatedInfo: { nickname, profileImage },
-        }),
+        body: formData,
       });
 
       const data = await response.json();
       if (response.ok && data) {
         onClose();
       } else {
-        console.error("Failed to fetch challenges");
+        console.error("Failed to fetch info update");
       }
     } catch (err) {
-      console.error("Error fetching challenges", err);
+      console.error("Error fetching info update", err);
     }
   };
 
@@ -47,6 +47,11 @@ const InfoUpModal = ({ onClose }) => {
       setImgUrl(null);
     }
   };
+
+  useEffect(() => {
+    // 초기 이미지 미리보기 설정
+    setImgUrl(`http://localhost:8000${userInfo.thumbnail}`);
+  }, [userInfo]);
 
   return (
     <div className={style.popModal}>
@@ -69,7 +74,6 @@ const InfoUpModal = ({ onClose }) => {
               <dl className={style.form}>
                 {imgUrl && (
                   <div>
-                    {/* <h2>이미지 미리보기:</h2> */}
                     <img
                       src={imgUrl}
                       alt="Preview"

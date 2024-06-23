@@ -5,22 +5,23 @@
   line-height: 1.38;
 }
 
-.infoCon p {
+.infoCon .tit {
   position: relative;
   font-weight: 800;
   font-size: 28px;
   line-height: 33px;
 }
 
-.infoCon p::before {
-  content: '';
+.infoCon .tit::before {
+  content: "";
   position: absolute;
   display: block;
   width: 80px;
   height: 80px;
-  background: url(../../public/img/test.jpg);
+  background: var(--thumbnail-url);
   background-size: cover;
   border-radius: 50%;
+  top: 1.5rem;
 }
 
 .tit {
@@ -59,7 +60,7 @@
 }
 
 .infoCon a::after {
-  content: '';
+  content: "";
   display: inline-block;
   position: absolute;
   vertical-align: top;
@@ -78,7 +79,7 @@
     margin: 0 0 40px;
   }
 
-  .infoCon p {
+  .infoCon .tit {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -86,7 +87,8 @@
     padding-right: 120px;
   }
 
-  .infoCon p::before {
+  .infoCon .tit::before {
+    top: 0.5rem;
     right: 0;
     margin: -1rem 0 0;
   }

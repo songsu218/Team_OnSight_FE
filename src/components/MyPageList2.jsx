@@ -5,11 +5,6 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 const MyPageList2 = () => {
-  const [isModalOpen, setModalOpen] = useState(false);
-
-  const openModal = () => setModalOpen(true);
-  const closeModal = () => setModalOpen(false);
-
   const [recodes, setRecodes] = useState([]);
   const user = useSelector((state) => state.user.userInfo);
 
@@ -47,12 +42,11 @@ const MyPageList2 = () => {
           <span>내</span>
           <span>기록</span>
         </h3>
-        <button className={style.btn} onClick={openModal}>
-          기록추가
+        <button className={style.btn}>
+          <RecordModal />
         </button>
       </div>
       <List items={recodes} itemType="recode" />
-      {isModalOpen && <RecordModal closeModal={closeModal} />}
     </section>
   );
 };
