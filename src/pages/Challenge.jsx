@@ -216,6 +216,7 @@ const Challenge = (props) => {
                     >
                       나의 챌린지 만들기
                     </a>
+                    {/* <ChallengeModal /> */}
                   </li>
                 </ul>
               </nav>
