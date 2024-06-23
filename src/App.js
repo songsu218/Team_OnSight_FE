@@ -13,7 +13,6 @@ import Challenge from "./pages/Challenge";
 import ChallengeDetail from "./pages/ChallengeDetail";
 import CreateCrew from "./pages/CreateCrew";
 import CrewDetail from "./pages/CrewDetail";
-import Write from "./pages/Write";
 import Profile from "./pages/Profile";
 import Ranking from "./pages/Ranking";
 import FeedDetail from "./pages/FeedDetail";
@@ -32,7 +31,6 @@ function App() {
         <Route path="/crew" element={<Crew />} />
         <Route path="/createCrew" element={<CreateCrew />} />
         <Route path="/crewdetail/*" element={<CrewDetail />} />
-        <Route path="/write" element={<Write />} />
         <Route path="/challenge" element={<Challenge />} />
         <Route
           path="/challenge/:challenge_id/:challenge_name"
