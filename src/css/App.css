@@ -1,11 +1,23 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: 'S-CoreDream-3Light';
-  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
-    format('woff');
+  font-family: "S-CoreDream-3Light";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
+}
+
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+:root {
+  font-family: "NanumSquareRound";
 }
 
 .App {
@@ -49,7 +61,7 @@ body {
   }
 
   .con2 {
-    padding: 0 0 135px 210px ;
+    padding: 0 0 135px 210px;
   }
 }
 
@@ -62,6 +74,12 @@ body {
 .viewCon {
   width: calc(100% - 210px);
   margin-left: auto;
+}
+
+@media (max-width: 1400px) {
+  .viewCon {
+    width: 100%;
+  }
 }
 
 /* .mw {
