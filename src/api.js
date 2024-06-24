@@ -38,7 +38,7 @@ const ch = {
    * @returns  챌린지목록
    */
   chEnter: (challengename, members) => {
-    return instance.get("/challenge/challengeEnter", {
+    return instance.post("/challenge/challegeEnter", {
       challengename: challengename,
       members: members,
     });

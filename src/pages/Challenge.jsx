@@ -1,13 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
-import { useNavigate } from 'react-router-dom';
-import { ch } from '../api.js';
-// import "swiper/css";
+import React, { useEffect, useRef, useState } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { useNavigate } from "react-router-dom";
+import { ch } from "../api.js";
+import "swiper/css";
 // import "swiper/css/pagination";
-import style from '../css/challenge.module.css';
-// import ChallengeModal from "../components/challenge/ChallengeModal";
 // import 'swiper/css/navigation';
+import style from "../css/challenge.module.css";
+import ChallengeModal from "../components/modal/ChallengeModal";
+
 const Challenge = (props) => {
   //#region 변수,Hook
   const { props1, props2 } = {
@@ -24,22 +25,19 @@ const Challenge = (props) => {
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [totalSlides, setTotalSlides] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState("");
   const [printData, setPrintData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerViewCount, setSlidesPerViewCount] = useState(4);
   const [isNarrowScreen, setIsNarrowScreen] = useState(
     window.innerWidth <= 1079
   );
+  const [showModal, setShowModal] = useState(false);
 
-  // console.log(
-  //   totalSlides - slidesPerViewCount + 1 > 0
-  //     ? totalSlides - slidesPerViewCount + 1
-  //     : 1
-  // );
-  // console.log(totalSlides);
-  // console.log(slidesPerViewCount);
   //#endregion 변수,Hook
+  const closeModal = () => {
+    setShowModal(false);
+  };
   const handleAutoplayToggle = () => {
     if (swiper) {
       if (isAutoplay) {
@@ -49,24 +47,16 @@ const Challenge = (props) => {
       }
       setIsAutoplay(!isAutoplay);
     } else {
-      console.error('Swiper가 초기화되지 않았습니다.');
+      console.error("Swiper가 초기화되지 않았습니다.");
     }
   };
 
-  console.log(
-    totalSlides - slidesPerViewCount + 1 > 0
-      ? totalSlides - slidesPerViewCount + 1
-      : 1
-  );
-  console.log(totalSlides);
-  console.log(slidesPerViewCount);
-
   //#region init
   useEffect(() => {
-    setAllChData('TOT');
-    window.addEventListener('resize', handleResize);
+    setAllChData("TOT");
+    window.addEventListener("resize", handleResize);
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
@@ -88,8 +78,10 @@ const Challenge = (props) => {
     ch.chTotalList(tag)
       .then((result) => {
         setDataList(result.data);
-        setNowList(result.data.filter((item) => item.state === 'NOW'));
-        setPastList(result.data.filter((item) => item.state === 'PAST'));
+        // setNowList(result.data.filter((item) => item.state === "NOW"));
+        // setPastList(result.data.filter((item) => item.state === "PAST"));
+        setNowList(result.data.filter((item) => item.state === true));
+        setPastList(result.data.filter((item) => item.state === false));
         setPrintData(result.data);
         console.log(result.data);
       })
@@ -102,8 +94,10 @@ const Challenge = (props) => {
     ch.chMyList(tag, id)
       .then((result) => {
         setDataList(result.data);
-        setNowList(result.data.filter((item) => item.state === 'NOW'));
-        setPastList(result.data.filter((item) => item.state === 'PAST'));
+        // setNowList(result.data.filter((item) => item.state === "NOW"));
+        // setPastList(result.data.filter((item) => item.state === "PAST"));
+        setNowList(result.data.filter((item) => item.state === true));
+        setPastList(result.data.filter((item) => item.state === false));
         setPrintData(result.data);
         console.log(result.data);
       })
@@ -115,19 +109,19 @@ const Challenge = (props) => {
   const handleSelectChange = (event) => {
     const target = event.target.value;
     const instance =
-      target == '선택'
+      target == "선택"
         ? dataList
         : target == 1
         ? nowList
         : target == 2
         ? pastList
-        : '';
+        : "";
     setSelectedOption(target);
     setPrintData(instance);
     setTotalSlides(instance.length);
   };
   const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty('--progress', 1 - progress);
+    progressCircle.current.style.setProperty("--progress", 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
   const goNext = () => {
@@ -164,15 +158,16 @@ const Challenge = (props) => {
   const handleClick = (index, event) => {
     event.preventDefault();
     setActiveIndex(index);
-    const type = selectedOption == '선택' ? 'TOT' : selectedOption;
+    const type = selectedOption == "선택" ? "TOT" : selectedOption;
     if (index === 0) {
       //챌린지 일정
       setAllChData(type);
     } else if (index === 1) {
       //나의 챌린지 보기
-      setMyChData(type, 'qwer1234');
+      setMyChData(type, "qwer1234");
     } else if (index === 2) {
       // setShowModal(true); //나의 챌린지 만들기
+      setShowModal(true);
     }
   };
   //#endregion 함수
@@ -187,7 +182,7 @@ const Challenge = (props) => {
               <h2 className={style.page_tit}>챌린지 일정</h2>
               <nav className={style.page_nav}>
                 <ul>
-                  <li className={activeIndex === 0 ? style.active : ''}>
+                  <li className={activeIndex === 0 ? style.active : ""}>
                     <a
                       href="#"
                       className={style.page_link}
@@ -197,7 +192,7 @@ const Challenge = (props) => {
                       챌린지 일정
                     </a>
                   </li>
-                  <li className={activeIndex === 1 ? style.active : ''}>
+                  <li className={activeIndex === 1 ? style.active : ""}>
                     <a
                       href="#"
                       className={`${style.page_link}`}
@@ -207,15 +202,16 @@ const Challenge = (props) => {
                       나의 챌린지 보기
                     </a>
                   </li>
-                  <li className={activeIndex === 2 ? style.active : ''}>
+                  <li className={activeIndex === 2 ? style.active : ""}>
                     <a
                       href="#"
                       className={style.page_link}
                       onClick={(event) => handleClick(2, event)}
                       title="나의 챌린지 만들기 페이지 이동 링크"
-                    >
+                      >
                       나의 챌린지 만들기
                     </a>
+                      {showModal && <ChallengeModal onClose={closeModal} />}
                     {/* <ChallengeModal /> */}
                   </li>
                 </ul>
@@ -253,7 +249,7 @@ const Challenge = (props) => {
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
               >
                 {printData.length == 0
-                  ? ''
+                  ? ""
                   : printData.map((item) => (
                       <SwiperSlide
                         key={item._id}
@@ -286,7 +282,7 @@ const Challenge = (props) => {
                 <div className={style.control}>
                   <div className={style.swiper_button_prev} onClick={goPrev} />
                   <div className={style.swiper_pagination}>
-                    {currentIndex} /{' '}
+                    {currentIndex} /{" "}
                     {totalSlides - slidesPerViewCount + 1 > 0
                       ? totalSlides - slidesPerViewCount + 1
                       : 1}
@@ -300,10 +296,10 @@ const Challenge = (props) => {
                       className={`${style.control_btn} ${
                         isAutoplay ? style.btn_stop : style.btn_play
                       }`}
-                      title={isAutoplay ? '정지 버튼' : '재생 버튼'}
+                      title={isAutoplay ? "정지 버튼" : "재생 버튼"}
                       onClick={handleAutoplayToggle}
                     >
-                      {isAutoplay ? '자동재생 정지 버튼' : '재생 버튼'}
+                      {isAutoplay ? "자동재생 정지 버튼" : "재생 버튼"}
                     </button>
                     <span ref={progressContent}></span>
                   </div>

@@ -18,6 +18,18 @@ const MyPage = () => {
     }
   }, [user, navigate]);
 
+  useEffect(() => {
+    if (user) {
+      const imgBox = document.querySelector(`.${styleInfo.tit}`);
+      if (imgBox) {
+        imgBox.style.setProperty(
+          "--thumbnail-url",
+          `url(http://localhost:8000${user.thumbnail})`
+        );
+      }
+    }
+  }, [user]);
+
   return (
     <div className={`con1`}>
       <main className={`mw`}>

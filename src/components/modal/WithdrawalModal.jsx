@@ -1,6 +1,46 @@
-import style from '../../css/Withdrawal.module.css';
+import style from "../../css/Withdrawal.module.css";
+import { useState, useRef } from "react";
+import { useSelector } from "react-redux";
 
-const WithdrawalModal = ({ onClose }) => {
+const WithdrawalModal = ({ onClose, onWithdrawSuccess }) => {
+  const user = useSelector((state) => state.user.userInfo);
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
+  const passwordRef = useRef(null);
+
+  const withdrawal = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/user/withdrawal", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          user,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("회원 탈퇴가 성공적으로 완료되었습니다.");
+        onClose();
+        onWithdrawSuccess();
+      } else {
+        alert(data.message || "회원 탈퇴에 실패했습니다.");
+      }
+    } catch (err) {
+      alert("서버 에러가 발생했습니다.");
+    }
+  };
+
+  const toggleVisibility = (setter, ref) => {
+    setter((prev) => !prev);
+    ref.current.type = ref.current.type === "password" ? "text" : "password";
+  };
+
   return (
     <div className={style.popModal}>
       <section>
@@ -33,6 +73,7 @@ const WithdrawalModal = ({ onClose }) => {
                       title="아이디"
                       disabled="disabled"
                       className={style.inputTxt}
+                      value={user.id}
                     />
                   </div>
                 </dd>
@@ -47,16 +88,18 @@ const WithdrawalModal = ({ onClose }) => {
                       placeholder="비밀번호 입력"
                       id="Password"
                       className={style.inputTxt}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      ref={passwordRef}
                     />
                     <button
-                      className={`${style.btnIcon} ${style.ic1}`}
-                      // data-mode="hidden"
-                      data-mode="visible"
-                    ></button>
-                    <button
-                      className={`${style.btnIcon} ${style.ic2}`}
-                      data-mode="hidden"
-                      // data-mode="visible"
+                      type="button"
+                      className={`${style.btnIcon} ${
+                        showPassword ? style.ic2 : style.ic1
+                      }`}
+                      onClick={() =>
+                        toggleVisibility(setShowPassword, passwordRef)
+                      }
                     ></button>
                   </div>
                 </dd>
@@ -64,10 +107,10 @@ const WithdrawalModal = ({ onClose }) => {
             </fieldset>
           </div>
           <div className={style.actionBox}>
-            <button type="button" data-btn="pop-close" className={style.btnSub}>
+            <button type="button" className={style.btnSub} onClick={onClose}>
               취소
             </button>
-            <button type="button" className={style.btnSub}>
+            <button type="button" className={style.btnSub} onClick={withdrawal}>
               탈퇴
             </button>
           </div>
