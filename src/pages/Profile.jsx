@@ -1,20 +1,77 @@
-import { useState } from 'react';
-import style from '../css/Profile.module.css';
-import InfoModal from '../components/modal/InfoModal';
-import InfoUpModal from '../components/modal/InfoUpModal';
-import PwUpModal from '../components/modal/PwUpModal';
-import WithdrawalModal from '../components/modal/WithdrawalModal';
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { clearUserAllInfo } from "../store/userStore";
+import style from "../css/Profile.module.css";
+import InfoModal from "../components/modal/InfoModal";
+import InfoUpModal from "../components/modal/InfoUpModal";
+import PwUpModal from "../components/modal/PwUpModal";
+import WithdrawalModal from "../components/modal/WithdrawalModal";
 
 const Profile = () => {
-  const [isOpenModal, setIsOpenModal] = useState(false);
+  const [modalType, setModalType] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.user.userInfo);
 
-  const openModal = (e) => {
-    e.preventDefault();
-    setIsOpenModal(true);
+  const logout = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/user/logout", {
+        method: "POST",
+        credentials: "include",
+      });
+      dispatch(clearUserAllInfo());
+    } catch (err) {
+      console.error("로그아웃 실패:", err);
+    }
+  };
+
+  const handleWithdrawSuccess = async () => {
+    await logout();
+    navigate("/");
+  };
+
+  const maskString = (str) => {
+    if (str.length <= 1) return str;
+    const visibleLength = 2; // 표시할 문자 수
+    const maskedLength = str.length - visibleLength;
+    return str.substring(0, visibleLength) + "*".repeat(maskedLength);
+  };
+
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/user/info`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setUserInfo(data);
+        } else {
+          console.error("Failed to fetch user info");
+        }
+      } catch (err) {
+        console.error("Error fetching user info", err);
+      }
+    };
+
+    if (user) {
+      fetchUserInfo();
+    }
+  }, [user]);
+
+  const openModal = (type, e) => {
+    setModalType(type);
   };
 
   const closeModal = () => {
-    setIsOpenModal(false);
+    setModalType(null);
   };
 
   return (
@@ -26,7 +83,7 @@ const Profile = () => {
             <nav className={style.navCon}>
               <ol>
                 <li>
-                  <a href="">마이홈</a>
+                  <Link to="/mypage">마이홈</Link>
                 </li>
                 <li>나의 정보관리</li>
               </ol>
@@ -34,42 +91,67 @@ const Profile = () => {
           </section>
           <section className={style.sec}>
             <h3 className={style.titSub1}>기본정보</h3>
-            <ul className={style.area}>
-              <li className={style.info1}>
-                <div>
-                  <img src="/img/test.jpg" alt="" />
-                </div>
-              </li>
-              <li>
-                <div>아이디</div>
-                <div>asane*</div>
-              </li>
-              <li>
-                <div>닉네임</div>
-                <div>류규*</div>
-              </li>
-            </ul>
+            {userInfo ? (
+              <ul className={style.area}>
+                <li className={style.info1}>
+                  <div>
+                    <img
+                      src={`http://localhost:8000${userInfo.thumbnail}`}
+                      alt="프로필 사진"
+                    />
+                  </div>
+                </li>
+                <li>
+                  <div>아이디</div>
+                  <div>{maskString(userInfo.id)}</div>
+                </li>
+                <li>
+                  <div>닉네임</div>
+                  <div>{maskString(userInfo.nick)}</div>
+                </li>
+              </ul>
+            ) : (
+              <p>사용자 정보를 불러오는 중입니다...</p>
+            )}
             <div className={style.areaBtn}>
-              <button onClick={openModal}>수정하기</button>
+              <button onClick={() => openModal("info")}>수정하기</button>
             </div>
           </section>
           <section className={style.sec}>
             <div className={`${style.tit} ${style.titPw}`}>
-              <h3 className={`${style.titSub1} ${style.titPwSub1}`}>비밀번호</h3>
+              <h3 className={`${style.titSub1} ${style.titPwSub1}`}>
+                비밀번호
+              </h3>
               <p className={style.pw}>********</p>
             </div>
             <div className={style.areaBtn}>
-              <button>수정하기</button>
+              <button onClick={() => openModal("password")}>수정하기</button>
             </div>
           </section>
           <div className={style.subCon2}>
-            <button className={style.linkBtn}>회원 탈퇴하기</button>
+            <button
+              className={style.linkBtn}
+              onClick={() => openModal("withdrawal")}
+            >
+              회원 탈퇴하기
+            </button>
           </div>
         </main>
       </div>
-      {/* {isOpenModal && <InfoModal onClose={closeModal} />} */}
-      {/* {isOpenModal && <InfoUpModal onClose={closeModal} />} */}
-      {isOpenModal && <WithdrawalModal onClose={closeModal} />}
+      {modalType === "info" && (
+        <InfoModal
+          onClose={closeModal}
+          onPwCheck={() => openModal("infoUpdate")}
+        />
+      )}
+      {modalType === "infoUpdate" && <InfoUpModal onClose={closeModal} />}
+      {modalType === "password" && <PwUpModal onClose={closeModal} />}
+      {modalType === "withdrawal" && (
+        <WithdrawalModal
+          onClose={closeModal}
+          onWithdrawSuccess={handleWithdrawSuccess}
+        />
+      )}
     </div>
   );
 };

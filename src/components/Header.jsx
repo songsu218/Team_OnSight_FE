@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import style from '../css/Header.module.css';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUserAllInfo } from '../store/userStore';
+import { clearUserAllInfo, setUserAllInfo } from '../store/userStore';
 
 const Header = () => {
   const [hoverImg, setHoverImg] = useState({
@@ -26,18 +26,29 @@ const Header = () => {
           const userInfo = await response.json();
           dispatch(setUserAllInfo(userInfo));
         } else {
-          dispatch(setUserAllInfo(null));
+          dispatch(clearUserAllInfo());
         }
       } catch (error) {
         console.error('error', error);
-        dispatch(setUserAllInfo(null));
+        dispatch(clearUserAllInfo());
       }
     };
-    fetchProfile();
-  }, [dispatch, location]);
 
-  const user = useSelector((state) => state.user.user);
-  console.log('유저 정보:', user);
+    const cookies = document.cookie.split(';').reduce((acc, cookie) => {
+      const [key, value] = cookie.trim().split('=');
+      acc[key] = value;
+      return acc;
+    }, []);
+
+    if (cookies.onSightToken) {
+      fetchProfile();
+    } else {
+      dispatch(clearUserAllInfo());
+    }
+  }, [dispatch, location.pathname]);
+
+  const user = useSelector((state) => state.user.userInfo);
+  // console.log("유저 정보:", user);
   const username = user ? user.id : null;
   const nickname = user ? user.nick : null;
 
@@ -79,7 +90,7 @@ const Header = () => {
         <nav>
           <div className={style.holdBar}>
             <Link
-              to="/search"
+              to="/SearchPage"
               onMouseEnter={() => MouseHover('link1')}
               onMouseLeave={() => MouseLeave('link1')}
             >
@@ -110,37 +121,37 @@ const Header = () => {
               onMouseLeave={() => MouseLeave('link3')}
             >
               <img
-                src={hoverImg.link3 ? '/img/eholdg.png' : '/img/holdg.png'}
+                src={hoverImg.link3 ? '/img/eholdy.png' : '/img/holdy.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link3 ? '#A2D262' : '#FFFFFF' }}>
+              <span style={{ color: hoverImg.link3 ? '#FFD02C' : '#FFFFFF' }}>
                 챌린지
               </span>
             </Link>
             <Link
-              to="/mypage"
+              to="/rank"
               onMouseEnter={() => MouseHover('link4')}
               onMouseLeave={() => MouseLeave('link4')}
             >
               <img
-                src={hoverImg.link4 ? '/img/eholdp.png' : '/img/holdp.png'}
+                src={hoverImg.link4 ? '/img/eholdg.png' : '/img/holdg.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link4 ? '#BE65FF' : '#FFFFFF' }}>
-                MY
+              <span style={{ color: hoverImg.link4 ? '#A2D262' : '#FFFFFF' }}>
+                랭킹
               </span>
             </Link>
             <Link
-              to="/rank"
+              to="/mypage"
               onMouseEnter={() => MouseHover('link5')}
               onMouseLeave={() => MouseLeave('link5')}
             >
               <img
-                src={hoverImg.link5 ? '/img/eholdr.png' : '/img/holdr.png'}
+                src={hoverImg.link5 ? '/img/eholdp.png' : '/img/holdp.png'}
                 alt=""
               />
-              <span style={{ color: hoverImg.link5 ? '#FF454A' : '#FFFFFF' }}>
-                랭킹
+              <span style={{ color: hoverImg.link5 ? '#BE65FF' : '#FFFFFF' }}>
+                MY
               </span>
             </Link>
           </div>
@@ -150,8 +161,10 @@ const Header = () => {
         {username ? (
           <Link to="/" onClick={signout}>
             <i className="fa-solid fa-sign-out-alt"></i>
-            <span>{nickname}님</span>
-            <span>로그아웃</span>
+            <div className={style.nickBox}>
+              <span>{nickname}님</span>
+              <span>로그아웃</span>
+            </div>
           </Link>
         ) : (
           <Link to="/signinpage">

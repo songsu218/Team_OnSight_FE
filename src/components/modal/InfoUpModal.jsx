@@ -1,9 +1,39 @@
-import { useState } from 'react';
-import style from '../../css/InfoUpModal.module.css';
+import { useEffect, useState } from "react";
+import style from "../../css/InfoUpModal.module.css";
+import { useSelector } from "react-redux";
 
 const InfoUpModal = ({ onClose }) => {
+  const userInfo = useSelector((state) => state.user.userInfo);
+  const [nickname, setNickname] = useState(userInfo.nick);
+  const [imgUrl, setImgUrl] = useState(
+    `http://localhost:8000${userInfo.thumbnail}`
+  );
   const [preImg, setPreImg] = useState(null);
-  const [imgUrl, setImgUrl] = useState(null);
+
+  const formData = new FormData();
+  formData.append("id", userInfo.id);
+  formData.append("nick", nickname);
+  if (preImg) {
+    formData.append("thumbnail", preImg);
+  }
+
+  const userPwCheck = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/user/infoUpdate`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const data = await response.json();
+      if (response.ok && data) {
+        onClose();
+      } else {
+        console.error("Failed to fetch info update");
+      }
+    } catch (err) {
+      console.error("Error fetching info update", err);
+    }
+  };
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -17,6 +47,11 @@ const InfoUpModal = ({ onClose }) => {
       setImgUrl(null);
     }
   };
+
+  useEffect(() => {
+    // 초기 이미지 미리보기 설정
+    setImgUrl(`http://localhost:8000${userInfo.thumbnail}`);
+  }, [userInfo]);
 
   return (
     <div className={style.popModal}>
@@ -36,62 +71,72 @@ const InfoUpModal = ({ onClose }) => {
           <div className={style.formBox}>
             <fieldset>
               <legend>기본정보 수정</legend>
-              <form
-                action="/user/profile/update"
-                autoComplete="off"
-                enctype="multipart/form-data"
-                id="formProfile"
-                method="post"
-              >
-                <input type="hidden" name="" id="" />
-                <dl className={style.form}>
-                  {imgUrl && (
-                    <div>
-                      <h2>이미지 미리보기:</h2>
-                      <img
-                        src={imgUrl}
-                        alt="Preview"
-                        style={{ width: '100%', height: '300px', borderRadius: '50%' }}
-                      />
-                    </div>
-                  )}
-                  <input type="file" accept="image/*" onChange={handleImageChange} />
-                </dl>
-                <dl className={style.form}>
-                  <dt>아이디</dt>
-                  <dd>
-                    <div className={style.form2}>
-                      <input
-                        type="text"
-                        title="아이디"
-                        disabled="disabled"
-                        className={style.inputTxt}
-                      />
-                    </div>
-                  </dd>
-                </dl>
-                <dl className={style.form}>
-                  <dt>닉네임</dt>
-                  <dd>
-                    <div className={style.form2}>
-                      <input
-                        type="text"
-                        title="닉네임"
-                        id="NickName"
-                        name="NickName"
-                        className={style.inputTxt}
-                      />
-                    </div>
-                  </dd>
-                </dl>
-              </form>
+              <dl className={style.form}>
+                {imgUrl && (
+                  <div>
+                    <img
+                      src={imgUrl}
+                      alt="Preview"
+                      style={{
+                        width: "100%",
+                        height: "300px",
+                        borderRadius: "50%",
+                      }}
+                    />
+                  </div>
+                )}
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+              </dl>
+              <dl className={style.form}>
+                <dt>아이디</dt>
+                <dd>
+                  <div className={style.form2}>
+                    <input
+                      type="text"
+                      title="아이디"
+                      disabled="disabled"
+                      value={userInfo.id}
+                      className={style.inputTxt}
+                    />
+                  </div>
+                </dd>
+              </dl>
+              <dl className={style.form}>
+                <dt>닉네임</dt>
+                <dd>
+                  <div className={style.form2}>
+                    <input
+                      type="text"
+                      title="닉네임"
+                      id="NickName"
+                      name="NickName"
+                      className={style.inputTxt}
+                      value={nickname}
+                      onChange={(e) => setNickname(e.target.value)}
+                    />
+                  </div>
+                </dd>
+              </dl>
             </fieldset>
           </div>
           <div className={style.actionBox}>
-            <button type="button" data-btn="pop-close" className={style.btnSub}>
+            <button
+              type="button"
+              data-btn="pop-close"
+              className={style.btnSub}
+              onClick={onClose}
+            >
               취소
             </button>
-            <button type="button" className={style.btnSub}>
+            <button
+              type="button"
+              className={style.btnSub}
+              onClick={userPwCheck}
+            >
               수정완료
             </button>
           </div>

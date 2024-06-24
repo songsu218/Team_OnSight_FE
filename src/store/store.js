@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 
-import user from './userStore';
+import userInfo from './userStore';
+import recordInfo from './recordStore';
 
 export const store = configureStore({
   reducer: {
-    user: user.reducer,
+    user: userInfo,
+    record: recordInfo,
   },
 });
 

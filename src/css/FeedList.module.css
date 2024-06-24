@@ -41,6 +41,11 @@
   border: 0;
 }
 
+.p {
+  font-size: 1.5rem;
+  line-height: 26px;
+}
+
 @media (max-width: 1079px) {
   .label {
     display: none;

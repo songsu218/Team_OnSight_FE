@@ -9,6 +9,9 @@ const Ranking = () => {
   return (
     <div>
       <div className={`${style.rankArea} viewCon`}>
+        <div className={style.rankListBox}>
+          <RankList hoveredCard={hoveredCard} />
+        </div>
         <div className={style.imgBox}>
           <img src="/img/climb.png" alt="wall" />
           <div className={style.personBox}>
@@ -44,7 +47,6 @@ const Ranking = () => {
             />
           </div>
         </div>
-        <RankList hoveredCard={hoveredCard} />
       </div>
     </div>
   );

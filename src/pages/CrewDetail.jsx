@@ -1,58 +1,91 @@
-import { Link } from "react-router-dom";
-import style from "../css/CrewDetail.module.css";
-import CrewFeedlist from "../components/list/CrewFeedlist";
+import style from '../css/CrewDetail.module.css';
+import { NavLink, Routes, Route } from 'react-router-dom';
+
+import CrewHome from '../components/CrewHome';
+import CrewWrite from '../components/CrewWrite';
+import CrewManage from '../components/CrewManage';
 
 const CrewDetail = () => {
   return (
-    <main className={`${style.mainCrew} viewCon`}>
-      <article>
-        <div className={style.leftCon}>
-          <span>크루원 찾기</span>
+    <div className={`${style.mainCrew} viewCon`}>
+      <div className={style.leftCon}>
+        <h3>크루원 찾기</h3>
+        <div className={style.leftConinner}>
           <div className={style.searchCon}>
-            <input
-              type="text"
-              className={style.search}
-              placeholder="크루원 검색"
-            />
-
-            <form action="/submit" method="POST">
-              <button type="submit" class={style.iconButton}>
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </form>
+            <input type="text" placeholder=" 크루원 검색" />
+            <button className={style.iconButton}>
+              <i className="fa-solid fa-magnifying-glass"></i>
+            </button>
           </div>
-          <ul className={style.mycrewCon}>
-            <li></li>
+          <ul className={style.memberCon}>
+            <li>
+              <div className={style.profileBox}>
+                <img src="/img/test.jpg" alt="" />
+              </div>
+              <span>닉네임</span>
+            </li>
+            <li>
+              <div className={style.profileBox}>
+                <img src="/img/test.jpg" alt="" />
+              </div>
+              <span>닉네임</span>
+            </li>
           </ul>
         </div>
-      </article>
+      </div>
       <section className={style.rightCon}>
         <div className={style.righttxt}>
           <div className={style.crewName}>
             <h2>크루명</h2>
             <span>활동지역</span>
           </div>
-          <div className={style.Menu}>
-            <Link to="/Write">
-              <button>글쓰기</button>
-            </Link>
-            <Link to="/ManageCrew">
-              <button>크루관리</button>
-            </Link>
+          <div className={style.menu}>
+            <nav className={style.page_nav}>
+              <ul>
+                <li>
+                  <NavLink
+                    to="crewhome"
+                    aria-current={({ isActive }) =>
+                      isActive ? 'page' : undefined
+                    }
+                  >
+                    크루홈
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="crewwrite"
+                    aria-current={({ isActive }) =>
+                      isActive ? 'page' : undefined
+                    }
+                  >
+                    글쓰기
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink
+                    to="crewmanage"
+                    aria-current={({ isActive }) =>
+                      isActive ? 'page' : undefined
+                    }
+                  >
+                    관리하기
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
           </div>
         </div>
-        <div className={style.introCrew}>
-          <img src="img/on_sight.jpg" alt="크루이미지" />
-          <p>
-            소개문구 : Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Non officiis, quia suscipit provident earum at, quam veniam
-            temporibus fugiat, harum quis dignissimos nisi possimus nemo beatae
-            laboriosam quasi totam cumque.
-          </p>
+        <div>
+          <Routes>
+            <Route path="crewhome" element={<CrewHome />} />
+            <Route path="crewwrite" element={<CrewWrite />} />
+            <Route path="crewmanage" element={<CrewManage />} />
+            <Route path="*" element={<CrewHome />} />
+          </Routes>
         </div>
-        <CrewFeedlist />
       </section>
-    </main>
+    </div>
   );
 };
 

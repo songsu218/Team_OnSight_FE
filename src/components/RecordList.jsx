@@ -1,88 +1,104 @@
 import style from '../css/RecordList.module.css';
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import axios from 'axios';
+import RecordModal from './RecordModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { setRecordAllInfo } from '../store/recordStore';
 
 const RecordList = () => {
-  const [records, setRecords] = useState([]);
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [currentCenter, setCurrentCenter] = useState(`'어디어디클라이밍장' `);
+  const [currentCenter, setCurrentCenter] = useState(`'클라이밍장' `);
+  const [currentNick, setCurrentNick] = useState(`'클라이머' `);
   const containerRef = useRef(null);
+  const swiperConRef = useRef(null);
+
+  const dispatch = useDispatch();
+  const records = useSelector((state) => state.record.recordInfo);
 
   useEffect(() => {
     const fetchRecords = async () => {
       try {
         const response = await axios.get('http://localhost:8000/record');
-        const sortedRecords = response.data.sort(
-          (a, b) => new Date(b.date) - new Date(a.date)
-        );
-        setRecords(sortedRecords);
+        dispatch(setRecordAllInfo(response.data));
       } catch (error) {
         console.error('Error', error);
       }
     };
 
     fetchRecords();
-  }, []);
+  }, [dispatch]);
+
+  const handleScroll = useCallback(() => {
+    const swiperCon = swiperConRef.current;
+    const boxes = swiperCon.querySelectorAll(`.${style.swiperBox}`);
+    const mainHeight = swiperCon.clientHeight;
+    const sectionHeight = mainHeight / 7;
+    const translateXValues = [0, 40, 80, 120, 80, 40, 0];
+
+    const scrollTop = swiperCon.scrollTop;
+    const currentSection = Math.floor(scrollTop / sectionHeight);
+
+    boxes.forEach((box, index) => {
+      const relativeIndex = (index - currentSection + 7) % 7;
+      let transformValue = translateXValues[relativeIndex];
+
+      if (index === hoveredIndex) {
+        transformValue += 50;
+      }
+
+      box.style.transform = `translateX(${transformValue}px)`;
+    });
+  }, [hoveredIndex]);
 
   useEffect(() => {
-    const handleScroll = () => {
-      const container = containerRef.current;
-      const boxes = container.querySelectorAll(`.${style.swiperBox}`);
-      const mainHeight = container.clientHeight;
-      const sectionHeight = mainHeight / 7;
-      const translateXValues = [0, 40, 80, 120, 80, 40, 0];
-
-      boxes.forEach((box, index) => {
-        const scrollTop = container.scrollTop;
-        const currentSection = Math.floor(scrollTop / sectionHeight);
-        const relativeIndex = (index - currentSection + 7) % 7;
-        let transformValue = translateXValues[relativeIndex];
-
-        if (index === hoveredIndex) {
-          transformValue += 100;
-          box.style.transform = `translateX(${transformValue}px) scale(1.2)`;
-        } else {
-          box.style.transform = `translateX(${transformValue}px) scale(1)`;
-        }
-      });
-    };
-
-    const container = containerRef.current;
-    container.addEventListener('scroll', handleScroll);
-    handleScroll();
+    const swiperCon = swiperConRef.current;
+    swiperCon.addEventListener('scroll', handleScroll);
     return () => {
-      container.removeEventListener('scroll', handleScroll);
+      swiperCon.removeEventListener('scroll', handleScroll);
     };
-  }, [records, hoveredIndex]);
+  }, [handleScroll]);
 
-  const handleMouseEnter = (index, center) => {
+  useEffect(() => {
+    handleScroll();
+  }, [records, handleScroll]);
+
+  const handleMouseEnter = (index, center, nick) => {
     setHoveredIndex(index);
-    setCurrentCenter(center);
+    setCurrentCenter(`'${center}' `);
+    setCurrentNick(`'${nick}' `);
   };
 
   return (
     <div>
-      <div className={style.swiperCon} ref={containerRef}>
-        {records.map((record, index) => (
-          <div
-            key={record._id}
-            className={style.swiperBox}
-            onMouseEnter={() => handleMouseEnter(index, record.center)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <img
-              src={`http://localhost:8000/uploads/${record.thumbnail}`}
-              alt="thumbnail"
-            />
-          </div>
-        ))}
+      <div className={style.listCon} ref={containerRef}>
+        <div className={style.swiperCon} ref={swiperConRef}>
+          {records &&
+            records.map((record, index) => (
+              <div
+                key={record._id}
+                className={style.swiperBox}
+                onMouseEnter={() =>
+                  handleMouseEnter(index, record.center, record.nick)
+                }
+                onMouseLeave={() => setHoveredIndex(null)}
+              >
+                <img
+                  src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                  alt="thumbnail"
+                />
+              </div>
+            ))}
+        </div>
         <div className={style.textBox}>
           <p>
             <span>{currentCenter}</span>
             에서의
             <br />
-            <span>'닉네임'</span> 님의 기록입니다
+            <span>{currentNick}</span> 님의 기록입니다
           </p>
+          <div className={style.btnBox}>
+            <RecordModal />
+          </div>
         </div>
       </div>
     </div>

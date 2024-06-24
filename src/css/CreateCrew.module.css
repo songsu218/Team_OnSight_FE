@@ -1,42 +1,111 @@
-.createpage {
-  /* border: 1px dotted red; */
-  width: 720px;
-  margin: 98px auto;
-}
-
-.createCrew > h2 {
+.createCrew h2 {
   font-size: 3.5rem;
   font-weight: bold;
+  padding-bottom: 3rem;
+  border-bottom: 3px solid black;
 }
 
-.createCrew > img {
-  margin-top: 45px;
-  width: 720px;
-  height: 265px;
-  border: 1px dotted lightgray;
+.createCrew .topBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.createCrew .preImgCon {
+  width: 600px;
+  height: 300px;
+  margin-top: 3rem;
+  border: 1px solid #f1f1f1f1;
+}
+
+.createCrew .preImgCon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.createCrew section {
+  font-size: 2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 30px;
+}
+
+.createCrew p {
+  font-size: 1rem;
+  color: #777777;
+  padding-left: 10px;
+}
+
+/* 크루명 */
+.createCrew input {
+  width: 100%;
+  height: 55px;
+  margin-bottom: 30px;
+  border: 1px solid lightgray;
+  align-self: center;
+}
+
+.lowerCon {
+  width: 70%;
+  margin: auto;
+}
+
+.createCrew textarea {
+  width: 100%;
+}
+
+.createCrew div select {
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  width: 150px;
+  height: 38px;
+  margin-bottom: 20px;
+  margin-right: 10px;
 }
 
 .imgBtnCon {
+  margin: 2rem 0;
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
+  gap: 1rem;
 }
 
-.imgBtnCon > input,
-.Btn {
-  /* border: 1px solid #f1f1f1; */
+.imgBtnCon input {
+  border-radius: 5px;
+}
+
+.formList {
+  border-radius: 5px;
+}
+
+.longList {
+  width: 100%;
+  height: 110px;
+  border-radius: 5px;
   border: 1px solid lightgray;
   background-color: white;
-  border-radius: 5px;
   padding: 10px;
-  margin-top: 20px;
-  margin-left: 10px;
-  font-size: 14px;
-}
-.Btn {
-  width: 128px;
+  margin-bottom: 30px;
 }
 
-.selectBox{
+.Btn {
+  border: 3px solid #000000;
+  background-color: transparent;
+  border-radius: 5px;
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.Btn:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.selectBox {
   display: flex;
 }
 

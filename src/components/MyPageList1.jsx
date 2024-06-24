@@ -1,10 +1,39 @@
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import style from '../css/MyPageList1.module.css';
-import List from './list/List';
+import style from "../css/MyPageList1.module.css";
+import List from "./list/List";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const MyPageList1 = () => {
+  const [challenges, setChallenges] = useState([]);
+  const user = useSelector((state) => state.user.userInfo);
+
+  useEffect(() => {
+    const fetchChallenges = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/user/challenges`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setChallenges(data);
+        } else {
+          console.error("Failed to fetch challenges");
+        }
+      } catch (err) {
+        console.error("Error fetching challenges", err);
+      }
+    };
+
+    if (user) {
+      fetchChallenges();
+    }
+  }, [user]);
+
   return (
     <section className={style.sec}>
       <div>
@@ -13,7 +42,7 @@ const MyPageList1 = () => {
           <span>챌린지</span>
         </h3>
       </div>
-      <List />
+      <List items={challenges} itemType="challenge" />
     </section>
   );
 };

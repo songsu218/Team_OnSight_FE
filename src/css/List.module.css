@@ -14,6 +14,11 @@
   flex-basis: calc(50% - 1rem);
 }
 
+.p {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
 @media (max-width: 767px) {
   .listData1 ul {
     gap: 4rem 2rem;

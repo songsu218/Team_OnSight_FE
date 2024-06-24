@@ -1,11 +1,39 @@
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
-import style from '../css/MyPageList1.module.css';
-import List from './list/List';
-import FeedList from './list/FeedList';
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import style from "../css/MyPageList1.module.css";
+import FeedList from "./list/FeedList";
 
 const MyPageList3 = () => {
+  const [feeds, setFeeds] = useState([]);
+  const user = useSelector((state) => state.user.userInfo);
+
+  useEffect(() => {
+    const fetchFeeds = async () => {
+      try {
+        const response = await fetch(`http://localhost:8000/user/feeds`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ user }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setFeeds(data);
+        } else {
+          console.error("Failed to fetch feeds");
+        }
+      } catch (err) {
+        console.error("Error fetching feeds", err);
+      }
+    };
+
+    if (user) {
+      fetchFeeds();
+    }
+  }, [user]);
+
   return (
     <section className={style.sec}>
       <div>
@@ -14,7 +42,7 @@ const MyPageList3 = () => {
           <span>피드</span>
         </h3>
       </div>
-      <FeedList />
+      <FeedList items={feeds} />
     </section>
   );
 };

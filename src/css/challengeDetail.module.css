@@ -1,4 +1,3 @@
-
 /* html {
 font-size: 62.5%;
 } */
@@ -46,7 +45,7 @@ font-size: 62.5%;
 
 .page_nav:before,
 .page_nav .active .page_link:before {
-  content: ''; 
+  content: "";
   display: block;
   position: absolute;
   left: 0;
@@ -196,14 +195,16 @@ font-size: 62.5%;
   width: 100%;
   height: 48px;
   padding: 0.5rem 3.6rem 0.5rem 1.6rem;
-	background: #f2f4f8 url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212.176%22%20height%3D%226.048%22%20viewBox%3D%220%200%2012.176%206.048%22%3E%0D%0A%20%20%3Cpath%20id%3D%22ico_arr_drop%22%20d%3D%22M508.5%2C430.5l5.545%2C4%2C5.455-4%22%20transform%3D%22translate(-507.915%20-429.689)%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0D%0A%3C%2Fsvg%3E%0D%0A") no-repeat calc(100% - 1.6rem) 50%;
+  background: #f2f4f8
+    url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212.176%22%20height%3D%226.048%22%20viewBox%3D%220%200%2012.176%206.048%22%3E%0D%0A%20%20%3Cpath%20id%3D%22ico_arr_drop%22%20d%3D%22M508.5%2C430.5l5.545%2C4%2C5.455-4%22%20transform%3D%22translate(-507.915%20-429.689)%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0D%0A%3C%2Fsvg%3E%0D%0A")
+    no-repeat calc(100% - 1.6rem) 50%;
   box-sizing: border-box;
   border: 1px solid #dde1e6;
   outline: none;
   font-size: 15px;
   text-align: left;
   color: #121619;
-	cursor: default !important;
+  cursor: default !important;
 }
 
 .entry_list {
@@ -220,8 +221,8 @@ font-size: 62.5%;
   list-style: none;
 }
 
-	.challenge_detail_wrap.end .entry_list {
-		max-height: 293px;
+.challenge_detail_wrap.end .entry_list {
+  max-height: 293px;
 }
 
 .entry_list li {
@@ -263,12 +264,12 @@ font-size: 62.5%;
 }
 
 .apply_btn_wrap {
-		display: block;
+  display: block;
   margin: 30px 0 0;
 }
 
 .challenge_detail_wrap.end .apply_btn_wrap {
-	display: none;
+  display: none;
 }
 
 .apply_btn {
@@ -300,6 +301,7 @@ font-size: 62.5%;
   font-size: 32px;
   text-align: center;
   color: #000;
+  margin-top: 3rem;
 }
 
 .challenge_detail_wrap.end .detail_contents .noti_txt {
@@ -313,9 +315,9 @@ font-size: 62.5%;
   text-underline-position: under;
 }
 
-.challenge_detail_wrap .rank_table_wrap {
+/* .challenge_detail_wrap .rank_table_wrap {
   display: none;
-}
+} */
 
 .challenge_detail_wrap.end .rank_table_wrap {
   display: block;
@@ -333,7 +335,7 @@ font-size: 62.5%;
   padding: 20px;
   background: #f3f3f3;
   font-size: 20px;
-	text-align: center;
+  text-align: center;
 }
 
 .rank_table td {
@@ -341,7 +343,7 @@ font-size: 62.5%;
   border-bottom: 1px solid #dde1e6;
   font-size: 20px;
   text-align: center;
-	vertical-align: middle;
+  vertical-align: middle;
 }
 
 .rank_table .rank_profile {
@@ -374,7 +376,8 @@ font-size: 62.5%;
   right: -10px;
   width: 40px;
   height: 40px;
-	background: url("https://png.pngtree.com/png-vector/20230509/ourmid/pngtree-trophy-flat-icon-vector-png-image_7092605.png") no-repeat 50% / 4rem;
+  background: url("https://png.pngtree.com/png-vector/20230509/ourmid/pngtree-trophy-flat-icon-vector-png-image_7092605.png")
+    no-repeat 50% / 4rem;
 }
 
 .pagination {
@@ -391,70 +394,69 @@ font-size: 62.5%;
   border-radius: 4px;
 }
 .pagination button:hover {
-  background-color: #0056b3;
+  background-color: #aeb0b1;
 }
 .pagination .active {
   color: white;
   background-color: black;
 }
 
+@media (max-width: 1079px) {
+  .challenge_detail_wrap {
+    width: 100%;
+  }
+  .challenge_detail_wrap .sub_tit {
+    font-size: 24px;
+    line-height: normal;
+    font-weight: 900;
+  }
+  .challenge_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: initial;
+    align-items: center;
+    gap: 55px;
+  }
 
-	@media (max-width: 1079px) {
-		.challenge_detail_wrap {
-			width: 100%;
-		}
-		.challenge_detail_wrap .sub_tit {
-			font-size: 24px;
-			line-height: normal;
-			font-weight: 900;
-		}
-		.challenge_info {
-			display: flex;
-			flex-direction: column;
-			justify-content: initial;
-			align-items: center;
-			gap: 55px;
-			}
+  .detail_list {
+    margin: 34px 0;
+  }
 
-		.detail_list {
-			margin: 34px 0;
-		}
-	
-		.challenge_img {
-		position: relative;
-		margin: 0 auto;
-		width: 350px;
-		height: auto;
-		object-fit: contain;
-		}
-	
-		.challenge_img img {
-		display: block;
-		overflow: hidden;
-		position: relative;
-		left: 0;
-		right: 0;
-		top: 0;
-		bottom: 0;
-		width: 100%;
-		height: auto;
-		}
-	
-		.entry_list_wrap {
-		width: 100%;
-		}
+  .challenge_img {
+    position: relative;
+    margin: 0 auto;
+    width: 350px;
+    height: auto;
+    object-fit: contain;
+  }
 
-		.challenge_detail_wrap .detail_contents .noti_txt {
-			font-size: 24px;
-		}
+  .challenge_img img {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+  }
 
-		.rank_table .rank_profile {
-			width: 50px;
-			height: 50px;
-		}
+  .entry_list_wrap {
+    width: 100%;
+  }
 
-		.rank_table .trophy {
-			width: 20px;
-			height: 20px;
-		}
-	}
+  .challenge_detail_wrap .detail_contents .noti_txt {
+    font-size: 24px;
+  }
+
+  .rank_table .rank_profile {
+    width: 50px;
+    height: 50px;
+  }
+
+  .rank_table .trophy {
+    width: 20px;
+    height: 20px;
+  }
+}

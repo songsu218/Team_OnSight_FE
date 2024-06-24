@@ -14,20 +14,26 @@ const CreateCrew = () => {
   const [selectedDistrict, setSelectedDistrict] = useState(""); //구
   const [districts, setDistricts] = useState([]);
 
-  //img 미리보기 부분
+  // img 미리보기 부분
   const [previewSrc, setPreviewSrc] = useState("/img/noimg.jpg");
+
+  const handleButtonClick = () => {
+    document.getElementById("crewImgInput").click();
+  };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
       const fileUrl = URL.createObjectURL(file);
       setPreviewSrc(fileUrl);
+      setCrewImg(file); // Save the selected file to state
     }
   };
 
   const handleRemoveImage = () => {
-    setPreviewSrc("/img/on_sight.jpg");
-    document.getElementById("crewImg").value = null;
+    setPreviewSrc("/img/noimg.jpg");
+    setCrewImg(""); // Clear the selected file from state
+    document.getElementById("crewImgInput").value = null;
   };
 
   // 지역 검색부분
@@ -128,82 +134,102 @@ const CreateCrew = () => {
   };
 
   return (
-    <main className={style.createpage}>
-      <form Submit="createCrew" className={style.createCrew}>
-        <h2>나의 크루생성</h2>
-        <img src={previewSrc} alt="미리보기" />
-        <div className={style.imgBtnCon}>
-          <input
-            type="file"
-            name="crewImg"
-            id="crewImg"
-            onChange={handleFileChange}
-          />
-          <button className={style.Btn} onClick={handleRemoveImage}>
-            사진삭제
-          </button>
-        </div>
-
-        <section>크루명</section>
-        <input
-          type="text"
-          placeholder="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <section>소개 글</section>
-        <input
-          type="text"
-          placeholder="content"
-          value={content}
-          onChange={(e) => setContent(e.target.value)}
-          required
-        />
-        <section>활동지역</section>
-        <div className="selectBox">
-          <select value={selectedCity} onChange={handleCityChange}>
-            <option value="">선택</option>
-            <option value="seoul">서울특별시</option>
-            <option value="busan">부산광역시</option>
-          </select>
-          <select value={selectedDistrict} onChange={handleDistrictChange}>
-            <option value="">선택</option>
-            {districts.map((district, index) => (
-              <option key={index} value={district}>
-                {district}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className={style.selectBox}>
-          <section>인원제한</section>
-          <select
-            name="limit"
-            id="limit"
-            value={memberLimit}
-            onChange={(e) => setMemberLimit(e.target.value)}
-          >
-            <option value="10" selected>
-              10
-            </option>
-            <option value="20">20</option>
-            <option value="30">30</option>
-            <option value="40">40</option>
-            <option value="50">50</option>
-          </select>
-        </div>
-        <div className={style.saBtn}>
-          <button
-            className={style.Btn}
-            type="submit"
-            onClick={handleSubmitcrew}
-          >
-            저장
-          </button>
-        </div>
-      </form>
+    <main className="con1">
+      <div className={`${style.createpage} mw`}>
+        <form Submit="createCrew" className={style.createCrew}>
+          <h2>나의 크루생성</h2>
+          <div className={style.topBox}>
+            <div>
+              <div className={style.preImgCon}>
+                <img src={previewSrc} alt="미리보기" />
+              </div>
+              <div className={style.imgBtnCon}>
+                <input
+                  type="file"
+                  name="crewImg"
+                  id="crewImgInput"
+                  onChange={handleFileChange}
+                  style={{ display: "none" }} // 첨부파일 팝업
+                />
+                <button
+                  type="button"
+                  className={style.Btn}
+                  onClick={handleButtonClick}
+                >
+                  사진변경
+                </button>
+                <button className={style.Btn} onClick={handleRemoveImage}>
+                  사진삭제
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className={style.lowerCon}>
+            <section>
+              크루명 <p>크루명은 변경되지 않습니다.</p>
+            </section>
+            <input
+              className={style.formList}
+              type="text"
+              placeholder=" 크루명을 입력해주세요"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <section>소개글</section>
+            <textarea
+              className={style.longList}
+              type="text"
+              placeholder="소개글을 입력해주세요"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              required
+            />
+            <section>활동 지역</section>
+            <div className="selectBox">
+              <select value={selectedCity} onChange={handleCityChange}>
+                <option value="">선택</option>
+                <option value="seoul">서울특별시</option>
+                <option value="busan">부산광역시</option>
+              </select>
+              <select value={selectedDistrict} onChange={handleDistrictChange}>
+                <option value="">선택</option>
+                {districts.map((district, index) => (
+                  <option key={index} value={district}>
+                    {district}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <section>참가자수</section>
+            <div className={style.selectBox}>
+              <select
+                name="limit"
+                id="limit"
+                value={memberLimit}
+                onChange={(e) => setMemberLimit(e.target.value)}
+              >
+                <option value="10" selected>
+                  10
+                </option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+                <option value="50">50</option>
+              </select>
+            </div>
+          </div>
+          <div className={style.saBtn}>
+            <button
+              className={style.Btn}
+              type="submit"
+              onClick={handleSubmitcrew}
+            >
+              저장
+            </button>
+          </div>
+        </form>
+      </div>
     </main>
   );
 };

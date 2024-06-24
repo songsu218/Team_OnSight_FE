@@ -6,6 +6,8 @@ import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ko from 'date-fns/locale/ko';
 import axios from 'axios';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 registerLocale('ko', ko);
 
@@ -19,7 +21,7 @@ function RecordModal() {
   const [counts, setCounts] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
   const [title, setTitle] = useState('');
-  const [detail, setDetail] = useState('');
+  const [content, setContent] = useState('');
   const [climbingCenters, setClimbingCenters] = useState([]);
   const [selectedCity, setSelectedCity] = useState('서울특별시');
   const [selectedDistrict, setSelectedDistrict] = useState('전체');
@@ -27,12 +29,23 @@ function RecordModal() {
   const [showingCenters, setShowingCenters] = useState([]);
   const [diffiList, setDiffiList] = useState([]);
 
+  const user = useSelector((state) => state.user.userInfo);
+  const navigate = useNavigate();
+
+  console.log(user);
+
   const handleClose = () => {
     setShow(false);
     resetForm();
   };
 
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    if (!user) {
+      navigate('/signinpage');
+      return;
+    }
+    setShow(true);
+  };
 
   const resetForm = () => {
     setSelectedFile(null);
@@ -40,7 +53,7 @@ function RecordModal() {
     setCounts({});
     setSelectedPlace(null);
     setTitle('');
-    setDetail('');
+    setContent('');
   };
 
   const togglePlace = () => {
@@ -116,7 +129,7 @@ function RecordModal() {
       alert('제목을 입력해주세요.');
       return;
     }
-    if (!detail) {
+    if (!content) {
       alert('상세내용을 입력해주세요.');
       return;
     }
@@ -139,8 +152,10 @@ function RecordModal() {
     console.log('곱한값', levelSum);
 
     const formData = new FormData();
+    formData.append('userId', user.id);
+    formData.append('nick', user.nick);
     formData.append('title', title);
-    formData.append('detail', detail);
+    formData.append('content', content);
     formData.append('center', selectedPlace);
     formData.append('date', startDate.toISOString().split('T')[0]);
     formData.append('level', JSON.stringify(level));
@@ -213,7 +228,7 @@ function RecordModal() {
   return (
     <>
       <button onClick={handleShow} className={style.addBtn}>
-        <span>추가하기</span>
+        <span>내 기록 추가하기</span>
       </button>
       <Modal className={style.modalRe} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -229,13 +244,13 @@ function RecordModal() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <label htmlFor="detail">상세내용</label>
+            <label htmlFor="content">상세내용</label>
             <input
               type="text"
-              name="detail"
-              id="detail"
-              value={detail}
-              onChange={(e) => setDetail(e.target.value)}
+              name="content"
+              id="content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
             />
             <label htmlFor="date">날짜 선택</label>
             <div className={style.dateWrap}>
