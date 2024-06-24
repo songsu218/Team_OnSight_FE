@@ -172,7 +172,7 @@ font-size: 62.5%;
 }
 
 .detail_list .status.end {
-  display: none;
+  /* display: none; */
   background: #777;
 }
 

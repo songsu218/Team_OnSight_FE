@@ -1,27 +1,37 @@
-import { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
-import style from "../../css/ChallengeModal.module.css";
-import DatePicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import ko from "date-fns/locale/ko";
-import axios from "axios";
-import { ch } from "../../api.js";
+import { useEffect, useRef, useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
+import style from '../../css/ChallengeModal.module.css';
+import DatePicker, { registerLocale } from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import ko from 'date-fns/locale/ko';
+import axios from 'axios';
+import { ch } from '../../api.js';
 
-registerLocale("ko", ko);
+registerLocale('ko', ko);
 
-function ChallengeModal({onClose}) {
+function ChallengeModal({ onClose, isOpen, username }) {
   // const [show, setShow] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [openPlace, setOpenPlace] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [climbingCenters, setClimbingCenters] = useState([]);
-  const [selectedCity, setSelectedCity] = useState("서울특별시");
-  const [selectedDistrict, setSelectedDistrict] = useState("전체");
-  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCity, setSelectedCity] = useState('서울특별시');
+  const [selectedDistrict, setSelectedDistrict] = useState('전체');
+  const [searchTerm, setSearchTerm] = useState('');
   const [showingCenters, setShowingCenters] = useState([]);
   const [title, setTitle] = useState('');
-
+  const isFirstRun = useRef(true);
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (!username) {
+      alert('로그인이 필요합니다.');
+      onClose();
+    }
+  }, []);
   const handleClose = () => {
     // setShow(false);
     resetForm();
@@ -32,7 +42,7 @@ function ChallengeModal({onClose}) {
 
   const resetForm = () => {
     setSelectedPlace(null);
-    setTitle("");
+    setTitle('');
   };
 
   const togglePlace = () => {
@@ -46,41 +56,50 @@ function ChallengeModal({onClose}) {
 
   const handleSubmit = async () => {
     if (!title) {
-      alert("제목을 입력해주세요.");
+      alert('제목을 입력해주세요.');
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("center", selectedPlace);
-    formData.append("date", startDate.toISOString().split("T")[0]);
+    // const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("center", selectedPlace);
+    // formData.append("date", startDate.toISOString().split("T")[0]);
 
-    console.log(formData);
-    // ch.chEnter()
-    // .then((result) => {
-
-    // }).catch((error) => {
-    //   console.log(`${error}`);
-    // });
+    ch.chRegister(
+      title,
+      username,
+      selectedPlace,
+      '주소 모달창미구현',
+      startDate.toISOString().split('T')[0]
+    )
+      .then((result) => {
+        console.log(result);
+        alert('챌린지 생성이 완료되었습니다.');
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+        alert('오류 : 챌린지 생성실패');
+      });
 
     handleClose();
-  }
+  };
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/center")
+      .get('http://localhost:8000/api/center')
       .then((response) => {
         setClimbingCenters(response.data);
         setShowingCenters(response.data);
       })
-      .catch((error) => console.error("API 요청 에러:", error));
+      .catch((error) => console.error('API 요청 에러:', error));
   }, []);
 
   const handleSearch = () => {
     const results = climbingCenters.filter((center) => {
       return (
         center.si === selectedCity &&
-        (selectedDistrict === "전체" || center.gu.includes(selectedDistrict)) &&
+        (selectedDistrict === '전체' || center.gu.includes(selectedDistrict)) &&
         center.center.includes(searchTerm)
       );
     });
@@ -88,9 +107,9 @@ function ChallengeModal({onClose}) {
   };
 
   const handleRefresh = () => {
-    setSelectedCity("서울특별시");
-    setSelectedDistrict("전체");
-    setSearchTerm("");
+    setSelectedCity('서울특별시');
+    setSelectedDistrict('전체');
+    setSearchTerm('');
     setShowingCenters(climbingCenters);
   };
 
@@ -104,7 +123,7 @@ function ChallengeModal({onClose}) {
       {/* <button className={style.addBtn}>
         <span>나의 챌린지 만들기</span>
       </button> */}
-      <Modal className={style.modalRe} show={true} onHide={handleClose}>
+      <Modal className={style.modalRe} show={isOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>챌린지 만들기</Modal.Title>
         </Modal.Header>
@@ -131,7 +150,7 @@ function ChallengeModal({onClose}) {
             <label htmlFor='place'>운동 장소</label>
             <div className={style.placeC}>
               <div className={style.placeView} onClick={togglePlace}>
-                <span>{selectedPlace || "장소 선택"}</span>
+                <span>{selectedPlace || '장소 선택'}</span>
                 <i className='fa-solid fa-chevron-down'></i>
               </div>
               {openPlace && (
@@ -150,7 +169,7 @@ function ChallengeModal({onClose}) {
                         setShowingCenters(
                           climbingCenters.filter(
                             (center) =>
-                              e.target.value === "전체" ||
+                              e.target.value === '전체' ||
                               center.gu.includes(e.target.value)
                           )
                         );
@@ -174,7 +193,7 @@ function ChallengeModal({onClose}) {
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter") {
+                        if (e.key === 'Enter') {
                           handleSearch();
                         }
                       }}

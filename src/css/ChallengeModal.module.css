@@ -1,4 +1,4 @@
-.addBtn {
+/* .addBtn {
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   font-size: 1rem;
   width: 100px;
@@ -18,10 +18,11 @@
   transform: scale(1.1);
   color: #ffffff;
   background-color: #000000;
-}
+} */
 
 .modalRe {
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  margin-top: 7rem;
 }
 
 .recordCon {

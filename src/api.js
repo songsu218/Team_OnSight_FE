@@ -43,6 +43,18 @@ const ch = {
       members: members,
     });
   },
+  /**
+   * 챌린지등록
+   * @param {string} challengename 
+   * @param {string} id 
+   * @param {string} center 
+   * @param {string} address 
+   * @param {string} date yyyy-MM-dd
+   * @returns 챌린지목록
+   */
+  chRegister: (challengename, id, center, address, date) => {
+    return instance.post("/challenge/register", {challengename: challengename, id:id, center : center , address : address, date : date});
+  },
 
   /**
    * challenge 전체목록
