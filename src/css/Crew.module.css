@@ -15,7 +15,6 @@
 
 .myCrewCon h3 {
   padding: 22px 0 70px;
-  font-family: 'S-CoreDream-3Light';
   font-size: 26px;
   font-weight: bold;
 }
@@ -124,7 +123,7 @@
 }
 
 .searchBox::after {
-  content: '';
+  content: "";
   width: 2px;
   height: 20px;
   position: absolute;

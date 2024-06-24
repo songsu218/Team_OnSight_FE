@@ -1,17 +1,17 @@
 .listCon {
   display: flex;
-  justify-content: center;
 }
 
 .swiperCon {
   height: 100vh;
-  width: 50%;
+  width: 100%;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   scroll-behavior: smooth;
+  position: relative;
 }
 
 .swiperCon::-webkit-scrollbar {
@@ -26,6 +26,7 @@
   scroll-snap-align: start;
   flex-shrink: 0;
   transition: 0.5s;
+  margin-left: 150px;
 }
 
 .swiperBox img {
@@ -37,16 +38,71 @@
 .listCon .textBox {
   transform: translateY(50%);
   font-size: 2rem;
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
   white-space: nowrap;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  height: 100%;
-  padding-top: 25vh;
-  width: 200px;
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 1150px;
 }
 
 .listCon .textBox span {
   font-weight: bold;
+}
+
+@media (max-width: 1550px) {
+  .swiperBox {
+    width: 500px;
+  }
+
+  .listCon .textBox {
+    left: 1050px;
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 1400px) {
+  .swiperBox {
+    width: 500px;
+  }
+
+  .listCon .textBox {
+    left: 840px;
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 1180px) {
+  .swiperBox {
+    width: 400px;
+  }
+
+  .listCon .textBox {
+    left: 740px;
+    font-size: 1.75rem;
+  }
+}
+@media (max-width: 1060px) {
+  .swiperBox {
+    width: 300px;
+  }
+
+  .listCon .textBox {
+    left: 640px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 890px) {
+  .swiperBox {
+    width: 300px;
+    margin-left: 50px;
+  }
+
+  .listCon .textBox {
+    display: none;
+  }
 }
