@@ -1,7 +1,23 @@
+.viewCon {
+    width: calc(100% - 210px);
+    margin-left: auto;
+}
+
 .search {
   display: flex;
   height: 100vh;
 }
+
+.customOverlay {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 14px;  
+    white-space: nowrap; 
+    transform: translateY(-28px);
+  }
 
 .sidebar {
   background-color: #f1f1f1;
@@ -83,63 +99,58 @@
   flex: 1;
 }
 
-.starButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 20px;
-}
-
 .centerName {
-  font-size: 0.8rem;
+    font-size: 0.8rem;
 }
 
 .centerList {
-  width: 347px;
-  /* height: 278px; */
-  background-color: #fff;
-  padding: 10px;
-  margin-top: 20px;
-  display: flex;
-  flex-direction: column;
-  /* 이거 수장하니까 됨 */
+    width: 347px;
+    height: 250px;
+    background-color: #fff;
+    padding: 10px 20px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .centerList img {
-  /* width: 306px; */
-  width: 100%;
-  height: 132px;
-  object-fit: cover;
+    width: 306px;
+    margin: auto;
+    height: 132px;
+    object-fit: cover;
 }
 
 .centerInfo {
-  margin-top: 10px;
-  /* 임시 */
-  display: flex;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+
 }
 
-.centerInfo h4 {
-  font-size: 18px;
+.centerInfo div {
+    display: flex;
 }
 
-.centerInfo p {
-  font-size: 14px;
-  opacity: 0.5;
+.centerInfo div h4 {
+    font-size: 18px;
 }
 
-.centerDetail {
-  margin-top: 30px;
+.centerInfo div p {
+    font-size: 14px;
+    opacity: 0.5;
 }
 
-.centerRecord {
-  margin-top: 30px;
+.searchResults .centerDetail {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    margin-top: 30px;
 }
 
-/*  centerDetails
-            썸네일 x표시
-            (암장이름 구 즐찾)
-            (.centerHome - .centerAddress 번호 사이트 레벨 소개글)
-             */
+/* 상세페이지-공통 */
 .centerDetails {
   position: relative;
 }
@@ -162,23 +173,44 @@
   cursor: pointer;
 }
 
-.tabContainer {
-  display: flex;
-  justify-content: left;
-  margin-top: 20px;
-  /* 생략가능할지도 추후고민 */
+
+.centerDetails .centerDetailInfo {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
+.likeStar {
+    color: #FECE2F;
+}
+
+.centerDetailInfo div {
+    display: flex;
+}
+
+.centerDetailInfo div h4 {
+    font-size: 20px;
+}
+
+.centerDetailInfo div p {
+    opacity: 0.5;
+}
+
+.sidebarDetails {
+    background-color: #fff;
+}
+
+/* 상세페이지 탭부분 */
 .tabButtonHome,
 .tabButtonRecode {
-  background: none;
-  border: none;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  outline: none;
-  position: relative;
-  color: grey;
+    position: relative;
+    background: none;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    outline: none;
+    color: grey;
+    /* 다른 부분의 회색은 DEE2E6이걸 썼는데 너무 연해서 바꿈*/
 }
 
 .tabButtonHome.activeTab,
@@ -203,22 +235,11 @@
   margin-top: 20px;
 }
 
-.centerDetails .centerDetailInfo {
-  margin-top: 10px;
-  display: flex;
-}
-
-.centerDetailInfo h4 {
-  font-size: 20px;
-}
-
-.centerDetailInfo p {
-  opacity: 0.5;
-}
-
+/* 상세페이지 - 홈 */
 .centerHome {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
 }
 
 .centerHome > * {
@@ -250,10 +271,115 @@
   border-right: 1px solid #dee2e6;
 }
 
-.sidebarDetails {
-  background-color: #fff;
+.websiteContainer {
+    display: flex;
+    align-items: center;
 }
 
-.centerHome .centerDesc {
-  margin-bottom: 10px;
+.websiteContainer a {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+}
+
+.centerHome .centerDetail {
+    white-space: pre-wrap;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* 상세페이지- 기록 */
+.centerRecordNav {
+    display: flex;
+    justify-content: end;
+    margin-top: 30px;
+    margin-bottom: 1rem;
+} 
+
+ 
+
+.centerRecordNav .btnBox { 
+    border: 3px solid black;
+}
+
+.btnBox .customButton {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    cursor: pointer;
+    height: 30px;
+     
+}
+
+
+/* 테스트 */
+.recordItem {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 이미지, recordUserInfo */
+.recordHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.recordItem .recordHeader .profileImage {
+    border: 1px solid red;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 16px;
+    object-fit: cover;
+}
+
+
+/* recordUserInfo -> 닉네임, 기록수 */
+.recordNickname {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+}
+
+.recordCount {
+    color: gray;
+}
+
+/* recordContent */
+.recordContent .recordImage {
+    width: 100%;
+    height: 170px;
+    margin-right: 16px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.recordText h5 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.recordText p {
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+.recordDate {
+    font-size: 0.8rem;
+    color: gray;
+}
+
+@media (max-width: 1440px) {
+    .viewCon {
+        width: 100%;
+    }
 }
