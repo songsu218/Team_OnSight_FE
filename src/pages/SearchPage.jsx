@@ -186,7 +186,7 @@ const SearchPage = () => {
     dispatch(setCurrentCenter(center));
     dispatch(setShowDetails(true));
     dispatch(setActiveTab('home'));
-  };;
+  };
 
   const handleListClick = (center) => {
     dispatch(setCurrentCenter(center));
@@ -204,7 +204,6 @@ const SearchPage = () => {
     dispatch(toggleFavorite(centerId));
     console.log('Updated userLikes:', userLikes);
   };
-  
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -229,7 +228,7 @@ const SearchPage = () => {
 
   return (
     <main className={`${style.search} ${style.viewCon}`}>
-       <div
+      <div
         className={`${style.sidebar} ${showDetails ? style.sidebarDetails : ''}`}
       >
         {showDetails && currentCenter ? (
@@ -248,13 +247,13 @@ const SearchPage = () => {
                 <p>{currentCenter.gu}</p>
               </div>
               <i
-  className={
-    userLikes.includes(currentCenter._id)
-      ? `fa-solid fa-star ${style.likeStar}`
-      : 'fa-regular fa-star'
-  }
-  onClick={() => toggleFavoriteHandler(currentCenter._id)}
-></i>
+                className={
+                  userLikes.includes(currentCenter._id)
+                    ? `fa-solid fa-star ${style.likeStar}`
+                    : 'fa-regular fa-star'
+                }
+                onClick={() => toggleFavoriteHandler(currentCenter._id)}
+              ></i>
             </div>
             <div className={style.tabContainer}>
               <button
@@ -279,8 +278,7 @@ const SearchPage = () => {
                 <div className={style.centerHome}>
                   <div className={style.centerAddress}>
                     <i className="fa-solid fa-location-pin"></i>
-                    {currentCenter.si} {currentCenter.gu}{' '}
-                    {currentCenter.address}
+                    {currentCenter.si} {currentCenter.gu} {currentCenter.address}
                   </div>
                   <div>
                     <i className="fa-solid fa-phone"></i>
@@ -327,7 +325,7 @@ const SearchPage = () => {
                       />
                     </div>
                   </div>
-                   
+
                   <div>
                     {records.length > 0 ? (
                       records.map((record) => (
@@ -418,32 +416,32 @@ const SearchPage = () => {
             {searchResults.length > 0 ? (
               <div className={style.searchResults}>
                 {searchResults.map((center) => (
-  <div
-    key={center._id} // 고유한 식별자인 center._id를 사용합니다.
-    className={style.centerList}
-    onClick={() => handleListClick(center)}
-  >
-    <img src={center.thumbnail} alt={center.center} />
-    <div className={style.centerInfo}>
-      <div>
-        <h4>{center.center}</h4>
-        <p>{center.gu}</p>
-      </div>
-      <i
-  className={
-    userLikes.includes(center._id)
-      ? `fa-solid fa-star ${style.likeStar}`
-      : 'fa-regular fa-star'
-  }
-  onClick={(e) => {
-    e.stopPropagation();
-    toggleFavoriteHandler(center._id);
-  }}
-></i>
-    </div>
-    <p className={style.centerDetail}>{center.detail}</p> 
-  </div>
-))}
+                  <div
+                    key={center._id} // 고유한 식별자인 center._id를 사용합니다.
+                    className={style.centerList}
+                    onClick={() => handleListClick(center)}
+                  >
+                    <img src={center.thumbnail} alt={center.center} />
+                    <div className={style.centerInfo}>
+                      <div>
+                        <h4>{center.center}</h4>
+                        <p>{center.gu}</p>
+                      </div>
+                      <i
+                        className={
+                          userLikes.includes(center._id)
+                            ? `fa-solid fa-star ${style.likeStar}`
+                            : 'fa-regular fa-star'
+                        }
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          toggleFavoriteHandler(center._id);
+                        }}
+                      ></i>
+                    </div>
+                    <p className={style.centerDetail}>{center.detail}</p>
+                  </div>
+                ))}
               </div>
             ) : (
               <div className={style.searchResults}>
@@ -462,16 +460,16 @@ const SearchPage = () => {
                           <p>{center.gu}</p>
                         </div>
                         <i
-  className={
-    userLikes.includes(center._id)
-      ? `fa-solid fa-star ${style.likeStar}`
-      : 'fa-regular fa-star'
-  }
-  onClick={(e) => {
-    e.stopPropagation(); // 아이콘 클릭 시 페이지 이동 방지
-    toggleFavoriteHandler(center._id); // toggleFavoriteHandler 사용
-  }}
-></i>
+                          className={
+                            userLikes.includes(center._id)
+                              ? `fa-solid fa-star ${style.likeStar}`
+                              : 'fa-regular fa-star'
+                          }
+                          onClick={(e) => {
+                            e.stopPropagation(); // 아이콘 클릭 시 페이지 이동 방지
+                            toggleFavoriteHandler(center._id); // toggleFavoriteHandler 사용
+                          }}
+                        ></i>
                       </div>
                       <p className={style.centerDetail}>{center.detail}</p>
                     </div>
@@ -482,7 +480,7 @@ const SearchPage = () => {
         )}
       </div>
       <div className={style.mapContainer}>
-      <Map
+        <Map
           center={mapCenter}
           style={{ width: '100%', height: '100%' }}
           level={3}
