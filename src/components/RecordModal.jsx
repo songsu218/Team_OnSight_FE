@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import style from '../css/RecordModal.module.css';
@@ -11,7 +11,11 @@ import { useNavigate } from 'react-router-dom';
 
 registerLocale('ko', ko);
 
-function RecordModal() {
+function RecordModal({
+  currentCenter,
+  buttonText = '내 기록 추가하기',
+  buttonClass,
+}) {
   const [show, setShow] = useState(false);
   const [startDate, setStartDate] = useState(new Date());
   const [openPlace, setOpenPlace] = useState(false);
@@ -31,8 +35,17 @@ function RecordModal() {
 
   const user = useSelector((state) => state.user.userInfo);
   const navigate = useNavigate();
-
   console.log(user);
+  useEffect(() => {
+    if (currentCenter) {
+      setSelectedPlace(currentCenter.center);
+      if (currentCenter.level) {
+        setDiffiList(
+          Object.keys(currentCenter.level).map((key) => `난이도 (v${key})`)
+        );
+      }
+    }
+  }, [currentCenter]);
 
   const handleClose = () => {
     setShow(false);
@@ -72,7 +85,7 @@ function RecordModal() {
   };
 
   const toggleDiffi = () => {
-    if (!selectedPlace) {
+    if (!selectedPlace && !currentCenter) {
       alert('먼저 운동 장소를 선택해주세요.');
       return;
     }
@@ -227,8 +240,8 @@ function RecordModal() {
 
   return (
     <>
-      <button onClick={handleShow} className={style.addBtn}>
-        <span>내 기록 추가하기</span>
+      <button onClick={handleShow} className={`${style.addBtn} ${buttonClass}`}>
+        <span>{buttonText}</span>
       </button>
       <Modal className={style.modalRe} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
@@ -262,81 +275,94 @@ function RecordModal() {
                 locale="ko"
               />
             </div>
-            <label htmlFor="place">운동 장소</label>
-            <div className={style.placeC}>
-              <div className={style.placeView} onClick={togglePlace}>
-                <span>{selectedPlace || '장소 선택'}</span>
-                <i className="fa-solid fa-chevron-down"></i>
-              </div>
-              {openPlace && (
-                <div className={style.placeList}>
-                  <div>
-                    <select
-                      value={selectedCity}
-                      onChange={(e) => setSelectedCity(e.target.value)}
-                    >
-                      <option value="서울특별시">서울특별시</option>
-                    </select>
-                    <select
-                      value={selectedDistrict}
-                      onChange={(e) => {
-                        setSelectedDistrict(e.target.value);
-                        setShowingCenters(
-                          climbingCenters.filter(
-                            (center) =>
-                              e.target.value === '전체' ||
-                              center.gu.includes(e.target.value)
-                          )
-                        );
-                      }}
-                    >
-                      <option value="전체">전체</option>
-                      {Array.from(
-                        new Set(climbingCenters.map((center) => center.gu))
-                      ).map((district) => (
-                        <option key={district} value={district}>
-                          {district}
-                        </option>
-                      ))}
-                    </select>
+            {currentCenter ? (
+              <>
+                <label htmlFor="place">운동 장소</label>
+                <div className={style.placeC}>
+                  <div className={style.placeView}>
+                    <span>{currentCenter.center}</span>
                   </div>
-                  <div className={style.searchCon}>
-                    <input
-                      type="text"
-                      className={style.searchInput}
-                      placeholder="검색창"
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter') {
-                          handleSearch();
-                        }
-                      }}
-                    />
-                    <div>
-                      <i
-                        className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
-                        onClick={handleSearch}
-                      ></i>
-                      <i
-                        className={`fa-solid fa-rotate-left ${style.rotate}`}
-                        onClick={handleRefresh}
-                      ></i>
-                    </div>
-                  </div>
-                  <ul className={style.placeResult}>
-                    {showingCenters.map((center) => (
-                      <li
-                        key={center._id}
-                        onClick={() => handlePlaceClick(center)}
-                      >
-                        {center.center}
-                      </li>
-                    ))}
-                  </ul>
                 </div>
-              )}
-            </div>
+              </>
+            ) : (
+              <>
+                <label htmlFor="place">운동 장소</label>
+                <div className={style.placeC}>
+                  <div className={style.placeView} onClick={togglePlace}>
+                    <span>{selectedPlace || '장소 선택'}</span>
+                    <i className="fa-solid fa-chevron-down"></i>
+                  </div>
+                  {openPlace && (
+                    <div className={style.placeList}>
+                      <div>
+                        <select
+                          value={selectedCity}
+                          onChange={(e) => setSelectedCity(e.target.value)}
+                        >
+                          <option value="서울특별시">서울특별시</option>
+                        </select>
+                        <select
+                          value={selectedDistrict}
+                          onChange={(e) => {
+                            setSelectedDistrict(e.target.value);
+                            setShowingCenters(
+                              climbingCenters.filter(
+                                (center) =>
+                                  e.target.value === '전체' ||
+                                  center.gu.includes(e.target.value)
+                              )
+                            );
+                          }}
+                        >
+                          <option value="전체">전체</option>
+                          {Array.from(
+                            new Set(climbingCenters.map((center) => center.gu))
+                          ).map((district) => (
+                            <option key={district} value={district}>
+                              {district}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div className={style.searchCon}>
+                        <input
+                          type="text"
+                          className={style.searchInput}
+                          placeholder="검색창"
+                          value={searchTerm}
+                          onChange={(e) => setSearchTerm(e.target.value)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter') {
+                              handleSearch();
+                            }
+                          }}
+                        />
+                        <div>
+                          <i
+                            className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
+                            onClick={handleSearch}
+                          ></i>
+                          <i
+                            className={`fa-solid fa-rotate-left ${style.rotate}`}
+                            onClick={handleRefresh}
+                          ></i>
+                        </div>
+                      </div>
+                      <ul className={style.placeResult}>
+                        {showingCenters.map((center) => (
+                          <li
+                            key={center._id} // Use unique key from center object
+                            onClick={() => handlePlaceClick(center)}
+                          >
+                            {center.center}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              </>
+            )}
             <label htmlFor="difficulty">운동 난이도</label>
             <div className={style.diffiC}>
               <div className={style.diffiView} onClick={toggleDiffi}>
