@@ -83,7 +83,7 @@ const RecordList = () => {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img
-                  src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                  src={`http://localhost:8000/${record.thumbnail}`}
                   alt="thumbnail"
                 />
               </div>
