@@ -60,7 +60,7 @@ const RankList = ({ hoveredCard }) => {
         >
           <strong>{index + 1}</strong>
           <span>
-            <img src={user.thumbnail || '/img/test.jpg'} alt="" />
+            <img src={`http://localhost:8000${user.thumbnail}` || '/img/test.jpg'} alt="" />
             <strong>{user.nick || '클라이머'}</strong>
           </span>
           <span>{user.levelsum.toLocaleString()}</span>

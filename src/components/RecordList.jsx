@@ -1,9 +1,9 @@
-import style from '../css/RecordList.module.css';
-import { useState, useEffect, useRef, useCallback } from 'react';
-import axios from 'axios';
-import RecordModal from './RecordModal';
-import { useDispatch, useSelector } from 'react-redux';
-import { setRecordAllInfo } from '../store/recordStore';
+import style from "../css/RecordList.module.css";
+import { useState, useEffect, useRef, useCallback } from "react";
+import axios from "axios";
+import RecordModal from "./RecordModal";
+import { useDispatch, useSelector } from "react-redux";
+import { setRecordAllInfo } from "../store/recordStore";
 
 const RecordList = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -18,10 +18,10 @@ const RecordList = () => {
   useEffect(() => {
     const fetchRecords = async () => {
       try {
-        const response = await axios.get('http://localhost:8000/record');
+        const response = await axios.get("http://localhost:8000/record");
         dispatch(setRecordAllInfo(response.data));
       } catch (error) {
-        console.error('Error', error);
+        console.error("Error", error);
       }
     };
 
@@ -52,9 +52,9 @@ const RecordList = () => {
 
   useEffect(() => {
     const swiperCon = swiperConRef.current;
-    swiperCon.addEventListener('scroll', handleScroll);
+    swiperCon.addEventListener("scroll", handleScroll);
     return () => {
-      swiperCon.removeEventListener('scroll', handleScroll);
+      swiperCon.removeEventListener("scroll", handleScroll);
     };
   }, [handleScroll]);
 
@@ -83,21 +83,21 @@ const RecordList = () => {
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 <img
-                  src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                  src={`http://localhost:8000${record.thumbnail}`}
                   alt="thumbnail"
                 />
               </div>
             ))}
-        </div>
-        <div className={style.textBox}>
-          <p>
-            <span>{currentCenter}</span>
-            에서의
-            <br />
-            <span>{currentNick}</span> 님의 기록입니다
-          </p>
-          <div className={style.btnBox}>
-            <RecordModal />
+          <div className={style.textBox}>
+            <p>
+              <span>{currentCenter}</span>
+              에서의
+              <br />
+              <span>{currentNick}</span> 님의 기록입니다
+            </p>
+            <div className={style.btnBox}>
+              <RecordModal />
+            </div>
           </div>
         </div>
       </div>
