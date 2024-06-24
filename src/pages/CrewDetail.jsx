@@ -1,11 +1,35 @@
 import style from '../css/CrewDetail.module.css';
-import { NavLink, Routes, Route } from 'react-router-dom';
-
+import { NavLink, Routes, Route, useParams } from 'react-router-dom';
 import CrewHome from '../components/CrewHome';
 import CrewWrite from '../components/CrewWrite';
 import CrewManage from '../components/CrewManage';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 const CrewDetail = () => {
+  const { crewId } = useParams();
+  const crew = useSelector((state) => state.crew.crewInfo);
+  const users = useSelector((state) => state.userAll.userAllInfo);
+
+  const selectedCrew = crew.find((c) => c._id === crewId);
+  console.log(selectedCrew);
+
+  useEffect(() => {
+    if (selectedCrew) {
+      const members = selectedCrew.members.map((memberId) => {
+        return users.find((user) => user.id === memberId);
+      });
+      console.log(members);
+    }
+  }, [selectedCrew, users]);
+
+  if (!selectedCrew) {
+    return <p>메인페이지 갔다오세요</p>;
+  }
+
+  // 이거 없으니까 새로고침할 때마다 리덕스 초기화되고 빨간화면 떠서 추가함
+  // 나중에 redux persist 쓰거나 local storage 쓰게되면 삭제할 예정
+
   return (
     <div className={`${style.mainCrew} viewCon`}>
       <div className={style.leftCon}>
@@ -18,33 +42,36 @@ const CrewDetail = () => {
             </button>
           </div>
           <ul className={style.memberCon}>
-            <li>
-              <div className={style.profileBox}>
-                <img src="/img/test.jpg" alt="" />
-              </div>
-              <span>닉네임</span>
-            </li>
-            <li>
-              <div className={style.profileBox}>
-                <img src="/img/test.jpg" alt="" />
-              </div>
-              <span>닉네임</span>
-            </li>
+            {selectedCrew &&
+              selectedCrew.members.map((memberId) => {
+                const memberInfo = users.find((user) => user.id === memberId);
+                return (
+                  <li key={memberId}>
+                    <div className={style.profileBox}>
+                      <img
+                        src={`http://localhost:8000${memberInfo.thumbnail}`}
+                        alt="프로필 사진"
+                      />
+                    </div>
+                    <span>{memberInfo.nick}</span>
+                  </li>
+                );
+              })}
           </ul>
         </div>
       </div>
       <section className={style.rightCon}>
         <div className={style.righttxt}>
           <div className={style.crewName}>
-            <h2>크루명</h2>
-            <span>활동지역</span>
+            <h2>{selectedCrew?.name}</h2>
+            <span>{selectedCrew?.activityArea}</span>
           </div>
           <div className={style.menu}>
             <nav className={style.page_nav}>
               <ul>
                 <li>
                   <NavLink
-                    to="crewhome"
+                    to={`/crewdetail/${crewId}/crewhome`}
                     aria-current={({ isActive }) =>
                       isActive ? 'page' : undefined
                     }
@@ -54,7 +81,7 @@ const CrewDetail = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="crewwrite"
+                    to={`/crewdetail/${crewId}/crewwrite`}
                     aria-current={({ isActive }) =>
                       isActive ? 'page' : undefined
                     }
@@ -64,7 +91,7 @@ const CrewDetail = () => {
                 </li>
                 <li>
                   <NavLink
-                    to="crewmanage"
+                    to={`/crewdetail/${crewId}/crewmanage`}
                     aria-current={({ isActive }) =>
                       isActive ? 'page' : undefined
                     }

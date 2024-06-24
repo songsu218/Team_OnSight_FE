@@ -1,27 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import style from '../css/RankList.module.css';
-import axios from 'axios';
 
 const RankList = ({ hoveredCard }) => {
   const records = useSelector((state) => state.record.recordInfo);
-  const [users, setUsers] = useState([]);
-
-  console.log(records);
-  console.log(users);
-
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get('http://localhost:8000/user/userall');
-        setUsers(response.data);
-      } catch (error) {
-        console.error('error', error);
-      }
-    };
-
-    fetchUsers();
-  }, []);
+  const users = useSelector((state) => state.userAll.userAllInfo);
 
   const userLevelSumMap = {};
 
@@ -35,7 +18,7 @@ const RankList = ({ hoveredCard }) => {
   });
 
   const userList = Object.keys(userLevelSumMap).map((userId) => {
-    const user = users.find((user) => user.id == userId) || {};
+    const user = users.find((user) => user.id === userId) || {};
     return {
       ...user,
       levelsum: userLevelSumMap[userId],
@@ -60,7 +43,10 @@ const RankList = ({ hoveredCard }) => {
         >
           <strong>{index + 1}</strong>
           <span>
-            <img src={`http://localhost:8000${user.thumbnail}` || '/img/test.jpg'} alt="" />
+            <img
+              src={`http://localhost:8000${user.thumbnail}` || '/img/test.jpg'}
+              alt=""
+            />
             <strong>{user.nick || '클라이머'}</strong>
           </span>
           <span>{user.levelsum.toLocaleString()}</span>
@@ -71,7 +57,3 @@ const RankList = ({ hoveredCard }) => {
 };
 
 export default RankList;
-
-// const userArray = users && Array.isArray(users) ? users : [];
-// // userStore에는 initailState가 null로 돼있어서 이걸 배열로 변경함
-// // userStore에서 initialState를 null에서 []로 바꿔도 되는지? 왜 강사님 코드에선 null인지

@@ -1,10 +1,11 @@
+import axios from 'axios';
 import style from '../css/Crew.module.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setCrewAllInfo } from '../store/crewStore';
 
 const Crew = () => {
-  // const nick = "춘식이";
-
   const districtsByRegion = {
     seoul: [
       '종로구',
@@ -33,29 +34,36 @@ const Crew = () => {
       '송파구',
       '강동구',
     ],
-    busan: [
-      '중구',
-      '서구',
-      '동구',
-      '영도구',
-      '부산진구',
-      '동래구',
-      '남구',
-      '북구',
-      '해운대구',
-      '사하구',
-      '금정구',
-      '강서구',
-      '연제구',
-      '수영구',
-      '사상구',
-      '기장군',
-    ],
   };
 
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [searchCrew, setSearchCrew] = useState('');
+
+  const dispatch = useDispatch();
+
+  const crew = useSelector((state) => state.crew.crewInfo);
+  const user = useSelector((state) => state.user.userInfo);
+
+  useEffect(() => {
+    const fetchCrews = async () => {
+      try {
+        const response = await axios.get('http://localhost:8000/crew');
+        dispatch(setCrewAllInfo(response.data));
+      } catch (error) {
+        console.error('error', error);
+      }
+    };
+
+    fetchCrews();
+  }, [dispatch]);
+
+  console.log(crew);
+  console.log(user);
+
+  const userId = user ? user.id : null;
+
+  const myCrew = crew.filter((crew) => crew.members.includes(userId));
 
   const handleRegionChange = (event) => {
     setSelectedRegion(event.target.value);
@@ -70,53 +78,35 @@ const Crew = () => {
     setSearchCrew(e.target.value);
   };
 
-  const crewList = [
-    {
-      crewName: '영통 크루',
-      members: '1',
-      content: '크루 소개글12341234',
-    },
-    {
-      crewName: '강남 크루',
-      members: '2',
-      content: '크루 소개글56785678',
-    },
-    {
-      crewName: '북한 크루',
-      members: '3',
-      content: '크루 소개글12341234',
-    },
-    {
-      crewName: '미국 크루',
-      members: '4',
-      content: '크루 소개글56785678',
-    },
-  ];
-
-  const filteredCrewList = crewList.filter((crew) =>
-    crew.crewName.includes(searchCrew)
-  );
-
   return (
     <main className={`${style.mainCrew} viewCon`}>
       <article>
         <div className={style.myCrewCon}>
           <h3>나의크루 리스트</h3>
           <ul className={style.myCrewListCon}>
-            <li className={style.crewListCard}>
-              <Link to="/crewdetail">
-                <div className={style.crewImgBox}>
-                  <img src="/img/imgsample.png" alt="img" />
-                </div>
-                <div className={style.crewTextBox}>
-                  <div className={style.crewNameBox}>
-                    <strong>크루 이름</strong>
-                    <span> 영통구 </span>
-                  </div>
-                  <p>크루 소개글12341234</p>
-                </div>
-              </Link>
-            </li>
+            {myCrew.length > 0 ? (
+              myCrew.map((crew) => (
+                <li key={crew._id} className={style.crewListCard}>
+                  <Link to={`/crewdetail/${crew._id}`}>
+                    <div className={style.crewImgBox}>
+                      <img
+                        src={`http://localhost:8000${crew.crewImg}`}
+                        alt="crew"
+                      />
+                    </div>
+                    <div className={style.crewTextBox}>
+                      <div className={style.crewNameBox}>
+                        <strong>{crew.name}</strong>
+                        <span> {crew.gu} </span>
+                      </div>
+                      <p>{crew.content}</p>
+                    </div>
+                  </Link>
+                </li>
+              ))
+            ) : (
+              <li>나의 크루가 없습니다.</li>
+            )}
           </ul>
         </div>
       </article>
@@ -137,7 +127,6 @@ const Crew = () => {
             >
               <option value="">선택</option>
               <option value="seoul">서울</option>
-              <option value="busan">부산</option>
             </select>
             <label htmlFor="district-select" />
             <select
@@ -164,20 +153,27 @@ const Crew = () => {
             <i className="fa-solid fa-magnifying-glass"></i>
           </div>
         </div>
-
         <ul className={style.crewList}>
-          {filteredCrewList.map((crew) => (
-            <li key={crew} className={style.crewListCard}>
-              <div className={style.recCrewImgBox}>
-                <img src="/img/imgsample.png" alt="img" />
-              </div>
-              <div className={style.crewListTextBox}>
-                <strong>{crew.crewName}</strong>
-                <p>{crew.content}</p>
-                <span>크루원 : {crew.members}명</span>
-              </div>
-            </li>
-          ))}
+          {crew
+            .filter((crew) => !myCrew.map((c) => c._id).includes(crew._id))
+            .map((crew) => (
+              <Link to={`/crewdetail/${crew._id}`}>
+                <li key={crew._id} className={style.crewListCard}>
+                  <div className={style.recCrewImgBox}>
+                    <img
+                      src={`http://localhost:8000${crew.crewImg}`}
+                      alt="crew"
+                    />
+                  </div>
+                  <div className={style.crewListTextBox}>
+                    <strong>{crew.name}</strong>
+                    <p> {crew.gu} </p>
+                    <p>{crew.content}</p>
+                    <span>크루원 : {crew.membercount}명</span>
+                  </div>
+                </li>
+              </Link>
+            ))}
         </ul>
       </section>
     </main>
