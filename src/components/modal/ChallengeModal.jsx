@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import style from "../../css/ChallengeModal.module.css";
@@ -10,7 +10,7 @@ import { ch } from "../../api.js";
 
 registerLocale("ko", ko);
 
-function ChallengeModal({onClose}) {
+function ChallengeModal({ onClose, isOpen, username }) {
   // const [show, setShow] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [openPlace, setOpenPlace] = useState(false);
@@ -20,8 +20,18 @@ function ChallengeModal({onClose}) {
   const [selectedDistrict, setSelectedDistrict] = useState("전체");
   const [searchTerm, setSearchTerm] = useState("");
   const [showingCenters, setShowingCenters] = useState([]);
-  const [title, setTitle] = useState('');
-
+  const [title, setTitle] = useState("");
+  const isFirstRun = useRef(true);
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    if (!username) {
+      alert("로그인이 필요합니다.");
+      onClose();
+    }
+  }, []);
   const handleClose = () => {
     // setShow(false);
     resetForm();
@@ -50,21 +60,30 @@ function ChallengeModal({onClose}) {
       return;
     }
 
-    const formData = new FormData();
-    formData.append("title", title);
-    formData.append("center", selectedPlace);
-    formData.append("date", startDate.toISOString().split("T")[0]);
+    // const formData = new FormData();
+    // formData.append("title", title);
+    // formData.append("center", selectedPlace);
+    // formData.append("date", startDate.toISOString().split("T")[0]);
 
-    console.log(formData);
-    // ch.chEnter()
-    // .then((result) => {
-
-    // }).catch((error) => {
-    //   console.log(`${error}`);
-    // });
+    ch.chRegister(
+      title,
+      username,
+      selectedPlace,
+      "주소 모달창미구현",
+      startDate.toISOString().split("T")[0]
+    )
+      .then((result) => {
+        console.log(result);
+        alert("챌린지 생성이 완료되었습니다.");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+        alert("오류 : 챌린지 생성실패");
+      });
 
     handleClose();
-  }
+  };
 
   useEffect(() => {
     axios
@@ -104,35 +123,35 @@ function ChallengeModal({onClose}) {
       {/* <button className={style.addBtn}>
         <span>나의 챌린지 만들기</span>
       </button> */}
-      <Modal className={style.modalRe} show={true} onHide={handleClose}>
+      <Modal className={style.modalRe} show={isOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>챌린지 만들기</Modal.Title>
         </Modal.Header>
         <Modal.Body className={style.modalBody}>
           <form className={style.recordCon}>
-            <label htmlFor='title'>챌린지 이름</label>
+            <label htmlFor="title">챌린지 이름</label>
             <input
-              type='text'
-              name='title'
-              id='title'
+              type="text"
+              name="title"
+              id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
-            <label htmlFor='date'>날짜 선택</label>
+            <label htmlFor="date">날짜 선택</label>
             <div className={style.dateWrap}>
               <DatePicker
-                dateFormat='yyyy.MM.dd'
+                dateFormat="yyyy.MM.dd"
                 selected={startDate}
                 onChange={(date) => setStartDate(date)}
                 maxDate={new Date()}
-                locale='ko'
+                locale="ko"
               />
             </div>
-            <label htmlFor='place'>운동 장소</label>
+            <label htmlFor="place">운동 장소</label>
             <div className={style.placeC}>
               <div className={style.placeView} onClick={togglePlace}>
                 <span>{selectedPlace || "장소 선택"}</span>
-                <i className='fa-solid fa-chevron-down'></i>
+                <i className="fa-solid fa-chevron-down"></i>
               </div>
               {openPlace && (
                 <div className={style.placeList}>
@@ -141,7 +160,7 @@ function ChallengeModal({onClose}) {
                       value={selectedCity}
                       onChange={(e) => setSelectedCity(e.target.value)}
                     >
-                      <option value='서울특별시'>서울특별시</option>
+                      <option value="서울특별시">서울특별시</option>
                     </select>
                     <select
                       value={selectedDistrict}
@@ -156,7 +175,7 @@ function ChallengeModal({onClose}) {
                         );
                       }}
                     >
-                      <option value='전체'>전체</option>
+                      <option value="전체">전체</option>
                       {Array.from(
                         new Set(climbingCenters.map((center) => center.gu))
                       ).map((district) => (
@@ -168,9 +187,9 @@ function ChallengeModal({onClose}) {
                   </div>
                   <div className={style.searchCon}>
                     <input
-                      type='text'
+                      type="text"
                       className={style.searchInput}
-                      placeholder='검색창'
+                      placeholder="검색창"
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
                       onKeyDown={(e) => {
@@ -208,7 +227,7 @@ function ChallengeModal({onClose}) {
         <Modal.Footer className={style.ModalFt}>
           <Button
             className={style.saveBtn}
-            variant='primary'
+            variant="primary"
             onClick={handleSubmit}
           >
             챌린지 생성

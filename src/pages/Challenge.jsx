@@ -8,12 +8,16 @@ import "swiper/css";
 // import 'swiper/css/navigation';
 import style from "../css/challenge.module.css";
 import ChallengeModal from "../components/modal/ChallengeModal";
+import { useSelector } from "react-redux";
 
 const Challenge = (props) => {
   //#region 변수,Hook
   const { props1, props2 } = {
     ...props,
   };
+  const user = useSelector((state) => state.user.userInfo);
+  const username = user ? user.id : null;
+  const nickname = user ? user.nick : null;
   const navigate = useNavigate();
   const swiperRef = useRef(null);
   const progressCircle = useRef(null);
@@ -33,11 +37,16 @@ const Challenge = (props) => {
     window.innerWidth <= 1079
   );
   const [showModal, setShowModal] = useState(false);
-
+  const isFirstRun = useRef(true);
   //#endregion 변수,Hook
-  const closeModal = () => {
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+  const handleCloseModal = () => {
     setShowModal(false);
   };
+
   const handleAutoplayToggle = () => {
     if (swiper) {
       if (isAutoplay) {
@@ -53,6 +62,10 @@ const Challenge = (props) => {
 
   //#region init
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
     setAllChData("TOT");
     window.addEventListener("resize", handleResize);
     return () => {
@@ -166,8 +179,8 @@ const Challenge = (props) => {
       //나의 챌린지 보기
       setMyChData(type, "qwer1234");
     } else if (index === 2) {
-      // setShowModal(true); //나의 챌린지 만들기
-      setShowModal(true);
+      //나의 챌린지 만들기
+      handleOpenModal();
     }
   };
   //#endregion 함수
@@ -208,10 +221,16 @@ const Challenge = (props) => {
                       className={style.page_link}
                       onClick={(event) => handleClick(2, event)}
                       title="나의 챌린지 만들기 페이지 이동 링크"
-                      >
+                    >
                       나의 챌린지 만들기
                     </a>
-                      {showModal && <ChallengeModal onClose={closeModal} />}
+                    {showModal && (
+                      <ChallengeModal
+                        onClose={handleCloseModal}
+                        isOpen={showModal}
+                        username={username}
+                      />
+                    )}
                     {/* <ChallengeModal /> */}
                   </li>
                 </ul>
