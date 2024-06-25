@@ -329,7 +329,7 @@ const ChallengeDetail = () => {
                         <tr key={index}>
                           <td>
                             <div className={style.rank_profile}>
-                              <img src={item.thumbnail} alt='Profile' />
+                              <img src={item.thumbnail == null ? "/img/joinuser.png" : `http://localhost:8000${item.thumbnail}`} alt='Profile' />
                               <span className={style.trophy} />
                             </div>
                           </td>
