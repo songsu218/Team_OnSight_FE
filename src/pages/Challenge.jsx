@@ -29,7 +29,7 @@ const Challenge = (props) => {
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [totalSlides, setTotalSlides] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState('TOT');
   const [printData, setPrintData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerViewCount, setSlidesPerViewCount] = useState(4);
