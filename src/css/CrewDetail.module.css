@@ -23,6 +23,7 @@
   text-align: center;
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s;
+  z-index: 2;
 }
 
 .leftCon h3 {
@@ -37,6 +38,7 @@
   top: 1rem;
   right: 1rem;
   font-size: 2rem;
+  cursor: pointer;
 }
 
 .leftCon .iconLeft {
@@ -44,6 +46,7 @@
   top: 1rem;
   font-size: 2rem;
   right: -2.5rem;
+  cursor: pointer;
 }
 
 .leftCon .leftConinner {
