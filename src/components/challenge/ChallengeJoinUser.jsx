@@ -34,7 +34,7 @@ const ChallengeJoinUser = (props) => {
       <div style={entry_img}>
         <img
           style={img}
-          src={thumbnail == null ? "/img/joinuser.png" : thumbnail}
+          src={thumbnail == null ? "/img/joinuser.png" : `http://localhost:8000${thumbnail}`}
         ></img>
       </div>
       <em style={entry}>{user_name}</em>
