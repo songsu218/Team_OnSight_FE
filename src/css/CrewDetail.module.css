@@ -1,5 +1,17 @@
 .mainCrew {
   display: flex;
+  width: calc(100% - 210px);
+  margin-left: auto;
+  position: relative;
+}
+
+.mainCrewToggled .leftCon {
+  transform: translateX(-400px);
+}
+
+.mainCrewToggled .rightCon {
+  width: 100%;
+  margin: auto;
 }
 
 /* 크루원 영역 */
@@ -9,8 +21,8 @@
   position: fixed;
   top: 0;
   text-align: center;
-  background-color: #f1f1f1;
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
 }
 
 .leftCon h3 {
@@ -18,6 +30,20 @@
   font-family: 'S-CoreDream-3Light';
   font-size: 26px;
   font-weight: bold;
+}
+
+.leftCon .iconRight {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+}
+
+.leftCon .iconLeft {
+  position: absolute;
+  top: 1rem;
+  font-size: 2rem;
+  right: -2.5rem;
 }
 
 .leftCon .leftConinner {
@@ -82,6 +108,16 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  position: relative;
+  transition: 0.3s;
+}
+
+.rightCon > i {
+  font-size: 2rem;
+  position: absolute;
+  top: 1rem;
+  right: 7%;
+  cursor: pointer;
 }
 
 .righttxt {
@@ -180,6 +216,10 @@
 .page_nav ul li > a::before {
   border-top: 3px solid transparent;
   border-bottom: 3px solid transparent;
+}
+
+.blur {
+  filter: blur(5px);
 }
 
 /* a 선택 */

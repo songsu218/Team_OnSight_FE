@@ -1,7 +1,9 @@
 .listData2 {
   position: relative;
 }
-
+.listData2 p i {
+  padding: 1rem;
+}
 .listData2 > ul {
   border-top: 3px solid #000000;
 }
@@ -11,6 +13,7 @@
   padding: 38px 0;
   border-bottom: 1px solid #cdcdcd;
   cursor: pointer;
+  align-items: center;
 }
 
 .listData2 > ul > li > span {
@@ -40,6 +43,14 @@
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.listData2 .deleteButton {
+  position: absolute;
+  padding: 0.5rem;
+  right: -5px;
+  background-color: transparent;
+  transform: translateY(30px);
 }
 
 @media (max-width: 1079px) {
@@ -131,6 +142,9 @@
   }
 }
 
+.listData2 ul li i {
+  padding: 1rem;
+}
 @media (min-width: 1680px) {
   .listData2 .label {
     padding: 0 56px;

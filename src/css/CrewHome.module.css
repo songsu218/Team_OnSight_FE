@@ -25,3 +25,10 @@
   font-size: 32px;
   font-weight: bold;
 }
+
+.memberNot {
+  margin-top: 2rem;
+  font-size: 1.75rem;
+  display: flex;
+  justify-content: center;
+}

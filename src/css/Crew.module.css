@@ -1,5 +1,17 @@
 .mainCrew {
   display: flex;
+  width: calc(100% - 210px);
+  margin-left: auto;
+  position: relative;
+}
+
+.mainCrewToggled .myCrewCon {
+  transform: translateX(-400px);
+}
+
+.mainCrewToggled .rightCon {
+  width: 100%;
+  margin: auto;
 }
 
 /* 나의 크루 리스트 영역 */
@@ -9,8 +21,22 @@
   position: fixed;
   top: 0;
   text-align: center;
-  background-color: #f1f1f1;
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+}
+
+.myCrewCon .iconRight {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 2rem;
+}
+
+.myCrewCon .iconLeft {
+  position: absolute;
+  top: 1rem;
+  font-size: 2rem;
+  right: -2.5rem;
 }
 
 .myCrewCon h3 {
@@ -29,6 +55,7 @@
   height: 300px;
   background-color: white;
   border-radius: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .myCrewListCon .crewImgBox {
@@ -67,6 +94,7 @@
   width: calc(100% - 400px);
   margin-left: auto;
   padding: 96px 80px 136px;
+  transition: 0.3s;
 }
 
 .righttxt {
@@ -123,7 +151,7 @@
 }
 
 .searchBox::after {
-  content: "";
+  content: '';
   width: 2px;
   height: 20px;
   position: absolute;
