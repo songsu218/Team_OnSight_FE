@@ -2,7 +2,7 @@ import axios from 'axios';
 import style from '../css/Crew.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { setCrewAllInfo } from '../store/crewStore';
 
 const Crew = () => {
@@ -39,12 +39,22 @@ const Crew = () => {
   const [selectedRegion, setSelectedRegion] = useState('');
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [searchCrew, setSearchCrew] = useState('');
+  const [toggle, setToggle] = useState(false);
   const [filteredCrew, setFilteredCrew] = useState([]);
 
   const dispatch = useDispatch();
 
   const crew = useSelector((state) => state.crew.crewInfo);
-  const user = useSelector((state) => state.user.userInfo);
+  const user = useSelector((state) => state.user.userInfo || null);
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!user) {
+      // 새로고침부분 보류
+      navigate('/signinpage');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     const fetchCrews = async () => {
@@ -91,6 +101,9 @@ const Crew = () => {
     setSearchCrew(e.target.value);
   };
 
+  const toggleSidebar = () => {
+    setToggle(!toggle);
+    
   const handleSearch = () => {
     filterCrews();
   };
@@ -102,10 +115,18 @@ const Crew = () => {
   };
 
   return (
-    <main className={`${style.mainCrew} viewCon`}>
+    <main
+      className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ''}`}
+    >
       <article>
         <div className={style.myCrewCon}>
           <h3>나의크루 리스트</h3>
+          <i
+            className={`fa-solid ${
+              toggle ? 'fa-angle-right' : 'fa-angle-left'
+            } ${toggle ? style.iconLeft : style.iconRight}`}
+            onClick={toggleSidebar}
+          ></i>
           <ul className={style.myCrewListCon}>
             {myCrew.length > 0 ? (
               myCrew.map((crew) => (
@@ -184,8 +205,8 @@ const Crew = () => {
           {filteredCrew
             .filter((crew) => !myCrew.map((c) => c._id).includes(crew._id))
             .map((crew) => (
-              <Link to={`/crewdetail/${crew._id}`}>
-                <li key={crew._id} className={style.crewListCard}>
+              <Link to={`/crewdetail/${crew._id}`} key={crew._id}>
+                <li className={style.crewListCard}>
                   <div className={style.recCrewImgBox}>
                     <img
                       src={`http://localhost:8000${crew.crewImg}`}
