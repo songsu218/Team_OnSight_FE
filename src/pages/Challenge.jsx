@@ -62,11 +62,11 @@ const Challenge = (props) => {
 
   //#region init
   // 비로그인 시 접근 제한
-  useEffect(() => {
-    if (!user) {
-      navigate('/signinpage');
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate('/signinpage');
+  //   }
+  // }, [user, navigate]);
 
   useEffect(() => {
     if (isFirstRun.current) {
@@ -116,8 +116,8 @@ const Challenge = (props) => {
         setDataList(result.data);
         // setNowList(result.data.filter((item) => item.state === "NOW"));
         // setPastList(result.data.filter((item) => item.state === "PAST"));
-        setNowList(result.data.filter((item) => item.state === true));
-        setPastList(result.data.filter((item) => item.state === false));
+        setNowList(result.data.filter((item) => item.state === 'true'));
+        setPastList(result.data.filter((item) => item.state === 'false'));
         setPrintData(result.data);
         console.log(result.data);
       })
@@ -129,11 +129,11 @@ const Challenge = (props) => {
   const handleSelectChange = (event) => {
     const target = event.target.value;
     const instance =
-      target == 0
+      target == 'TOT'
         ? dataList
-        : target == 1
+        : target == 'NOW'
         ? nowList
-        : target == 2
+        : target == 'PAST'
         ? pastList
         : '';
     setSelectedOption(target);
@@ -178,13 +178,12 @@ const Challenge = (props) => {
   const handleClick = (index, event) => {
     event.preventDefault();
     setActiveIndex(index);
-    const type = selectedOption == '선택' ? 'TOT' : selectedOption;
     if (index === 0) {
       //챌린지 일정
-      setAllChData(type);
+      setAllChData(selectedOption);
     } else if (index === 1) {
       //나의 챌린지 보기
-      setMyChData(type, username);
+      setMyChData(selectedOption, username);
     } else if (index === 2) {
       //나의 챌린지 만들기
       handleOpenModal();
@@ -256,9 +255,9 @@ const Challenge = (props) => {
                 value={selectedOption}
                 onChange={handleSelectChange}
               >
-                <option value={0}>선택</option>
-                <option value={1}>진행 중</option>
-                <option value={2}>진행 끝</option>
+                <option value={'TOT'}>선택</option>
+                <option value={'NOW'}>진행 중</option>
+                <option value={'PAST'}>진행 끝</option>
               </select>
             </div>
             <div className={style.challenge_wrap}>
