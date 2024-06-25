@@ -8,31 +8,31 @@ import { setCrewAllInfo } from '../store/crewStore';
 const Crew = () => {
   const districtsByRegion = {
     seoul: [
-      '종로구',
-      '중구',
-      '용산구',
-      '성동구',
-      '광진구',
-      '동대문구',
-      '중랑구',
-      '성북구',
-      '강북구',
-      '도봉구',
-      '노원구',
-      '은평구',
-      '서대문구',
-      '마포구',
-      '양천구',
+      '강남구',
+      '강동구',
       '강서구',
+      '강북구',
+      '관악구',
+      '광진구',
       '구로구',
       '금천구',
-      '영등포구',
+      '노원구',
+      '동대문구',
+      '도봉구',
       '동작구',
-      '관악구',
+      '마포구',
+      '서대문구',
+      '성동구',
+      '성북구',
       '서초구',
-      '강남구',
       '송파구',
-      '강동구',
+      '영등포구',
+      '용산구',
+      '양천구',
+      '은평구',
+      '종로구',
+      '중구',
+      '중랑구',
     ],
   };
 
@@ -40,6 +40,7 @@ const Crew = () => {
   const [selectedDistrict, setSelectedDistrict] = useState('');
   const [searchCrew, setSearchCrew] = useState('');
   const [toggle, setToggle] = useState(false);
+  const [filteredCrew, setFilteredCrew] = useState([]);
 
   const dispatch = useDispatch();
 
@@ -60,6 +61,7 @@ const Crew = () => {
       try {
         const response = await axios.get('http://localhost:8000/crew');
         dispatch(setCrewAllInfo(response.data));
+        setFilteredCrew(response.data);
       } catch (error) {
         console.error('error', error);
       }
@@ -68,12 +70,23 @@ const Crew = () => {
     fetchCrews();
   }, [dispatch]);
 
-  console.log(crew);
-  console.log(user);
+  useEffect(() => {
+    filterCrews();
+  }, [selectedDistrict]);
 
   const userId = user ? user.id : null;
 
   const myCrew = crew.filter((crew) => crew.members.includes(userId));
+
+  const filterCrews = () => {
+    const result = crew.filter((crew) => {
+      return (
+        (!selectedDistrict || crew.gu === selectedDistrict) &&
+        (!searchCrew || crew.name.includes(searchCrew))
+      );
+    });
+    setFilteredCrew(result);
+  };
 
   const handleRegionChange = (event) => {
     setSelectedRegion(event.target.value);
@@ -90,6 +103,15 @@ const Crew = () => {
 
   const toggleSidebar = () => {
     setToggle(!toggle);
+    
+  const handleSearch = () => {
+    filterCrews();
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleSearch();
+    }
   };
 
   return (
@@ -171,12 +193,16 @@ const Crew = () => {
               placeholder="크루검색"
               value={searchCrew}
               onChange={handleSearchChange}
+              onKeyDown={handleKeyDown}
             />
-            <i className="fa-solid fa-magnifying-glass"></i>
+            <i
+              className="fa-solid fa-magnifying-glass"
+              onClick={handleSearch}
+            ></i>
           </div>
         </div>
         <ul className={style.crewList}>
-          {crew
+          {filteredCrew
             .filter((crew) => !myCrew.map((c) => c._id).includes(crew._id))
             .map((crew) => (
               <Link to={`/crewdetail/${crew._id}`} key={crew._id}>

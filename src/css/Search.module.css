@@ -1,6 +1,6 @@
 .viewCon {
-    width: calc(100% - 210px);
-    margin-left: auto;
+  width: calc(100% - 210px);
+  margin-left: auto;
 }
 
 .search {
@@ -9,15 +9,15 @@
 }
 
 .customOverlay {
-    background: white;
-    border: 1px solid #ccc;
-    padding: 5px 10px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
-    font-size: 14px;  
-    white-space: nowrap; 
-    transform: translateY(-28px);
-  }
+  background: white;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  white-space: nowrap;
+  transform: translateY(-28px);
+}
 
 .sidebar {
   background-color: #f1f1f1;
@@ -27,7 +27,7 @@
   overflow-y: auto;
 }
 
-.sidebar > h3 {
+.sidebar>h3 {
   margin: 46px 0 50px 0;
   text-align: center;
   font-size: 26px;
@@ -100,54 +100,54 @@
 }
 
 .centerName {
-    font-size: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .centerList {
-    width: 347px;
-    height: 250px;
-    background-color: #fff;
-    padding: 10px 20px;
-    margin-top: 20px;
-    display: flex;
-    flex-direction: column;
+  width: 347px;
+  height: 250px;
+  background-color: #fff;
+  padding: 10px 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 .centerList img {
-    width: 306px;
-    margin: auto;
-    height: 132px;
-    object-fit: cover;
+  width: 306px;
+  margin: auto;
+  height: 132px;
+  object-fit: cover;
 }
 
 .centerInfo {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 
 }
 
 .centerInfo div {
-    display: flex;
+  display: flex;
 }
 
 .centerInfo div h4 {
-    font-size: 18px;
+  font-size: 18px;
 }
 
 .centerInfo div p {
-    font-size: 14px;
-    opacity: 0.5;
+  font-size: 14px;
+  opacity: 0.5;
 }
 
 .searchResults .centerDetail {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    margin-top: 30px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+  margin-top: 30px;
 }
 
 /* 상세페이지-공통 */
@@ -155,7 +155,7 @@
   position: relative;
 }
 
-.centerDetails > * {
+.centerDetails>* {
   margin-bottom: 20px;
 }
 
@@ -175,42 +175,42 @@
 
 
 .centerDetails .centerDetailInfo {
-    margin-top: 10px;
-    display: flex;
-    justify-content: space-between;
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .likeStar {
-    color: #FECE2F;
+  color: #FECE2F;
 }
 
 .centerDetailInfo div {
-    display: flex;
+  display: flex;
 }
 
 .centerDetailInfo div h4 {
-    font-size: 20px;
+  font-size: 20px;
 }
 
 .centerDetailInfo div p {
-    opacity: 0.5;
+  opacity: 0.5;
 }
 
 .sidebarDetails {
-    background-color: #fff;
+  background-color: #fff;
 }
 
 /* 상세페이지 탭부분 */
 .tabButtonHome,
 .tabButtonRecode {
-    position: relative;
-    background: none;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    outline: none;
-    color: grey;
-    /* 다른 부분의 회색은 DEE2E6이걸 썼는데 너무 연해서 바꿈*/
+  position: relative;
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  color: grey;
+  /* 다른 부분의 회색은 DEE2E6이걸 썼는데 너무 연해서 바꿈*/
 }
 
 .tabButtonHome.activeTab,
@@ -237,12 +237,12 @@
 
 /* 상세페이지 - 홈 */
 .centerHome {
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
 
-.centerHome > * {
+.centerHome>* {
   margin-bottom: 20px;
 }
 
@@ -272,114 +272,113 @@
 }
 
 .websiteContainer {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .websiteContainer a {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    display: inline-block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
 }
 
 .centerHome .centerDetail {
-    white-space: pre-wrap;
-    margin-top: 10px;
-    line-height: 1.6;
+  white-space: pre-wrap;
+  margin-top: 10px;
+  line-height: 1.6;
 }
 
 /* 상세페이지- 기록 */
 .centerRecordNav {
-    display: flex;
-    justify-content: end;
-    margin-top: 30px;
-    margin-bottom: 1rem;
-} 
+  display: flex;
+  justify-content: end;
+  margin-top: 30px;
+  margin-bottom: 1rem;
+}
 
- 
 
-.centerRecordNav .btnBox { 
-    border: 3px solid black;
+
+.centerRecordNav .btnBox {
+  border: 3px solid black;
 }
 
 .btnBox .customButton {
-    font-size: 1rem;
-    font-family: Arial, sans-serif;
-    cursor: pointer;
-    height: 30px;
-     
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  height: 30px;
+
 }
 
 
 /* 테스트 */
 .recordItem {
-    border: 1px solid #dee2e6;
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 /* 이미지, recordUserInfo */
 .recordHeader {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
 }
 
 .recordItem .recordHeader .profileImage {
-    border: 1px solid red;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 16px;
-    object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  object-fit: cover;
 }
 
 
 /* recordUserInfo -> 닉네임, 기록수 */
 .recordNickname {
-    font-weight: bold;
-    margin-bottom: 0.3rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
 }
 
 .recordCount {
-    color: gray;
+  color: gray;
 }
 
 /* recordContent */
 .recordContent .recordImage {
-    width: 100%;
-    height: 170px;
-    margin-right: 16px;
-    object-fit: cover;
-    margin-bottom: 1rem;
+  width: 100%;
+  height: 170px;
+  margin-right: 16px;
+  object-fit: cover;
+  margin-bottom: 1rem;
 }
 
 .recordText h5 {
-    font-weight: bold;
-    margin-bottom: 0.5rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
 }
 
 .recordText p {
-    margin-bottom: 1rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
 }
 
 .recordDate {
-    font-size: 0.8rem;
-    color: gray;
+  font-size: 0.8rem;
+  color: gray;
 }
 
 @media (max-width: 1440px) {
-    .viewCon {
-        width: 100%;
-    }
+  .viewCon {
+    width: 100%;
+  }
 }
