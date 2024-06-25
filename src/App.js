@@ -15,7 +15,8 @@ import CreateCrew from './pages/CreateCrew';
 import CrewDetail from './pages/CrewDetail';
 import Profile from './pages/Profile';
 import Ranking from './pages/Ranking';
-import FeedDetail from './pages/FeedDetail';
+import CrewFeedDetail from './pages/CrewFeedDetail';
+import CrewFeedEdit from './pages/CrewFeedEdit';
 
 function App() {
   return (
@@ -37,7 +38,14 @@ function App() {
           element={<ChallengeDetail />}
         />
         <Route path="/profile" element={<Profile />} />
-        <Route path="/crewdetail/feeddetail" element={<FeedDetail />} />
+        <Route
+          path="/crewdetail/feeddetail/:feedId/*"
+          element={<CrewFeedDetail />}
+        />
+        <Route
+          path="/crewdetail/feeddetail/edit/:feedId"
+          element={<CrewFeedEdit />}
+        />
         <Route path="/rank" element={<Ranking />} />
       </Routes>
     </div>

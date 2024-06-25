@@ -13,7 +13,7 @@ const CrewHome = () => {
   const selectedCrew = crew.find((c) => c._id === crewId);
 
   if (!selectedCrew) {
-    return <div>삭제 되거나, 존재하지 않는 크루입니다.</div>;
+    return <div>삭제 되았거나 존재하지 않는 크루입니다.</div>;
   }
 
   return (
