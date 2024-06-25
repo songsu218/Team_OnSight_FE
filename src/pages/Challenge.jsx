@@ -62,11 +62,11 @@ const Challenge = (props) => {
 
   //#region init
   // 비로그인 시 접근 제한
-  // useEffect(() => {
-  //   if (!user) {
-  //     navigate('/signinpage');
-  //   }
-  // }, [user, navigate]);
+  useEffect(() => {
+    if (!user) {
+      navigate('/signinpage');
+    }
+  }, [user, navigate]);
 
   useEffect(() => {
     if (isFirstRun.current) {
@@ -125,7 +125,7 @@ const Challenge = (props) => {
         setChData(target);
         break;
       case 1:
-        setMyChData(target,username);
+        setMyChData(target, username);
         break;
       default:
         break;
@@ -177,7 +177,7 @@ const Challenge = (props) => {
       setMyChData(selectedOption, username);
     } else if (index === 2) {
       //나의 챌린지 만들기
-      handleOpenModal()
+      handleOpenModal();
       setActiveIndex(activeIndex);
       return;
     }
@@ -202,7 +202,7 @@ const Challenge = (props) => {
                       onClick={(event) => handleClick(0, event)}
                       title='챌린지 일정 페이지 이동 링크'
                     >
-                      챌린지 일정
+                      전체 챌린지
                     </a>
                   </li>
                   <li className={activeIndex === 1 ? style.active : ''}>
@@ -212,7 +212,7 @@ const Challenge = (props) => {
                       onClick={(event) => handleClick(1, event)}
                       title='나의 챌린지 보기 페이지 이동 링크'
                     >
-                      나의 챌린지 보기
+                      나의 챌린지
                     </a>
                   </li>
                   <li className={activeIndex === 2 ? style.active : ''}>
