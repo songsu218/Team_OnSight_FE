@@ -5,6 +5,8 @@ import ChallengeJoinUser from "../components/challenge/ChallengeJoinUser";
 import { ch } from "../api.js";
 import { useSelector } from "react-redux";
 
+const itemsPerPage = 3;
+
 const ChallengeDetail = () => {
   //#region 변수,Hook
   const location = useLocation();
@@ -21,29 +23,38 @@ const ChallengeDetail = () => {
   const [challenge_center, setChallenge_center] = useState(detailData.center); // 챌린지 장소
   const [joinList, setJoinList] = useState([]);
   const [rank, setRank] = useState([]);
-  const itemsPerPage = 3;
+  //페이징
   const [currentPage, setCurrentPage] = useState(1);
-  const indexOfLastItem = currentPage * itemsPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-
   const [currentItems, setCurrentItems] = useState([]);
+  const [indexOfLastItem, setIndexOfLastItem] = useState(
+    currentPage * itemsPerPage
+  );
+  const [indexOfFirstItem, setIndexOfFirstItem] = useState(
+    indexOfLastItem - itemsPerPage
+  );
+  useEffect(() => {
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    setCurrentItems(rank.slice(indexOfFirstItem, indexOfLastItem));
+  }, [currentPage]);
   const [totalPages, setTotalPages] = useState();
-  const isFirstRun = useRef(true);
+  
   //#endregion 변수,Hook
   // console.log("detailData");
   // console.log(detailData);
   // console.log("user");
   // console.log(username);
   // console.log(nickname);
-
+  
   //#region init
+  const isFirstRun = useRef(true);
   useEffect(() => {
     if (isFirstRun.current) {
       isFirstRun.current = false;
       return;
     }
     ch.chJoinList(detailData.challengename)
-    .then((result) => {
+      .then((result) => {
         console.log("state : " + detailData.state);
         console.log("참여자 목록");
         console.log(result.data);
@@ -59,7 +70,6 @@ const ChallengeDetail = () => {
           console.log("랭킹데이터");
           console.log(result.data);
           setRank(result.data);
-
           setCurrentItems(result.data.slice(indexOfFirstItem, indexOfLastItem));
           setTotalPages(Math.ceil(result.data.length / itemsPerPage));
         })
@@ -205,8 +215,8 @@ const ChallengeDetail = () => {
 
   return (
     <>
-      <div className="con1">
-        <main id={style.container} className="mw">
+      <div className='con1'>
+        <main id={style.container} className='mw'>
           <div className={style.content}>
             {/* h1은 로고(사이트명)이라 가정하고 */}
             {/* 아래 타이틀 및 페이지 네비 영역은 들어가야 챌린지 일정과 헤딩 태그 레벨이 맞음. */}
@@ -216,18 +226,18 @@ const ChallengeDetail = () => {
                 <ul>
                   <li className={style.active}>
                     <a
-                      href="#"
+                      href='#'
                       className={style.page_link}
-                      title="나의 챌린지 만들기 페이지 이동 링크"
+                      title='나의 챌린지 만들기 페이지 이동 링크'
                     >
                       나의 챌린지 만들기
                     </a>
                   </li>
                   <li>
                     <a
-                      href="#"
+                      href='#'
                       className={style.page_link}
-                      title="나의 챌린지 보기 페이지 이동 링크"
+                      title='나의 챌린지 보기 페이지 이동 링크'
                     >
                       나의 챌린지 보기
                     </a>
@@ -243,12 +253,12 @@ const ChallengeDetail = () => {
                     <img
                       srcSet={`${challenge_img}`}
                       src={`${challenge_img}`}
-                      alt="A챌린지 이미지"
+                      alt='A챌린지 이미지'
                     />
                   </div>
                   <div className={style.apply_btn_wrap}>
                     <button
-                      type="button"
+                      type='button'
                       id={style.applyBtn}
                       className={style.apply_btn}
                       onClick={() => {
@@ -268,7 +278,7 @@ const ChallengeDetail = () => {
                       <li>
                         <span className={style.bold}>기간</span>
                         <span>{challenge_period}</span>
-                        {detailData.state == 'true' ? (
+                        {detailData.state == "true" ? (
                           <span className={`${style.status} ${style.ing}`}>
                             진행중
                           </span>
@@ -284,7 +294,7 @@ const ChallengeDetail = () => {
                       </li>
                     </ul>
                     <div className={style.entry_list_wrap}>
-                      <button type="button" className={style.entry_list_btn}>
+                      <button type='button' className={style.entry_list_btn}>
                         챌린지 참여자
                       </button>
                       <ul className={style.entry_list}>
@@ -319,7 +329,7 @@ const ChallengeDetail = () => {
                         <tr key={index}>
                           <td>
                             <div className={style.rank_profile}>
-                              <img src={item.thumbnail} alt="Profile" />
+                              <img src={item.thumbnail == null ? "/img/joinuser.png" : `http://localhost:8000${item.thumbnail}`} alt='Profile' />
                               <span className={style.trophy} />
                             </div>
                           </td>
