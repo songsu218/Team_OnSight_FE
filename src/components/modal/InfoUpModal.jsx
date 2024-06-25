@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import style from "../../css/InfoUpModal.module.css";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setUserAllInfo } from "../../store/userStore";
 
 const InfoUpModal = ({ onClose }) => {
+  const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
   const [nickname, setNickname] = useState(userInfo.nick);
   const [imgUrl, setImgUrl] = useState(
@@ -26,6 +28,11 @@ const InfoUpModal = ({ onClose }) => {
 
       const data = await response.json();
       if (response.ok && data) {
+        // 쿠키 업데이트
+        // document.cookie = `userInfo=${JSON.stringify(data)}; path=/`;
+
+        // Redux 업데이트
+        dispatch(setUserAllInfo(data));
         onClose();
       } else {
         console.error("Failed to fetch info update");

@@ -13,8 +13,9 @@ const MyPage = () => {
 
   useEffect(() => {
     if (!user) {
-      //새로고침부분 보류
-      // navigate("/signinpage");
+      // 새로고침부분 보류
+      alert("로그인 후 사용가능해요. 로그인 하시겠어요?");
+      navigate("/signinpage");
     }
   }, [user, navigate]);
 
