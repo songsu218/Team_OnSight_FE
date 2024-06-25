@@ -103,7 +103,8 @@ const Crew = () => {
 
   const toggleSidebar = () => {
     setToggle(!toggle);
-    
+  };
+
   const handleSearch = () => {
     filterCrews();
   };
