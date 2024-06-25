@@ -229,7 +229,9 @@ const SearchPage = () => {
   return (
     <main className={`${style.search} ${style.viewCon}`}>
       <div
-        className={`${style.sidebar} ${showDetails ? style.sidebarDetails : ''}`}
+        className={`${style.sidebar} ${
+          showDetails ? style.sidebarDetails : ''
+        }`}
       >
         {showDetails && currentCenter ? (
           <div className={style.centerDetails}>
@@ -278,7 +280,8 @@ const SearchPage = () => {
                 <div className={style.centerHome}>
                   <div className={style.centerAddress}>
                     <i className="fa-solid fa-location-pin"></i>
-                    {currentCenter.si} {currentCenter.gu} {currentCenter.address}
+                    {currentCenter.si} {currentCenter.gu}{' '}
+                    {currentCenter.address}
                   </div>
                   <div>
                     <i className="fa-solid fa-phone"></i>
@@ -331,8 +334,9 @@ const SearchPage = () => {
                       records.map((record) => (
                         <div key={record._id} className={style.recordItem}>
                           <div className={style.recordHeader}>
+                            {console.log(`${record.userRecordCount}`)}
                             <img
-                              src={`http://localhost:8000/uploads/${record.userId.thumbnail}`}
+                              src={`http://localhost:8000${record.userThumbnail}`}
                               alt="프로필"
                               className={style.profileImage}
                             />
@@ -341,13 +345,13 @@ const SearchPage = () => {
                                 {record.nick}
                               </div>
                               <div className={style.recordCount}>
-                                기록수 {record.userId.recordcount || 0}
+                                기록수 {record.userRecordCount || 0}
                               </div>
                             </div>
                           </div>
                           <div className={style.recordContent}>
                             <img
-                              src={`http://localhost:8000/uploads/${record.thumbnail}`}
+                              src={`http://localhost:8000${record.thumbnail}`}
                               alt="기록 이미지"
                               className={style.recordImage}
                             />
