@@ -1,19 +1,37 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import style from '../css/Write.module.css';
-import Editor from './Editor';
+import Editor from '../components/Editor';
 
-const CrewWrite = () => {
+const CrewFeedEdit = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [message1, setMessage1] = useState('');
 
   const navigate = useNavigate();
-  const { crewId } = useParams();
+  const { feedId } = useParams();
 
   const user = useSelector((state) => state.user.userInfo);
+
+  useEffect(() => {
+    if (feedId) {
+      const fetchFeed = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:8000/feed/${feedId}`
+          );
+          const result = response.data;
+          setTitle(result.title);
+          setContent(result.content);
+        } catch (error) {
+          console.error('error', error);
+        }
+      };
+      fetchFeed();
+    }
+  }, [feedId]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,11 +47,10 @@ const CrewWrite = () => {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('userId', user.id);
-    formData.append('crewId', crewId);
 
     try {
-      const response = await axios.post(
-        'http://localhost:8000/feed',
+      const response = await axios.put(
+        `http://localhost:8000/feed/${feedId}`,
         formData,
         {
           withCredentials: true,
@@ -43,8 +60,8 @@ const CrewWrite = () => {
         }
       );
 
-      if (response.status === 201) {
-        navigate(-1);
+      if (response.status === 200) {
+        navigate(`/crewdetail/feeddetail/${feedId}`);
       }
     } catch (error) {
       console.error('error', error);
@@ -79,11 +96,11 @@ const CrewWrite = () => {
           <button type="button" onClick={() => navigate(-1)}>
             취소
           </button>
-          <button type="submit">작성하기</button>
+          <button type="submit">수정하기</button>
         </div>
       </form>
     </div>
   );
 };
 
-export default CrewWrite;
+export default CrewFeedEdit;
