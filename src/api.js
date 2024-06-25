@@ -61,7 +61,7 @@ const ch = {
    * @param {string} tag ('TOT','NOW','PAST')
    * @returns challenge Collection, 썸네일
    */
-  chTotalList: (tag) => {
+  chListEachStatus: (tag) => {
     return instance.post(
       "/challenge/challengeTotList",
       { STATE: tag },
