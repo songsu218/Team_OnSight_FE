@@ -13,6 +13,16 @@ const RecordDetail = () => {
     .sort((a, b) => new Date(b.date) - new Date(a.date))
     .slice(0, 5);
 
+  const centerRecords = records.filter((rec) => rec.center === record.center);
+  const totalLevelSum = centerRecords.reduce(
+    (sum, rec) => sum + rec.levelsum,
+    0
+  );
+  const averageLevelSum =
+    centerRecords.length > 0
+      ? Math.floor(totalLevelSum / centerRecords.length)
+      : 0;
+
   return (
     <div className={`${style.allCon} con1`}>
       <div className={`${style.allBox} mw`}>
@@ -27,6 +37,9 @@ const RecordDetail = () => {
               <p>{rec.levelsum}</p>
             </div>
           ))}
+          <div>
+            <p>이 센터를 이용한 분들의 평균기록입니다 {averageLevelSum}</p>
+          </div>
         </div>
       </div>
     </div>
