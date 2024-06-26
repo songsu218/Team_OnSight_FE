@@ -29,6 +29,10 @@
   z-index: 9;
 }
 
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
 .sidebar>h3 {
   margin: 46px 0 50px 0;
   text-align: center;

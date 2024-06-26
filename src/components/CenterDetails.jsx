@@ -1,4 +1,3 @@
-// src/components/CenterDetails.jsx
 import React from 'react';
 import style from '../css/Search.module.css';
 import RecordModal from './RecordModal';
@@ -6,11 +5,9 @@ import RecordModal from './RecordModal';
 const CenterDetails = ({
   currentCenter,
   showDetails,
-  userLikes,
   activeTab,
   records,
   handleCloseDetails,
-  toggleFavoriteHandler,
   setActiveTab,
 }) => {
   if (!showDetails || !currentCenter) return null;
@@ -27,14 +24,7 @@ const CenterDetails = ({
           <h4>{currentCenter.center}</h4>
           <p>{currentCenter.gu}</p>
         </div>
-        <i
-          className={
-            userLikes.includes(currentCenter._id)
-              ? `fa-solid fa-star ${style.likeStar}`
-              : 'fa-regular fa-star'
-          }
-          onClick={() => toggleFavoriteHandler(currentCenter._id)}
-        ></i>
+        {/* 즐겨찾기 */}
       </div>
       <div className={style.tabContainer}>
         <button

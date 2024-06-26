@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import useSearchData from '../hooks/useSearchData';
 import MapView from '../components/MapView';
 import CenterDetails from '../components/CenterDetails';
@@ -13,9 +13,8 @@ import {
   setShowDetails,
   setCurrentCenter,
   setActiveTab,
-  toggleFavorite,
 } from '../store/searchStore';
-import { getInitials, filterCenters } from '../utils/searchUtils';
+import { filterCenters } from '../utils/searchUtils';
 import style from '../css/Search.module.css';
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
@@ -34,7 +33,6 @@ const SearchPage = () => {
     currentCenter,
     activeTab,
     records,
-    userLikes,
   } = useSelector((state) => state.searchPage);
 
   const { districtCoordinates } = useSearchData(currentCenter);
@@ -97,11 +95,6 @@ const SearchPage = () => {
     dispatch(setCurrentCenter(null));
   };
 
-  const toggleFavoriteHandler = (centerId) => {
-    dispatch(toggleFavorite(centerId));
-    console.log('Updated userLikes:', userLikes);
-  };
-
   useEffect(() => {
     const script = document.createElement('script');
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&autoload=false`;
@@ -126,11 +119,9 @@ const SearchPage = () => {
           <CenterDetails
             currentCenter={currentCenter}
             showDetails={showDetails}
-            userLikes={userLikes}
             activeTab={activeTab}
             records={records}
             handleCloseDetails={handleCloseDetails}
-            toggleFavoriteHandler={toggleFavoriteHandler}
             setActiveTab={(tab) => dispatch(setActiveTab(tab))}
           />
         ) : (
@@ -188,17 +179,7 @@ const SearchPage = () => {
                         <h4>{center.center}</h4>
                         <p>{center.gu}</p>
                       </div>
-                      <i
-                        className={
-                          userLikes.includes(center._id)
-                            ? `fa-solid fa-star ${style.likeStar}`
-                            : 'fa-regular fa-star'
-                        }
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          toggleFavoriteHandler(center._id);
-                        }}
-                      ></i>
+                      {/* 즐찾 */}
                     </div>
                     <p className={style.centerDetail}>{center.detail}</p>
                   </div>
@@ -206,35 +187,23 @@ const SearchPage = () => {
               </div>
             ) : (
               <div className={style.searchResults}>
-                {climbingCenters
-                  .filter((center) => userLikes.includes(center._id))
-                  .map((center) => (
-                    <div
-                      key={center._id}
-                      className={style.centerList}
-                      onClick={() => handleListClick(center)}
-                    >
-                      <img src={center.thumbnail} alt={center.center} />
-                      <div className={style.centerInfo}>
-                        <div>
-                          <h4>{center.center}</h4>
-                          <p>{center.gu}</p>
-                        </div>
-                        <i
-                          className={
-                            userLikes.includes(center._id)
-                              ? `fa-solid fa-star ${style.likeStar}`
-                              : 'fa-regular fa-star'
-                          }
-                          onClick={(e) => {
-                            e.stopPropagation(); // 아이콘 클릭 시 페이지 이동 방지
-                            toggleFavoriteHandler(center._id); // toggleFavoriteHandler 사용
-                          }}
-                        ></i>
+                {climbingCenters.map((center) => (
+                  <div
+                    key={center._id}
+                    className={style.centerList}
+                    onClick={() => handleListClick(center)}
+                  >
+                    <img src={center.thumbnail} alt={center.center} />
+                    <div className={style.centerInfo}>
+                      <div>
+                        <h4>{center.center}</h4>
+                        <p>{center.gu}</p>
                       </div>
-                      <p className={style.centerDetail}>{center.detail}</p>
+                      {/* 즐찾 */}
                     </div>
-                  ))}
+                    <p className={style.centerDetail}>{center.detail}</p>
+                  </div>
+                ))}
               </div>
             )}
           </>

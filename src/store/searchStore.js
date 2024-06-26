@@ -53,19 +53,6 @@ const searchSlice = createSlice({
     setRecords: (state, action) => {
       state.records = action.payload;
     },
-    setUserLikes: (state, action) => {
-      state.userLikes = action.payload;
-    },
-    toggleFavorite: (state, action) => {
-      if (state.userLikes.includes(action.payload)) {
-        state.userLikes = state.userLikes.filter((id) => id !== action.payload);
-      } else {
-        state.userLikes.push(action.payload);
-      }
-    },
-    setDistrictCoordinates: (state, action) => {
-      state.districtCoordinates = action.payload;
-    },
   },
 });
 
@@ -81,8 +68,6 @@ export const {
   setCurrentCenter,
   setActiveTab,
   setRecords,
-  setUserLikes,
-  toggleFavorite,
   setDistrictCoordinates,
 } = searchSlice.actions;
 
