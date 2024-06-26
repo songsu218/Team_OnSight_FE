@@ -7,6 +7,7 @@
 }
 
 .listData2 > ul > li {
+  position: relative;
   cursor: pointer;
   display: flex;
   padding: 38px 0;
@@ -33,18 +34,33 @@
 
 .listData2 > ul > li > div {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
+  display: block;
+  text-align: center;
+  padding: 50px;
+  right: 2.5rem;
+  top: 50%;
+  transform: translateY(-40%);
   padding: 0;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
   border: 0;
+}
+
+.listData2 > ul > li > div > i {
+  text-align: center;
+  align-items: center;
+  width: 25px;
+  height: 26px;
+  z-index: 1000;
 }
 
 .p {
   font-size: 1.5rem;
   line-height: 26px;
+}
+
+.deleteButton {
+  position: absolute;
+  padding: 0.5rem;
+  background-color: transparent;
 }
 
 @media (max-width: 1079px) {

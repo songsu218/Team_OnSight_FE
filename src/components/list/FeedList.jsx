@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import ListPagnation from "./ListPagnation";
 import { useNavigate } from "react-router-dom";
 import style from "../../css/FeedList.module.css";
+import axios from "axios";
+
 const formatDate = (date) => {
   const options = {
     year: "numeric",
@@ -19,25 +21,34 @@ const formatDate = (date) => {
 };
 
 const FeedList = ({ items }) => {
+  console.log("fffff", items);
+  const [feeds, setFeeds] = useState([]);
+  console.log("ff", feeds);
   const navigate = useNavigate();
-  console.log("전달받음", items);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 5;
 
-  const totalPages = Math.ceil(items.length / itemsPerPage);
+  const totalPages = Math.ceil(feeds.length / itemsPerPage);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
 
+  // 초기 데이터 설정
   useEffect(() => {
-    if (items.length > 0) {
+    if (items && items.length > 0) {
+      setFeeds(items);
+    }
+  }, [items]);
+
+  useEffect(() => {
+    if (feeds.length > 0) {
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
-      setCurrentItems(items.slice(startIndex, endIndex));
+      setCurrentItems(feeds.slice(startIndex, endIndex));
     }
-  }, [currentPage, items]);
+  }, [currentPage, feeds]);
 
   useEffect(() => {
     if (currentPage > totalPages) {
@@ -46,10 +57,33 @@ const FeedList = ({ items }) => {
   }, [currentPage, totalPages]);
 
   useEffect(() => {
-    if (items.length > 0) {
+    if (feeds.length > 0) {
       setCurrentPage(1); // items가 변경될 때 첫 페이지로 리셋
     }
-  }, [items]);
+  }, [feeds]);
+
+  const toggleDeleteButton = (feedId) => {
+    const deleteButton = document.getElementById(`delete-btn-${feedId}`);
+    if (deleteButton.style.display === "block") {
+      deleteButton.style.display = "none";
+    } else {
+      deleteButton.style.display = "block";
+    }
+  };
+
+  const handleDelete = async (feedId) => {
+    const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
+    if (confirmDelete) {
+      try {
+        await axios.delete(`http://localhost:8000/feed/${feedId}`);
+        const response = await axios.post("http://localhost:8000/feeds");
+        setFeeds(response.data);
+        navigate("/"); // 삭제 후 목록 새로고침
+      } catch (error) {
+        console.error("error", error);
+      }
+    }
+  };
 
   return (
     <div>
@@ -79,6 +113,26 @@ const FeedList = ({ items }) => {
                   {formatDate(item.createdTime)}
                 </span>
                 <span className={style.listCnt}>{item.views}</span>
+                <div>
+                  <i
+                    className="fa-solid fa-ellipsis-vertical"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleDeleteButton(item._id);
+                    }}
+                  ></i>
+                  <button
+                    id={`delete-btn-${item._id}`}
+                    className={style.deleteButton}
+                    style={{ display: "none" }}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDelete(item._id);
+                    }}
+                  >
+                    삭제하기
+                  </button>
+                </div>
               </li>
             ))
           ) : (
