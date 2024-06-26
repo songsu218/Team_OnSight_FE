@@ -1,14 +1,16 @@
-import { useState } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import axios from 'axios';
-import style from '../css/Write.module.css';
-import Editor from './Editor';
+import { useState } from "react";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
+import axios from "axios";
+import style from "../css/Write.module.css";
+import Editor from "./Editor";
 
 const CrewWrite = () => {
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
-  const [message1, setMessage1] = useState('');
+  const location = useLocation();
+  const { crewName } = location.state || {};
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [message1, setMessage1] = useState("");
 
   const navigate = useNavigate();
   const { crewId } = useParams();
@@ -17,28 +19,29 @@ const CrewWrite = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (title === '') {
-      setMessage1('제목을 입력해 주세요');
-      document.getElementById('title').focus();
+    if (title === "") {
+      setMessage1("제목을 입력해 주세요");
+      document.getElementById("title").focus();
       return;
     } else {
-      setMessage1('');
+      setMessage1("");
     }
 
     const formData = new FormData();
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('userId', user.id);
-    formData.append('crewId', crewId);
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("userId", user.id);
+    formData.append("crewId", crewId);
+    formData.append("crewName", crewName);
 
     try {
       const response = await axios.post(
-        'http://localhost:8000/feed',
+        "http://localhost:8000/feed",
         formData,
         {
           withCredentials: true,
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -47,7 +50,7 @@ const CrewWrite = () => {
         navigate(-1);
       }
     } catch (error) {
-      console.error('error', error);
+      console.error("error", error);
     }
   };
 

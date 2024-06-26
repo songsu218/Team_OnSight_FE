@@ -20,6 +20,7 @@ const MyPageList3 = () => {
 
         if (response.ok) {
           const data = await response.json();
+          console.log("여기", data);
           setFeeds(data);
         } else {
           console.error("Failed to fetch feeds");

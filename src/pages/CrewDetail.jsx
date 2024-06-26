@@ -134,6 +134,7 @@ const CrewDetail = () => {
                   {crewMember ? (
                     <NavLink
                       to={`/crewdetail/${crewId}/crewwrite`}
+                      state={{ crewName: selectedCrew.name }}
                       aria-current={({ isActive }) =>
                         isActive ? "page" : undefined
                       }
@@ -144,7 +145,6 @@ const CrewDetail = () => {
                     <Link to="#" onClick={handleJoinCrew}>
                       가입하기
                     </Link>
-                    // 그냥 a태그 넣어놨음
                   )}
                 </li>
                 {crewAdmin && (
