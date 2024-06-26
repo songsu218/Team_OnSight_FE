@@ -1,5 +1,4 @@
-// store/searchPageSlice.js
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   climbingCenters: [],
@@ -13,11 +12,12 @@ const initialState = {
   currentCenter: null,
   activeTab: 'home',
   records: [],
-  userLikes: JSON.parse(localStorage.getItem('userLikes')) || []
+  userLikes: [],
+  districtCoordinates: {},
 };
 
-const searchPageSlice = createSlice({
-  name: "searchPage",
+const searchSlice = createSlice({
+  name: 'searchPage',
   initialState,
   reducers: {
     setClimbingCenters: (state, action) => {
@@ -55,16 +55,16 @@ const searchPageSlice = createSlice({
     },
     setUserLikes: (state, action) => {
       state.userLikes = action.payload;
-      localStorage.setItem('userLikes', JSON.stringify(action.payload));
     },
     toggleFavorite: (state, action) => {
-      const centerId = action.payload;
-      if (state.userLikes.includes(centerId)) {
-        state.userLikes = state.userLikes.filter((id) => id !== centerId);
+      if (state.userLikes.includes(action.payload)) {
+        state.userLikes = state.userLikes.filter((id) => id !== action.payload);
       } else {
-        state.userLikes.push(centerId);
+        state.userLikes.push(action.payload);
       }
-      localStorage.setItem('userLikes', JSON.stringify(state.userLikes));
+    },
+    setDistrictCoordinates: (state, action) => {
+      state.districtCoordinates = action.payload;
     },
   },
 });
@@ -83,6 +83,7 @@ export const {
   setRecords,
   setUserLikes,
   toggleFavorite,
-} = searchPageSlice.actions;
+  setDistrictCoordinates,
+} = searchSlice.actions;
 
-export default searchPageSlice.reducer;
+export default searchSlice.reducer;
