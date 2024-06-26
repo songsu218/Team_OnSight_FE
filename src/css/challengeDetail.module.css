@@ -80,6 +80,13 @@
 }
 
 /* 여기서부터 해당 페이지 콘텐츠 */
+.back_button {
+  border: none;
+  background: none;
+  font-size: 3rem;
+  cursor: pointer;
+  padding: 5px;
+}
 .challenge_info {
   display: flex;
   justify-content: space-between;
