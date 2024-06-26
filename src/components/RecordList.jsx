@@ -4,6 +4,7 @@ import axios from 'axios';
 import RecordModal from './RecordModal';
 import { useDispatch, useSelector } from 'react-redux';
 import { setRecordAllInfo } from '../store/recordStore';
+import { useNavigate } from 'react-router-dom';
 
 const RecordList = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -11,6 +12,8 @@ const RecordList = () => {
   const [currentNick, setCurrentNick] = useState(`'클라이머' `);
   const containerRef = useRef(null);
   const swiperConRef = useRef(null);
+
+  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   const records = useSelector((state) => state.record.recordInfo);
@@ -81,6 +84,9 @@ const RecordList = () => {
                   handleMouseEnter(index, record.center, record.nick)
                 }
                 onMouseLeave={() => setHoveredIndex(null)}
+                onClick={() => {
+                  navigate(`/recorddetail/${record._id}`);
+                }}
               >
                 <img
                   src={`http://localhost:8000${record.thumbnail}`}
