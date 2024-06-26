@@ -1,4 +1,3 @@
-// SearchPage.jsx
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
@@ -19,7 +18,7 @@ import {
   setRecords,
   setUserLikes,
   toggleFavorite,
-} from '../store/searchStore'; // 경로 수정
+} from '../store/searchStore';
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 
@@ -228,11 +227,7 @@ const SearchPage = () => {
 
   return (
     <main className={`${style.search} ${style.viewCon}`}>
-      <div
-        className={`${style.sidebar} ${
-          showDetails ? style.sidebarDetails : ''
-        }`}
-      >
+      <div className={style.sidebar}>
         {showDetails && currentCenter ? (
           <div className={style.centerDetails}>
             <i
@@ -421,7 +416,7 @@ const SearchPage = () => {
               <div className={style.searchResults}>
                 {searchResults.map((center) => (
                   <div
-                    key={center._id} // 고유한 식별자인 center._id를 사용합니다.
+                    key={center._id}
                     className={style.centerList}
                     onClick={() => handleListClick(center)}
                   >
@@ -503,7 +498,7 @@ const SearchPage = () => {
                 />
                 <CustomOverlayMap
                   position={{ lat: center.latlng.lat, lng: center.latlng.lng }}
-                  yAnchor={1.5} // yAnchor 값을 조정하여 인포윈도우를 위로 올립니다.
+                  yAnchor={1.5}
                 >
                   <div className={style.customOverlay}>
                     <span>{center.center}</span>
