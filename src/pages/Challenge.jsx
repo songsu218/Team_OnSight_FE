@@ -107,6 +107,10 @@ const Challenge = (props) => {
   };
 
   const setMyChData = (tag, id) => {
+    if (id === null) {
+      setPrintData([]);
+      return;
+    }
     ch.chMyList(tag, id)
       .then((result) => {
         setPrintData(result.data);
@@ -231,7 +235,6 @@ const Challenge = (props) => {
                         username={username}
                       />
                     )}
-                    {/* <ChallengeModal /> */}
                   </li>
                 </ul>
               </nav>
