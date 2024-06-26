@@ -42,9 +42,9 @@ const MyPageList2 = () => {
           <span>내</span>
           <span>기록</span>
         </h3>
-        <button className={style.btn}>
-          <RecordModal />
-        </button>
+        <div className={style.btnBox}>
+          <RecordModal buttonText="기록 추가" />
+        </div>
       </div>
       <List items={recodes} itemType="recode" />
     </section>

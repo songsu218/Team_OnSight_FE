@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import style from "../../css/List.module.css";
 import ListPagnation from "./ListPagnation";
 import ListCard from "../ListCard";
 
 const List = ({ items, itemType }) => {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 4;
@@ -34,13 +36,23 @@ const List = ({ items, itemType }) => {
     }
   }, [items]);
 
+  console.log(currentItems);
   return (
     <div>
       <div className={`${style.listData1} ${style.ssw1}`}>
         <ul>
           {currentItems.length > 0 ? (
             currentItems.map((item, index) => (
-              <li key={index}>
+              <li
+                key={item._id}
+                onClick={() => {
+                  itemType === "challenge"
+                    ? navigate(`/challenge/${item._id}/${item.challengename}`, {
+                        state: { detailData: item },
+                      })
+                    : navigate(`/crewdetail/feeddetail/${item._id}`);
+                }}
+              >
                 <ListCard
                   title={
                     itemType === "challenge" ? item.challengename : item.title
