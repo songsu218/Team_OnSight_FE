@@ -2,6 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import DOMPurify from 'dompurify';
+import { useSelector } from 'react-redux'; // 리덕스 훅 추가
 import style from '../css/FeedDetail.module.css';
 
 const CrewFeedDetail = () => {
@@ -12,6 +13,8 @@ const CrewFeedDetail = () => {
   // 이 부분이 문제인가싶어서 크루id를 먼저 저장해봤는데
   // error 밑에도 navgiate 넣으면 해결되는거였어서 지워도 되는지
   // 실험은 나중에 해볼 예정
+
+  const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     const fetchFeedDetail = async () => {
@@ -80,10 +83,12 @@ const CrewFeedDetail = () => {
                 __html: DOMPurify.sanitize(feed.content),
               }}
             ></div>
-            <div className={style.middelBtnBox}>
-              <button onClick={handleEdit}>수정</button>
-              <button onClick={handleDelete}>삭제</button>
-            </div>
+            {user && user.id === feed.userId && (
+              <div className={style.middelBtnBox}>
+                <button onClick={handleEdit}>수정</button>
+                <button onClick={handleDelete}>삭제</button>
+              </div>
+            )}
           </div>
         </div>
       </div>

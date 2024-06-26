@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import style from '../css/Write.module.css';
 import Editor from '../components/Editor';
+import style from '../css/CrewFeedDetail.module.css';
 
 const CrewFeedEdit = () => {
   const [title, setTitle] = useState('');
@@ -70,33 +70,34 @@ const CrewFeedEdit = () => {
 
   return (
     <div>
-      <form className={style.writeCon} onSubmit={handleSubmit}>
-        <div className={style.titleCon}>
-          <label htmlFor="title">
-            <h2>제목</h2>
-          </label>
-          <input
-            type="text"
-            name="title"
-            id="title"
-            placeholder="제목을 입력해주세요"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-          <p>&nbsp;{message1}</p>
-        </div>
-        <div className={style.contentCon}>
-          <label htmlFor="content">
-            <h2>내용</h2>
-          </label>
-          <Editor content={content} setContent={setContent} />
-        </div>
-
-        <div className={style.buttonCon}>
-          <button type="button" onClick={() => navigate(-1)}>
-            취소
-          </button>
-          <button type="submit">수정하기</button>
+      <form className={`${style.writeCon} con1`} onSubmit={handleSubmit}>
+        <div className={`${style.writeWrap} mw`}>
+          <div className={`${style.titleCon}`}>
+            <label htmlFor="title">
+              <h2>제목</h2>
+            </label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              placeholder="제목을 입력해주세요"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+            />
+            <p>&nbsp;{message1}</p>
+          </div>
+          <div className={style.contentCon}>
+            <label htmlFor="content">
+              <h2>내용</h2>
+            </label>
+            <Editor content={content} setContent={setContent} />
+          </div>
+          <div className={style.buttonCon}>
+            <button type="button" onClick={() => navigate(-1)}>
+              취소
+            </button>
+            <button type="submit">수정하기</button>
+          </div>
         </div>
       </form>
     </div>
