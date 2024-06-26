@@ -53,6 +53,12 @@ const searchSlice = createSlice({
     setRecords: (state, action) => {
       state.records = action.payload;
     },
+    setUserLikes: (state, action) => {
+      state.userLikes = action.payload;
+    },
+    setDistrictCoordinates: (state, action) => {
+      state.districtCoordinates = action.payload;
+    },
   },
 });
 
@@ -68,6 +74,7 @@ export const {
   setCurrentCenter,
   setActiveTab,
   setRecords,
+  setUserLikes,
   setDistrictCoordinates,
 } = searchSlice.actions;
 

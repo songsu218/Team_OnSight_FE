@@ -9,6 +9,8 @@ const CenterDetails = ({
   records,
   handleCloseDetails,
   setActiveTab,
+  userLikes,
+  toggleLike,
 }) => {
   if (!showDetails || !currentCenter) return null;
 
@@ -24,7 +26,12 @@ const CenterDetails = ({
           <h4>{currentCenter.center}</h4>
           <p>{currentCenter.gu}</p>
         </div>
-        {/* 즐겨찾기 */}
+        <i
+          className={`fa-regular fa-star ${style.likeStar} ${
+            userLikes.includes(currentCenter._id) ? 'fa-solid' : ''
+          }`}
+          onClick={() => toggleLike(currentCenter._id)}
+        ></i>
       </div>
       <div className={style.tabContainer}>
         <button

@@ -13,6 +13,7 @@ import {
   setShowDetails,
   setCurrentCenter,
   setActiveTab,
+  setUserLikes,
 } from '../store/searchStore';
 import { filterCenters } from '../utils/searchUtils';
 import style from '../css/Search.module.css';
@@ -33,15 +34,27 @@ const SearchPage = () => {
     currentCenter,
     activeTab,
     records,
+    userLikes,
   } = useSelector((state) => state.searchPage);
+  const user = useSelector((state) => state.user.userInfo);
 
   const { districtCoordinates } = useSearchData(currentCenter);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(setUserLikes(user.like));
+    } else {
+      dispatch(setUserLikes([]));
+      dispatch(setSearchResults([])); // 로그아웃 시 검색 결과도 초기화
+    }
+  }, [user, dispatch]);
 
   const handleSearch = () => {
     const results = filterCenters(
       climbingCenters,
       searchTerm,
-      selectedDistrict
+      selectedDistrict,
+      userLikes
     );
     dispatch(setSearchResults(results));
     if (results.length === 1) {
@@ -54,8 +67,10 @@ const SearchPage = () => {
   const handleDistrictChange = (event) => {
     dispatch(setSelectedDistrict(event.target.value));
     if (event.target.value === '전체') {
-      dispatch(setMapCenter({ lat: 37.573, lng: 126.9794 }));
-      dispatch(setSearchResults([]));
+      const results = user
+        ? climbingCenters.filter((center) => userLikes.includes(center._id))
+        : [];
+      dispatch(setSearchResults(results));
     } else {
       const coordinates = districtCoordinates[event.target.value];
       if (coordinates) {
@@ -83,7 +98,8 @@ const SearchPage = () => {
     dispatch(setActiveTab('home'));
   };
 
-  const handleListClick = (center) => {
+  const handleListClick = (center, event) => {
+    if (event.target.classList.contains('fa-star')) return; // 아이콘 클릭 시 상세 페이지로 이동하지 않음
     dispatch(setCurrentCenter(center));
     dispatch(setMapCenter({ lat: center.latlng.lat, lng: center.latlng.lng }));
     dispatch(setShowDetails(true));
@@ -95,22 +111,37 @@ const SearchPage = () => {
     dispatch(setCurrentCenter(null));
   };
 
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoApiKey}&autoload=false`;
-    script.async = true;
-    document.head.appendChild(script);
+  const toggleLike = async (centerId) => {
+    if (!user) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
 
-    script.onload = () => {
-      window.kakao.maps.load(() => {
-        console.log('Kakao maps loaded');
-      });
-    };
+    const updatedLikes = userLikes.includes(centerId)
+      ? userLikes.filter((id) => id !== centerId)
+      : [...userLikes, centerId];
 
-    return () => {
-      script.remove();
-    };
-  }, []);
+    dispatch(setUserLikes(updatedLikes));
+
+    await fetch(`http://localhost:8000/user/toggle-like`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userId: user._id,
+        centerId,
+      }),
+    });
+
+    // 즐겨찾기를 제거하면 목록에서 바로 사라지도록 업데이트
+    if (selectedDistrict === '전체') {
+      const results = climbingCenters.filter((center) =>
+        updatedLikes.includes(center._id)
+      );
+      dispatch(setSearchResults(results));
+    }
+  };
 
   return (
     <main className={`${style.search} ${style.viewCon}`}>
@@ -123,6 +154,8 @@ const SearchPage = () => {
             records={records}
             handleCloseDetails={handleCloseDetails}
             setActiveTab={(tab) => dispatch(setActiveTab(tab))}
+            userLikes={userLikes}
+            toggleLike={toggleLike}
           />
         ) : (
           <>
@@ -171,7 +204,7 @@ const SearchPage = () => {
                   <div
                     key={center._id}
                     className={style.centerList}
-                    onClick={() => handleListClick(center)}
+                    onClick={(event) => handleListClick(center, event)}
                   >
                     <img src={center.thumbnail} alt={center.center} />
                     <div className={style.centerInfo}>
@@ -179,7 +212,12 @@ const SearchPage = () => {
                         <h4>{center.center}</h4>
                         <p>{center.gu}</p>
                       </div>
-                      {/* 즐찾 */}
+                      <i
+                        className={`fa-regular fa-star ${style.likeStar} ${
+                          userLikes.includes(center._id) ? 'fa-solid' : ''
+                        }`}
+                        onClick={() => toggleLike(center._id)}
+                      ></i>
                     </div>
                     <p className={style.centerDetail}>{center.detail}</p>
                   </div>
@@ -187,23 +225,31 @@ const SearchPage = () => {
               </div>
             ) : (
               <div className={style.searchResults}>
-                {climbingCenters.map((center) => (
-                  <div
-                    key={center._id}
-                    className={style.centerList}
-                    onClick={() => handleListClick(center)}
-                  >
-                    <img src={center.thumbnail} alt={center.center} />
-                    <div className={style.centerInfo}>
-                      <div>
-                        <h4>{center.center}</h4>
-                        <p>{center.gu}</p>
+                {user &&
+                  climbingCenters
+                    .filter((center) => userLikes.includes(center._id))
+                    .map((center) => (
+                      <div
+                        key={center._id}
+                        className={style.centerList}
+                        onClick={(event) => handleListClick(center, event)}
+                      >
+                        <img src={center.thumbnail} alt={center.center} />
+                        <div className={style.centerInfo}>
+                          <div>
+                            <h4>{center.center}</h4>
+                            <p>{center.gu}</p>
+                          </div>
+                          <i
+                            className={`fa-regular fa-star ${style.likeStar} ${
+                              userLikes.includes(center._id) ? 'fa-solid' : ''
+                            }`}
+                            onClick={() => toggleLike(center._id)}
+                          ></i>
+                        </div>
+                        <p className={style.centerDetail}>{center.detail}</p>
                       </div>
-                      {/* 즐찾 */}
-                    </div>
-                    <p className={style.centerDetail}>{center.detail}</p>
-                  </div>
-                ))}
+                    ))}
               </div>
             )}
           </>
