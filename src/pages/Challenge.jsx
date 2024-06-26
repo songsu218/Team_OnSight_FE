@@ -231,7 +231,6 @@ const Challenge = (props) => {
                         username={username}
                       />
                     )}
-                    {/* <ChallengeModal /> */}
                   </li>
                 </ul>
               </nav>
