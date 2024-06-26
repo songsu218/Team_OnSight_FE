@@ -1,6 +1,6 @@
 import style from '../css/challengeDetail.module.css';
 import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
 import ChallengeJoinUser from '../components/challenge/ChallengeJoinUser';
 import { ch } from '../api.js';
 import { useSelector } from 'react-redux';
@@ -83,6 +83,7 @@ const ChallengeDetail = () => {
   //#endregion init
 
   const { challenge_id, challenge_name } = useParams(); // 챌린지 제목
+  const navigate = useNavigate();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -161,6 +162,12 @@ const ChallengeDetail = () => {
             </div>
             {/* 기본이 진행중 화면으로  기간이 지난 챌린지에는 아래 div.challenge_detail_wrap에 .end 추가하여 순위 콘텐츠 표시되도록 작업 */}
             <div className={wrapClass}>
+              <button
+                onClick={() => navigate(-1)}
+                className={style.back_button}
+              >
+                <i className='fa-solid fa-angle-left'></i>
+              </button>
               <div className={style.challenge_info}>
                 <div className={style.challenge_left}>
                   <div className={style.challenge_img}>

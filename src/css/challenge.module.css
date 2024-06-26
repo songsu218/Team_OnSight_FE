@@ -95,7 +95,7 @@
   padding: 5px 36px 5px 16px;
   background: transparent
     url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212.176%22%20height%3D%226.048%22%20viewBox%3D%220%200%2012.176%206.048%22%3E%0D%0A%20%20%3Cpath%20id%3D%22ico_arr_drop%22%20d%3D%22M508.5%2C430.5l5.545%2C4%2C5.455-4%22%20transform%3D%22translate(-507.915%20-429.689)%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0D%0A%3C%2Fsvg%3E%0D%0A')
-    no-repeat calc(100% - 1.6rem) 50%;
+    no-repeat calc(100% - 1.3rem) 50%;
   border: 0;
   font-size: 18px;
   line-height: 30px;
