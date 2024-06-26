@@ -17,6 +17,7 @@ import Profile from './pages/Profile';
 import Ranking from './pages/Ranking';
 import CrewFeedDetail from './pages/CrewFeedDetail';
 import CrewFeedEdit from './pages/CrewFeedEdit';
+import RecordDetail from './pages/RecordDetail';
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
           element={<CrewFeedEdit />}
         />
         <Route path="/rank" element={<Ranking />} />
+        <Route path="/recorddetail/:id" element={<RecordDetail />} />
       </Routes>
     </div>
   );

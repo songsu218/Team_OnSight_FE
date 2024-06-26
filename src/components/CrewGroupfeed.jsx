@@ -62,7 +62,6 @@ const CrewGroupfeed = () => {
         <span className={style.lbListCnt}>조회수</span>
         {crewAdmin && (
           <>
-            {' '}
             <i
               class="fa-solid fa-ellipsis-vertical"
               style={{ opacity: '0' }}
@@ -87,7 +86,7 @@ const CrewGroupfeed = () => {
               {new Date(feed.createdTime).toLocaleDateString()}
             </span>
             <div id="listCnt"></div>
-            <span className={style.listCnt}>150</span>
+            <span className={style.listCnt}>{feed.views}</span>
             {crewAdmin && (
               <>
                 <i
