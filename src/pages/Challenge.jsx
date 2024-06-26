@@ -62,11 +62,11 @@ const Challenge = (props) => {
 
   //#region init
   // 비로그인 시 접근 제한
-  useEffect(() => {
-    if (!user) {
-      navigate('/signinpage');
-    }
-  }, [user, navigate]);
+  // useEffect(() => {
+  //   if (!user) {
+  //     navigate('/signinpage');
+  //   }
+  // }, [user, navigate]);
 
   useEffect(() => {
     if (isFirstRun.current) {
@@ -107,6 +107,10 @@ const Challenge = (props) => {
   };
 
   const setMyChData = (tag, id) => {
+    if(id === null){
+      setPrintData([]);
+      return;
+    } 
     ch.chMyList(tag, id)
       .then((result) => {
         setPrintData(result.data);
