@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ListPagnation from "./ListPagnation";
+import { useNavigate } from "react-router-dom";
 import style from "../../css/FeedList.module.css";
 const formatDate = (date) => {
   const options = {
@@ -18,6 +19,8 @@ const formatDate = (date) => {
 };
 
 const FeedList = ({ items }) => {
+  const navigate = useNavigate();
+  console.log("전달받음", items);
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 5;
@@ -61,18 +64,25 @@ const FeedList = ({ items }) => {
         <ul>
           {currentItems.length > 0 ? (
             currentItems.map((item, index) => (
-              <li key={index}>
+              <li
+                key={item._id}
+                onClick={() => {
+                  navigate(`/crewdetail/feeddetail/${item._id}`);
+                }}
+              >
                 <span className={style.listNo}>
                   {index + 1 + (currentPage - 1) * itemsPerPage}
                 </span>
                 <span className={style.listCrew}>{item.crewName}</span>
                 <span className={style.listTitle}>{item.title}</span>
-                <span className={style.listDate}>{formatDate(item.date)}</span>
+                <span className={style.listDate}>
+                  {formatDate(item.createdTime)}
+                </span>
                 <span className={style.listCnt}>{item.views}</span>
               </li>
             ))
           ) : (
-            <p className={style.p}> 참여한 챌린저가 없습니다.</p>
+            <p className={style.p}> 작성한 피드가 없습니다.</p>
           )}
         </ul>
       </div>
