@@ -26,6 +26,8 @@ const CrewDetail = () => {
   const [crewMember, setCrewMember] = useState(false);
   const [crewAdmin, setCrewAdmin] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMembers, setFilteredMembers] = useState([]);
 
   const moveToCrew = () => {
     navigate('/crew');
@@ -35,18 +37,31 @@ const CrewDetail = () => {
     if (selectedCrew) {
       setCrewMember(selectedCrew.members.includes(user.id));
       setCrewAdmin(selectedCrew.userId === user.id);
+      setFilteredMembers(selectedCrew.members);
     }
   }, [selectedCrew, user]);
 
-  if (!selectedCrew) {
-    return <p>메인페이지 갔다오세요</p>;
-  }
-  // 이거 없으니까 새로고침할 때마다 리덕스 초기화되고 빨간화면 떠서 추가함
-  // 나중에 redux persist 쓰거나 local storage 쓰게되면 삭제할 예정
+  const handleSearch = () => {
+    const filtered = selectedCrew.members.filter((memberId) => {
+      const memberInfo = users.find((user) => user.id === memberId);
+      return memberInfo.nick.includes(searchTerm);
+    });
+    setFilteredMembers(filtered);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
 
   const toggleSidebar = () => {
     setToggle(!toggle);
   };
+
+  if (!selectedCrew) {
+    return <p>메인페이지 갔다오세요</p>;
+  }
 
   return (
     <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ''}`}>
@@ -60,14 +75,20 @@ const CrewDetail = () => {
         ></i>
         <div className={style.leftConinner}>
           <div className={style.searchCon}>
-            <input type="text" placeholder=" 크루원 검색" />
-            <button className={style.iconButton}>
+            <input
+              type="text"
+              placeholder=" 크루원 검색"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <button className={style.iconButton} onClick={handleSearch}>
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
           <ul className={`${style.memberCon} ${!crewMember ? style.blur : ''}`}>
             {selectedCrew &&
-              selectedCrew.members.map((memberId) => {
+              filteredMembers.map((memberId) => {
                 const memberInfo = users.find((user) => user.id === memberId);
                 return (
                   <li key={memberId}>
