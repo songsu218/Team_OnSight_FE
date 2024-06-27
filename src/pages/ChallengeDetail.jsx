@@ -249,7 +249,11 @@ const ChallengeDetail = () => {
                       {currentItems.map((item, index) => (
                         <tr key={index}>
                           <td>
-                            <div className={style.rank_profile}>
+                            <div
+                              className={`${style.rank_profile} ${
+                                item.rank <= 3 ? style[`rank-${item.rank}`] : ''
+                              }`}
+                            >
                               <img
                                 src={
                                   item.thumbnail == null
@@ -258,7 +262,10 @@ const ChallengeDetail = () => {
                                 }
                                 alt='Profile'
                               />
-                              <span className={style.trophy} />
+                              {/* <span className={style.trophy} /> */}
+                              {item.rank <= 3 && (
+                                <span className={`${style.trophy}`} />
+                              )}
                             </div>
                           </td>
                           <td>{item.rank}등</td>
