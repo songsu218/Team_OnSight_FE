@@ -45,7 +45,7 @@ const SearchPage = () => {
       dispatch(setUserLikes(user.like));
     } else {
       dispatch(setUserLikes([]));
-      dispatch(setSearchResults([])); // 로그아웃 시 검색 결과도 초기화
+      dispatch(setSearchResults([]));
     }
   }, [user, dispatch]);
 
@@ -66,11 +66,8 @@ const SearchPage = () => {
 
   const handleDistrictChange = (event) => {
     dispatch(setSelectedDistrict(event.target.value));
-    if (event.target.value === '전체') {
-      const results = user
-        ? climbingCenters.filter((center) => userLikes.includes(center._id))
-        : [];
-      dispatch(setSearchResults(results));
+    if (event.target.value === '전체') { 
+      dispatch(setSearchResults(climbingCenters));
     } else {
       const coordinates = districtCoordinates[event.target.value];
       if (coordinates) {
@@ -99,7 +96,7 @@ const SearchPage = () => {
   };
 
   const handleListClick = (center, event) => {
-    if (event.target.classList.contains('fa-star')) return; // 아이콘 클릭 시 상세 페이지로 이동하지 않음
+    if (event.target.classList.contains('fa-star')) return; 
     dispatch(setCurrentCenter(center));
     dispatch(setMapCenter({ lat: center.latlng.lat, lng: center.latlng.lng }));
     dispatch(setShowDetails(true));
@@ -116,13 +113,13 @@ const SearchPage = () => {
       alert('로그인이 필요합니다.');
       return;
     }
-
+  
     const updatedLikes = userLikes.includes(centerId)
       ? userLikes.filter((id) => id !== centerId)
       : [...userLikes, centerId];
-
+  
     dispatch(setUserLikes(updatedLikes));
-
+  
     await fetch(`http://localhost:8000/user/toggle-like`, {
       method: 'POST',
       headers: {
@@ -133,9 +130,10 @@ const SearchPage = () => {
         centerId,
       }),
     });
-
-    // 즐겨찾기를 제거하면 목록에서 바로 사라지도록 업데이트
+   
     if (selectedDistrict === '전체') {
+      dispatch(setSearchResults(climbingCenters));
+    } else {
       const results = climbingCenters.filter((center) =>
         updatedLikes.includes(center._id)
       );
