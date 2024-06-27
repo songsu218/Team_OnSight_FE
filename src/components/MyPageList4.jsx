@@ -1,17 +1,16 @@
-import RecordModal from '../components/RecordModal';
 import style from '../css/MyPageList1.module.css';
 import List from './list/List';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const MyPageList2 = () => {
-  const [recodes, setRecodes] = useState([]);
+const MyPageList4 = () => {
+  const [crews, setCrews] = useState([]);
   const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     const fetchRecodes = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/user/recodes`, {
+        const response = await fetch(`http://localhost:8000/user/centerlist`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -21,12 +20,12 @@ const MyPageList2 = () => {
 
         if (response.ok) {
           const data = await response.json();
-          setRecodes(data);
+          setCrews(data);
         } else {
-          console.error('Failed to fetch recodes');
+          console.error('Failed to fetch crews');
         }
       } catch (err) {
-        console.error('Error fetching recodes', err);
+        console.error('Error fetching crews', err);
       }
     };
 
@@ -39,16 +38,13 @@ const MyPageList2 = () => {
     <section className={style.sec}>
       <div>
         <h3 className={style.sub}>
-          <span>내</span>
-          <span>기록</span>
+          <span>즐겨찾기한</span>
+          <span>암장 목록</span>
         </h3>
-        <div className={style.btnBox}>
-          <RecordModal buttonText="기록 추가" />
-        </div>
       </div>
-      <List items={recodes} itemType="recode" />
+      <List items={crews} itemType="center" />
     </section>
   );
 };
 
-export default MyPageList2;
+export default MyPageList4;

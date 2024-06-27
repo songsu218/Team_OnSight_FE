@@ -34,19 +34,10 @@ function App() {
         <Route path="/createCrew" element={<CreateCrew />} />
         <Route path="/crewdetail/:crewId/*" element={<CrewDetail />} />
         <Route path="/challenge" element={<Challenge />} />
-        <Route
-          path="/challenge/:challenge_id/:challenge_name"
-          element={<ChallengeDetail />}
-        />
+        <Route path="/challenge/:challenge_id/:challenge_name" element={<ChallengeDetail />} />
         <Route path="/profile" element={<Profile />} />
-        <Route
-          path="/crewdetail/feeddetail/:feedId/*"
-          element={<CrewFeedDetail />}
-        />
-        <Route
-          path="/crewdetail/feeddetail/edit/:feedId"
-          element={<CrewFeedEdit />}
-        />
+        <Route path="/crewdetail/feeddetail/:feedId/*" element={<CrewFeedDetail />} />
+        <Route path="/crewdetail/feeddetail/edit/:feedId" element={<CrewFeedEdit />} />
         <Route path="/rank" element={<Ranking />} />
         <Route path="/recorddetail/:id" element={<RecordDetail />} />
       </Routes>
