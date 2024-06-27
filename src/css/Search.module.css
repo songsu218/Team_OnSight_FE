@@ -20,11 +20,17 @@
 }
 
 .sidebar {
-  background-color: #f1f1f1;
+  background-color: #fff;
+  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
   width: 400px;
   padding: 20px;
   box-sizing: border-box;
   overflow-y: auto;
+  z-index: 9;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .sidebar > h3 {
@@ -106,7 +112,8 @@
 .centerList {
   width: 347px;
   height: 250px;
-  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 1rem;
   padding: 10px 20px;
   margin-top: 20px;
   display: flex;
@@ -165,11 +172,11 @@
 }
 
 .centerDetails .iconX {
-  /* 위치 수정 예정 */
   position: absolute;
   top: -10px;
   right: -10px;
   cursor: pointer;
+  font-size: 1.5rem;
 }
 
 .centerDetails .centerDetailInfo {
@@ -194,10 +201,6 @@
   opacity: 0.5;
 }
 
-.sidebarDetails {
-  background-color: #fff;
-}
-
 /* 상세페이지 탭부분 */
 .tabButtonHome,
 .tabButtonRecode {
@@ -208,7 +211,6 @@
   cursor: pointer;
   outline: none;
   color: grey;
-  /* 다른 부분의 회색은 DEE2E6이걸 썼는데 너무 연해서 바꿈*/
 }
 
 .tabButtonHome.activeTab,
@@ -306,7 +308,6 @@
   height: 30px;
 }
 
-/* 테스트 */
 .recordItem {
   border: 1px solid #dee2e6;
   border-radius: 0.5rem;

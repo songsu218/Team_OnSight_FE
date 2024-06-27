@@ -28,6 +28,8 @@ const CrewDetail = () => {
   const [crewMember, setCrewMember] = useState(false);
   const [crewAdmin, setCrewAdmin] = useState(false);
   const [toggle, setToggle] = useState(false);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filteredMembers, setFilteredMembers] = useState([]);
 
   useEffect(() => {
     console.log("useEffect User", user);
@@ -35,9 +37,24 @@ const CrewDetail = () => {
     if (selectedCrew) {
       setCrewMember(selectedCrew.members.includes(user.id));
       setCrewAdmin(selectedCrew.userId === user.id);
+      setFilteredMembers(selectedCrew.members);
     }
   }, [selectedCrew, user]);
 
+  const handleSearch = () => {
+    const filtered = selectedCrew.members.filter((memberId) => {
+      const memberInfo = users.find((user) => user.id === memberId);
+      return memberInfo.nick.includes(searchTerm);
+    });
+    setFilteredMembers(filtered);
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+  
   const handleJoinCrew = async () => {
     try {
       const response = await fetch("http://localhost:8000/crew/crewjoin", {
@@ -74,6 +91,10 @@ const CrewDetail = () => {
     setToggle(!toggle);
   };
 
+  if (!selectedCrew) {
+    return <p>메인페이지 갔다오세요</p>;
+  }
+
   return (
     <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ""}`}>
       <div className={style.leftCon}>
@@ -86,14 +107,20 @@ const CrewDetail = () => {
         ></i>
         <div className={style.leftConinner}>
           <div className={style.searchCon}>
-            <input type="text" placeholder=" 크루원 검색" />
-            <button className={style.iconButton}>
+            <input
+              type="text"
+              placeholder=" 크루원 검색"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onKeyDown={handleKeyDown}
+            />
+            <button className={style.iconButton} onClick={handleSearch}>
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
           <ul className={`${style.memberCon} ${!crewMember ? style.blur : ""}`}>
             {selectedCrew &&
-              selectedCrew.members.map((memberId) => {
+              filteredMembers.map((memberId) => {
                 const memberInfo = users.find((user) => user.id === memberId);
                 return (
                   <li key={memberId}>
