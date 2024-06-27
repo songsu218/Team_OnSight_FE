@@ -201,10 +201,13 @@ const SearchPage = () => {
               className={`fa-solid fa-xmark ${style.iconX}`}
               onClick={handleCloseDetails}
             ></i>
-            <img
-              src={currentCenter.thumbnail.trim()}
-              alt={currentCenter.center}
-            />
+            {/* <div className={style.centerDetailsImg}> */}
+              <img
+                src={currentCenter.thumbnail.trim()}
+                alt={currentCenter.center}
+              />
+            {/* </div> */}
+            
 
             <div className={style.centerDetailInfo}>
               <h4>{currentCenter.center}</h4>
@@ -252,12 +255,15 @@ const SearchPage = () => {
           <>
             <h3>암장 찾기</h3>
             <div className={style.selectCity}>
+              <div className={style.selectCityBox}>
               <select
                 value={selectedCity}
                 onChange={(e) => setSelectedCity(e.target.value)}
               >
                 <option value="서울특별시">서울특별시</option>
               </select>
+              </div>
+              
               <select value={selectedDistrict} onChange={handleDistrictChange}>
                 <option value="전체">전체</option>
                 {Object.keys(districtCoordinates[selectedCity] || {}).map(
