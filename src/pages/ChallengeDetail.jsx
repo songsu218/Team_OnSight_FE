@@ -1,9 +1,9 @@
-import style from "../css/challengeDetail.module.css";
-import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import ChallengeJoinUser from "../components/challenge/ChallengeJoinUser";
-import { ch } from "../api.js";
-import { useSelector } from "react-redux";
+import style from '../css/challengeDetail.module.css';
+import React, { useState, useEffect, useRef } from 'react';
+import { useLocation, useParams, useNavigate } from 'react-router-dom';
+import ChallengeJoinUser from '../components/challenge/ChallengeJoinUser';
+import { ch } from '../api.js';
+import { useSelector } from 'react-redux';
 
 const itemsPerPage = 3;
 
@@ -38,14 +38,14 @@ const ChallengeDetail = () => {
     setCurrentItems(rank.slice(indexOfFirstItem, indexOfLastItem));
   }, [currentPage]);
   const [totalPages, setTotalPages] = useState();
-  
+
   //#endregion 변수,Hook
   // console.log("detailData");
   // console.log(detailData);
   // console.log("user");
   // console.log(username);
   // console.log(nickname);
-  
+
   //#region init
   const isFirstRun = useRef(true);
   useEffect(() => {
@@ -55,19 +55,19 @@ const ChallengeDetail = () => {
     }
     ch.chJoinList(detailData.challengename)
       .then((result) => {
-        console.log("state : " + detailData.state);
-        console.log("참여자 목록");
+        console.log('state : ' + detailData.state);
+        console.log('참여자 목록');
         console.log(result.data);
         setJoinList(result.data);
       })
       .catch((error) => {
         console.log(`${error}`);
       });
-    if (detailData.state === "false") {
+    if (detailData.state === 'false') {
       setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
       ch.chRank(detailData.challengename)
         .then((result) => {
-          console.log("랭킹데이터");
+          console.log('랭킹데이터');
           console.log(result.data);
           setRank(result.data);
           setCurrentItems(result.data.slice(indexOfFirstItem, indexOfLastItem));
@@ -76,99 +76,14 @@ const ChallengeDetail = () => {
         .catch((error) => {
           console.log(`${error}`);
         });
-    } else if (detailData.state === "true") {
+    } else if (detailData.state === 'true') {
       setWrapClass(style.challenge_detail_wrap);
     }
   }, []);
   //#endregion init
 
-  // 참여자 테스트용
-  // const [joinList, setJoinList] = useState([
-  //   "Alice",
-  //   "Bob",
-  //   "Charlie",
-  //   "David",
-  //   "Emma",
-  //   "Frank",
-  //   "Grace",
-  //   "Henry",
-  //   "Ivy",
-  //   "Jac",
-  // ]);
-
-  // const rank = [
-  //   {
-  //     rank: 1,
-  //     nick: "Alice",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 1500,
-  //   },
-  //   {
-  //     rank: 2,
-  //     nick: "Bob",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 1400,
-  //   },
-  //   {
-  //     rank: 3,
-  //     nick: "Charlie",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 1300,
-  //   },
-  //   {
-  //     rank: 4,
-  //     nick: "David",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 1200,
-  //   },
-  //   {
-  //     rank: 5,
-  //     nick: "Emma",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 1100,
-  //   },
-  //   {
-  //     rank: 6,
-  //     nick: "Frank",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 1000,
-  //   },
-  //   {
-  //     rank: 7,
-  //     nick: "Grace",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 900,
-  //   },
-  //   {
-  //     rank: 8,
-  //     nick: "Henry",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 800,
-  //   },
-  //   {
-  //     rank: 9,
-  //     nick: "Ivy",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 700,
-  //   },
-  //   {
-  //     rank: 10,
-  //     nick: "Jac",
-  //     thumbnail:
-  //       "https://mblogthumb-phinf.pstatic.net/MjAyMjEwMjhfMTcw/MDAxNjY2OTI1MDg3NDc4.AqT5btEHT3IVVM7qSccX1tZVYYhvaLqKqTHfo1Ec0pgg.OYgm3LMWb8gLiVxA66TKB98AIN8zH_yb7URx43L7Cfkg.JPEG.fotovista/%EA%B4%91%EC%A3%BC%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84_FOTO7095.jpg?type=w800",
-  //     total: 600,
-  //   },
-  // ];
   const { challenge_id, challenge_name } = useParams(); // 챌린지 제목
+  const navigate = useNavigate();
 
   const handlePageChange = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -177,12 +92,12 @@ const ChallengeDetail = () => {
     ch.chEnter(detailData.challengename, username) //username
       .then((result) => {
         console.log(result.data);
-        alert("참가하기 등록 성공");
+        alert('참가하기 등록 성공');
         window.location.reload();
       })
       .catch((error) => {
         console.log(`${error}`);
-        alert("참가하기 등록 실패");
+        alert('참가하기 등록 실패');
       });
   };
   const today = () => {
@@ -191,10 +106,10 @@ const ChallengeDetail = () => {
     let month = today.getMonth() + 1;
     let day = today.getDate();
     if (month < 10) {
-      month = "0" + month;
+      month = '0' + month;
     }
     if (day < 10) {
-      day = "0" + day;
+      day = '0' + day;
     }
     return `${year}${month}${day}`;
   };
@@ -215,8 +130,8 @@ const ChallengeDetail = () => {
 
   return (
     <>
-      <div className='con1'>
-        <main id={style.container} className='mw'>
+      <div className="con1">
+        <main id={style.container} className="mw">
           <div className={style.content}>
             {/* h1은 로고(사이트명)이라 가정하고 */}
             {/* 아래 타이틀 및 페이지 네비 영역은 들어가야 챌린지 일정과 헤딩 태그 레벨이 맞음. */}
@@ -226,18 +141,18 @@ const ChallengeDetail = () => {
                 <ul>
                   <li className={style.active}>
                     <a
-                      href='#'
+                      href="#"
                       className={style.page_link}
-                      title='나의 챌린지 만들기 페이지 이동 링크'
+                      title="나의 챌린지 만들기 페이지 이동 링크"
                     >
                       나의 챌린지 만들기
                     </a>
                   </li>
                   <li>
                     <a
-                      href='#'
+                      href="#"
                       className={style.page_link}
-                      title='나의 챌린지 보기 페이지 이동 링크'
+                      title="나의 챌린지 보기 페이지 이동 링크"
                     >
                       나의 챌린지 보기
                     </a>
@@ -247,18 +162,24 @@ const ChallengeDetail = () => {
             </div>
             {/* 기본이 진행중 화면으로  기간이 지난 챌린지에는 아래 div.challenge_detail_wrap에 .end 추가하여 순위 콘텐츠 표시되도록 작업 */}
             <div className={wrapClass}>
+              <button
+                onClick={() => navigate(-1)}
+                className={style.back_button}
+              >
+                <i className='fa-solid fa-angle-left'></i>
+              </button>
               <div className={style.challenge_info}>
                 <div className={style.challenge_left}>
                   <div className={style.challenge_img}>
                     <img
                       srcSet={`${challenge_img}`}
                       src={`${challenge_img}`}
-                      alt='A챌린지 이미지'
+                      alt="A챌린지 이미지"
                     />
                   </div>
                   <div className={style.apply_btn_wrap}>
                     <button
-                      type='button'
+                      type="button"
                       id={style.applyBtn}
                       className={style.apply_btn}
                       onClick={() => {
@@ -278,7 +199,7 @@ const ChallengeDetail = () => {
                       <li>
                         <span className={style.bold}>기간</span>
                         <span>{challenge_period}</span>
-                        {detailData.state == "true" ? (
+                        {detailData.state == 'true' ? (
                           <span className={`${style.status} ${style.ing}`}>
                             진행중
                           </span>
@@ -294,7 +215,7 @@ const ChallengeDetail = () => {
                       </li>
                     </ul>
                     <div className={style.entry_list_wrap}>
-                      <button type='button' className={style.entry_list_btn}>
+                      <button type="button" className={style.entry_list_btn}>
                         챌린지 참여자
                       </button>
                       <ul className={style.entry_list}>
@@ -328,9 +249,23 @@ const ChallengeDetail = () => {
                       {currentItems.map((item, index) => (
                         <tr key={index}>
                           <td>
-                            <div className={style.rank_profile}>
-                              <img src={item.thumbnail == null ? "/img/joinuser.png" : `http://localhost:8000${item.thumbnail}`} alt='Profile' />
-                              <span className={style.trophy} />
+                            <div
+                              className={`${style.rank_profile} ${
+                                item.rank <= 3 ? style[`rank-${item.rank}`] : ''
+                              }`}
+                            >
+                              <img
+                                src={
+                                  item.thumbnail == null
+                                    ? '/img/joinuser.png'
+                                    : `http://localhost:8000${item.thumbnail}`
+                                }
+                                alt='Profile'
+                              />
+                              {/* <span className={style.trophy} /> */}
+                              {item.rank <= 3 && (
+                                <span className={`${style.trophy}`} />
+                              )}
                             </div>
                           </td>
                           <td>{item.rank}등</td>
@@ -346,7 +281,7 @@ const ChallengeDetail = () => {
                         key={index}
                         onClick={() => handlePageChange(index + 1)}
                         className={
-                          index + 1 === currentPage ? style.active : ""
+                          index + 1 === currentPage ? style.active : ''
                         }
                       >
                         {index + 1}

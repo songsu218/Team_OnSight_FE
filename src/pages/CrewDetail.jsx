@@ -1,17 +1,18 @@
-import style from '../css/CrewDetail.module.css';
+import style from "../css/CrewDetail.module.css";
 import {
   NavLink,
   Routes,
   Route,
   useParams,
-  Navigate,
   useNavigate,
-} from 'react-router-dom';
-import CrewHome from '../components/CrewHome';
-import CrewWrite from '../components/CrewWrite';
-import CrewManage from '../components/CrewManage';
-import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
+  Link,
+} from "react-router-dom";
+import CrewHome from "../components/CrewHome";
+import CrewWrite from "../components/CrewWrite";
+import CrewManage from "../components/CrewManage";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { setUserAllInfo } from "../store/userStore";
 
 const CrewDetail = () => {
   const { crewId } = useParams();
@@ -21,6 +22,7 @@ const CrewDetail = () => {
   const selectedCrew = crew.find((c) => c._id === crewId);
   console.log(selectedCrew);
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [crewMember, setCrewMember] = useState(false);
@@ -29,11 +31,9 @@ const CrewDetail = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredMembers, setFilteredMembers] = useState([]);
 
-  const moveToCrew = () => {
-    navigate('/crew');
-  };
-
   useEffect(() => {
+    console.log("useEffect User", user);
+    console.log("useEffect selectedCrew", selectedCrew);
     if (selectedCrew) {
       setCrewMember(selectedCrew.members.includes(user.id));
       setCrewAdmin(selectedCrew.userId === user.id);
@@ -54,6 +54,38 @@ const CrewDetail = () => {
       handleSearch();
     }
   };
+  
+  const handleJoinCrew = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/crew/crewjoin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user, crewId: selectedCrew }),
+      });
+      const data = await response.json();
+      console.log("받아온값", data);
+      if (response.ok) {
+        // Update Redux state
+        dispatch(setUserAllInfo(data.updateUser));
+      } else {
+        console.error("Failed to join crew");
+      }
+    } catch (err) {
+      console.error("Error joining crew", err);
+    }
+  };
+
+  const moveToCrew = () => {
+    navigate("/crew");
+  };
+
+  if (!selectedCrew) {
+    return <p>메인페이지 갔다오세요</p>;
+  }
+  // 이거 없으니까 새로고침할 때마다 리덕스 초기화되고 빨간화면 떠서 추가함
+  // 나중에 redux persist 쓰거나 local storage 쓰게되면 삭제할 예정
 
   const toggleSidebar = () => {
     setToggle(!toggle);
@@ -64,11 +96,11 @@ const CrewDetail = () => {
   }
 
   return (
-    <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ''}`}>
+    <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ""}`}>
       <div className={style.leftCon}>
         <h3>크루원 찾기</h3>
         <i
-          className={`fa-solid ${toggle ? 'fa-angle-right' : 'fa-angle-left'} ${
+          className={`fa-solid ${toggle ? "fa-angle-right" : "fa-angle-left"} ${
             toggle ? style.iconLeft : style.iconRight
           }`}
           onClick={toggleSidebar}
@@ -86,7 +118,7 @@ const CrewDetail = () => {
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
-          <ul className={`${style.memberCon} ${!crewMember ? style.blur : ''}`}>
+          <ul className={`${style.memberCon} ${!crewMember ? style.blur : ""}`}>
             {selectedCrew &&
               filteredMembers.map((memberId) => {
                 const memberInfo = users.find((user) => user.id === memberId);
@@ -119,7 +151,7 @@ const CrewDetail = () => {
                   <NavLink
                     to={`/crewdetail/${crewId}/crewhome`}
                     aria-current={({ isActive }) =>
-                      isActive ? 'page' : undefined
+                      isActive ? "page" : undefined
                     }
                   >
                     크루홈
@@ -129,15 +161,17 @@ const CrewDetail = () => {
                   {crewMember ? (
                     <NavLink
                       to={`/crewdetail/${crewId}/crewwrite`}
+                      state={{ crewName: selectedCrew.name }}
                       aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
+                        isActive ? "page" : undefined
                       }
                     >
                       글쓰기
                     </NavLink>
                   ) : (
-                    <a href="#">가입하기</a>
-                    // 그냥 a태그 넣어놨음
+                    <Link to="#" onClick={handleJoinCrew}>
+                      가입하기
+                    </Link>
                   )}
                 </li>
                 {crewAdmin && (
@@ -145,7 +179,7 @@ const CrewDetail = () => {
                     <NavLink
                       to={`/crewdetail/${crewId}/crewmanage`}
                       aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
+                        isActive ? "page" : undefined
                       }
                     >
                       관리하기

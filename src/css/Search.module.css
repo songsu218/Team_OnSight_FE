@@ -33,7 +33,7 @@
   display: none;
 }
 
-.sidebar>h3 {
+.sidebar > h3 {
   margin: 46px 0 50px 0;
   text-align: center;
   font-size: 26px;
@@ -131,7 +131,6 @@
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
-
 }
 
 .centerInfo div {
@@ -162,7 +161,7 @@
   position: relative;
 }
 
-.centerDetails>* {
+.centerDetails > * {
   margin-bottom: 20px;
 }
 
@@ -180,7 +179,6 @@
   font-size: 1.5rem;
 }
 
-
 .centerDetails .centerDetailInfo {
   margin-top: 10px;
   display: flex;
@@ -188,7 +186,7 @@
 }
 
 .likeStar {
-  color: #FECE2F;
+  color: #fece2f;
 }
 
 .centerDetailInfo div {
@@ -224,7 +222,7 @@
 
 .tabButtonHome.activeTab::after,
 .tabButtonRecode.activeTab::after {
-  content: "";
+  content: '';
   position: absolute;
   bottom: -3px;
   left: 50%;
@@ -244,7 +242,7 @@
   margin-top: 30px;
 }
 
-.centerHome>* {
+.centerHome > * {
   margin-bottom: 20px;
 }
 
@@ -299,8 +297,6 @@
   margin-bottom: 1rem;
 }
 
-
-
 .centerRecordNav .btnBox {
   border: 3px solid black;
 }
@@ -310,7 +306,6 @@
   font-family: Arial, sans-serif;
   cursor: pointer;
   height: 30px;
-
 }
 
 .recordItem {
@@ -336,7 +331,6 @@
   margin-right: 16px;
   object-fit: cover;
 }
-
 
 /* recordUserInfo -> 닉네임, 기록수 */
 .recordNickname {

@@ -7,6 +7,7 @@
 
 .mainCrewToggled .myCrewCon {
   transform: translateX(-400px);
+  overflow: visible;
 }
 
 .mainCrewToggled .rightCon {
@@ -22,8 +23,15 @@
   top: 0;
   text-align: center;
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
+  transition: 0.3s;
+  overflow-y: scroll;
 }
+
+.myCrewCon::-webkit-scrollbar {
+  display: none;
+}
+/* 스크롤바 있으니까 안 예뻐서 일단 이렇게하고 */
+/* 마우스휠로 내려가기하는데 좀 수정필요할듯 */
 
 .myCrewCon .iconRight {
   position: absolute;
@@ -45,14 +53,18 @@
   font-weight: bold;
 }
 
+.myCrewListCon {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
 .myCrewListCon .crewListCard {
   margin: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
-  width: 350px;
-  height: 300px;
+  padding: 2rem 1.5rem;
   background-color: white;
   border-radius: 1rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -77,6 +89,7 @@
   gap: 1rem;
   flex-direction: column;
   align-items: baseline;
+  max-width: 300px;
 }
 
 .crewListCard .crewTextBox .crewNameBox strong {
@@ -87,6 +100,10 @@
 
 .crewListCard .crewTextBox .crewNameBox span {
   color: #b9b9b9;
+}
+
+.crewListCard .crewTextBox p {
+  text-align: left;
 }
 
 /* 추천크루 리스트 영역 */
