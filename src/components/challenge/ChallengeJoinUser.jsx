@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
 const ChallengeJoinUser = (props) => {
   const { user_name, thumbnail } = {
@@ -12,11 +12,11 @@ const ChallengeJoinUser = (props) => {
     height: '40px',
     background: '#f2f4f8',
     borderRadius: '50%',
-    objectFit: 'contain',
+    overflow: 'hidden',
   };
   const img = {
-    width: '24px',
-    height: '24px',
+    width: '100%',
+    height: '100%',
     border: '0',
     // filter: "invert(0.6)",
   };
@@ -39,7 +39,8 @@ const ChallengeJoinUser = (props) => {
               ? '/img/joinuser.png'
               : `http://localhost:8000${thumbnail}`
           }
-        ></img>
+          alt=''
+        />
       </div>
       <em style={entry}>{user_name}</em>
     </li>

@@ -31,7 +31,7 @@ function ChallengeModal({ onClose, isOpen, username }) {
       alert('로그인이 필요합니다.');
       onClose();
     }
-  }, []);
+  }, [onClose, username]);
   const handleClose = () => {
     // setShow(false);
     resetForm();
@@ -113,10 +113,10 @@ function ChallengeModal({ onClose, isOpen, username }) {
     setShowingCenters(climbingCenters);
   };
 
-  const handleClick = (e, action, diffi) => {
-    e.stopPropagation();
-    action(diffi);
-  };
+  // const handleClick = (e, action, diffi) => {
+  //   e.stopPropagation();
+  //   action(diffi);
+  // };
 
   return (
     <>

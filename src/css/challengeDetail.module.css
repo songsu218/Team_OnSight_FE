@@ -83,10 +83,10 @@
 .back_button {
   border: none;
   background: none;
-  font-size: 3rem;
+  font-size: 2.5rem;
   cursor: pointer;
   padding: 5px;
-  transform: translateY(-20px);
+  transform: translateY(-50px);
 }
 .challenge_info {
   display: flex;
@@ -221,7 +221,7 @@
   border-top: 1px solid #dde1e6;
 }
 
-.entry_list .entry_img {
+/* .entry_list .entry_img {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -237,7 +237,7 @@
   height: 24px;
   border: 0;
   filter: invert(0.6);
-}
+} */
 
 .entry_list .entry {
   margin: 0 0 0 1px;
@@ -299,10 +299,6 @@
   text-underline-position: under;
 }
 
-/* .challenge_detail_wrap .rank_table_wrap {
-  display: none;
-} */
-
 .challenge_detail_wrap.end .rank_table_wrap {
   display: block;
 }
@@ -358,21 +354,26 @@
   position: absolute;
   bottom: 0;
   right: -10px;
-  width: 40px;
-  height: 40px;
-  /* background: url('https://png.pngtree.com/png-vector/20230509/ourmid/pngtree-trophy-flat-icon-vector-png-image_7092605.png')
-    no-repeat 50% / 4rem; */
+  width: 50px;
+  height: 50px;
 }
 
 .rank-1 .trophy {
-  background: url(/public/img/first.png) no-repeat 50% / 4rem;
+  /* background: url(/public/img/first.png) no-repeat 50% 50%;
+  background-size: contain; */
+  /* background: url(/public/img/first.png) no-repeat center center;
+  background-size: 50px 50px; */
+  background: url(/public/img/first.png) no-repeat center center;
+  background-size: contain; /* 기본 크기 */
 }
 .rank-2 .trophy {
-  background: url(/public/img/second.png) no-repeat 50% / 4rem;
+  background: url(/public/img/second.png) no-repeat center center;
+  background-size: contain;
 }
 
 .rank-3 .trophy {
-  background: url(/public/img/third.png) no-repeat 50% / 4rem;
+  background: url(/public/img/third.png) no-repeat center center;
+  background-size: contain;
 }
 
 .pagination {
@@ -451,7 +452,7 @@
   }
 
   .rank_table .trophy {
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
   }
 }
