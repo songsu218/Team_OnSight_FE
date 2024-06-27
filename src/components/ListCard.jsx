@@ -1,21 +1,21 @@
-import style from "../css/ListCard.module.css";
+import style from '../css/ListCard.module.css';
 
 const formatDate = (date) => {
   const options = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    weekday: "short",
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'short',
   };
-  const formattedDate = new Intl.DateTimeFormat("ko-KR", options).format(
-    new Date(date)
-  );
-  return formattedDate.replace(/\./g, ".");
+  const formattedDate = new Intl.DateTimeFormat('ko-KR', options).format(new Date(date));
+  return formattedDate.replace(/\./g, '.');
 };
 
-const ListCard = ({ title, center, date, thumbnail, itemType }) => {
+const ListCard = ({ title, center, detail, date, thumbnail, itemType }) => {
   const imgPath =
-    itemType === "challenge" ? thumbnail : `http://localhost:8000` + thumbnail;
+    itemType === 'challenge' || itemType === 'center'
+      ? thumbnail
+      : `http://localhost:8000` + thumbnail;
   const renderDate = () => {
     if (Array.isArray(date)) {
       return (
@@ -32,9 +32,19 @@ const ListCard = ({ title, center, date, thumbnail, itemType }) => {
       <span className={style.imgBox}>
         <img src={imgPath} alt="대표이미지" />
       </span>
-      <strong className={style.tit}>{title}</strong>
-      <span>{center}</span>
-      {renderDate()}
+
+      {itemType === 'center' ? (
+        <>
+          <strong className={style.tit}>{center}</strong>
+          <span>{detail}</span>
+        </>
+      ) : (
+        <>
+          <strong className={style.tit}>{title}</strong>
+          <span>{center}</span>
+          {renderDate()}
+        </>
+      )}
     </a>
   );
 };
