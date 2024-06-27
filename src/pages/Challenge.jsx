@@ -10,21 +10,21 @@ import style from '../css/challenge.module.css';
 import ChallengeModal from '../components/modal/ChallengeModal';
 import { useSelector } from 'react-redux';
 
-const Challenge = (props) => {
+const Challenge = () => {
   //#region 변수,Hook
-  const { props1, props2 } = {
-    ...props,
-  };
+  // const { props1, props2 } = {
+  //   ...props,
+  // };
   const user = useSelector((state) => state.user.userInfo);
   const username = user ? user.id : null;
-  const nickname = user ? user.nick : null;
+  // const nickname = user ? user.nick : null;
   const navigate = useNavigate();
   const swiperRef = useRef(null);
   const progressCircle = useRef(null);
   const progressContent = useRef(null);
-  const [dataList, setDataList] = useState([]);
-  const [nowList, setNowList] = useState([]);
-  const [pastList, setPastList] = useState([]);
+  // const [dataList, setDataList] = useState([]);
+  // const [nowList, setNowList] = useState([]);
+  // const [pastList, setPastList] = useState([]);
   const [swiper, setSwiper] = useState(null);
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [totalSlides, setTotalSlides] = useState(0);
@@ -201,7 +201,7 @@ const Challenge = (props) => {
                 <ul>
                   <li className={activeIndex === 0 ? style.active : ''}>
                     <a
-                      href='#'
+                      href='/'
                       className={style.page_link}
                       onClick={(event) => handleClick(0, event)}
                       title='챌린지 일정 페이지 이동 링크'
@@ -211,7 +211,7 @@ const Challenge = (props) => {
                   </li>
                   <li className={activeIndex === 1 ? style.active : ''}>
                     <a
-                      href='#'
+                      href='/'
                       className={`${style.page_link}`}
                       onClick={(event) => handleClick(1, event)}
                       title='나의 챌린지 보기 페이지 이동 링크'
@@ -221,7 +221,7 @@ const Challenge = (props) => {
                   </li>
                   <li className={activeIndex === 2 ? style.active : ''}>
                     <a
-                      href='#'
+                      href='/'
                       className={style.page_link}
                       onClick={(event) => handleClick(2, event)}
                       title='나의 챌린지 만들기 페이지 이동 링크'
@@ -270,7 +270,7 @@ const Challenge = (props) => {
                 onSlideChange={handleSlideChange}
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
               >
-                {printData.length == 0
+                {printData.length === 0
                   ? ''
                   : printData.map((item) => (
                       <SwiperSlide
@@ -298,9 +298,6 @@ const Challenge = (props) => {
                         </div>
                       </SwiperSlide>
                     ))}
-                {/* <div class="swiper-button-prev"></div>
-                <div class="swiper-pagination"></div>
-                <div class="swiper-button-next"></div> */}
                 <div className={style.control}>
                   <div className={style.swiper_button_prev} onClick={goPrev} />
                   <div className={style.swiper_pagination}>
