@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Map, MapMarker } from "react-kakao-maps-sdk";
 import style from "../css/Search.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { filterCenters } from "../utils/searchUtils";
-import CenterDetails from "../components/CenterDetails"; // CenterDetails 컴포넌트 임포트
-import { setUserAllInfo } from "../store/userStore";
 
 const Search = () => {
   const user = useSelector((state) => state.user.userInfo); // 리덕스의 유저정보
-  const dispatch = useDispatch();
   const [centerList, setCenterList] = useState([]); // 센터 리스트
   const [guList, setGuList] = useState([]); // 구 리스트
   const [gu, setGu] = useState("전체"); // 선택된 구 상태 추가
@@ -17,17 +14,8 @@ const Search = () => {
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [filteredCenters, setFilteredCenters] = useState([]); // 필터링된 센터 리스트
   const [mapMarkers, setMapMarkers] = useState([]); // 구에 따른 맵마커 리스트
-  const [currentCenter, setCurrentCenter] = useState(null); // 선택된 센터 상태 추가
-  const [showDetails, setShowDetails] = useState(false); // 상세 정보 표시 상태 추가
-  const [activeTab, setActiveTab] = useState("home"); // 활성 탭 상태 추가
-  const [userLikes, setUserLikes] = useState(user?.like || []); // 사용자 좋아요 상태 추가
-  const [records, setRecords] = useState([]); // 기록 상태 추가
 
   useEffect(() => {
-    if (user && user.like) {
-      setUserLikes(user.like); // Redux에서 가져온 likes 상태를 설정
-    }
-
     const fetchCenterData = async () => {
       try {
         const response = await fetch(
@@ -78,28 +66,9 @@ const Search = () => {
 
     fetchCenterData();
     fetchGuData();
-  }, [user, gu]);
+  }, []); // 빈 배열을 사용하여 컴포넌트가 마운트될 때만 실행
 
-  const fetchRecords = async (centerId) => {
-    try {
-      const response = await fetch(`http://localhost:8000/center/${centerId}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setRecords(data);
-      } else {
-        console.error("Failed to fetch records");
-      }
-    } catch (err) {
-      console.error("Error fetching records", err);
-    }
-  };
-
+  // 콤보박스 부분
   const handleDistrictChange = (e) => {
     const selectedGu = e.target.value;
     setGu(selectedGu);
@@ -114,17 +83,17 @@ const Search = () => {
     setMapMarkers(newFilteredCenters); // 구 변경 시 맵마커 업데이트
   };
 
+  // 클릭한 센터로 이동
   const handleCenterClick = (center) => {
     setMapCenter({ lat: center.latlng.lat, lng: center.latlng.lng });
-    setCurrentCenter(center);
-    setShowDetails(true);
-    fetchRecords(center.center); // 선택한 센터에 해당하는 records 값을 가져옴
   };
 
+  // 검색 동작을 수행
   const performSearch = () => {
     setFilteredCenters(filterCenters(centerList, searchTerm, gu));
   };
 
+  // 초기 조건으로 되돌리는 함수
   const resetFilters = () => {
     setCity("서울특별시");
     setGu("전체");
@@ -133,49 +102,13 @@ const Search = () => {
     const initialFilteredCenters = filterCenters(centerList, "", "전체");
     setFilteredCenters(initialFilteredCenters);
     setMapMarkers(initialFilteredCenters);
-    setShowDetails(false);
-    setCurrentCenter(null);
   };
 
+  // 엔터키 이벤트
   const handleKeyPress = (event) => {
     if (event.key === "Enter") {
       performSearch();
     }
-  };
-
-  const handleToggleLike = async (centerId) => {
-    // if (userLikes.includes(centerId)) {
-    //   setUserLikes(userLikes.filter((id) => id !== centerId));
-    // } else {
-    //   setUserLikes([...userLikes, centerId]);
-    // }
-    try {
-      const response = await fetch(`http://localhost:8000/user/toggleLike`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userId: user._id, centerId }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        if (data) {
-          console.log(data);
-          setUserLikes(data.like);
-          dispatch(setUserAllInfo(data));
-        }
-      } else {
-        console.error("Failed to toggle like");
-      }
-    } catch (err) {
-      console.error("Error toggling like", err);
-    }
-  };
-
-  const handleCloseDetails = () => {
-    setShowDetails(false);
-    setCurrentCenter(null);
   };
 
   const selectedCoordinates = mapCenter;
@@ -228,13 +161,7 @@ const Search = () => {
                   <h4>{center.center}</h4>
                   <p>{center.gu}</p>
                 </div>
-                {/* 즐찾 */}
-                <i
-                  className={`fa-regular fa-star ${style.likeStar} ${
-                    userLikes.includes(center._id) ? "fa-solid" : ""
-                  }`}
-                  onClick={() => handleToggleLike(center._id)}
-                ></i>
+                <i></i>
               </div>
               <p className={style.centerDetail}>{center.detail}</p>
             </div>
@@ -257,18 +184,6 @@ const Search = () => {
           ))}
         </Map>
       </div>
-      {showDetails && currentCenter && (
-        <CenterDetails
-          currentCenter={currentCenter}
-          showDetails={showDetails}
-          activeTab={activeTab}
-          records={records}
-          handleCloseDetails={handleCloseDetails}
-          setActiveTab={setActiveTab}
-          userLikes={userLikes}
-          toggleLike={handleToggleLike}
-        />
-      )}
     </main>
   );
 };

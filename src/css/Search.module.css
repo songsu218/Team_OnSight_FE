@@ -43,14 +43,13 @@
 .selectCity {
   display: flex;
   justify-content: space-between;
-}
-
+} 
 .selectCity select {
   width: 170px;
   height: 36px;
   margin-bottom: 10px;
-  padding-left: 10px;
-  border: 1px solid #dee2e6;
+  padding-left: 10px; 
+  border: 1px solid #dee2e6; 
   border-radius: 0.5rem;
   z-index: 2;
 }
@@ -99,6 +98,7 @@
   height: 50px;
   object-fit: cover;
   margin-right: 10px;
+  border-radius: 1rem;
 }
 
 .listItem div {
@@ -110,31 +110,36 @@
 }
 
 .centerList {
-  width: 347px;
-  height: 250px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 1rem;
-  padding: 10px 20px;
-  margin-top: 20px;
   display: flex;
   flex-direction: column;
+  width: 347px;
+  height: 310px;
+  padding: 2rem 1.5rem;
+  margin-top: 20px;
+  border-radius: 1rem;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
 }
 
+
 .centerList img {
-  width: 306px;
-  margin: auto;
-  height: 132px;
+  width: 100%;
+  height: 150px;
   object-fit: cover;
+  border-radius: 1rem;
 }
 
 .centerInfo {
-  margin-top: 10px;
+  margin-top: 1rem;
   display: flex;
   justify-content: space-between;
 }
-
+ 
 .centerInfo div {
   display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
 }
 
 .centerInfo div h4 {
@@ -143,8 +148,9 @@
 
 .centerInfo div p {
   font-size: 14px;
-  opacity: 0.5;
+  opacity: 0.5; 
 }
+
 
 .searchResults .centerDetail {
   display: -webkit-box;
@@ -164,11 +170,19 @@
 .centerDetails > * {
   margin-bottom: 20px;
 }
+/* 상세페이지 이미지 */
+/* .centerDetailsImg { 
+  
+  
+} */
 
 .centerDetails img {
   width: 100%;
   height: 300px;
-  object-fit: contain;
+  margin-top: 1rem;
+  object-fit: cover;
+  /* object-fit: contain; */
+  border-radius: 1rem; 
 }
 
 .centerDetails .iconX {
@@ -265,10 +279,13 @@
 
 .levelBox:first-of-type {
   border-left: 1px solid #dee2e6;
+  border-radius: 0.5rem 0 0 0.5rem;
 }
 
 .levelBox:last-of-type {
   border-right: 1px solid #dee2e6;
+  border-radius: 0 0.5rem 0.5rem 0;
+
 }
 
 .websiteContainer {
@@ -299,6 +316,8 @@
 
 .centerRecordNav .btnBox {
   border: 3px solid black;
+  border-radius: 1.25rem;
+
 }
 
 .btnBox .customButton {
@@ -340,6 +359,8 @@
 
 .recordCount {
   color: gray;
+  font-size: 0.8rem;
+
 }
 
 /* recordContent */
