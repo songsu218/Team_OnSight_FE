@@ -1,5 +1,5 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import GaugeChart from 'react-gauge-chart';
 import {
@@ -16,6 +16,7 @@ const RecordDetail = () => {
   const { id } = useParams();
   const records = useSelector((state) => state.record.recordInfo);
   const record = records.find((record) => record._id === id);
+  const navigate = useNavigate();
 
   const userRecords = records
     .filter((rec) => rec.userId === record.userId && rec._id !== record._id)
@@ -54,6 +55,9 @@ const RecordDetail = () => {
   return (
     <div className={`${style.allCon} con1`}>
       <div className={`${style.allBox} mw`}>
+        <button onClick={() => navigate(-1)} className={style.back_button}>
+          <i className="fa-solid fa-angle-left"></i>
+        </button>
         <h2>{record.title}</h2>
         <div className={style.recordWrap}>
           <div className={style.leftBox}>

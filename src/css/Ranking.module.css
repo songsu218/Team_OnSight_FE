@@ -3,7 +3,6 @@
   height: 100vh;
   display: flex;
   justify-content: space-between;
-  overflow: hidden;
 }
 
 .imgBox {
@@ -67,4 +66,27 @@
 .personBox img:nth-of-type(5):hover {
   transform: scale(1.1);
   rotate: 5deg;
+}
+
+@media (max-width: 1160px) {
+  .rankArea {
+    margin-bottom: 650px;
+  }
+  .rankArea .imgBox {
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+
+  .rankArea .rankListBox {
+    margin: auto;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@media (max-width: 800px) {
+  .rankArea .imgBox {
+    display: none;
+  }
 }
