@@ -2,10 +2,11 @@ import style from '../css/challengeDetail.module.css';
 import React, { useState, useEffect, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ChallengeJoinUser from '../components/challenge/ChallengeJoinUser';
+import ListPagnation from '../components/list/ListPagnation.jsx';
 import { ch } from '../api.js';
 import { useSelector } from 'react-redux';
 
-const itemsPerPage = 3;
+const itemsPerPage = 5;
 
 const ChallengeDetail = () => {
   //#region 변수,Hook
@@ -184,13 +185,15 @@ const ChallengeDetail = () => {
                     <button
                       type='button'
                       id={style.applyBtn}
-                      className={style.apply_btn}
+                      className={`${style.apply_btn} ${
+                        isJoined ? style.apply_btn_completed : ''
+                      }`}
                       onClick={() => {
                         handleJoinClick();
                       }}
                       disabled={isJoined} // 참가 여부에 따라 버튼 비활성화
                     >
-                      {isJoined ? '참가완료' : '참가하기'}
+                      {isJoined ? '참가 완료' : '참가하기'}
                     </button>
                   </div>
                 </div>
@@ -205,11 +208,11 @@ const ChallengeDetail = () => {
                         <span>{challenge_period}</span>
                         {detailData.state === 'true' ? (
                           <span className={`${style.status} ${style.ing}`}>
-                            진행중
+                            진행 중
                           </span>
                         ) : (
                           <span className={`${style.status} ${style.end}`}>
-                            기간 끝
+                            기간 종료
                           </span>
                         )}
                       </li>
@@ -276,7 +279,7 @@ const ChallengeDetail = () => {
                       ))}
                     </tbody>
                   </table>
-                  <div className={style.pagination}>
+                  {/* <div className={style.pagination}>
                     {Array.from({ length: totalPages }, (_, index) => (
                       <button
                         key={index}
@@ -288,10 +291,17 @@ const ChallengeDetail = () => {
                         {index + 1}
                       </button>
                     ))}
-                  </div>
+                  </div> */}
                   <div className={style.noti_txt}>
                     * 집계는 <em>챌린지가 끝난 후</em> 결정돼요.
                   </div>
+                  {detailData.state === 'false' && (
+                    <ListPagnation
+                      currentPage={currentPage}
+                      totalPages={totalPages}
+                      onPageChange={handlePageChange}
+                    />
+                  )}
                 </div>
               </div>
             </div>

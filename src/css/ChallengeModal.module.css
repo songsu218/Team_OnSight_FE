@@ -1,7 +1,11 @@
 .modalRe {
-  margin-top: 7rem;
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  margin-top: 8rem;
 }
-
+/* .modalRe h2 {
+  font-size: 20px;
+  margin-left: 1.9rem;
+} */
 .recordCon {
   display: flex;
   flex-direction: column;
@@ -19,6 +23,7 @@
   -webkit-user-select: none;
   -khtml-user-select: none;
   user-select: none;
+  padding: 1rem 0;
 }
 
 .recordCon .dateWrap {
@@ -30,7 +35,7 @@
   width: 90%;
   position: relative;
   margin-bottom: 2rem;
-  padding: 1rem 0 0.5rem 1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
   box-shadow: 0 3px 3px -3px #777777;
   -ms-user-select: none;
   -moz-user-select: -moz-none;

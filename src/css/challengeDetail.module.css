@@ -70,6 +70,7 @@
 
 .sub_tit_area {
   margin: 0;
+  margin-left: 1.5rem;
 }
 
 .sub_tit_area .sub_tit {
@@ -86,7 +87,7 @@
   font-size: 2.5rem;
   cursor: pointer;
   padding: 5px;
-  transform: translateY(-50px);
+  transform: translate(-10px, -50px);
 }
 .challenge_info {
   display: flex;
@@ -175,15 +176,15 @@
 }
 
 .entry_list_btn {
-  padding: 0 15px;
   width: 100%;
   height: 48px;
   padding: 0.5rem 3.6rem 0.5rem 1.6rem;
   background: #f2f4f8
-    url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212.176%22%20height%3D%226.048%22%20viewBox%3D%220%200%2012.176%206.048%22%3E%0D%0A%20%20%3Cpath%20id%3D%22ico_arr_drop%22%20d%3D%22M508.5%2C430.5l5.545%2C4%2C5.455-4%22%20transform%3D%22translate(-507.915%20-429.689)%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22%2F%3E%0D%0A%3C%2Fsvg%3E%0D%0A')
+    url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2212.176%22%20height%3D%226.048%22%20viewBox%3D%220%200%2012.176%206.048%22%3E%3Cpath%20d%3D%22M.585.811l5.545%204%205.455-4%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22/%3E%3C/svg%3E')
     no-repeat calc(100% - 1.6rem) 50%;
   box-sizing: border-box;
   border: 1px solid #dde1e6;
+  border-radius: 0.5rem;
   outline: none;
   font-size: 15px;
   text-align: left;
@@ -268,6 +269,12 @@
   color: #fff;
   background: #000;
   cursor: pointer;
+  border-radius: 0.5rem;
+}
+.apply_btn_completed {
+  background: #b9b9b9; /* "참가완료" 상태일 때 버튼 색상 */
+  color: #fff;
+  border: none;
 }
 
 .detail_contents {
@@ -315,13 +322,15 @@
   padding: 20px;
   background: #f3f3f3;
   font-size: 20px;
+  font-weight: bold;
   text-align: center;
+  border-radius: 0.5rem;
 }
 
 .rank_table td {
   padding: 20px;
   border-bottom: 1px solid #dde1e6;
-  font-size: 20px;
+  font-size: 1.25rem;
   text-align: center;
   vertical-align: middle;
 }
@@ -363,16 +372,16 @@
   background-size: contain; */
   /* background: url(/public/img/first.png) no-repeat center center;
   background-size: 50px 50px; */
-  background: url(/public/img/first.png) no-repeat center center;
+  background: url(/public/img/first_1.png) no-repeat center center;
   background-size: contain; /* 기본 크기 */
 }
 .rank-2 .trophy {
-  background: url(/public/img/second.png) no-repeat center center;
+  background: url(/public/img/second_1.png) no-repeat center center;
   background-size: contain;
 }
 
 .rank-3 .trophy {
-  background: url(/public/img/third.png) no-repeat center center;
+  background: url(/public/img/third_1.png) no-repeat center center;
   background-size: contain;
 }
 
@@ -437,7 +446,9 @@
     width: 100%;
     height: auto;
   }
-
+  .rank_table td {
+    font-size: 1.1rem;
+  }
   .entry_list_wrap {
     width: 100%;
   }

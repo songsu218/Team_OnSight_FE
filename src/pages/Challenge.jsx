@@ -254,7 +254,7 @@ const Challenge = () => {
               >
                 <option value={'TOT'}>선택</option>
                 <option value={'NOW'}>진행 중</option>
-                <option value={'PAST'}>진행 끝</option>
+                <option value={'PAST'}>기간 종료</option>
               </select>
             </div>
             <div className={style.challenge_wrap}>
