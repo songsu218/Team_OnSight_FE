@@ -2,10 +2,11 @@
   font-family: 'Spoqa Han Sans Neo', 'sans-serif';
   margin-top: 8rem;
 }
-/* .modalRe h2 {
-  font-size: 20px;
-  margin-left: 1.9rem;
-} */
+.modalRe h2 {
+  /* font-size: 20px; */
+  margin-left: 1.65rem;
+  padding: 0.5rem 0;
+}
 .recordCon {
   display: flex;
   flex-direction: column;
@@ -16,7 +17,7 @@
   align-self: flex-start;
   margin-left: 2rem;
   margin-bottom: 0.5rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: bold;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
@@ -35,7 +36,7 @@
   width: 90%;
   position: relative;
   margin-bottom: 2rem;
-  padding: 0.5rem 0 0.5rem 1rem;
+  padding: 0.7rem 0 0.5rem 1rem;
   box-shadow: 0 3px 3px -3px #777777;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
@@ -119,6 +120,7 @@
   border: none;
   color: #000000;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  margin: 0.8rem 0;
 }
 
 .ModalFt .saveBtn:hover {

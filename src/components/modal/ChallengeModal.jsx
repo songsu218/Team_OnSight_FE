@@ -125,7 +125,9 @@ function ChallengeModal({ onClose, isOpen, username }) {
       </button> */}
       <Modal className={style.modalRe} show={isOpen} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>챌린지 만들기</Modal.Title>
+          <Modal.Title>
+            <h2>챌린지 만들기</h2>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className={style.modalBody}>
           <form className={style.recordCon}>
