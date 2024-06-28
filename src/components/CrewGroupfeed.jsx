@@ -85,8 +85,8 @@ const CrewGroupfeed = () => {
             <span className={style.listDate}>
               {new Date(feed.createdTime).toLocaleDateString()}
             </span>
-            <div id="listCnt"></div>
             <span className={style.listCnt}>{feed.views}</span>
+
             {crewAdmin && (
               <>
                 <i

@@ -22,7 +22,7 @@
   position: fixed;
   top: 0;
   text-align: center;
-  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
   overflow-y: scroll;
 }
@@ -38,6 +38,7 @@
   top: 1rem;
   right: 1rem;
   font-size: 2rem;
+  cursor: pointer;
 }
 
 .myCrewCon .iconLeft {
@@ -45,6 +46,7 @@
   top: 1rem;
   font-size: 2rem;
   right: -2.5rem;
+  cursor: pointer;
 }
 
 .myCrewCon h3 {
@@ -56,7 +58,7 @@
 .myCrewListCon {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
 }
 
 .myCrewListCon .crewListCard {
@@ -67,7 +69,7 @@
   padding: 2rem 1.5rem;
   background-color: white;
   border-radius: 1rem;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
 }
 
 .myCrewListCon .crewImgBox {
@@ -184,16 +186,17 @@
 }
 
 /* 검색 및 추천된 크루 목록 영역 */
+
 .crewList {
   padding-top: 25px;
   display: grid;
   grid-template-columns: repeat(auto-fit, 360px);
   gap: 1.5rem;
+  justify-content: center;
 }
 
 .crewList .crewListCard {
-  /* border: 1px solid blue; */
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.25);
   padding: 2rem;
   height: 400px;
   display: flex;
@@ -237,4 +240,58 @@
   padding-bottom: 5px;
   font-weight: bold;
   border-bottom: 3px solid black;
+}
+
+@media (max-width: 1440px) {
+  .mainCrew {
+    width: 100%;
+    margin: auto;
+  }
+
+  .myCrewCon {
+    width: 400px;
+    background-color: #ffffff;
+    height: 100vh;
+    top: 8vh;
+    left: 0;
+    z-index: 5;
+  }
+
+  .rightCon {
+    width: 100%;
+    margin-left: auto;
+    padding: 96px 80px 136px;
+    transition: 0.3s;
+  }
+}
+
+@media (max-width: 660px) {
+  .righttxt h2 {
+    font-size: 2.5rem;
+  }
+
+  .selectBox {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .selectBox span {
+    margin-left: 0.25rem;
+  }
+  .selectBox select {
+    padding-left: 0;
+  }
+  .rightmenu {
+    align-items: baseline;
+  }
+  .selectBox label {
+    display: none;
+  }
+  .searchBox::after {
+    display: none;
+  }
+
+  .rightCon {
+    padding: 96px 16px 136px;
+  }
 }

@@ -90,7 +90,7 @@ const RecordList = () => {
             return text;
           }
         });
-      }, 50);
+      }, 100);
       return interval;
     };
 

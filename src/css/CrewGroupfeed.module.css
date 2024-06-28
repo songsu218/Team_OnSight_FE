@@ -145,16 +145,19 @@
 .listData2 ul li i {
   padding: 1rem;
 }
-@media (min-width: 1680px) {
-  .listData2 .label {
-    padding: 0 56px;
+
+@media (max-width: 1080px) {
+  .listData2 ul li {
+    align-items: baseline;
   }
 
-  .listData2 > ul > li,
-  .listData2 .label {
-    gap: 56px;
+  .listData2 ul li i {
+    position: absolute;
+    right: 0;
   }
-  .listData2 > ul > li {
-    padding: 38px 56px;
+
+  .listData2 .deleteButton {
+    right: 12px;
+    transform: translateY(40px);
   }
 }
