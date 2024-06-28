@@ -2,12 +2,11 @@
   display: flex;
   flex-direction: column;
 }
-h2 {
+.allBox h2 {
   font-size: 2.5rem;
-  padding-bottom: 1rem;
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  margin-bottom: 4rem;
   font-weight: bold;
-  width: 40%;
   white-space: nowrap;
   border-bottom: 3px solid black;
 }
@@ -18,12 +17,18 @@ h2 {
 
 .leftBox {
   width: 50%;
+  background-color: #f1f1f1;
+  padding: 2rem;
+  border-radius: 1rem;
 }
 
 .imgBox {
   width: 100%;
   height: 500px;
   margin-bottom: 2rem;
+  border-radius: 13% 20% 10% 30% / 8% 43% 28% 17%;
+  overflow: hidden;
+  border: 10px solid black;
 }
 
 .imgBox img {
@@ -45,6 +50,9 @@ h2 {
   width: 50%;
   display: flex;
   flex-direction: column;
+  background-color: #f1f1f1;
+  border-radius: 1rem;
+  padding: 1rem;
 }
 
 .gaugeBox {
@@ -55,7 +63,7 @@ h2 {
   font-size: 1.5rem;
 }
 .gaugeBox p span {
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
   font-weight: bold;
 }
 .relatedRecords {

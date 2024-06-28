@@ -1,7 +1,7 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
-import GaugeChart from "react-gauge-chart";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import GaugeChart from 'react-gauge-chart';
 import {
   LineChart,
   Line,
@@ -9,8 +9,8 @@ import {
   YAxis,
   Tooltip,
   ResponsiveContainer,
-} from "recharts";
-import style from "../css/RecordDetail.module.css";
+} from 'recharts';
+import style from '../css/RecordDetail.module.css';
 
 const RecordDetail = () => {
   const { id } = useParams();
@@ -74,14 +74,14 @@ const RecordDetail = () => {
                 className={style.opacity0}
                 id="gauge-chart1"
                 hideText={true}
-                arcPadding={0}
+                arcPadding={0.01}
                 percent={1 - percentileRank / 100}
-                arcWidth={0.3}
+                arcWidth={0.2}
                 arcsLength={[100 - percentileRank, percentileRank]}
-                colors={["#0295CF", "#F1F1F1"]}
-                cornerRadius={0}
-                needleColor={"#000000"}
-                needleBaseColor={"#000000"}
+                colors={['#0295CF', '#ffffff']}
+                cornerRadius={16}
+                needleColor={'#000000'}
+                needleBaseColor={'#000000'}
               />
               <p>
                 <span>'{record.nick}'</span> 님의 이 기록은
@@ -94,7 +94,7 @@ const RecordDetail = () => {
               <ResponsiveContainer width="100%" height={350}>
                 <LineChart
                   data={transformedUserRecords}
-                  margin={{ top: 0, right: 100, bottom: 20, left: 100 }}
+                  margin={{ top: 10, right: 100, bottom: 20, left: 100 }}
                 >
                   <XAxis dataKey="date" hide />
                   <YAxis hide />
