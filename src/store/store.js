@@ -29,7 +29,12 @@ export const store = configureStore({
     getDefaultMiddleware({
       serializableCheck: {
         // 비직렬화 가능한 데이터가 포함된 액션을 무시합니다.
-        ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
+        ignoredActions: [
+          "persist/PERSIST",
+          "persist/REHYDRATE",
+          "persist/PURGE",
+        ],
+        ignoredPaths: ["result"],
       },
     }),
 });

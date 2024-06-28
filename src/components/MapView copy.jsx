@@ -1,17 +1,17 @@
 import React from 'react';
-import { Map } from 'react-kakao-maps-sdk';
+import { Map, MapMarker, CustomOverlayMap } from 'react-kakao-maps-sdk';
 import style from '../css/Search.module.css';
 
 const MapView = ({
-  // mapCenter,
-  // climbingCenters,
-  // selectedCity,
-  // selectedDistrict,
-  // handleMarkerClick,
+  mapCenter,
+  climbingCenters,
+  selectedCity,
+  selectedDistrict,
+  handleMarkerClick,
 }) => {
   return (
-    <Map  style={{ width: '100%', height: '100%' }} level={3}>
-      {/* {climbingCenters
+    <Map center={mapCenter} style={{ width: '100%', height: '100%' }} level={3}>
+      {climbingCenters
         .filter(
           (center) =>
             selectedDistrict === '전체' ||
@@ -32,7 +32,7 @@ const MapView = ({
               </div>
             </CustomOverlayMap>
           </React.Fragment>
-        ))} */}
+        ))}
     </Map>
   );
 };
