@@ -1,17 +1,20 @@
 .listCon {
-  display: flex;
+  position: relative;
+  height: 100vh;
 }
 
-.swiperCon {
+.listCon .swiperCon {
   height: 100vh;
-  width: 100%;
+  width: 800px;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   scroll-behavior: smooth;
-  position: relative;
+  position: absolute;
+  left: 40%;
+  transform: translateX(-50%);
 }
 
 .swiperCon::-webkit-scrollbar {
@@ -26,7 +29,6 @@
   scroll-snap-align: start;
   flex-shrink: 0;
   transition: 0.5s;
-  margin-left: 150px;
 }
 
 .swiperBox img {
@@ -38,19 +40,20 @@
 .listCon .textBox {
   transform: translateY(50%);
   font-size: 2rem;
-  font-family: "S-CoreDream-3Light";
   white-space: nowrap;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
-  position: fixed;
+  position: absolute;
+  left: 70%;
   top: 50%;
-  transform: translateY(-50%);
-  left: 1150px;
+  transform: translateY(-40%);
+  transition: 0.3s;
 }
 
 .listCon .textBox span {
   font-weight: bold;
+  font-family: 'S-CoreDream-3Light';
 }
 
 @media (max-width: 1550px) {
@@ -59,50 +62,45 @@
   }
 
   .listCon .textBox {
-    left: 1050px;
-    font-size: 1.75rem;
+    left: 65%;
   }
 }
 
-@media (max-width: 1400px) {
-  .swiperBox {
-    width: 500px;
+@media (max-width: 1100px) {
+  .listCon .swiperCon {
+    left: 45%;
   }
-
-  .listCon .textBox {
-    left: 840px;
-    font-size: 1.75rem;
-  }
-}
-
-@media (max-width: 1180px) {
   .swiperBox {
     width: 400px;
   }
-
   .listCon .textBox {
-    left: 740px;
-    font-size: 1.75rem;
-  }
-}
-@media (max-width: 1060px) {
-  .swiperBox {
-    width: 300px;
-  }
-
-  .listCon .textBox {
-    left: 640px;
-    font-size: 1.25rem;
+    font-size: 1.5rem;
   }
 }
 
-@media (max-width: 890px) {
-  .swiperBox {
-    width: 300px;
-    margin-left: 50px;
+@media (max-width: 900px) {
+  .listCon .swiperCon {
+    height: 72vh;
+    width: 400px;
+    left: 50%;
   }
-
+  .listCon .swiperBox {
+    transform: translateX(0) !important;
+    left: 0;
+  }
   .listCon .textBox {
-    display: none;
+    align-items: center;
+    top: 75%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 500px) {
+  .listCon .swiperCon {
+    width: 300px;
+  }
+  .listCon .swiperBox {
+    width: 300px;
   }
 }

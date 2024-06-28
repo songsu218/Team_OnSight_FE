@@ -23,15 +23,6 @@ const RecordDetail = () => {
     .slice(0, 5);
 
   const centerRecords = records.filter((rec) => rec.center === record.center);
-  // const totalLevelSum = centerRecords.reduce(
-  //   (sum, rec) => sum + rec.levelsum,
-  //   0
-  // );
-  // const averageLevelSum =
-  //   centerRecords.length > 0
-  //     ? Math.floor(totalLevelSum / centerRecords.length)
-  //     : 0;
-  // 평균값 구한거임, 언젠가 다시 쓸지도 모르니까
 
   const levelSums = centerRecords
     .map((rec) => rec.levelsum)
@@ -53,6 +44,13 @@ const RecordDetail = () => {
 
   const transformedUserRecords = transformDate(userRecords);
 
+  const defaultArcWidth = 0.2;
+  const defaultCornerRadius = 16;
+  const defaultColors = ['#0295CF', '#ffffff'];
+  const defaultNeedleColor = '#000000';
+  const defaultNeedleBaseColor = '#000000';
+  const defaultGaugeId = 'gauge-chart1';
+
   return (
     <div className={`${style.allCon} con1`}>
       <div className={`${style.allBox} mw`}>
@@ -72,16 +70,16 @@ const RecordDetail = () => {
             <div className={style.gaugeBox}>
               <GaugeChart
                 className={style.opacity0}
-                id="gauge-chart1"
+                id={defaultGaugeId}
                 hideText={true}
-                arcPadding={0.01}
+                arcPadding={0.05}
                 percent={1 - percentileRank / 100}
-                arcWidth={0.2}
+                arcWidth={defaultArcWidth}
                 arcsLength={[100 - percentileRank, percentileRank]}
-                colors={['#0295CF', '#ffffff']}
-                cornerRadius={16}
-                needleColor={'#000000'}
-                needleBaseColor={'#000000'}
+                colors={defaultColors}
+                cornerRadius={defaultCornerRadius}
+                needleColor={defaultNeedleColor}
+                needleBaseColor={defaultNeedleBaseColor}
               />
               <p>
                 <span>'{record.nick}'</span> 님의 이 기록은

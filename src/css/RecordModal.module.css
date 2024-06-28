@@ -1,5 +1,5 @@
 .addBtn {
-  font-family: "S-CoreDream-3Light";
+  font-family: 'S-CoreDream-3Light';
   font-size: 1.25rem;
   height: 50px;
   background-color: transparent;
@@ -17,7 +17,11 @@
 }
 
 .modalRe {
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+}
+
+.modalRe h2 {
+  margin-left: 1.9rem;
 }
 
 .recordCon {
@@ -42,6 +46,7 @@
 .recordCon .dateWrap {
   align-self: flex-start;
   margin-left: 2.25rem;
+  margin-top: 0.25rem;
 }
 
 .recordCon .placeC,
@@ -49,7 +54,7 @@
   width: 90%;
   position: relative;
   margin-bottom: 2rem;
-  padding: 1rem 0 0.5rem 1rem;
+  padding: 0.5rem 0 0.5rem 1rem;
   box-shadow: 0 3px 3px -3px #777777;
   -ms-user-select: none;
   -moz-user-select: -moz-none;
@@ -114,6 +119,11 @@
   cursor: pointer;
 }
 
+.recordCon .placeList select {
+  border: none;
+  margin-right: 1rem;
+}
+
 .recordCon .placeResult {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
   border-radius: 1rem;
@@ -134,15 +144,19 @@
 
 .modalBody .diffiCon {
   padding: 1rem;
-  width: 90%;
+  width: 80%;
   margin-bottom: 2rem;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   gap: 1rem;
   font-size: 0.9rem;
-  height: 170px;
+  height: 150px;
   overflow-y: scroll;
+}
+
+.modalBody .diffiCon::-webkit-scrollbar {
+  display: none;
 }
 
 .modalBody .diffiCon .diffiCountList {
@@ -163,8 +177,9 @@
 }
 
 .modalBody .preview {
-  width: 100px;
+  width: 200px;
   height: 100px;
+  border: 1px solid #f1f1f1;
 }
 
 .modalBody .preview > img {

@@ -245,7 +245,9 @@ function RecordModal({
       </button>
       <Modal className={style.modalRe} show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>기록 추가</Modal.Title>
+          <Modal.Title>
+            <h2>기록 추가</h2>
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body className={style.modalBody}>
           <form className={style.recordCon}>
@@ -401,11 +403,13 @@ function RecordModal({
               id="thumbnail"
               onChange={handleFileChange}
             />
-            {selectedFile && (
-              <div className={style.preview}>
+            <div className={style.preview}>
+              {selectedFile ? (
                 <img src={URL.createObjectURL(selectedFile)} alt="preview" />
-              </div>
-            )}
+              ) : (
+                ''
+              )}
+            </div>
           </form>
         </Modal.Body>
         <Modal.Footer className={style.ModalFt}>
