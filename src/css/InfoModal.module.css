@@ -33,6 +33,7 @@
   transform: translate(0, -50%);
   background: #ffffff;
   outline: 0;
+  border-radius: 1rem;
 }
 
 .popModal > section > header {
@@ -165,6 +166,7 @@
   bottom: 0;
   border: 1px solid #b9b9b9;
   pointer-events: none;
+  border-radius: 0.5rem;
 }
 
 .inputTxt {
@@ -204,6 +206,7 @@
   white-space: nowrap;
   vertical-align: top;
   border: 0 none;
+  border-radius: 0.5rem;
 }
 
 @media (max-width: 767px) {
