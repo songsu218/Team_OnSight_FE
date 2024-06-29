@@ -1,6 +1,6 @@
-import React from "react";
-import style from "../css/Search.module.css";
-import RecordModal from "./RecordModal";
+import React from 'react';
+import style from '../css/Search.module.css';
+import RecordModal from './RecordModal';
 
 const CenterDetails = ({
   currentCenter,
@@ -15,12 +15,14 @@ const CenterDetails = ({
   if (!showDetails || !currentCenter) return null;
 
   return (
-    <div className={style.centerDetails}>
+    <div className={style.centerDetailCon}>
       <i
         className={`fa-solid fa-xmark ${style.iconX}`}
         onClick={handleCloseDetails}
       ></i>
-      <img src={currentCenter.thumbnail.trim()} alt={currentCenter.center} />
+      <div className={style.centerDetailImg}>
+        <img src={currentCenter.thumbnail.trim()} alt={currentCenter.center} />
+      </div>
       <div className={style.centerDetailInfo}>
         <div>
           <h4>{currentCenter.center}</h4>
@@ -28,7 +30,7 @@ const CenterDetails = ({
         </div>
         <i
           className={`fa-regular fa-star ${style.likeStar} ${
-            userLikes.includes(currentCenter._id) ? "fa-solid" : ""
+            userLikes.includes(currentCenter._id) ? 'fa-solid' : ''
           }`}
           onClick={() => toggleLike(currentCenter._id)}
         ></i>
@@ -36,23 +38,23 @@ const CenterDetails = ({
       <div className={style.tabContainer}>
         <button
           className={`${style.tabButtonHome} ${
-            activeTab === "home" ? style.activeTab : ""
+            activeTab === 'home' ? style.activeTab : ''
           }`}
-          onClick={() => setActiveTab("home")}
+          onClick={() => setActiveTab('home')}
         >
           홈
         </button>
         <button
           className={`${style.tabButtonRecode} ${
-            activeTab === "records" ? style.activeTab : ""
+            activeTab === 'records' ? style.activeTab : ''
           }`}
-          onClick={() => setActiveTab("records")}
+          onClick={() => setActiveTab('records')}
         >
           기록
         </button>
       </div>
       <div className={style.tabContent}>
-        {activeTab === "home" && (
+        {activeTab === 'home' && (
           <div className={style.centerHome}>
             <div className={style.centerAddress}>
               <i className="fa-solid fa-location-pin"></i>
@@ -90,7 +92,7 @@ const CenterDetails = ({
             </div>
           </div>
         )}
-        {activeTab === "records" && (
+        {activeTab === 'records' && (
           <div className={style.centerRecords}>
             <div className={style.centerRecordNav}>
               <div className={style.btnBox}>

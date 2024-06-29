@@ -27,13 +27,24 @@
   box-sizing: border-box;
   overflow-y: auto;
   z-index: 9;
+  position: relative;
 }
 
 .sidebar::-webkit-scrollbar {
   display: none;
 }
 
-.sidebar > h3 {
+.searchInputCon {
+  position: fixed;
+  background-color: white;
+  left: 210px;
+  top: 0;
+  width: 400px;
+  padding: 10px 20px;
+  z-index: 10;
+}
+
+.sidebar .searchInputCon h3 {
   margin: 46px 0 50px 0;
   text-align: center;
   font-size: 26px;
@@ -43,13 +54,14 @@
 .selectCity {
   display: flex;
   justify-content: space-between;
-} 
+}
+
 .selectCity select {
   width: 170px;
   height: 36px;
   margin-bottom: 10px;
-  padding-left: 10px; 
-  border: 1px solid #dee2e6; 
+  padding-left: 10px;
+  border: 1px solid #dee2e6;
   border-radius: 0.5rem;
   z-index: 2;
 }
@@ -58,6 +70,7 @@
   display: flex;
   justify-content: space-between;
 }
+
 
 .sidebar .searchInput {
   width: 260px;
@@ -134,7 +147,7 @@
   display: flex;
   justify-content: space-between;
 }
- 
+
 .centerInfo div {
   display: flex;
   align-items: center;
@@ -148,9 +161,12 @@
 
 .centerInfo div p {
   font-size: 14px;
-  opacity: 0.5; 
+  opacity: 0.5;
 }
 
+.searchResults {
+  margin-top: 210px;
+}
 
 .searchResults .centerDetail {
   display: -webkit-box;
@@ -163,37 +179,38 @@
 }
 
 /* 상세페이지-공통 */
-.centerDetails {
+.centerDetailCon {
   position: relative;
 }
 
-.centerDetails > * {
+.centerDetailCon>* {
   margin-bottom: 20px;
 }
-/* 상세페이지 이미지 */
-/* .centerDetailsImg { 
-  
-  
-} */
 
-.centerDetails img {
-  width: 100%;
+/* 상세페이지 이미지 */
+.centerDetailCon .centerDetailImg {
+  width: 360px;
   height: 300px;
-  margin-top: 1rem;
-  object-fit: cover;
-  /* object-fit: contain; */
-  border-radius: 1rem; 
+  border-radius: 1rem;
+  margin-top: 10px;
+  overflow: hidden;
 }
 
-.centerDetails .iconX {
+.centerDetailCon .centerDetailImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.centerDetailCon .iconX {
   position: absolute;
-  top: -10px;
+  top: -20px;
   right: -10px;
   cursor: pointer;
   font-size: 1.5rem;
 }
 
-.centerDetails .centerDetailInfo {
+.centerDetailCon .centerDetailInfo {
   margin-top: 10px;
   display: flex;
   justify-content: space-between;
@@ -256,7 +273,7 @@
   margin-top: 30px;
 }
 
-.centerHome > * {
+.centerHome>* {
   margin-bottom: 20px;
 }
 
@@ -395,5 +412,6 @@
 @media (max-width: 1440px) {
   .viewCon {
     width: 100%;
+    margin-top: 96px;
   }
 }
