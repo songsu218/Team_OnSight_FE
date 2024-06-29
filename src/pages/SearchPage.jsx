@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { Map, MapMarker } from "react-kakao-maps-sdk";
-import style from "../css/Search.module.css";
-import { useSelector, useDispatch } from "react-redux";
-import { filterCenters } from "../utils/searchUtils";
-import CenterDetails from "../components/CenterDetails"; // CenterDetails 컴포넌트 임포트
-import { setUserAllInfo } from "../store/userStore";
+import React, { useState, useEffect } from 'react';
+import style from '../css/Search.module.css';
+import { useSelector, useDispatch } from 'react-redux';
+import { filterCenters } from '../utils/searchUtils';
+import CenterDetails from '../components/CenterDetails'; // CenterDetails 컴포넌트 임포트
+import MapView from '../components/MapView';
+import { setUserAllInfo } from '../store/userStore';
 
 const Search = () => {
   const user = useSelector((state) => state.user.userInfo); // 리덕스의 유저정보
   const dispatch = useDispatch();
   const [centerList, setCenterList] = useState([]); // 센터 리스트
   const [guList, setGuList] = useState([]); // 구 리스트
-  const [gu, setGu] = useState("전체"); // 선택된 구 상태 추가
-  const [city, setCity] = useState("서울특별시"); // 선택된 시 상태 추가
-  const [searchTerm, setSearchTerm] = useState(""); // 검색 상태 추가
+  const [gu, setGu] = useState('전체'); // 선택된 구 상태 추가
+  const [city, setCity] = useState('서울특별시'); // 선택된 시 상태 추가
+  const [searchTerm, setSearchTerm] = useState(''); // 검색 상태 추가
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [filteredCenters, setFilteredCenters] = useState([]); // 필터링된 센터 리스트
   const [mapMarkers, setMapMarkers] = useState([]); // 구에 따른 맵마커 리스트
   const [currentCenter, setCurrentCenter] = useState(null); // 선택된 센터 상태 추가
   const [showDetails, setShowDetails] = useState(false); // 상세 정보 표시 상태 추가
-  const [activeTab, setActiveTab] = useState("home"); // 활성 탭 상태 추가
+  const [activeTab, setActiveTab] = useState('home'); // 활성 탭 상태 추가
   const [userLikes, setUserLikes] = useState(user?.like || []); // 사용자 좋아요 상태 추가
   const [records, setRecords] = useState([]); // 기록 상태 추가
 
@@ -31,11 +31,11 @@ const Search = () => {
     const fetchCenterData = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/center/centerList",
+          'http://localhost:8000/center/centerList',
           {
-            method: "POST",
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
             },
           }
         );
@@ -44,35 +44,36 @@ const Search = () => {
           const data = await response.json();
           setCenterList(data);
           setFilteredCenters(filterCenters(data, searchTerm, gu)); // 초기 필터링 수행
-          setMapMarkers(filterCenters(data, "", gu)); // 초기 구 필터링 수행
+          setMapMarkers(filterCenters(data, '', gu)); // 초기 구 필터링 수행
         } else {
-          console.error("Failed to fetch center");
+          console.error('Failed to fetch center');
         }
       } catch (err) {
-        console.error("Error fetching center", err);
+        console.error('Error fetching center', err);
       }
     };
 
     const fetchGuData = async () => {
       try {
-        const response = await fetch("http://localhost:8000/center/guList", {
-          method: "POST",
+        const response = await fetch('http://localhost:8000/center/guList', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
         });
 
         if (response.ok) {
           const data = await response.json();
+          const sortedData = data.sort((a, b) => a.gu.localeCompare(b.gu)); //구를 글자순으로 정렬
           setGuList([
-            { gu: "전체", latlng: { lat: 37.5665, lng: 126.978 } },
-            ...data,
+            { gu: '전체', latlng: { lat: 37.5665, lng: 126.978 } },
+            ...sortedData,
           ]);
         } else {
-          console.error("Failed to fetch gu");
+          console.error('Failed to fetch gu');
         }
       } catch (err) {
-        console.error("Error fetching gu", err);
+        console.error('Error fetching gu', err);
       }
     };
 
@@ -83,9 +84,9 @@ const Search = () => {
   const fetchRecords = async (centerId) => {
     try {
       const response = await fetch(`http://localhost:8000/center/${centerId}`, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
       });
 
@@ -93,10 +94,10 @@ const Search = () => {
         const data = await response.json();
         setRecords(data);
       } else {
-        console.error("Failed to fetch records");
+        console.error('Failed to fetch records');
       }
     } catch (err) {
-      console.error("Error fetching records", err);
+      console.error('Error fetching records', err);
     }
   };
 
@@ -109,7 +110,7 @@ const Search = () => {
     } else {
       setMapCenter({ lat: 37.5665, lng: 126.978 }); // 기본 좌표 설정
     }
-    const newFilteredCenters = filterCenters(centerList, "", selectedGu);
+    const newFilteredCenters = filterCenters(centerList, '', selectedGu);
     setFilteredCenters(newFilteredCenters); // 구 변경 시 필터링 수행
     setMapMarkers(newFilteredCenters); // 구 변경 시 맵마커 업데이트
   };
@@ -126,11 +127,11 @@ const Search = () => {
   };
 
   const resetFilters = () => {
-    setCity("서울특별시");
-    setGu("전체");
-    setSearchTerm("");
+    setCity('서울특별시');
+    setGu('전체');
+    setSearchTerm('');
     setMapCenter({ lat: 37.5665, lng: 126.978 });
-    const initialFilteredCenters = filterCenters(centerList, "", "전체");
+    const initialFilteredCenters = filterCenters(centerList, '', '전체');
     setFilteredCenters(initialFilteredCenters);
     setMapMarkers(initialFilteredCenters);
     setShowDetails(false);
@@ -138,7 +139,7 @@ const Search = () => {
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       performSearch();
     }
   };
@@ -151,9 +152,9 @@ const Search = () => {
     // }
     try {
       const response = await fetch(`http://localhost:8000/user/toggleLike`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userId: user._id, centerId }),
       });
@@ -166,10 +167,10 @@ const Search = () => {
           dispatch(setUserAllInfo(data));
         }
       } else {
-        console.error("Failed to toggle like");
+        console.error('Failed to toggle like');
       }
     } catch (err) {
-      console.error("Error toggling like", err);
+      console.error('Error toggling like', err);
     }
   };
 
@@ -181,94 +182,97 @@ const Search = () => {
   const selectedCoordinates = mapCenter;
 
   return (
-    <main className={`viewCon ${style.search}`}>
+    <main className={`${style.viewCon} ${style.search}`}>
       <div className={style.sidebar}>
-        <h3>암장 찾기</h3>
-
-        <div className={style.selectCity}>
-          <select value={city} onChange={(e) => setCity(e.target.value)}>
-            <option value="서울특별시">서울특별시</option>
-          </select>
-          <select value={gu} onChange={handleDistrictChange}>
-            {guList.map((district) => (
-              <option key={district.gu} value={district.gu}>
-                {district.gu}
-              </option>
-            ))}
-          </select>
-        </div>
-        <div>
-          <input
-            type="text"
-            className={style.searchInput}
-            placeholder="검색창"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onKeyPress={handleKeyPress}
+        {showDetails && currentCenter ? (
+          <CenterDetails
+            currentCenter={currentCenter}
+            showDetails={showDetails}
+            activeTab={activeTab}
+            records={records}
+            handleCloseDetails={handleCloseDetails}
+            setActiveTab={setActiveTab}
+            userLikes={userLikes}
+            toggleLike={handleToggleLike}
           />
-          <i
-            className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
-            onClick={performSearch}
-          ></i>
-          <i
-            className={`fa-solid fa-rotate-left ${style.rotate}`}
-            onClick={resetFilters}
-          ></i>
-        </div>
-        <div>
-          {filteredCenters.map((center) => (
-            <div
-              key={center._id}
-              className={style.centerList}
-              onClick={() => handleCenterClick(center)}
-            >
-              <img src={center.thumbnail} alt={center.center} />
-              <div className={style.centerInfo}>
-                <div>
-                  <h4>{center.center}</h4>
-                  <p>{center.gu}</p>
-                </div>
-                {/* 즐찾 */}
+        ) : (
+          <>
+            <div className={style.searchInputCon}>
+              <h3>암장 찾기</h3>
+              <div className={style.selectCity}>
+                <select value={city} onChange={(e) => setCity(e.target.value)}>
+                  <option value="서울특별시">서울특별시</option>
+                </select>
+                <select value={gu} onChange={handleDistrictChange}>
+                  {guList.map((district) => (
+                    <option key={district.gu} value={district.gu}>
+                      {district.gu}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div className={style.searchCon}>
+                <input
+                  type="text"
+                  className={style.searchInput}
+                  placeholder="검색창"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter') {
+                      handleKeyPress(e);
+                    }
+                  }}
+                />
                 <i
-                  className={`fa-regular fa-star ${style.likeStar} ${
-                    userLikes.includes(center._id) ? "fa-solid" : ""
-                  }`}
-                  onClick={() => handleToggleLike(center._id)}
+                  className={`fa-solid fa-magnifying-glass ${style.readingGlasses}`}
+                  onClick={performSearch}
+                ></i>
+                <i
+                  className={`fa-solid fa-rotate-left ${style.rotate}`}
+                  onClick={resetFilters}
                 ></i>
               </div>
-              <p className={style.centerDetail}>{center.detail}</p>
             </div>
-          ))}
-        </div>
+            <div className={style.searchResults}>
+              {filteredCenters.map((center) => (
+                <div
+                  key={center._id}
+                  className={style.centerList}
+                  onClick={() => handleCenterClick(center)}
+                >
+                  <img src={center.thumbnail} alt={center.center} />
+                  <div className={style.centerInfo}>
+                    <div>
+                      <h4>{center.center}</h4>
+                      <p>{center.gu}</p>
+                    </div>
+                    <i
+                      className={`fa-regular fa-star ${style.likeStar} ${
+                        userLikes.includes(center._id) ? 'fa-solid' : ''
+                      }`}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleToggleLike(center._id);
+                      }}
+                    ></i>
+                  </div>
+                  <p className={style.centerDetail}>{center.detail}</p>
+                </div>
+              ))}
+            </div>
+          </>
+        )}
       </div>
       <div className={style.mapContainer}>
-        <Map
-          center={selectedCoordinates}
-          style={{ width: "100%", height: "100%" }}
-          level={3}
-        >
-          {mapMarkers.map((center) => (
-            <MapMarker
-              key={center._id}
-              position={{ lat: center.latlng.lat, lng: center.latlng.lng }}
-              title={center.center}
-              onClick={() => handleCenterClick(center)} // 마커 클릭 시에도 지도 이동
-            />
-          ))}
-        </Map>
-      </div>
-      {showDetails && currentCenter && (
-        <CenterDetails
-          currentCenter={currentCenter}
-          showDetails={showDetails}
-          activeTab={activeTab}
-          records={records}
-          handleCloseDetails={handleCloseDetails}
-          setActiveTab={setActiveTab}
-          userLikes={userLikes}
-          toggleLike={handleToggleLike}
+        <MapView
+          mapCenter={selectedCoordinates}
+          climbingCenters={mapMarkers}
+          selectedCity={city}
+          selectedDistrict={gu}
+          handleMarkerClick={handleCenterClick}
         />
-      )}
+      </div>
     </main>
   );
 };
