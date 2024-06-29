@@ -13,7 +13,7 @@
 }
 
 .infoCon .tit::before {
-  content: "";
+  content: '';
   position: absolute;
   display: block;
   width: 80px;
@@ -51,6 +51,7 @@
   box-shadow: 0 0 0 1px inset #b9b9b9;
   transition: box-shadow 0.1s ease-out;
   outline: 0;
+  border-radius: 0.5rem;
 }
 
 .infoCon a:hover,
@@ -60,7 +61,7 @@
 }
 
 .infoCon a::after {
-  content: "";
+  content: '';
   display: inline-block;
   position: absolute;
   vertical-align: top;
