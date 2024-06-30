@@ -20,11 +20,11 @@
 }
 
 .navCon > ol > li + li::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   margin: -4px 0 0 0;
-  top: 50%;
+  top: 55%;
   left: -20%;
   width: 6px;
   height: 6px;
@@ -147,7 +147,7 @@
 }
 
 .linkBtn::before {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   box-sizing: border-box;
@@ -161,7 +161,7 @@
 }
 
 .linkBtn::after {
-  content: '';
+  content: "";
   display: block;
   position: absolute;
   box-sizing: border-box;

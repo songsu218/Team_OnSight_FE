@@ -2,7 +2,7 @@ import { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 import style from "../../css/PwUpModal.module.css";
 
-const PwUpModal = ({ onClose }) => {
+const PwUpModal = ({ onClose, onPasswordChange }) => {
   const user = useSelector((state) => state.user.userInfo);
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -17,6 +17,7 @@ const PwUpModal = ({ onClose }) => {
 
   const pwChange = async () => {
     if (newPassword !== confirmNewPassword) {
+      alert("새 비밀번호와 비밀번호 확인이 일치하지 않습니다.");
       return;
     }
 
@@ -27,7 +28,7 @@ const PwUpModal = ({ onClose }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user,
+          id: user.id,
           currentPassword,
           newPassword,
         }),
@@ -36,13 +37,15 @@ const PwUpModal = ({ onClose }) => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("비밀번호가 성공적으로 변경되었습니다.");
+        alert(data.message);
+        onPasswordChange("비밀번호가 변경되었습니다. 다시 로그인해주세요.");
         onClose();
       } else {
         alert(data.message || "비밀번호 변경에 실패했습니다.");
       }
     } catch (err) {
-      alert("서버 에러가 발생했습니다.");
+      alert("서버 오류가 발생했습니다. 다시 시도해 주세요.");
+      console.error("비밀번호 변경 중 서버 오류:", err);
     }
   };
 

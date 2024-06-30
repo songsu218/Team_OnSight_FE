@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUserAllInfo } from "../store/userStore";
+import { persistor } from "../store/store";
 import style from "../css/Profile.module.css";
 import InfoModal from "../components/modal/InfoModal";
 import InfoUpModal from "../components/modal/InfoUpModal";
@@ -15,20 +16,28 @@ const Profile = () => {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.userInfo);
 
-  const logout = async () => {
+  const logout = async (message) => {
     try {
       const response = await fetch("http://localhost:8000/user/logout", {
         method: "POST",
-        credentials: "include",
       });
-      dispatch(clearUserAllInfo());
+
+      if (response.ok) {
+        dispatch(clearUserAllInfo());
+        localStorage.removeItem("onSightToken");
+        persistor.purge();
+        alert(message);
+        navigate("/");
+      } else {
+        console.error("로그아웃 실패:", response.statusText);
+      }
     } catch (err) {
       console.error("로그아웃 실패:", err);
     }
   };
 
   const handleWithdrawSuccess = async () => {
-    await logout();
+    await logout("회원 탈퇴가 완료되었습니다.");
     navigate("/");
   };
 
@@ -145,7 +154,9 @@ const Profile = () => {
         />
       )}
       {modalType === "infoUpdate" && <InfoUpModal onClose={closeModal} />}
-      {modalType === "password" && <PwUpModal onClose={closeModal} />}
+      {modalType === "password" && (
+        <PwUpModal onClose={closeModal} onPasswordChange={logout} />
+      )}
       {modalType === "withdrawal" && (
         <WithdrawalModal
           onClose={closeModal}

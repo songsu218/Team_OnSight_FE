@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import style from "../css/SignUpPage.module.css";
 
 const SignUpPage = () => {
@@ -7,105 +7,110 @@ const SignUpPage = () => {
   const [nick, setNick] = useState("");
   const [password, setPassword] = useState("");
   const [pdcon, setPdcon] = useState("");
-  const [message1, setMessage1] = useState("");
-  const [message2, setMessage2] = useState("");
-  const [message3, setMessage3] = useState("");
-  const [message4, setMessage4] = useState("");
-
+  const [messages, setMessages] = useState({
+    id: "",
+    nick: "",
+    password: "",
+    pdcon: "",
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const [passwordVisible2, setPasswordVisible2] = useState(false);
+  const navigate = useNavigate();
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  const [passwordVisible2, setPasswordVisible2] = useState(false);
+
   const togglePasswordVisibility2 = () => {
     setPasswordVisible2(!passwordVisible2);
   };
 
-  const register = async (e) => {
-    e.preventDefault();
-    console.log(id);
+  const validateForm = () => {
+    let valid = true;
+    const newMessages = { id: "", nick: "", password: "", pdcon: "" };
+
     if (!/^[a-zA-Z0-9_-]{4,10}$/.test(id)) {
-      setMessage1("4~10자 내외 영문,숫자,특수기호,_,-만 사용 가능합니다.");
-      return;
-    } else {
-      setMessage1("");
+      newMessages.id = "4~10자 내외 영문,숫자,특수기호,_,-만 사용 가능합니다.";
+      valid = false;
     }
     if (!/^[a-zA-Z0-9가-힣\u4E00-\u9FFF_-]{1,10}$/.test(nick)) {
-      setMessage2("닉네임은 10자 이내로 입력하세요.");
-      return;
-    } else {
-      setMessage2("");
+      newMessages.nick = "닉네임은 10자 이내로 입력하세요.";
+      valid = false;
     }
     if (
       !/^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
         password
       )
     ) {
-      setMessage3("영문소문자,숫자,특수문자를 포함한 8자이상 입력해주세요");
-      return;
-    } else {
-      setMessage3("");
+      newMessages.password =
+        "영문소문자,숫자,특수문자를 포함한 8자이상 입력해주세요";
+      valid = false;
     }
     if (password !== pdcon) {
-      setMessage4("동일한 패스워드를 입력하세요");
-      return;
-    } else {
-      setMessage4("");
+      newMessages.pdcon = "동일한 패스워드를 입력하세요";
+      valid = false;
     }
 
+    setMessages(newMessages);
+    return valid;
+  };
+
+  const register = async (e) => {
+    e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
+
+    setLoading(true);
+
     try {
-      //백엔드로 POST 요청 및 응답
       const response = await fetch("http://localhost:8000/user/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, nick, password }),
       });
-      // console.log(await response.json());
 
-      // if (response.status === 200) {
-      // window.location.href = "/SignInPage";
-      // } else {
-      //   alert("이미 존재하는 아이디 입니다.");
-      // }
-
+      const data = await response.json();
       if (response.ok) {
-        // window.location.href = "/SignInPage";
+        alert("회원가입에 성공하였습니다.");
+        navigate("/SignInPage");
       } else {
-        const errorData = await response.json();
-        alert(errorData.message || "이미 존재하는 아이디 입니다.");
+        setErrorMessage(data.message || "회원가입 중 오류가 발생했습니다.");
       }
     } catch (error) {
-      alert("서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.");
+      setErrorMessage(
+        "서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요."
+      );
       console.error("Error during fetch:", error);
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <main className={`${style.register}`}>
+    <main className={style.register}>
       <form onSubmit={register}>
         <h2>회원가입</h2>
-        <section>아이디입력(4~10자)</section>
+        <section>아이디 입력(4~10자)</section>
         <input
           type="text"
           placeholder="아이디"
           value={id}
-          onChange={(e) => {
-            setId(e.target.value);
-          }}
+          onChange={(e) => setId(e.target.value)}
           required
         />
-        <span>{message1}</span>
+        <span>{messages.id}</span>
         <section>닉네임</section>
         <input
           type="text"
           placeholder="닉네임"
           value={nick}
-          onChange={(e) => {
-            setNick(e.target.value);
-          }}
+          onChange={(e) => setNick(e.target.value)}
           required
         />
-        <span>{message2}</span>
+        <span>{messages.nick}</span>
         <section>비밀번호</section>
         <div className={style.eye}>
           <input
@@ -113,36 +118,36 @@ const SignUpPage = () => {
             id="password"
             placeholder="패스워드"
             value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
+            onChange={(e) => setPassword(e.target.value)}
             required
           />
           <p className="toggle-password" onClick={togglePasswordVisibility}>
             {passwordVisible ? "👁️" : "🔒"}
           </p>
         </div>
-        <span>{message3}</span>
+        <span>{messages.password}</span>
         <section>비밀번호 확인</section>
         <div className={style.eye}>
           <input
             type={passwordVisible2 ? "text" : "password"}
             placeholder="확인"
             value={pdcon}
-            onChange={(e) => {
-              setPdcon(e.target.value);
-            }}
+            onChange={(e) => setPdcon(e.target.value)}
             required
           />
           <p className="toggle-password" onClick={togglePasswordVisibility2}>
             {passwordVisible2 ? "👁️" : "🔒"}
           </p>
         </div>
-        <span>{message4}</span>
-        <button type="submit">회원가입</button>
+        <span>{messages.pdcon}</span>
+        {errorMessage && <p className={style.error}>{errorMessage}</p>}
+        <button type="submit" disabled={loading}>
+          {loading ? "회원가입 중..." : "회원가입"}
+        </button>
       </form>
       <p>
-        이미 계정이 있으신가요?<Link to="/SignInPage">로그인페이지</Link>로 이동
+        이미 계정이 있으신가요? <Link to="/SignInPage">로그인페이지</Link>로
+        이동
       </p>
     </main>
   );

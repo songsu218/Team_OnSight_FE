@@ -34,20 +34,21 @@
 
 .listData2 > ul > li > div {
   position: absolute;
-  display: block;
+  display: inline-block;
   text-align: center;
   padding: 50px;
-  right: 2.5rem;
+  right: 0.1rem;
   top: 50%;
   transform: translateY(-40%);
   padding: 0;
   border: 0;
+  z-index: 100;
 }
 
 .listData2 > ul > li > div > i {
-  text-align: center;
+  text-align: left;
   align-items: center;
-  width: 25px;
+  width: 5rem;
   height: 26px;
   z-index: 1000;
 }

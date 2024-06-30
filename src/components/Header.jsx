@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUserAllInfo, setUserAllInfo } from "../store/userStore";
 import { persistor } from "../store/store";
+import { jwtDecode } from "jwt-decode";
 
 const Header = () => {
   const user = useSelector((state) => state.user.userInfo);
@@ -22,14 +23,29 @@ const Header = () => {
   useEffect(() => {
     const fetchProfile = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/user/profile`, {
-          credentials: "include",
-        });
-        if (response.ok) {
-          const userInfo = await response.json();
-          dispatch(setUserAllInfo(userInfo));
-        } else {
-          dispatch(clearUserAllInfo());
+        const token = localStorage.getItem("onSightToken");
+        if (token) {
+          if (isTokenExpired(token)) {
+            //토큰 유효기간 확인
+            localStorage.removeItem("onSightToken");
+            dispatch(clearUserAllInfo());
+            alert("로그인이 만료되었습니다. 다시 로그인 해주세요.");
+            navigate("/signinpage");
+            return;
+          }
+          const response = await fetch(`http://localhost:8000/user/profile`, {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          });
+          if (response.ok) {
+            const userInfo = await response.json();
+            dispatch(setUserAllInfo(userInfo));
+          } else {
+            dispatch(clearUserAllInfo());
+          }
         }
       } catch (error) {
         console.error("error", error);
@@ -37,16 +53,23 @@ const Header = () => {
       }
     };
 
-    const cookies = document.cookie.split(";").reduce((acc, cookie) => {
-      const [key, value] = cookie.trim().split("=");
-      acc[key] = value;
-      return acc;
-    }, []);
-
-    if (!user && cookies["onSightToken"]) {
+    const token = localStorage.getItem("onSightToken");
+    if (!user && token) {
       fetchProfile();
     }
   }, [dispatch, location.pathname, user]);
+
+  //토큰의 유효기간을 확인하는 함수
+  const isTokenExpired = (token) => {
+    try {
+      const decoded = jwtDecode(token);
+      const currentTime = Date.now() / 1000;
+      return decoded.exp < currentTime;
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return true;
+    }
+  };
 
   // console.log("유저 정보:", user);
   const username = user ? user.id : null;
@@ -57,10 +80,10 @@ const Header = () => {
     try {
       const response = await fetch(`http://localhost:8000/user/logout`, {
         method: "POST",
-        credentials: "include",
       });
       if (response.ok) {
-        dispatch(setUserAllInfo(null));
+        dispatch(clearUserAllInfo());
+        localStorage.removeItem("onSightToken");
         persistor.purge();
         alert("로그아웃 되었어요");
         navigate("/");

@@ -17,7 +17,7 @@ const WithdrawalModal = ({ onClose, onWithdrawSuccess }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          user,
+          id: user.id,
           password,
         }),
       });
@@ -25,14 +25,15 @@ const WithdrawalModal = ({ onClose, onWithdrawSuccess }) => {
       const data = await response.json();
 
       if (response.ok) {
-        alert("회원 탈퇴가 성공적으로 완료되었습니다.");
+        alert(data.message);
         onClose();
         onWithdrawSuccess();
       } else {
         alert(data.message || "회원 탈퇴에 실패했습니다.");
       }
     } catch (err) {
-      alert("서버 에러가 발생했습니다.");
+      alert("서버 오류가 발생했습니다. 다시 시도해 주세요.");
+      console.error("회원 탈퇴 중 서버 오류:", err);
     }
   };
 
