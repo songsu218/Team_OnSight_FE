@@ -8,9 +8,9 @@ const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 const link = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoApiKey}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const SignInPage = () => {
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [message1, setMessage1] = useState('');
+  const [id, setId] = useState("");
+  const [password, setPassword] = useState("");
+  const [message1, setMessage1] = useState("");
   const [redirect, setRedirect] = useState(false);
 
   const SignIn = async (e) => {
@@ -19,24 +19,24 @@ const SignInPage = () => {
 
     try {
       const response = await fetch(`http://localhost:8000/user/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id, password }),
-        credentials: 'include',
       });
       const data = await response.json();
       console.log(data);
       console.log(data.id);
 
-      if (data.id) {
+      if (data.token) {
+        localStorage.setItem("onSightToken", data.token);
         setRedirect(true);
-      }
-      if (data.message === 'nouser' || data.message === 'failed') {
-        setMessage1('아이디 또는 비밀번호가 맞지 않습니다.');
+      } else if (data.message === "nouser" || data.message === "failed") {
+        alert("아이디 또는 비밀번호가 맞지 않습니다.");
+        setMessage1("아이디 또는 비밀번호가 맞지 않습니다.");
       }
     } catch (error) {
-      console.error('Error:', error);
-      setMessage1('로그인 중 오류가 발생했습니다.');
+      console.error("Error:", error);
+      setMessage1("로그인 중 오류가 발생했습니다.");
     }
   };
 

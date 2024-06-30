@@ -28,17 +28,15 @@ const InfoUpModal = ({ onClose }) => {
 
       const data = await response.json();
       if (response.ok && data) {
-        // 쿠키 업데이트
-        // document.cookie = `userInfo=${JSON.stringify(data)}; path=/`;
-
-        // Redux 업데이트
         dispatch(setUserAllInfo(data));
         onClose();
       } else {
-        console.error("Failed to fetch info update");
+        alert(data.message || "정보 수정에 실패했습니다. 다시 시도해 주세요.");
+        console.error("정보 수정 실패:", data.message);
       }
     } catch (err) {
-      console.error("Error fetching info update", err);
+      alert("서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.");
+      console.error("정보 수정 중 서버 오류:", err);
     }
   };
 

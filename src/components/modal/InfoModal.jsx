@@ -13,19 +13,22 @@ const InfoModal = ({ onClose, onPwCheck }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ user, password }),
+        body: JSON.stringify({ id: user.id, password }),
       });
 
       const data = await response.json();
       if (response.ok && data) {
         onClose();
         onPwCheck();
-        // onClose();
       } else {
-        console.error("Failed to fetch challenges");
+        alert(
+          data.message || "비밀번호 확인에 실패했습니다. 다시 시도해 주세요."
+        );
+        console.error("비밀번호 확인 실패:", data.message);
       }
     } catch (err) {
-      console.error("Error fetching challenges", err);
+      alert("서버와의 통신 중 오류가 발생했습니다. 다시 시도해 주세요.");
+      console.error("비밀번호 확인 중 서버 오류:", err);
     }
   };
 

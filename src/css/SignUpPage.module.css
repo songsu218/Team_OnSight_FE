@@ -73,3 +73,8 @@
 .eye p {
   margin: 1px;
 }
+
+.error {
+  color: #ff454a;
+  padding: 1rem 0;
+}
