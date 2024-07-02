@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useOutletContext } from "react-router-dom";
 import style from "../css/MyPageList1.module.css";
 import FeedList from "./list/FeedList";
 
 const MyPageList3 = () => {
+  const { user, isOwnProfile } = useOutletContext();
   const [feeds, setFeeds] = useState([]);
-  const user = useSelector((state) => state.user.userInfo);
 
   const fetchFeeds = async () => {
     try {

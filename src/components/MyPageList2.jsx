@@ -1,20 +1,20 @@
-import RecordModal from '../components/RecordModal';
-import style from '../css/MyPageList1.module.css';
-import List from './list/List';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import RecordModal from "../components/RecordModal";
+import style from "../css/MyPageList1.module.css";
+import List from "./list/List";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 const MyPageList2 = () => {
+  const { user, isOwnProfile } = useOutletContext();
   const [recodes, setRecodes] = useState([]);
-  const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     const fetchRecodes = async () => {
       try {
         const response = await fetch(`http://localhost:8000/user/recodes`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ user }),
         });
@@ -23,10 +23,10 @@ const MyPageList2 = () => {
           const data = await response.json();
           setRecodes(data);
         } else {
-          console.error('Failed to fetch recodes');
+          console.error("Failed to fetch recodes");
         }
       } catch (err) {
-        console.error('Error fetching recodes', err);
+        console.error("Error fetching recodes", err);
       }
     };
 
@@ -43,7 +43,7 @@ const MyPageList2 = () => {
           <span>기록</span>
         </h3>
         <div className={style.btnBox}>
-          <RecordModal buttonText="기록 추가" />
+          {isOwnProfile && <RecordModal buttonText="기록 추가" />}
         </div>
       </div>
       <List items={recodes} itemType="recode" />

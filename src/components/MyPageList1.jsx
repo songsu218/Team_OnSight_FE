@@ -1,11 +1,11 @@
 import style from "../css/MyPageList1.module.css";
+import { useOutletContext } from "react-router-dom";
 import List from "./list/List";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 
 const MyPageList1 = () => {
+  const { user, isOwnProfile } = useOutletContext();
   const [challenges, setChallenges] = useState([]);
-  const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     const fetchChallenges = async () => {

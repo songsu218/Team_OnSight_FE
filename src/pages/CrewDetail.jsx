@@ -1,4 +1,4 @@
-import style from '../css/CrewDetail.module.css';
+import style from "../css/CrewDetail.module.css";
 import {
   NavLink,
   Routes,
@@ -6,13 +6,13 @@ import {
   useParams,
   useNavigate,
   Link,
-} from 'react-router-dom';
-import CrewHome from '../components/CrewHome';
-import CrewWrite from '../components/CrewWrite';
-import CrewManage from '../components/CrewManage';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { setUserAllInfo } from '../store/userStore';
+} from "react-router-dom";
+import CrewHome from "../components/CrewHome";
+import CrewWrite from "../components/CrewWrite";
+import CrewManage from "../components/CrewManage";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { setUserAllInfo } from "../store/userStore";
 
 const CrewDetail = () => {
   const { crewId } = useParams();
@@ -28,12 +28,12 @@ const CrewDetail = () => {
   const [crewMember, setCrewMember] = useState(false);
   const [crewAdmin, setCrewAdmin] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [filteredMembers, setFilteredMembers] = useState([]);
 
   useEffect(() => {
-    console.log('useEffect User', user);
-    console.log('useEffect selectedCrew', selectedCrew);
+    console.log("useEffect User", user);
+    console.log("useEffect selectedCrew", selectedCrew);
     if (selectedCrew) {
       setCrewMember(selectedCrew.members.includes(user.id));
       setCrewAdmin(selectedCrew.userId === user.id);
@@ -50,35 +50,39 @@ const CrewDetail = () => {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       handleSearch();
     }
   };
 
   const handleJoinCrew = async () => {
     try {
-      const response = await fetch('http://localhost:8000/crew/crewjoin', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8000/crew/crewjoin", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId: user, crewId: selectedCrew }),
       });
       const data = await response.json();
-      console.log('받아온값', data);
+      console.log("받아온값", data);
       if (response.ok) {
         // Update Redux state
         dispatch(setUserAllInfo(data.updateUser));
       } else {
-        console.error('Failed to join crew');
+        console.error("Failed to join crew");
       }
     } catch (err) {
-      console.error('Error joining crew', err);
+      console.error("Error joining crew", err);
     }
   };
 
   const moveToCrew = () => {
-    navigate('/crew');
+    navigate("/crew");
+  };
+
+  const handleMemberClick = (memberId) => {
+    navigate(`/mypage/home/${memberId}`);
   };
 
   if (!selectedCrew) {
@@ -91,16 +95,12 @@ const CrewDetail = () => {
     setToggle(!toggle);
   };
 
-  if (!selectedCrew) {
-    return <p>메인페이지 갔다오세요</p>;
-  }
-
   return (
-    <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ''}`}>
+    <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ""}`}>
       <div className={style.leftCon}>
         <h3>크루원 찾기</h3>
         <i
-          className={`fa-solid ${toggle ? 'fa-angle-right' : 'fa-angle-left'} ${
+          className={`fa-solid ${toggle ? "fa-angle-right" : "fa-angle-left"} ${
             toggle ? style.iconLeft : style.iconRight
           }`}
           onClick={toggleSidebar}
@@ -118,12 +118,15 @@ const CrewDetail = () => {
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
-          <ul className={`${style.memberCon} ${!crewMember ? style.blur : ''}`}>
+          <ul className={`${style.memberCon} ${!crewMember ? style.blur : ""}`}>
             {selectedCrew &&
               filteredMembers.map((memberId) => {
                 const memberInfo = users.find((user) => user.id === memberId);
                 return (
-                  <li key={memberId}>
+                  <li
+                    key={memberId}
+                    onClick={() => handleMemberClick(memberInfo.id)}
+                  >
                     <div className={style.profileBox}>
                       <img
                         src={`http://localhost:8000${memberInfo.thumbnail}`}
@@ -150,7 +153,7 @@ const CrewDetail = () => {
                   <NavLink
                     to={`/crewdetail/${crewId}/crewhome`}
                     aria-current={({ isActive }) =>
-                      isActive ? 'page' : undefined
+                      isActive ? "page" : undefined
                     }
                   >
                     크루홈
@@ -162,7 +165,7 @@ const CrewDetail = () => {
                       to={`/crewdetail/${crewId}/crewwrite`}
                       state={{ crewName: selectedCrew.name }}
                       aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
+                        isActive ? "page" : undefined
                       }
                     >
                       글쓰기
@@ -178,7 +181,7 @@ const CrewDetail = () => {
                     <NavLink
                       to={`/crewdetail/${crewId}/crewmanage`}
                       aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
+                        isActive ? "page" : undefined
                       }
                     >
                       관리하기
