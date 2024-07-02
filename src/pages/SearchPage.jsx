@@ -27,7 +27,7 @@ const Search = () => {
 
   useEffect(() => {
     if (user && user.like) {
-      setUserLikes(user.like); // Redux에서 가져온 likes 상태를 설정
+      setUserLikes(user.like);
     }
 
     const fetchCenterData = async () => {
@@ -46,7 +46,7 @@ const Search = () => {
           const data = await response.json();
           setCenterList(data);
           setFilteredCenters(filterCenters(data, searchTerm, gu)); // 초기 필터링 수행
-          setMapMarkers(filterCenters(data, "", gu)); // 초기 구 필터링 수행
+          setMapMarkers(filterCenters(data, '', gu)); // 초기 구 필터링 수행
         } else {
           console.error("Failed to fetch center");
         }
@@ -54,33 +54,18 @@ const Search = () => {
         console.error("Error fetching center", err);
       }
     };
-
-    const fetchGuData = async () => {
-      try {
-        const response = await fetch("http://localhost:8000/center/guList", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          const sortedData = data.sort((a, b) => a.gu.localeCompare(b.gu)); //구를 글자순으로 정렬
-          setGuList([
-            { gu: "전체", latlng: { lat: 37.5665, lng: 126.978 } },
-            ...sortedData,
-          ]);
-        } else {
-          console.error("Failed to fetch gu");
-        }
-      } catch (err) {
-        console.error("Error fetching gu", err);
+ 
+    const loadGuData = () => {
+      const guData = localStorage.getItem('guList');
+      if (guData) {
+        setGuList(JSON.parse(guData));
+      } else {
+        console.error('No gu data in local storage');
       }
     };
 
     fetchCenterData();
-    fetchGuData();
+    loadGuData();
   }, [user, gu]);
 
   useEffect(() => {
@@ -154,11 +139,6 @@ const Search = () => {
   };
 
   const handleToggleLike = async (centerId) => {
-    // if (userLikes.includes(centerId)) {
-    //   setUserLikes(userLikes.filter((id) => id !== centerId));
-    // } else {
-    //   setUserLikes([...userLikes, centerId]);
-    // }
     try {
       const response = await fetch(`http://localhost:8000/user/toggleLike`, {
         method: "POST",
@@ -192,7 +172,7 @@ const Search = () => {
 
   return (
     <main className={`${style.viewCon} ${style.search}`}>
-      <div className={style.sidebar}>
+      <div className={`${style.sidebar} ${showDetails ? style.details : ''}`}>
         {showDetails && currentCenter ? (
           <CenterDetails
             currentCenter={currentCenter}

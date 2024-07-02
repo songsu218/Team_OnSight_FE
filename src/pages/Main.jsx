@@ -19,8 +19,36 @@ const Main = () => {
         console.error('error', error);
       }
     };
+    const fetchGuData = async () => {
+      try {
+        const response = await axios.post(
+          'http://localhost:8000/center/guList',
+          {},
+          {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          const data = response.data;
+          const sortedData = data.sort((a, b) => a.gu.localeCompare(b.gu)); // 구를 글자순으로 정렬
+          const guList = [
+            { gu: '전체', latlng: { lat: 37.5665, lng: 126.978 } },
+            ...sortedData,
+          ];
+          localStorage.setItem('guList', JSON.stringify(guList));
+        } else {
+          console.error('Failed to fetch gu');
+        }
+      } catch (err) {
+        console.error('Error fetching gu', err);
+      }
+    };
 
     fetchUsers();
+    fetchGuData();
   }, [dispatch]);
 
   return (
