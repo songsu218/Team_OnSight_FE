@@ -25,34 +25,74 @@ const RankList = ({ hoveredCard }) => {
     };
   });
 
-  const top5Users = userList
-    .sort((a, b) => b.levelsum - a.levelsum)
-    .slice(0, 5);
+  const sortedUsers = userList.sort((a, b) => b.levelsum - a.levelsum);
+  const top3Users = sortedUsers.slice(0, 3);
+  const top8Users = sortedUsers.slice(3, 8);
+
+  const rankCrown = (rank) => {
+    if (rank === 0) return '/img/crown1.png';
+    if (rank === 1) return '/img/crown2.png';
+    if (rank === 2) return '/img/crown3.png';
+    return null;
+  };
 
   return (
-    <ul className={style.rankListCon}>
-      <div className={style.btnBox}>
-        <button>전체</button>
-      </div>
-      {top5Users.map((user, index) => (
-        <li
-          key={user.id}
-          className={`${style.rankListCard} ${
-            hoveredCard === index + 1 ? style.hover : ''
-          }`}
-        >
-          <strong>{index + 1}</strong>
-          <span>
-            <img
-              src={`http://localhost:8000${user.thumbnail}` || '/img/test.jpg'}
-              alt=""
-            />
-            <strong>{user.nick || '클라이머'}</strong>
-          </span>
-          <span>{user.levelsum.toLocaleString()}</span>
-        </li>
-      ))}
-    </ul>
+    <div>
+      <ul className={style.rankListCon}>
+        <div className={style.btnBox}>
+          <button>전체</button>
+        </div>
+        {top3Users.map((user, index) => (
+          <li
+            key={user.id}
+            className={`${style.rankListCard} ${
+              hoveredCard === index + 1 ? style.hover : ''
+            }`}
+          >
+            <strong>{index + 1}</strong>
+            <span>
+              <img
+                src={
+                  `http://localhost:8000${user.thumbnail}` || '/img/test.jpg'
+                }
+                alt=""
+              />
+              <strong>{user.nick || '클라이머'}</strong>
+              <img
+                src={rankCrown(index)}
+                alt={`crown${index + 1}`}
+                className={style.crown}
+              />
+            </span>
+            <span>{user.levelsum.toLocaleString()}</span>
+          </li>
+        ))}
+      </ul>
+      <ul className={style.rankListCon2}>
+        {top8Users.map((user, index) => (
+          <li
+            key={user.id}
+            className={`${style.rankListCard2} ${
+              hoveredCard === index + 4 ? style.hover : ''
+            }`}
+          >
+            <div className={style.rankListCard2Prof}>
+              <strong>{index + 4}</strong>
+              <span>
+                <img
+                  src={
+                    `http://localhost:8000${user.thumbnail}` || '/img/test.jpg'
+                  }
+                  alt=""
+                />
+                <strong>{user.nick || '클라이머'}</strong>
+              </span>
+            </div>
+            <span>{user.levelsum.toLocaleString()}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 };
 
