@@ -218,6 +218,49 @@
   font-weight: 800;
 }
 
+.rightCon > span {
+  display: inline-block;
+  position: relative;
+  font-size: 18px;
+  padding: 1rem;
+  margin-top: 50px;
+  cursor: pointer;
+}
+
+.rightCon > span:hover,
+.rightCon > span:focus {
+  text-decoration: underline;
+}
+
+.rightCon > span::before {
+  content: '';
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  top: 16px;
+  left: 125px;
+  width: 17px;
+  height: 14px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px;
+}
+
+.rightCon > span::after {
+  content: '';
+  display: block;
+  position: absolute;
+  box-sizing: border-box;
+  margin: 4px;
+  top: 16px;
+  left: 125px;
+  width: 17px;
+  height: 14px;
+  background: #ffffff;
+  border: 2px solid #000000;
+  border-radius: 3px;
+}
+
 @media (max-width: 1440px) {
   .mainCrew {
     width: 100%;
