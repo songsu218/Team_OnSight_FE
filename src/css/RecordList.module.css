@@ -5,7 +5,7 @@
 
 .listCon .swiperCon {
   height: 100vh;
-  width: 800px;
+  width: 100%;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
   display: flex;
@@ -13,8 +13,7 @@
   gap: 0.5rem;
   scroll-behavior: smooth;
   position: absolute;
-  left: 40%;
-  transform: translateX(-50%);
+  left: -10%;
 }
 
 .swiperCon::-webkit-scrollbar {
@@ -29,6 +28,7 @@
   scroll-snap-align: start;
   flex-shrink: 0;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .swiperBox img {
@@ -39,50 +39,57 @@
 
 .listCon .textBox {
   transform: translateY(50%);
-  font-size: 2rem;
+  font-size: 3rem;
   white-space: nowrap;
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   position: absolute;
-  left: 70%;
+  left: 50%;
   top: 50%;
   transform: translateY(-40%);
   transition: 0.3s;
+  color: #999999;
+  line-height: 140%;
 }
 
-.listCon .textBox span {
+.listCon .textBox p span {
+  color: #000000;
   font-weight: bold;
-  font-family: 'S-CoreDream-3Light';
+  font-family: 'GongGothicMedium';
 }
 
 @media (max-width: 1550px) {
   .swiperBox {
-    width: 500px;
+    width: 600px;
   }
 
   .listCon .textBox {
-    left: 65%;
+    left: 55%;
+    font-size: 2.5rem;
   }
 }
 
 @media (max-width: 1100px) {
   .listCon .swiperCon {
-    left: 45%;
+    left: 0%;
   }
   .swiperBox {
     width: 400px;
   }
   .listCon .textBox {
     font-size: 1.5rem;
+    left: 70%;
   }
 }
 
 @media (max-width: 900px) {
   .listCon .swiperCon {
-    height: 72vh;
+    top: 100px;
+    height: 65vh;
     width: 400px;
     left: 50%;
+    transform: translateX(-50%);
   }
   .listCon .swiperBox {
     transform: translateX(0) !important;
@@ -90,7 +97,7 @@
   }
   .listCon .textBox {
     align-items: center;
-    top: 75%;
+    top: 80%;
     left: 50%;
     transform: translateX(-50%);
   }
