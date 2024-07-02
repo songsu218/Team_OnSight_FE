@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import style from '../../css/List.module.css';
-import ListPagnation from './ListPagnation';
-import ListCard from '../ListCard';
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import style from "../../css/List.module.css";
+import ListPagnation from "./ListPagnation";
+import ListCard from "../ListCard";
 
 const List = ({ items, itemType }) => {
   const navigate = useNavigate();
@@ -46,14 +46,14 @@ const List = ({ items, itemType }) => {
               <li
                 key={item._id}
                 onClick={() => {
-                  if (itemType === 'challenge') {
+                  if (itemType === "challenge") {
                     navigate(`/challenge/${item._id}/${item.challengename}`, {
                       state: { detailData: item },
                     });
-                  } else if (itemType === 'record') {
+                  } else if (itemType === "record") {
                     navigate(`/crewdetail/feeddetail/${item._id}`);
-                  } else if (itemType === 'center') {
-                    navigate(`/center/${item._id}`, {
+                  } else if (itemType === "center") {
+                    navigate(`/SearchPage`, {
                       state: { detailData: item },
                     });
                   }
@@ -61,15 +61,15 @@ const List = ({ items, itemType }) => {
               >
                 <ListCard
                   title={
-                    itemType === 'challenge'
+                    itemType === "challenge"
                       ? item.challengename
-                      : itemType === 'record'
+                      : itemType === "record"
                       ? item.title
                       : item.center
                   }
                   center={item.center}
-                  detail={itemType === 'center' ? item.detail : ''}
-                  date={itemType === 'center' ? '' : item.date}
+                  detail={itemType === "center" ? item.detail : ""}
+                  date={itemType === "center" ? "" : item.date}
                   thumbnail={item.thumbnail}
                   itemType={itemType}
                 />
@@ -77,12 +77,12 @@ const List = ({ items, itemType }) => {
             ))
           ) : (
             <p className={style.p}>
-              {' '}
-              {itemType === 'challenge'
-                ? '참여한 챌린저가 없습니다.'
-                : itemType === 'record'
-                ? '기록한 기록이 없습니다.'
-                : '센터가 없습니다.'}
+              {" "}
+              {itemType === "challenge"
+                ? "참여한 챌린저가 없습니다."
+                : itemType === "record"
+                ? "기록한 기록이 없습니다."
+                : "센터가 없습니다."}
             </p>
           )}
         </ul>

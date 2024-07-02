@@ -177,14 +177,26 @@ function RecordModal({
     }
 
     try {
-      await axios.post('http://localhost:8000/record', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
-      });
+
+      const response = await axios.post(
+        "http://localhost:8000/record",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      if (response.data && response.data.message) {
+        alert(response.data.message);
+      }
       handleClose();
-    } catch (error) {
-      console.error('error', error);
+    } catch (err) {
+      const errorMessage =
+        err.response?.data?.message ||
+        "오류가 발생했습니다. 다시 시도해 주세요.";
+      alert(`Error: ${errorMessage}`);
+      console.error("error", err);
     }
   };
 
@@ -406,7 +418,7 @@ function RecordModal({
               {selectedFile ? (
                 <img src={URL.createObjectURL(selectedFile)} alt="preview" />
               ) : (
-                ''
+                ""
               )}
             </div>
           </form>
