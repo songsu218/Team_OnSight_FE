@@ -1,9 +1,5 @@
 import styleHd from "../css/MyPageHd.module.css";
 import styleInfo from "../css/MyPageInfo.module.css";
-import MyPageList1 from "../components/MyPageList1";
-import MyPageList2 from "../components/MyPageList2";
-import MyPageList3 from "../components/MyPageList3";
-import MyPageList4 from "../components/MyPageList4";
 import { useSelector } from "react-redux";
 import {
   useNavigate,

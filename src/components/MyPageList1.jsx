@@ -4,7 +4,7 @@ import List from "./list/List";
 import { useEffect, useState } from "react";
 
 const MyPageList1 = () => {
-  const { user, isOwnProfile } = useOutletContext();
+  const { user } = useOutletContext();
   const [challenges, setChallenges] = useState([]);
 
   useEffect(() => {

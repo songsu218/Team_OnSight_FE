@@ -142,8 +142,13 @@
   font-size: 18px;
   line-height: 1.5rem;
   font-weight: normal;
-  text-decoration: underline;
   padding-right: 27px;
+  transition: 0.3s all;
+}
+
+.linkBtn:hover,
+.linkBtn:focus {
+  text-decoration: underline;
 }
 
 .linkBtn::before {

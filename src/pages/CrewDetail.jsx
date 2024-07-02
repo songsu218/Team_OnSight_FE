@@ -13,6 +13,8 @@ import CrewManage from "../components/CrewManage";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { setUserAllInfo } from "../store/userStore";
+import { setCrewAllInfo } from "../store/crewStore";
+import { setUsers } from "../store/userAllStore";
 
 const CrewDetail = () => {
   const { crewId } = useParams();
@@ -20,7 +22,6 @@ const CrewDetail = () => {
   const users = useSelector((state) => state.userAll.userAllInfo);
   const user = useSelector((state) => state.user.userInfo);
   const selectedCrew = crew.find((c) => c._id === crewId);
-  console.log(selectedCrew);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -32,8 +33,6 @@ const CrewDetail = () => {
   const [filteredMembers, setFilteredMembers] = useState([]);
 
   useEffect(() => {
-    console.log("useEffect User", user);
-    console.log("useEffect selectedCrew", selectedCrew);
     if (selectedCrew) {
       setCrewMember(selectedCrew.members.includes(user.id));
       setCrewAdmin(selectedCrew.userId === user.id);
@@ -65,10 +64,10 @@ const CrewDetail = () => {
         body: JSON.stringify({ userId: user, crewId: selectedCrew }),
       });
       const data = await response.json();
-      console.log("받아온값", data);
       if (response.ok) {
-        // Update Redux state
         dispatch(setUserAllInfo(data.updateUser));
+        dispatch(setUsers(data.users));
+        dispatch(setCrewAllInfo(data.crews));
       } else {
         console.error("Failed to join crew");
       }

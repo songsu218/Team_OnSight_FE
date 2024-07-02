@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
 const MyPageList4 = () => {
-  const { user, isOwnProfile } = useOutletContext();
+  const { user } = useOutletContext();
   const [crews, setCrews] = useState([]);
 
   useEffect(() => {

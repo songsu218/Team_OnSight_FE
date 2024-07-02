@@ -37,6 +37,7 @@ const List = ({ items, itemType }) => {
   }, [items]);
 
   console.log(currentItems);
+  console.log(itemType);
   return (
     <div>
       <div className={`${style.listData1} ${style.ssw1}`}>
@@ -51,7 +52,7 @@ const List = ({ items, itemType }) => {
                       state: { detailData: item },
                     });
                   } else if (itemType === "record") {
-                    navigate(`/crewdetail/feeddetail/${item._id}`);
+                    navigate(`/recorddetail/${item._id}`);
                   } else if (itemType === "center") {
                     navigate(`/SearchPage`, {
                       state: { detailData: item },
