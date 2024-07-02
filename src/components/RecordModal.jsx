@@ -177,13 +177,12 @@ function RecordModal({
     }
 
     try {
-
       const response = await axios.post(
-        "http://localhost:8000/record",
+        'http://localhost:8000/record',
         formData,
         {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
         }
       );
@@ -194,20 +193,38 @@ function RecordModal({
     } catch (err) {
       const errorMessage =
         err.response?.data?.message ||
-        "오류가 발생했습니다. 다시 시도해 주세요.";
+        '오류가 발생했습니다. 다시 시도해 주세요.';
       alert(`Error: ${errorMessage}`);
-      console.error("error", err);
+      console.error('error', err);
     }
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/center/centerList')
-      .then((response) => {
-        setClimbingCenters(response.data);
-        setShowingCenters(response.data);
-      })
-      .catch((error) => console.error('API 요청 에러:', error));
+    const fetchCenterData = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:8000/center/centerList',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setClimbingCenters(data);
+          setShowingCenters(data);
+        } else {
+          console.error('Failed to fetch center');
+        }
+      } catch (err) {
+        console.error('Error fetching center', err);
+      }
+    };
+
+    fetchCenterData();
   }, []);
 
   const handleSearch = () => {
@@ -418,7 +435,7 @@ function RecordModal({
               {selectedFile ? (
                 <img src={URL.createObjectURL(selectedFile)} alt="preview" />
               ) : (
-                ""
+                ''
               )}
             </div>
           </form>
