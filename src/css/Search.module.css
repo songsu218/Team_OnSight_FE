@@ -20,7 +20,7 @@
 }
 
 .sidebar {
-  background-color: #fff;
+  background-color: #f1f1f1;
   box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
   width: 400px;
   padding: 20px;
@@ -28,6 +28,12 @@
   overflow-y: auto;
   z-index: 9;
   position: relative;
+  margin-top: 20px;
+}
+
+.sidebar.details {
+  background-color: #fff;
+  margin-top: 0;
 }
 
 .sidebar::-webkit-scrollbar {
@@ -36,15 +42,16 @@
 
 .searchInputCon {
   position: fixed;
-  background-color: white;
-  left: 210px;
   top: 0;
+  left: 210px;
   width: 400px;
   padding: 10px 20px;
+  background-color: white;
   z-index: 10;
 }
 
 .sidebar .searchInputCon h3 {
+  /* 수정해야함 */
   margin: 46px 0 50px 0;
   text-align: center;
   font-size: 26px;
@@ -95,29 +102,6 @@
   flex: 1;
 }
 
-.list {
-  list-style: none;
-  padding: 0;
-}
-
-.listItem {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-
-.listItem img {
-  width: 50px;
-  height: 50px;
-  object-fit: cover;
-  margin-right: 10px;
-  border-radius: 1rem;
-}
-
-.listItem div {
-  flex: 1;
-}
-
 .centerName {
   font-size: 0.8rem;
 }
@@ -125,27 +109,29 @@
 .centerList {
   display: flex;
   flex-direction: column;
-  width: 347px;
+  width: 350px;
   height: 310px;
-  padding: 2rem 1.5rem;
+  padding-bottom: 2rem;
+  margin: auto;
   margin-top: 20px;
   border-radius: 1rem;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-
+  background-color: white;
 }
 
 
 .centerList img {
-  width: 100%;
-  height: 150px;
+  width: 350px;
+  height: 180px;
   object-fit: cover;
-  border-radius: 1rem;
+  border-radius: 1rem 1rem 0 0;
 }
 
 .centerInfo {
   margin-top: 1rem;
   display: flex;
+  padding: 0 1.5rem;
   justify-content: space-between;
+
 }
 
 .centerInfo div {
@@ -160,6 +146,7 @@
 }
 
 .centerInfo div p {
+
   font-size: 14px;
   opacity: 0.5;
 }
@@ -174,8 +161,11 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
+  padding: 0 1.5rem;
   white-space: normal;
-  margin-top: 30px;
+  margin-top: 20px;
+  line-height: 140%;
+  opacity: 0.6;
 }
 
 /* 상세페이지-공통 */
@@ -413,5 +403,10 @@
   .viewCon {
     width: 100%;
     margin-top: 96px;
+  }
+
+  .searchInputCon {
+    top: 107px;
+    left: 0px;
   }
 }

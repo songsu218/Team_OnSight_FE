@@ -145,11 +145,6 @@ const Search = () => {
   };
 
   const handleToggleLike = async (centerId) => {
-    // if (userLikes.includes(centerId)) {
-    //   setUserLikes(userLikes.filter((id) => id !== centerId));
-    // } else {
-    //   setUserLikes([...userLikes, centerId]);
-    // }
     try {
       const response = await fetch(`http://localhost:8000/user/toggleLike`, {
         method: 'POST',
@@ -183,7 +178,7 @@ const Search = () => {
 
   return (
     <main className={`${style.viewCon} ${style.search}`}>
-      <div className={style.sidebar}>
+      <div className={`${style.sidebar} ${showDetails ? style.details : ''}`}>
         {showDetails && currentCenter ? (
           <CenterDetails
             currentCenter={currentCenter}
