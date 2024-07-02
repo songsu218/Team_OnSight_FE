@@ -64,6 +64,7 @@ const Challenge = () => {
   // 비로그인 시 접근 제한
   useEffect(() => {
     if (!user) {
+      alert('로그인 후 사용가능해요. 로그인 하시겠어요?');
       navigate('/signinpage');
     }
   }, [user, navigate]);

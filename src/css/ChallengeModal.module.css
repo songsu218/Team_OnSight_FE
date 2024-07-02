@@ -7,6 +7,11 @@
   margin-left: 1.65rem;
   padding: 0.5rem 0;
 }
+.modalRe p {
+  font-size: 1rem;
+  color: red;
+  margin-left: 1.65rem;
+}
 .recordCon {
   display: flex;
   flex-direction: column;

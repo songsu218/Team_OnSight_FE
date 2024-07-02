@@ -35,13 +35,6 @@ const ChallengeDetail = () => {
   }, [currentPage, rank]);
   const [totalPages, setTotalPages] = useState();
 
-  //#endregion 변수,Hook
-  // console.log("detailData");
-  // console.log(detailData);
-  // console.log("user");
-  // console.log(username);
-  // console.log(nickname);
-
   //#region init
   const isFirstRun = useRef(true);
   useEffect(() => {
@@ -60,7 +53,7 @@ const ChallengeDetail = () => {
       .catch((error) => {
         console.log(`${error}`);
       });
-    if (detailData.state === 'false') {
+    if (detailData.state === 'false' || detailData.state === false) {
       setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
       ch.chRank(detailData.challengename)
         .then((result) => {
@@ -274,7 +267,7 @@ const ChallengeDetail = () => {
                           </td>
                           <td>{item.rank}등</td>
                           <td>{item.nick}</td>
-                          <td>{item.total}</td>
+                          <td>{item.total.toLocaleString()}</td>
                         </tr>
                       ))}
                     </tbody>
