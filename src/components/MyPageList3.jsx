@@ -7,28 +7,28 @@ const MyPageList3 = () => {
   const [feeds, setFeeds] = useState([]);
   const user = useSelector((state) => state.user.userInfo);
 
-  useEffect(() => {
-    const fetchFeeds = async () => {
-      try {
-        const response = await fetch(`http://localhost:8000/user/feeds`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ user }),
-        });
+  const fetchFeeds = async () => {
+    try {
+      const response = await fetch(`http://localhost:8000/user/feeds`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ user }),
+      });
 
-        if (response.ok) {
-          const data = await response.json();
-          setFeeds(data);
-        } else {
-          console.error("Failed to fetch feeds");
-        }
-      } catch (err) {
-        console.error("Error fetching feeds", err);
+      if (response.ok) {
+        const data = await response.json();
+        setFeeds(data);
+      } else {
+        console.error("Failed to fetch feeds");
       }
-    };
+    } catch (err) {
+      console.error("Error fetching feeds", err);
+    }
+  };
 
+  useEffect(() => {
     if (user) {
       fetchFeeds();
     }
