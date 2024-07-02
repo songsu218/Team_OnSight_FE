@@ -170,7 +170,7 @@ const Crew = () => {
               value={selectedRegion}
               onChange={handleRegionChange}
             >
-              <option value="">선택</option>
+              <option value="">전체</option>
               <option value="seoul">서울</option>
             </select>
             <label htmlFor="district-select" />
@@ -179,7 +179,7 @@ const Crew = () => {
               value={selectedDistrict}
               onChange={handleDistrictChange}
             >
-              <option value="">선택</option>
+              <option value="">전체</option>
               {selectedRegion &&
                 districtsByRegion[selectedRegion].map((district) => (
                   <option key={district} value={district}>

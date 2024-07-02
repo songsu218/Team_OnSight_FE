@@ -163,11 +163,11 @@ const CreateCrew = () => {
             <section>활동 지역</section>
             <div className="selectBox">
               <select value={selectedSi} onChange={handleSiChange}>
-                <option value="">선택</option>
+                <option value="">전체</option>
                 <option value="seoul">서울특별시</option>
               </select>
               <select value={selectedGu} onChange={handleGuChange}>
-                <option value="">선택</option>
+                <option value="">전체</option>
                 {gus.map((gu, index) => (
                   <option key={index} value={gu}>
                     {gu}
