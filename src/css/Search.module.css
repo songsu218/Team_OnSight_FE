@@ -323,7 +323,7 @@
 
 .centerRecordNav .btnBox {
   border: 3px solid black;
-  border-radius: 1.25rem;
+  border-radius: 0.5rem;
 
 }
 
@@ -331,7 +331,8 @@
   font-size: 1rem;
   font-family: Arial, sans-serif;
   cursor: pointer;
-  height: 30px;
+  height: 40px;
+  line-height: 40px;
 }
 
 .recordItem {
