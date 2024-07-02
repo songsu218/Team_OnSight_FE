@@ -1,25 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import style from '../css/Search.module.css';
-import { useSelector, useDispatch } from 'react-redux';
-import { filterCenters } from '../utils/searchUtils';
-import CenterDetails from '../components/CenterDetails'; // CenterDetails 컴포넌트 임포트
-import MapView from '../components/MapView';
-import { setUserAllInfo } from '../store/userStore';
+import React, { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import style from "../css/Search.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { filterCenters } from "../utils/searchUtils";
+import CenterDetails from "../components/CenterDetails"; // CenterDetails 컴포넌트 임포트
+import MapView from "../components/MapView";
+import { setUserAllInfo } from "../store/userStore";
 
 const Search = () => {
+  const location = useLocation();
   const user = useSelector((state) => state.user.userInfo); // 리덕스의 유저정보
   const dispatch = useDispatch();
   const [centerList, setCenterList] = useState([]); // 센터 리스트
   const [guList, setGuList] = useState([]); // 구 리스트
-  const [gu, setGu] = useState('전체'); // 선택된 구 상태 추가
-  const [city, setCity] = useState('서울특별시'); // 선택된 시 상태 추가
-  const [searchTerm, setSearchTerm] = useState(''); // 검색 상태 추가
+  const [gu, setGu] = useState("전체"); // 선택된 구 상태 추가
+  const [city, setCity] = useState("서울특별시"); // 선택된 시 상태 추가
+  const [searchTerm, setSearchTerm] = useState(""); // 검색 상태 추가
   const [mapCenter, setMapCenter] = useState({ lat: 37.5665, lng: 126.978 });
   const [filteredCenters, setFilteredCenters] = useState([]); // 필터링된 센터 리스트
   const [mapMarkers, setMapMarkers] = useState([]); // 구에 따른 맵마커 리스트
   const [currentCenter, setCurrentCenter] = useState(null); // 선택된 센터 상태 추가
   const [showDetails, setShowDetails] = useState(false); // 상세 정보 표시 상태 추가
-  const [activeTab, setActiveTab] = useState('home'); // 활성 탭 상태 추가
+  const [activeTab, setActiveTab] = useState("home"); // 활성 탭 상태 추가
   const [userLikes, setUserLikes] = useState(user?.like || []); // 사용자 좋아요 상태 추가
   const [records, setRecords] = useState([]); // 기록 상태 추가
 
@@ -31,11 +33,11 @@ const Search = () => {
     const fetchCenterData = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8000/center/centerList',
+          "http://localhost:8000/center/centerList",
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         );
@@ -43,16 +45,16 @@ const Search = () => {
         if (response.ok) {
           const data = await response.json();
           setCenterList(data);
-          setFilteredCenters(filterCenters(data, searchTerm, gu));
-          setMapMarkers(filterCenters(data, '', gu));
+          setFilteredCenters(filterCenters(data, searchTerm, gu)); // 초기 필터링 수행
+          setMapMarkers(filterCenters(data, '', gu)); // 초기 구 필터링 수행
         } else {
-          console.error('Failed to fetch center');
+          console.error("Failed to fetch center");
         }
       } catch (err) {
-        console.error('Error fetching center', err);
+        console.error("Error fetching center", err);
       }
     };
-
+ 
     const loadGuData = () => {
       const guData = localStorage.getItem('guList');
       if (guData) {
@@ -66,12 +68,19 @@ const Search = () => {
     loadGuData();
   }, [user, gu]);
 
+  useEffect(() => {
+    if (location.state && location.state.detailData) {
+      const center = location.state.detailData;
+      handleCenterClick(center);
+    }
+  }, [location.state]);
+
   const fetchRecords = async (centerId) => {
     try {
       const response = await fetch(`http://localhost:8000/center/${centerId}`, {
-        method: 'GET',
+        method: "GET",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
 
@@ -79,10 +88,10 @@ const Search = () => {
         const data = await response.json();
         setRecords(data);
       } else {
-        console.error('Failed to fetch records');
+        console.error("Failed to fetch records");
       }
     } catch (err) {
-      console.error('Error fetching records', err);
+      console.error("Error fetching records", err);
     }
   };
 
@@ -95,7 +104,7 @@ const Search = () => {
     } else {
       setMapCenter({ lat: 37.5665, lng: 126.978 }); // 기본 좌표 설정
     }
-    const newFilteredCenters = filterCenters(centerList, '', selectedGu);
+    const newFilteredCenters = filterCenters(centerList, "", selectedGu);
     setFilteredCenters(newFilteredCenters); // 구 변경 시 필터링 수행
     setMapMarkers(newFilteredCenters); // 구 변경 시 맵마커 업데이트
   };
@@ -112,11 +121,11 @@ const Search = () => {
   };
 
   const resetFilters = () => {
-    setCity('서울특별시');
-    setGu('전체');
-    setSearchTerm('');
+    setCity("서울특별시");
+    setGu("전체");
+    setSearchTerm("");
     setMapCenter({ lat: 37.5665, lng: 126.978 });
-    const initialFilteredCenters = filterCenters(centerList, '', '전체');
+    const initialFilteredCenters = filterCenters(centerList, "", "전체");
     setFilteredCenters(initialFilteredCenters);
     setMapMarkers(initialFilteredCenters);
     setShowDetails(false);
@@ -124,7 +133,7 @@ const Search = () => {
   };
 
   const handleKeyPress = (event) => {
-    if (event.key === 'Enter') {
+    if (event.key === "Enter") {
       performSearch();
     }
   };
@@ -132,9 +141,9 @@ const Search = () => {
   const handleToggleLike = async (centerId) => {
     try {
       const response = await fetch(`http://localhost:8000/user/toggleLike`, {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({ userId: user._id, centerId }),
       });
@@ -147,10 +156,10 @@ const Search = () => {
           dispatch(setUserAllInfo(data));
         }
       } else {
-        console.error('Failed to toggle like');
+        console.error("Failed to toggle like");
       }
     } catch (err) {
-      console.error('Error toggling like', err);
+      console.error("Error toggling like", err);
     }
   };
 
@@ -199,7 +208,7 @@ const Search = () => {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                   onKeyDown={(e) => {
-                    if (e.key === 'Enter') {
+                    if (e.key === "Enter") {
                       handleKeyPress(e);
                     }
                   }}
@@ -229,7 +238,7 @@ const Search = () => {
                     </div>
                     <i
                       className={`fa-regular fa-star ${style.likeStar} ${
-                        userLikes.includes(center._id) ? 'fa-solid' : ''
+                        userLikes.includes(center._id) ? "fa-solid" : ""
                       }`}
                       onClick={(e) => {
                         e.stopPropagation();

@@ -48,11 +48,19 @@ const CrewFeedDetail = () => {
     const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8000/feed/${feedId}`);
-        if (crewId) {
-          navigate(`/crewdetail/${crewId}`);
-        }
+        const response = await axios.delete(
+          `http://localhost:8000/feed/${feedId}`,
+          {
+            params: { userId: user.id },
+          }
+        );
+        alert(response.data.message);
+        navigate(`/crewdetail/${crewId}`);
       } catch (error) {
+        const errorMessage =
+          error.response?.data?.message ||
+          "오류가 발생했습니다. 다시 시도해 주세요.";
+        alert(`Error: ${errorMessage}`);
         console.error("error", error);
         navigate(`/crewdetail/${crewId}`);
         // 크루 페이지 삭제되면서 41번째 줄에서 오류나고 navgiate가 작동을 안하는데

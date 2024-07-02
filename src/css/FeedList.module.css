@@ -3,7 +3,7 @@
 }
 
 .listData2 > ul {
-  border-top: 3px solid #000000;
+  border-top: 1px solid #000000;
 }
 
 .listData2 > ul > li {
@@ -12,6 +12,7 @@
   display: flex;
   padding: 38px 0;
   border-bottom: 1px solid #cdcdcd;
+  align-items: center;
 }
 
 .listData2 > ul > li > span {
@@ -32,36 +33,22 @@
   font-weight: 300;
 }
 
-.listData2 > ul > li > div {
-  position: absolute;
-  display: inline-block;
-  text-align: center;
-  padding: 50px;
-  right: 0.1rem;
-  top: 50%;
-  transform: translateY(-40%);
-  padding: 0;
-  border: 0;
-  z-index: 100;
-}
-
-.listData2 > ul > li > div > i {
-  text-align: left;
-  align-items: center;
-  width: 5rem;
-  height: 26px;
-  z-index: 1000;
+.listData2 .label .lblistDelete {
+  opacity: 0;
 }
 
 .p {
   font-size: 1.5rem;
   line-height: 26px;
+  margin-top: 2.5rem;
 }
 
 .deleteButton {
   position: absolute;
   padding: 0.5rem;
-  background-color: transparent;
+  background-color: #ffffff;
+  transform: translateY(5px);
+  right: -5px;
 }
 
 @media (max-width: 1079px) {
@@ -124,6 +111,14 @@
     font-size: 1rem;
     line-height: 72px;
     font-weight: 800;
+  }
+
+  .listData2 .label .lblistDelete,
+  .listData2 .listDelete,
+  .listData2 .listDelete > i {
+    width: 50px;
+    z-index: 100;
+    text-align: center;
   }
 
   .listData2 .label .lbListNo,

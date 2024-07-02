@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ListPagnation from "./ListPagnation";
 import { useNavigate } from "react-router-dom";
 import style from "../../css/FeedList.module.css";
+import { useSelector } from "react-redux";
 import axios from "axios";
 
 const formatDate = (date) => {
@@ -21,15 +22,14 @@ const formatDate = (date) => {
 };
 
 const FeedList = ({ items }) => {
-  console.log("fffff", items);
   const [feeds, setFeeds] = useState([]);
-  console.log("ff", feeds);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
   const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 5;
 
   const totalPages = Math.ceil(feeds.length / itemsPerPage);
+  const user = useSelector((state) => state.user.userInfo);
 
   const handlePageChange = (page) => {
     setCurrentPage(page);
@@ -75,11 +75,19 @@ const FeedList = ({ items }) => {
     const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
     if (confirmDelete) {
       try {
-        await axios.delete(`http://localhost:8000/feed/${feedId}`);
-        const response = await axios.post("http://localhost:8000/feeds");
-        setFeeds(response.data);
-        navigate("/"); // 삭제 후 목록 새로고침
+        const response = await axios.delete(
+          `http://localhost:8000/feed/${feedId}`,
+          {
+            params: { userId: user.id },
+          }
+        );
+        alert(response.data.message);
+        window.location.reload(); // 페이지 새로고침
       } catch (error) {
+        const errorMessage =
+          error.response?.data?.message ||
+          "오류가 발생했습니다. 다시 시도해 주세요.";
+        alert(`Error: ${errorMessage}`);
         console.error("error", error);
       }
     }
@@ -94,6 +102,7 @@ const FeedList = ({ items }) => {
           <span className={style.lbListTitle}>제목</span>
           <span className={style.lbListDate}>등록일</span>
           <span className={style.lbListCnt}>조회수</span>
+          <span className={style.lblistDelete}>버튼</span>
         </p>
         <ul>
           {currentItems.length > 0 ? (
@@ -113,7 +122,7 @@ const FeedList = ({ items }) => {
                   {formatDate(item.createdTime)}
                 </span>
                 <span className={style.listCnt}>{item.views}</span>
-                <div>
+                <span className={style.listDelete}>
                   <i
                     className="fa-solid fa-ellipsis-vertical"
                     onClick={(e) => {
@@ -132,7 +141,7 @@ const FeedList = ({ items }) => {
                   >
                     삭제하기
                   </button>
-                </div>
+                </span>
               </li>
             ))
           ) : (

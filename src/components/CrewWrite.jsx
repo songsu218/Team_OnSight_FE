@@ -47,9 +47,14 @@ const CrewWrite = () => {
       );
 
       if (response.status === 201) {
+        alert(response.data.message);
         navigate(-1);
       }
     } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        "오류가 발생했습니다. 다시 시도해 주세요.";
+      alert(`Error: ${errorMessage}`);
       console.error("error", error);
     }
   };
