@@ -1,19 +1,19 @@
-import style from '../css/MyPageList1.module.css';
-import List from './list/List';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import style from "../css/MyPageList1.module.css";
+import List from "./list/List";
+import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
 
 const MyPageList4 = () => {
+  const { user, isOwnProfile } = useOutletContext();
   const [crews, setCrews] = useState([]);
-  const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
     const fetchRecodes = async () => {
       try {
         const response = await fetch(`http://localhost:8000/user/centerlist`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ user }),
         });
@@ -22,10 +22,10 @@ const MyPageList4 = () => {
           const data = await response.json();
           setCrews(data);
         } else {
-          console.error('Failed to fetch crews');
+          console.error("Failed to fetch crews");
         }
       } catch (err) {
-        console.error('Error fetching crews', err);
+        console.error("Error fetching crews", err);
       }
     };
 
