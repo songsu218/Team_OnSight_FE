@@ -1,80 +1,85 @@
-@charset 'utf-8';
+ .register {
+   margin: 200px auto auto auto;
+   max-width: 720px;
+   width: calc(100% - 10rem);
+ }
 
-.register {
-  font-family: "Spoqa Han Sans Neo", "sans-serif";
-}
+ .register h2 {
+   text-align: left;
+   margin-bottom: 60px;
+   font-weight: bold;
+   font-size: 3rem;
+ }
 
-.register h2 {
-  margin-top: 100px;
-  margin-bottom: 60px;
-  text-align: left;
-  font-weight: bold;
-  font-size: 3rem;
-}
+ .register form {
+   text-align: center;
+ }
 
-.register form {
-  max-width: 400px;
-  width: calc(100% - 2rem);
-  margin: auto;
-  text-align: center;
-}
-.register form > section {
-  font-size: 1rem;
-  text-align: left;
-  margin-top: 20px;
-}
+ .register form label {
+   display: inline-block;
+   display: flex;
+   align-items: center;
+ }
 
-.register input {
-  box-sizing: border-box;
-  width: 100%;
-  padding: 0.5rem;
-  outline: none;
-  border: none;
-  border-bottom: 1px solid lightgray;
-  /* border: 1px solid red; */
-}
+ .register input {
+   border: none;
+   border-bottom: 1px solid lightgray;
+   box-sizing: border-box;
+   width: 100%;
+   padding: 1rem;
+   margin: 1rem 0;
+ }
 
-.register button {
-  margin-top: 20px;
-  margin-bottom: 50px;
-  padding: 0.5rem;
-  width: 100%;
-  font-size: 1.25rem;
-  font-weight: bold;
-  border-radius: 1rem;
-  background-color: #ffffff;
-  transition: background-color 0.3s, font-weight 0.3s;
-}
-.register button:hover {
-  background-color: #f6f6f695;
-}
+ .register button {
+   position: relative;
+   border: 3px solid black;
+   width: 100%;
+   padding: 1rem;
+   margin: 1.5rem 0 1rem 0;
+   font-size: 1.25rem;
+   font-weight: 900;
+   border-radius: 1rem;
+   background-color: white;
+   transition: 0.3s;
+ }
 
-.register > p {
-  text-align: center;
-  padding: 1rem 0;
-  font-size: 0.7rem;
-}
-.register > p a {
-  color: tomato;
-}
-.register form > span {
-  display: block;
-  font-size: 1rem;
-  color: tomato;
-  text-align: left;
-  padding-top: 0.25rem;
-}
+ .register button:hover {
+   background-color: black;
+   color: white;
+ }
 
-.eye {
-  /* border: 1px solid red; */
-  display: flex;
-  align-items: center;
-}
-.eye p {
-  margin: 1px;
-}
+ .register>p {
+   padding: 1rem 0;
+ }
 
-.error {
-  color: #ff454a;
-  padding: 1rem 0;
-}
+ .register>p a {
+   color: #999999;
+ }
+
+ .register>p a:hover {
+   border-bottom: 1px solid #999999;
+ }
+
+ .register form>span {
+   display: block;
+   font-size: 1rem;
+   color: red;
+   text-align: left;
+   padding-top: 0.25rem;
+ }
+
+ .eye {
+   position: relative;
+   display: flex;
+   align-items: center;
+ }
+
+ .eye img {
+   cursor: pointer;
+ }
+
+
+ .error {
+   color: red;
+   padding: 1rem 0;
+ }

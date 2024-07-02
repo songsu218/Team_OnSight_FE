@@ -37,8 +37,7 @@
 }
 
 .SignInPage form button,
-.SignInPage>button
- {
+.SignInPage>button {
   border: 3px solid black;
   font-size: 1.25rem;
   font-weight: 900;
@@ -49,7 +48,13 @@
 .SignInPage form button {
   background-color: white;
   width: 100%;
-  margin-bottom: 3rem;
+  margin: 1rem 0 3rem 0;
+  transition: 0.3s;
+}
+
+.SignInPage form button:hover {
+  background-color: black;
+  color: white;
 }
 
 .SignInPage>button {
@@ -58,19 +63,28 @@
   width: 100%;
 }
 
-.SignInPage>button::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  border: 1px solid lightgray;
-  bottom: -3rem;
-  left: 0;
+.eye {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eye img {
+  cursor: pointer;
 }
 
 .errorMessage {
   color: red;
 }
 
-.moveSigninpage>p:last-of-type {
-  margin-top: 100px;
+.moveSigninpage {
+  margin-top: 2rem;
+}
+
+.moveSigninpage a {
+  color: #999999;
+}
+
+.moveSigninpage a:hover {
+  border-bottom: 1px solid #999999;
 }
