@@ -33,18 +33,6 @@ const Ranking = () => {
               onMouseEnter={() => setHoveredCard(3)}
               onMouseLeave={() => setHoveredCard(null)}
             />
-            <img
-              src="/img/person4.png"
-              alt="p4"
-              onMouseEnter={() => setHoveredCard(4)}
-              onMouseLeave={() => setHoveredCard(null)}
-            />
-            <img
-              src="/img/person5.png"
-              alt="p5"
-              onMouseEnter={() => setHoveredCard(5)}
-              onMouseLeave={() => setHoveredCard(null)}
-            />
           </div>
         </div>
       </div>
