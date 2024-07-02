@@ -1,10 +1,12 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import style from '../css/RankList.module.css';
+import { useNavigate } from 'react-router-dom';
 
 const RankList = ({ hoveredCard }) => {
   const records = useSelector((state) => state.record.recordInfo);
   const users = useSelector((state) => state.userAll.userAllInfo);
+  const navigate = useNavigate();
 
   const userLevelSumMap = {};
 
@@ -36,6 +38,10 @@ const RankList = ({ hoveredCard }) => {
     return null;
   };
 
+  const handleProfileClick = (userId) => {
+    navigate(`/mypage/home/${userId}`);
+  };
+
   return (
     <div>
       <ul className={style.rankListCon}>
@@ -48,6 +54,7 @@ const RankList = ({ hoveredCard }) => {
             className={`${style.rankListCard} ${
               hoveredCard === index + 1 ? style.hover : ''
             }`}
+            onClick={() => handleProfileClick(user.id)}
           >
             <strong>{index + 1}</strong>
             <span>
@@ -75,6 +82,7 @@ const RankList = ({ hoveredCard }) => {
             className={`${style.rankListCard2} ${
               hoveredCard === index + 4 ? style.hover : ''
             }`}
+            onClick={() => handleProfileClick(user.id)}
           >
             <div className={style.rankListCard2Prof}>
               <strong>{index + 4}</strong>

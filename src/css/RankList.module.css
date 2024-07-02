@@ -129,6 +129,7 @@
   font-weight: bold;
   font-size: 1.5rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .rankListCon2 .rankListCard2 .rankListCard2Prof {

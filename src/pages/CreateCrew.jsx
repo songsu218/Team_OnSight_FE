@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import style from '../css/CreateCrew.module.css';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const CreateCrew = () => {
   const [name, setName] = useState('');
@@ -11,6 +12,8 @@ const CreateCrew = () => {
   const [selectedSi, setSelectedSi] = useState('');
   const [selectedGu, setSelectedGu] = useState('');
   const [gus, setGus] = useState([]);
+
+  const navigate = useNavigate();
 
   const [previewSrc, setPreviewSrc] = useState('/img/noimg.jpg');
 
@@ -100,6 +103,7 @@ const CreateCrew = () => {
       );
       if (response.status === 200) {
         console.log('success');
+        navigate('/crew');
       }
     } catch (error) {
       console.error('error', error);
