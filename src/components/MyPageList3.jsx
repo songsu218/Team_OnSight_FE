@@ -4,7 +4,7 @@ import style from "../css/MyPageList1.module.css";
 import FeedList from "./list/FeedList";
 
 const MyPageList3 = () => {
-  const { user, isOwnProfile } = useOutletContext();
+  const { user } = useOutletContext();
   const [feeds, setFeeds] = useState([]);
 
   const fetchFeeds = async () => {

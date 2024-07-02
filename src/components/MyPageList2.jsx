@@ -46,7 +46,7 @@ const MyPageList2 = () => {
           {isOwnProfile && <RecordModal buttonText="기록 추가" />}
         </div>
       </div>
-      <List items={recodes} itemType="recode" />
+      <List items={recodes} itemType="record" />
     </section>
   );
 };

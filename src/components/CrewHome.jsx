@@ -1,8 +1,8 @@
-import CrewGroupfeed from './CrewGroupfeed';
-import style from '../css/CrewHome.module.css';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import CrewGroupfeed from "./CrewGroupfeed";
+import style from "../css/CrewHome.module.css";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const CrewHome = () => {
   const { crewId } = useParams();
@@ -17,7 +17,7 @@ const CrewHome = () => {
     if (selectedCrew && user) {
       setCrewMember(selectedCrew.members.includes(user.id));
     }
-  }, [selectedCrew, user]);
+  }, [selectedCrew, user, crew]);
 
   if (!selectedCrew) {
     return <div>삭제되었거나 존재하지 않는 크루입니다.</div>;
