@@ -193,8 +193,8 @@ const Challenge = () => {
   //#region return
   return (
     <>
-      <div className='con1'>
-        <main id={style.container} className='mw'>
+      <div className="con1">
+        <main id={style.container} className="mw">
           <div className={style.content}>
             <div className={style.page_tit_area}>
               <h2 className={style.page_tit}>챌린지 일정</h2>
@@ -202,30 +202,30 @@ const Challenge = () => {
                 <ul>
                   <li className={activeIndex === 0 ? style.active : ''}>
                     <a
-                      href='/'
+                      href="/"
                       className={style.page_link}
                       onClick={(event) => handleClick(0, event)}
-                      title='챌린지 일정 페이지 이동 링크'
+                      title="챌린지 일정 페이지 이동 링크"
                     >
                       전체 챌린지
                     </a>
                   </li>
                   <li className={activeIndex === 1 ? style.active : ''}>
                     <a
-                      href='/'
+                      href="/"
                       className={`${style.page_link}`}
                       onClick={(event) => handleClick(1, event)}
-                      title='나의 챌린지 보기 페이지 이동 링크'
+                      title="나의 챌린지 보기 페이지 이동 링크"
                     >
                       나의 챌린지
                     </a>
                   </li>
                   <li className={activeIndex === 2 ? style.active : ''}>
                     <a
-                      href='/'
+                      href="/"
                       className={style.page_link}
                       onClick={(event) => handleClick(2, event)}
-                      title='나의 챌린지 만들기 페이지 이동 링크'
+                      title="나의 챌린지 만들기 페이지 이동 링크"
                     >
                       나의 챌린지 만들기
                     </a>
@@ -244,7 +244,7 @@ const Challenge = () => {
               <h3 className={style.sub_tit}>2024</h3>
             </div>
             <div className={style.filter_option}>
-              <label htmlFor='challengeOption1' className={style.option_label}>
+              <label htmlFor="challengeOption1" className={style.option_label}>
                 <span>상태</span>
               </label>
               <select
@@ -253,7 +253,7 @@ const Challenge = () => {
                 value={selectedOption}
                 onChange={handleSelectChange}
               >
-                <option value={'TOT'}>선택</option>
+                <option value={'TOT'}>전체</option>
                 <option value={'NOW'}>진행 중</option>
                 <option value={'PAST'}>기간 종료</option>
               </select>
@@ -307,12 +307,12 @@ const Challenge = () => {
                       ? totalSlides - slidesPerViewCount + 1
                       : 1}
                   </div>
-                  <div className={style.autoplay_progress} slot='container-end'>
-                    <svg viewBox='0 0 48 48' ref={progressCircle}>
-                      <circle cx='24' cy='24' r='20'></circle>
+                  <div className={style.autoplay_progress} slot="container-end">
+                    <svg viewBox="0 0 48 48" ref={progressCircle}>
+                      <circle cx="24" cy="24" r="20"></circle>
                     </svg>
                     <button
-                      type='button'
+                      type="button"
                       className={`${style.control_btn} ${
                         isAutoplay ? style.btn_stop : style.btn_play
                       }`}
