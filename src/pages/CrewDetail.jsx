@@ -199,7 +199,7 @@ const CrewDetail = () => {
             <Route path="*" element={<CrewHome />} />
           </Routes>
         </div>
-        <span>크루 탈퇴하기</span>
+        {crewMember && <span>크루 탈퇴하기</span>}
       </section>
     </div>
   );
