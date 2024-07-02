@@ -66,6 +66,14 @@
   gap: 0.5rem;
 }
 
+.gnb .viewMore .nickBox i {
+  display: none;
+}
+
+.gnb .viewMore a i:nth-of-type(2) {
+  display: none;
+}
+
 @media (max-width: 1440px) {
   .gnb {
     position: fixed;
@@ -76,8 +84,21 @@
     align-items: center;
   }
 
-  .holdBar > a {
+  .holdBar {
     display: none;
+  }
+  .holdBar.showMenu {
+    display: flex;
+    position: absolute;
+    top: 8vh;
+    height: 100vh;
+    right: 0;
+    left: 0;
+    background-color: #ffffff;
+  }
+
+  .holdBar.showMenu a {
+    margin-top: 2rem;
   }
 
   .gnb h1 {
@@ -90,5 +111,12 @@
 
   .gnb .viewMore span {
     margin-right: 1rem;
+  }
+
+  .gnb .viewMore .nickBox i {
+    display: block;
+  }
+  .gnb .viewMore a i:nth-of-type(2) {
+    display: block;
   }
 }
