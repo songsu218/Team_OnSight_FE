@@ -127,6 +127,7 @@ function ChallengeModal({ onClose, isOpen, username }) {
         <Modal.Header closeButton>
           <Modal.Title>
             <h2>챌린지 만들기</h2>
+            <p>*챌린지는 일주일에 하나씩만 생성 가능</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className={style.modalBody}>
