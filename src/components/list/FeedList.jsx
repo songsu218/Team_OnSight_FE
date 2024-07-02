@@ -94,6 +94,7 @@ const FeedList = ({ items }) => {
           <span className={style.lbListTitle}>제목</span>
           <span className={style.lbListDate}>등록일</span>
           <span className={style.lbListCnt}>조회수</span>
+          <span className={style.lblistDelete}>버튼</span>
         </p>
         <ul>
           {currentItems.length > 0 ? (
@@ -113,7 +114,7 @@ const FeedList = ({ items }) => {
                   {formatDate(item.createdTime)}
                 </span>
                 <span className={style.listCnt}>{item.views}</span>
-                <div>
+                <span className={style.listDelete}>
                   <i
                     className="fa-solid fa-ellipsis-vertical"
                     onClick={(e) => {
@@ -132,7 +133,7 @@ const FeedList = ({ items }) => {
                   >
                     삭제하기
                   </button>
-                </div>
+                </span>
               </li>
             ))
           ) : (
