@@ -135,8 +135,8 @@ const ChallengeDetail = () => {
 
   return (
     <>
-      <div className='con1'>
-        <main id={style.container} className='mw'>
+      <div className="con1">
+        <main id={style.container} className="mw">
           <div className={style.content}>
             {/* 아래 타이틀 및 페이지 네비 영역은 들어가야 챌린지 일정과 헤딩 태그 레벨이 맞음. */}
             <div className={style.page_tit_area}>
@@ -170,7 +170,7 @@ const ChallengeDetail = () => {
                 onClick={() => navigate(-1)}
                 className={style.back_button}
               >
-                <i className='fa-solid fa-angle-left'></i>
+                <i className="fa-solid fa-angle-left"></i>
               </button>
               <div className={style.challenge_info}>
                 <div className={style.challenge_left}>
@@ -178,12 +178,12 @@ const ChallengeDetail = () => {
                     <img
                       srcSet={`${challenge_img}`}
                       src={`${challenge_img}`}
-                      alt='A챌린지 이미지'
+                      alt="A챌린지 이미지"
                     />
                   </div>
                   <div className={style.apply_btn_wrap}>
                     <button
-                      type='button'
+                      type="button"
                       id={style.applyBtn}
                       className={`${style.apply_btn} ${
                         isJoined ? style.apply_btn_completed : ''
@@ -222,7 +222,7 @@ const ChallengeDetail = () => {
                       </li>
                     </ul>
                     <div className={style.entry_list_wrap}>
-                      <button type='button' className={style.entry_list_btn}>
+                      <button type="button" className={style.entry_list_btn}>
                         챌린지 참여자
                       </button>
                       <ul className={style.entry_list}>
@@ -264,7 +264,7 @@ const ChallengeDetail = () => {
                                     ? '/img/joinuser.png'
                                     : `http://localhost:8000${item.thumbnail}`
                                 }
-                                alt='Profile'
+                                alt="Profile"
                               />
                               {/* <span className={style.trophy} /> */}
                               {item.rank <= 3 && (

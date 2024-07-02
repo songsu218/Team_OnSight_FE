@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import GaugeChart from 'react-gauge-chart';
 import {
   LineChart,
   Line,
@@ -11,6 +10,7 @@ import {
   ResponsiveContainer,
 } from 'recharts';
 import style from '../css/RecordDetail.module.css';
+import GaugeBar from '../components/GaugeBar';
 
 const RecordDetail = () => {
   const { id } = useParams();
@@ -30,9 +30,11 @@ const RecordDetail = () => {
     .sort((a, b) => a - b);
 
   const recordIndex = levelSums.indexOf(record.levelsum);
-  const percentileRank = Math.floor(
+  let percentileRank = Math.floor(
     ((levelSums.length - recordIndex - 1) / levelSums.length) * 100
   );
+
+  percentileRank = Math.max(percentileRank, 1);
 
   const transformDate = (records) => {
     return records
@@ -45,21 +47,30 @@ const RecordDetail = () => {
 
   const transformedUserRecords = transformDate(userRecords);
 
-  const defaultArcWidth = 0.2;
-  const defaultCornerRadius = 16;
-  const defaultColors = ['#0295CF', '#ffffff'];
-  const defaultNeedleColor = '#000000';
-  const defaultNeedleBaseColor = '#000000';
-  const defaultGaugeId = 'gauge-chart1';
-
   return (
     <div className={`${style.allCon} con1`}>
       <div className={`${style.allBox} mw`}>
         <button onClick={() => navigate(-1)} className={style.back_button}>
           <i className="fa-solid fa-angle-left"></i>
         </button>
-        <h2>{record.title}</h2>
+        <h2>
+          <strong>{record.title}</strong>
+          <span>{new Date(record.date).toLocaleDateString()}</span>
+        </h2>
+
         <div className={style.recordWrap}>
+          <div className={style.rightBox}>
+            <div className={style.gaugeBox}>
+              <GaugeBar percentileRank={percentileRank} />
+              <span>{percentileRank}</span>
+            </div>
+            <div className={style.gaugeTextBox}>
+              <span>'{record.nick}'</span> 님의 이 기록은
+              <br />
+              <span> '{record.center}'</span> 에서 <br />
+              상위 <span>'{percentileRank}%'</span> 에 위치하고 있어요
+            </div>
+          </div>
           <div className={style.leftBox}>
             <div className={style.imgBox}>
               <img
@@ -67,52 +78,46 @@ const RecordDetail = () => {
                 alt="thumbnail"
               />
             </div>
-            <span>{new Date(record.date).toLocaleDateString()}</span>
-            <p>{record.content}</p>
-          </div>
-          <div className={style.rightBox}>
-            <div className={style.gaugeBox}>
-              <GaugeChart
-                className={style.opacity0}
-                id={defaultGaugeId}
-                hideText={true}
-                arcPadding={0.05}
-                percent={1 - percentileRank / 100}
-                arcWidth={defaultArcWidth}
-                arcsLength={[100 - percentileRank, percentileRank]}
-                colors={defaultColors}
-                cornerRadius={defaultCornerRadius}
-                needleColor={defaultNeedleColor}
-                needleBaseColor={defaultNeedleBaseColor}
-              />
-              <p>
-                <span>'{record.nick}'</span> 님의 이 기록은
-                <br />
-                <span> '{record.center}'</span> 에서 <br />
-                상위 <span>'{percentileRank}%'</span> 에 위치하고 있어요
-              </p>
+            <div className={style.crewDetailTextBox}>
+              <p>{record.content}</p>
             </div>
+          </div>
+          <div className={style.lowerBox}>
             <div className={style.relatedRecords}>
-              <ResponsiveContainer width="100%" height={350}>
-                <LineChart
-                  data={transformedUserRecords}
-                  margin={{ top: 10, right: 100, bottom: 20, left: 100 }}
-                >
-                  <XAxis dataKey="date" hide />
-                  <YAxis hide />
-                  <Tooltip />
-                  <Line
-                    type="monotone"
-                    dataKey="levelsum"
-                    stroke="#A2D262"
-                    strokeWidth={8}
-                  />
-                </LineChart>
-              </ResponsiveContainer>
-              <p>최근 기록 변동</p>
+              <div className={style.chartBox}>
+                <ResponsiveContainer width="100%" height={350}>
+                  <LineChart
+                    data={transformedUserRecords}
+                    margin={{ top: 100, right: 130, bottom: 20, left: 100 }}
+                  >
+                    <XAxis dataKey="date" hide />
+                    <YAxis hide />
+                    <Tooltip
+                      contentStyle={{
+                        backgroundColor: '#A2D262',
+                        color: '#fff',
+                      }}
+                      itemStyle={{ color: '#fff' }}
+                      labelStyle={{ color: '#fff' }}
+                    />
+                    <Line
+                      type="monotone"
+                      dataKey="levelsum"
+                      stroke="#ffffff"
+                      strokeWidth={8}
+                    />
+                  </LineChart>
+                </ResponsiveContainer>
+              </div>
+              <p>
+                <span>'{record.nick}'</span> 님의
+                <br />
+                최근 기록 추이
+              </p>
               <div></div>
             </div>
           </div>
+          <div></div>
         </div>
       </div>
     </div>

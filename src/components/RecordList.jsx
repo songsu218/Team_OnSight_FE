@@ -50,7 +50,7 @@ const RecordList = () => {
       let transformValue = translateXValues[relativeIndex];
 
       if (index === hoveredIndex) {
-        transformValue += 50;
+        transformValue += 160 - translateXValues[relativeIndex];
       }
 
       box.style.transform = `translateX(${transformValue}px)`;
@@ -73,6 +73,24 @@ const RecordList = () => {
     setHoveredIndex(index);
     setCurrentCenter(center || '');
     setCurrentNick(nick || '');
+
+    const swiperCon = swiperConRef.current;
+    const boxes = swiperCon.querySelectorAll(`.${style.swiperBox}`);
+    const mainHeight = swiperCon.clientHeight;
+    const sectionHeight = mainHeight / 7;
+    const translateXValues = [0, 40, 80, 120, 80, 40, 0];
+
+    boxes.forEach((box, i) => {
+      const relativeIndex =
+        (i - Math.floor(swiperCon.scrollTop / sectionHeight) + 7) % 7;
+      let transformValue = translateXValues[relativeIndex];
+
+      if (i === index) {
+        transformValue += 160 - translateXValues[relativeIndex];
+      }
+
+      box.style.transform = `translateX(${transformValue}px)`;
+    });
   };
 
   useEffect(() => {
