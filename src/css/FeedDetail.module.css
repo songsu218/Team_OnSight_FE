@@ -11,7 +11,9 @@
 
 .topCon {
   border-bottom: 3px solid black;
+  padding-left: 48px;
 }
+
 .topCon .backBtn {
   border: none;
   font-size: 2rem;
@@ -86,7 +88,7 @@
   width: 80%;
 }
 
-.bottomCon ul li > button {
+.bottomCon ul li>button {
   border: none;
 }
 
