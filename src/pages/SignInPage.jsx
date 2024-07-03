@@ -1,6 +1,6 @@
-import { useState } from "react";
-import style from "../css/SignInPage.module.css";
-import { Link, Navigate } from "react-router-dom";
+import { useState } from 'react';
+import style from '../css/SignInPage.module.css';
+import { Link, Navigate } from 'react-router-dom';
 
 const kakaoApiKey = process.env.REACT_APP_KAKAO_API_KEY;
 const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
@@ -8,9 +8,9 @@ const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 const link = `https://kauth.kakao.com/oauth/authorize?client_id=${kakaoApiKey}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
 const SignInPage = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [message1, setMessage1] = useState("");
+  const [id, setId] = useState('');
+  const [password, setPassword] = useState('');
+  const [message1, setMessage1] = useState('');
   const [redirect, setRedirect] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
   const SignIn = async (e) => {
@@ -18,21 +18,22 @@ const SignInPage = () => {
 
     try {
       const response = await fetch(`http://localhost:8000/user/login`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ id, password }),
       });
       const data = await response.json();
 
       if (data.token) {
-        localStorage.setItem("onSightToken", data.token);
+        localStorage.setItem('onSightToken', data.token);
         setRedirect(true);
+
       } else if (data.message === "nouser" || data.message === "failed") {
         setMessage1("아이디 또는 비밀번호가 맞지 않습니다.");
       }
     } catch (error) {
-      console.error("Error:", error);
-      setMessage1("로그인 중 오류가 발생했습니다.");
+      console.error('Error:', error);
+      setMessage1('로그인 중 오류가 발생했습니다.');
     }
   };
   const togglePasswordVisibility = () => {
@@ -60,7 +61,7 @@ const SignInPage = () => {
         <label>비밀번호</label>
         <div className={style.eye}>
           <input
-            type={passwordVisible ? "text" : "password"}
+            type={passwordVisible ? 'text' : 'password'}
             id="password"
             placeholder="비밀번호"
             value={password}
@@ -69,8 +70,8 @@ const SignInPage = () => {
           />
           <p className="toggle-password" onClick={togglePasswordVisibility}>
             <img
-              src={passwordVisible ? "/img/eye.png" : "/img/eye-slash.png"}
-              alt={passwordVisible ? "Hide password" : "Show password"}
+              src={passwordVisible ? '/img/eye.png' : '/img/eye-slash.png'}
+              alt={passwordVisible ? 'Hide password' : 'Show password'}
             />
           </p>
         </div>

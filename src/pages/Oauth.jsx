@@ -48,21 +48,33 @@ function Oauth() {
       try {
         // 2. 코드를 잘 받아왔다면 토큰을 받아옴
         const tokenRes = await getToken(code);
-        if (tokenRes.error) {
-          console.error('토큰 요청 에러:', tokenRes.error_description);
-          alert('토큰 요청 에러: ' + tokenRes.error_description);
-          return;
-        }
-        // 3. 인증코드를 localStorage에 저장 'token'명으로 저장
-        localStorage.setItem('token', JSON.stringify(tokenRes));
+
+        //3. 인증코드를 localStorage에 저장 'token'명으로 저장
+        localStorage.setItem('onSightKakaoToken', JSON.stringify(tokenRes));
         console.log('토큰 저장 완료:', tokenRes);
 
         // 사용자 정보 가져오기
-        const userInfo = await getUserInfo(tokenRes.access_token);
-        console.log('사용자 정보:', userInfo);
+        const kakaoInfo = await getUserInfo(tokenRes.access_token);
+        console.log('사용자 정보:', kakaoInfo);
+
+        const response = await fetch('http://localhost:8000/user/kakao', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ kakaoInfo }),
+        });
+
+        const data = await response.json();
+        console.log('data 부분:', data);
+
+        if (data.token) {
+          localStorage.setItem('onSightToken', data.token);
+        } else {
+          alert('소셜 로그인에 실패하였습니다.');
+        }
 
         // 사용자 정보를 localStorage에 저장 (필요에 따라)
-        localStorage.setItem('userInfo', JSON.stringify(userInfo));
+        // localStorage.setItem('', JSON.stringify(userInfo));
+
         // 4. 메인 페이지로 이동
         navigate('/');
         // 5. 토큰을 이용하여 사용자 정보를 받아올 수 있음 Header or Nav에 사용자 정보 표시
