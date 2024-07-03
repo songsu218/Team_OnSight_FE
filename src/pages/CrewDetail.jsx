@@ -1,12 +1,5 @@
 import style from '../css/CrewDetail.module.css';
-import {
-  NavLink,
-  Routes,
-  Route,
-  useParams,
-  useNavigate,
-  Link,
-} from 'react-router-dom';
+import { NavLink, Routes, Route, useParams, useNavigate, Link } from 'react-router-dom';
 import CrewHome from '../components/CrewHome';
 import CrewWrite from '../components/CrewWrite';
 import CrewManage from '../components/CrewManage';
@@ -81,7 +74,7 @@ const CrewDetail = () => {
   };
 
   const handleMemberClick = (memberId) => {
-    navigate(`/mypage/home/${memberId}`);
+    navigate(`/mypage/${memberId}`);
   };
 
   if (!selectedCrew) {
@@ -122,15 +115,9 @@ const CrewDetail = () => {
               filteredMembers.map((memberId) => {
                 const memberInfo = users.find((user) => user.id === memberId);
                 return (
-                  <li
-                    key={memberId}
-                    onClick={() => handleMemberClick(memberInfo.id)}
-                  >
+                  <li key={memberId} onClick={() => handleMemberClick(memberInfo.id)}>
                     <div className={style.profileBox}>
-                      <img
-                        src={`http://localhost:8000${memberInfo.thumbnail}`}
-                        alt="프로필 사진"
-                      />
+                      <img src={`http://localhost:8000${memberInfo.thumbnail}`} alt="프로필 사진" />
                     </div>
                     <span>{memberInfo.nick}</span>
                   </li>
@@ -151,9 +138,7 @@ const CrewDetail = () => {
                 <li>
                   <NavLink
                     to={`/crewdetail/${crewId}/crewhome`}
-                    aria-current={({ isActive }) =>
-                      isActive ? 'page' : undefined
-                    }
+                    aria-current={({ isActive }) => (isActive ? 'page' : undefined)}
                   >
                     크루홈
                   </NavLink>
@@ -163,9 +148,7 @@ const CrewDetail = () => {
                     <NavLink
                       to={`/crewdetail/${crewId}/crewwrite`}
                       state={{ crewName: selectedCrew.name }}
-                      aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
-                      }
+                      aria-current={({ isActive }) => (isActive ? 'page' : undefined)}
                     >
                       글쓰기
                     </NavLink>
@@ -179,9 +162,7 @@ const CrewDetail = () => {
                   <li>
                     <NavLink
                       to={`/crewdetail/${crewId}/crewmanage`}
-                      aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
-                      }
+                      aria-current={({ isActive }) => (isActive ? 'page' : undefined)}
                     >
                       관리하기
                     </NavLink>
