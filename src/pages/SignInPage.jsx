@@ -27,9 +27,9 @@ const SignInPage = () => {
       if (data.token) {
         localStorage.setItem('onSightToken', data.token);
         setRedirect(true);
-      } else if (data.message === 'nouser' || data.message === 'failed') {
-        alert('아이디 또는 비밀번호가 맞지 않습니다.');
-        setMessage1('아이디 또는 비밀번호가 맞지 않습니다.');
+
+      } else if (data.message === "nouser" || data.message === "failed") {
+        setMessage1("아이디 또는 비밀번호가 맞지 않습니다.");
       }
     } catch (error) {
       console.error('Error:', error);
@@ -74,8 +74,9 @@ const SignInPage = () => {
               alt={passwordVisible ? 'Hide password' : 'Show password'}
             />
           </p>
-          <span className={style.errorMessage}>{message1}</span>
         </div>
+        <span className={style.errorMessage}>{message1}</span>
+
         <button type="submit">로그인</button>
       </form>
       <button className={style.kakaoButtom} onClick={kakaoLoginHandler}>

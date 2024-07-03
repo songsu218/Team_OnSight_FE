@@ -70,10 +70,13 @@
 }
 
 .eye img {
+  position: absolute;
   cursor: pointer;
+  right: 0;
+  top: 35%;
 }
 
-.errorMessage {
+.errorMessage {  
   color: red;
 }
 
