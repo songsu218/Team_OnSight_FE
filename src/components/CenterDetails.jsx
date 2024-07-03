@@ -1,6 +1,7 @@
 import React from 'react';
 import style from '../css/Search.module.css';
 import RecordModal from './RecordModal';
+import { useNavigate } from 'react-router-dom';
 
 const CenterDetails = ({
   currentCenter,
@@ -12,6 +13,13 @@ const CenterDetails = ({
   userLikes,
   toggleLike,
 }) => {
+
+  const navigate = useNavigate();
+
+  const handleRecordClick = (id) => {
+    navigate(`/recorddetail/${id}`);
+  };
+
   if (!showDetails || !currentCenter) return null;
 
   return (
@@ -106,7 +114,7 @@ const CenterDetails = ({
             <div>
               {records.length > 0 ? (
                 records.map((record) => (
-                  <div key={record._id} className={style.recordItem}>
+                  <div key={record._id} className={style.recordItem} onClick={() => handleRecordClick(record._id)}>
                     <div className={style.recordHeader}>
                       <img
                         src={`http://localhost:8000${record.userThumbnail}`}

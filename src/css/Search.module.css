@@ -396,11 +396,11 @@
 @media (max-width: 1440px) {
   .viewCon {
     width: 100%;
-    margin-top: 96px;
+    margin-top: 8vh;
   }
 
   .searchInputCon {
-    top: 107px;
+    top: 8vh;
     left: 0px;
   }
 }
