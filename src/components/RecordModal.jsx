@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
-import style from '../css/RecordModal.module.css';
-import DatePicker, { registerLocale } from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import ko from 'date-fns/locale/ko';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import style from "../css/RecordModal.module.css";
+import DatePicker, { registerLocale } from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import ko from "date-fns/locale/ko";
+import axios from "axios";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-registerLocale('ko', ko);
+registerLocale("ko", ko);
 
 function RecordModal({
   currentCenter,
-  buttonText = '내 기록 추가하기',
+  buttonText = "내 기록 추가하기",
   buttonClass,
 }) {
   const [show, setShow] = useState(false);
@@ -24,12 +24,12 @@ function RecordModal({
   const [selectedDiffis, setSelectedDiffis] = useState([]);
   const [counts, setCounts] = useState({});
   const [selectedFile, setSelectedFile] = useState(null);
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
   const [climbingCenters, setClimbingCenters] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('서울특별시');
-  const [selectedDistrict, setSelectedDistrict] = useState('전체');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCity, setSelectedCity] = useState("서울특별시");
+  const [selectedDistrict, setSelectedDistrict] = useState("전체");
+  const [searchTerm, setSearchTerm] = useState("");
   const [showingCenters, setShowingCenters] = useState([]);
   const [diffiList, setDiffiList] = useState([]);
 
@@ -53,8 +53,8 @@ function RecordModal({
 
   const handleShow = () => {
     if (!user) {
-      navigate('/signinpage');
-      return;
+      alert("로그인 후 사용가능해요. 로그인 하시겠어요?");
+      navigate("/signinpage");
     }
     setShow(true);
   };
@@ -64,8 +64,8 @@ function RecordModal({
     setSelectedDiffis([]);
     setCounts({});
     setSelectedPlace(null);
-    setTitle('');
-    setContent('');
+    setTitle("");
+    setContent("");
   };
 
   const togglePlace = () => {
@@ -85,7 +85,7 @@ function RecordModal({
 
   const toggleDiffi = () => {
     if (!selectedPlace && !currentCenter) {
-      alert('먼저 운동 장소를 선택해주세요.');
+      alert("먼저 운동 장소를 선택해주세요.");
       return;
     }
     setOpenPlace(false);
@@ -101,7 +101,7 @@ function RecordModal({
       }));
       setOpenDiffi(false);
     } else {
-      alert('이미 선택된 난이도입니다.');
+      alert("이미 선택된 난이도입니다.");
     }
   };
 
@@ -130,7 +130,7 @@ function RecordModal({
     if (mimetype && extname) {
       setSelectedFile(file);
     } else {
-      alert('이미지 파일만 업로드할 수 있습니다.');
+      alert("이미지 파일만 업로드할 수 있습니다.");
       e.target.value = null;
       setSelectedFile(null);
     }
@@ -138,15 +138,15 @@ function RecordModal({
 
   const handleSubmit = async () => {
     if (!title) {
-      alert('제목을 입력해주세요.');
+      alert("제목을 입력해주세요.");
       return;
     }
     if (!content) {
-      alert('상세내용을 입력해주세요.');
+      alert("상세내용을 입력해주세요.");
       return;
     }
     if (!selectedFile) {
-      alert('파일을 업로드해주세요.');
+      alert("파일을 업로드해주세요.");
       return;
     }
 
@@ -161,28 +161,26 @@ function RecordModal({
       return sum + diffiNum * counts[diffi];
     }, 0);
 
-    console.log('곱한값', levelSum);
-
     const formData = new FormData();
-    formData.append('userId', user.id);
-    formData.append('nick', user.nick);
-    formData.append('title', title);
-    formData.append('content', content);
-    formData.append('center', selectedPlace);
-    formData.append('date', startDate.toISOString().split('T')[0]);
-    formData.append('level', JSON.stringify(level));
-    formData.append('levelsum', levelSum);
+    formData.append("userId", user.id);
+    formData.append("nick", user.nick);
+    formData.append("title", title);
+    formData.append("content", content);
+    formData.append("center", selectedPlace);
+    formData.append("date", startDate.toISOString().split("T")[0]);
+    formData.append("level", JSON.stringify(level));
+    formData.append("levelsum", levelSum);
     if (selectedFile) {
-      formData.append('thumbnail', selectedFile);
+      formData.append("thumbnail", selectedFile);
     }
 
     try {
       const response = await axios.post(
-        'http://localhost:8000/record',
+        "http://localhost:8000/record",
         formData,
         {
           headers: {
-            'Content-Type': 'multipart/form-data',
+            "Content-Type": "multipart/form-data",
           },
         }
       );
@@ -193,9 +191,9 @@ function RecordModal({
     } catch (err) {
       const errorMessage =
         err.response?.data?.message ||
-        '오류가 발생했습니다. 다시 시도해 주세요.';
+        "오류가 발생했습니다. 다시 시도해 주세요.";
       alert(`Error: ${errorMessage}`);
-      console.error('error', err);
+      console.error("error", err);
     }
   };
 
@@ -203,11 +201,11 @@ function RecordModal({
     const fetchCenterData = async () => {
       try {
         const response = await fetch(
-          'http://localhost:8000/center/centerList',
+          "http://localhost:8000/center/centerList",
           {
-            method: 'POST',
+            method: "POST",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
             },
           }
         );
@@ -217,10 +215,10 @@ function RecordModal({
           setClimbingCenters(data);
           setShowingCenters(data);
         } else {
-          console.error('Failed to fetch center');
+          console.error("Failed to fetch center");
         }
       } catch (err) {
-        console.error('Error fetching center', err);
+        console.error("Error fetching center", err);
       }
     };
 
@@ -231,7 +229,7 @@ function RecordModal({
     const results = climbingCenters.filter((center) => {
       return (
         center.si === selectedCity &&
-        (selectedDistrict === '전체' || center.gu.includes(selectedDistrict)) &&
+        (selectedDistrict === "전체" || center.gu.includes(selectedDistrict)) &&
         center.center.includes(searchTerm)
       );
     });
@@ -239,9 +237,9 @@ function RecordModal({
   };
 
   const handleRefresh = () => {
-    setSelectedCity('서울특별시');
-    setSelectedDistrict('전체');
-    setSearchTerm('');
+    setSelectedCity("서울특별시");
+    setSelectedDistrict("전체");
+    setSearchTerm("");
     setShowingCenters(climbingCenters);
   };
 
@@ -319,7 +317,7 @@ function RecordModal({
                 <label htmlFor="place">운동 장소</label>
                 <div className={style.placeC}>
                   <div className={style.placeView} onClick={togglePlace}>
-                    <span>{selectedPlace || '장소 선택'}</span>
+                    <span>{selectedPlace || "장소 선택"}</span>
                     <i className="fa-solid fa-chevron-down"></i>
                   </div>
                   {openPlace && (
@@ -338,7 +336,7 @@ function RecordModal({
                             setShowingCenters(
                               climbingCenters.filter(
                                 (center) =>
-                                  e.target.value === '전체' ||
+                                  e.target.value === "전체" ||
                                   center.gu.includes(e.target.value)
                               )
                             );
@@ -362,7 +360,7 @@ function RecordModal({
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
                           onKeyDown={(e) => {
-                            if (e.key === 'Enter') {
+                            if (e.key === "Enter") {
                               handleSearch();
                             }
                           }}
@@ -435,7 +433,7 @@ function RecordModal({
               {selectedFile ? (
                 <img src={URL.createObjectURL(selectedFile)} alt="preview" />
               ) : (
-                ''
+                ""
               )}
             </div>
           </form>

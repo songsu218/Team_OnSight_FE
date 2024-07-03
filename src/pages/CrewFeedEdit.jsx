@@ -16,7 +16,6 @@ const CrewFeedEdit = () => {
   const user = useSelector((state) => state.user.userInfo);
 
   useEffect(() => {
-    console.log(feedId);
     if (feedId) {
       const fetchFeed = async () => {
         try {

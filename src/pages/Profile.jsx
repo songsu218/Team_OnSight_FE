@@ -92,7 +92,7 @@ const Profile = () => {
             <nav className={style.navCon}>
               <ol>
                 <li>
-                  <Link to="/mypage">마이홈</Link>
+                  <Link to={`/mypage/${user.id}`}>마이홈</Link>
                 </li>
                 <li>나의 정보관리</li>
               </ol>

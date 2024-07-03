@@ -13,7 +13,6 @@ const CrewGroupfeed = () => {
   const user = useSelector((state) => state.user.userInfo);
 
   const selectedCrew = crew.find((c) => c._id === crewId);
-  console.log(selectedCrew);
 
   const crewAdmin = selectedCrew && selectedCrew.userId === user.id;
 
@@ -73,7 +72,7 @@ const CrewGroupfeed = () => {
         {crewAdmin && (
           <>
             <i
-              class="fa-solid fa-ellipsis-vertical"
+              className="fa-solid fa-ellipsis-vertical"
               style={{ opacity: "0" }}
             ></i>
           </>

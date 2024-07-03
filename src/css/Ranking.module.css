@@ -61,9 +61,12 @@
   rotate: 5deg;
 }
 
+@media (max-width: 1440px) {
+}
+
 @media (max-width: 1160px) {
   .rankArea {
-    margin-bottom: 650px;
+    margin: auto;
   }
   .rankArea .imgBox {
     position: fixed;

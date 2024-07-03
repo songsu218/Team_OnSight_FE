@@ -78,7 +78,6 @@
   justify-content: space-between;
 }
 
-
 .sidebar .searchInput {
   width: 260px;
   height: 36px;
@@ -118,12 +117,12 @@
   background-color: white;
 }
 
-
 .centerList img {
   width: 350px;
   height: 180px;
   object-fit: cover;
   border-radius: 1rem 1rem 0 0;
+  border-bottom: 1px solid #f1f1f1;
 }
 
 .centerInfo {
@@ -131,7 +130,6 @@
   display: flex;
   padding: 0 1.5rem;
   justify-content: space-between;
-
 }
 
 .centerInfo div {
@@ -146,7 +144,6 @@
 }
 
 .centerInfo div p {
-
   font-size: 14px;
   opacity: 0.5;
 }
@@ -173,7 +170,7 @@
   position: relative;
 }
 
-.centerDetailCon>* {
+.centerDetailCon > * {
   margin-bottom: 20px;
 }
 
@@ -243,7 +240,7 @@
 
 .tabButtonHome.activeTab::after,
 .tabButtonRecode.activeTab::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -3px;
   left: 50%;
@@ -263,7 +260,7 @@
   margin-top: 30px;
 }
 
-.centerHome>* {
+.centerHome > * {
   margin-bottom: 20px;
 }
 
@@ -292,7 +289,6 @@
 .levelBox:last-of-type {
   border-right: 1px solid #dee2e6;
   border-radius: 0 0.5rem 0.5rem 0;
-
 }
 
 .websiteContainer {
@@ -366,7 +362,6 @@
 .recordCount {
   color: gray;
   font-size: 0.8rem;
-
 }
 
 /* recordContent */

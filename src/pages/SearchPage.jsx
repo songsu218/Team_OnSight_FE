@@ -46,7 +46,7 @@ const Search = () => {
           const data = await response.json();
           setCenterList(data);
           setFilteredCenters(filterCenters(data, searchTerm, gu)); // 초기 필터링 수행
-          setMapMarkers(filterCenters(data, '', gu)); // 초기 구 필터링 수행
+          setMapMarkers(filterCenters(data, "", gu)); // 초기 구 필터링 수행
         } else {
           console.error("Failed to fetch center");
         }
@@ -54,13 +54,13 @@ const Search = () => {
         console.error("Error fetching center", err);
       }
     };
- 
+
     const loadGuData = () => {
-      const guData = localStorage.getItem('guList');
+      const guData = localStorage.getItem("guList");
       if (guData) {
         setGuList(JSON.parse(guData));
       } else {
-        console.error('No gu data in local storage');
+        console.error("No gu data in local storage");
       }
     };
 
@@ -151,7 +151,6 @@ const Search = () => {
       if (response.ok) {
         const data = await response.json();
         if (data) {
-          console.log(data);
           setUserLikes(data.like);
           dispatch(setUserAllInfo(data));
         }
@@ -172,7 +171,7 @@ const Search = () => {
 
   return (
     <main className={`${style.viewCon} ${style.search}`}>
-      <div className={`${style.sidebar} ${showDetails ? style.details : ''}`}>
+      <div className={`${style.sidebar} ${showDetails ? style.details : ""}`}>
         {showDetails && currentCenter ? (
           <CenterDetails
             currentCenter={currentCenter}
