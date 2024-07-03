@@ -1,37 +1,37 @@
 @charset "UTF-8";
 
 @font-face {
-  font-family: "S-CoreDream-3Light";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff")
-    format("woff");
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "NanumSquareRound";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff")
-    format("woff");
+  font-family: 'NanumSquareRound';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "GongGothicMedium";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
-    format("woff");
+  font-family: 'GongGothicMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
-  font-family: "Bazzi";
-  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff")
-    format("woff");
+  font-family: 'Bazzi';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff')
+    format('woff');
   font-weight: normal;
   font-style: normal;
 }
 :root {
-  font-family: "NanumSquareRound";
+  font-family: 'NanumSquareRound';
 }
 
 .App {
@@ -49,6 +49,10 @@ body {
 .mw {
   width: 100%;
   margin: 0 auto;
+}
+
+.modal-header .btn-close {
+  padding-right: 3.5rem;
 }
 
 @media (min-width: 768px) {
