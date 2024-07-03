@@ -36,6 +36,7 @@
 .recordCon label {
   align-self: flex-start;
   margin-left: 2rem;
+  margin-top: 0.25rem;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
   font-weight: bold;
@@ -56,7 +57,8 @@
 .recordCon .diffiC {
   width: 90%;
   position: relative;
-  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1.5rem;
   padding: 0.5rem 0 0.5rem 1rem;
   box-shadow: 0 3px 3px -3px #777777;
   -ms-user-select: none;
@@ -154,7 +156,7 @@
   flex-direction: column;
   gap: 1rem;
   font-size: 0.9rem;
-  height: 150px;
+  height: 120px;
   overflow-y: scroll;
 }
 
