@@ -5,7 +5,7 @@ import style from '../../css/ChallengeModal.module.css';
 import DatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import ko from 'date-fns/locale/ko';
-import axios from 'axios';
+// import axios from 'axios';
 import { ch } from '../../api.js';
 
 registerLocale('ko', ko);
@@ -65,34 +65,73 @@ function ChallengeModal({ onClose, isOpen, username }) {
     // formData.append("center", selectedPlace);
     // formData.append("date", startDate.toISOString().split("T")[0]);
 
-    ch.chRegister(
-      title,
-      username,
-      selectedPlace,
-      '주소 모달창미구현',
-      startDate.toISOString().split('T')[0]
-    )
-      .then((result) => {
-        console.log(result);
+    // ch.chRegister(
+    //   title,
+    //   username,
+    //   selectedPlace,
+    //   '주소 모달창미구현',
+    //   startDate.toISOString().split('T')[0]
+    // )
+    //   .then((result) => {
+    //     console.log(result);
+    //     alert('챌린지 생성이 완료되었습니다.');
+    //     window.location.reload();
+    //   })
+    //   .catch((error) => {
+    //     console.log(`${error}`);
+    //     alert('오류 : 챌린지 생성실패');
+    //   });
+    try {
+      const result = await ch.chRegister(
+        title,
+        username,
+        selectedPlace,
+        '주소 모달창미구현',
+        startDate.toISOString().split('T')[0]
+      );
+
+      if (result.success === false) {
+        {
+          alert('챌린지는 일주일에 하나씩만 생성할 수 있습니다');
+        }
+      } else {
         alert('챌린지 생성이 완료되었습니다.');
         window.location.reload();
-      })
-      .catch((error) => {
-        console.log(`${error}`);
-        alert('오류 : 챌린지 생성실패');
-      });
+      }
+    } catch (error) {
+      console.log(`${error}`);
+      alert('오류 : 챌린지 생성실패');
+    }
 
     handleClose();
   };
 
   useEffect(() => {
-    axios
-      .get('http://localhost:8000/api/center')
-      .then((response) => {
-        setClimbingCenters(response.data);
-        setShowingCenters(response.data);
-      })
-      .catch((error) => console.error('API 요청 에러:', error));
+    const fetchCenterData = async () => {
+      try {
+        const response = await fetch(
+          'http://localhost:8000/center/centerList',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }
+        );
+
+        if (response.ok) {
+          const data = await response.json();
+          setClimbingCenters(data);
+          setShowingCenters(data);
+        } else {
+          console.error('Failed to fetch center');
+        }
+      } catch (err) {
+        console.error('Error fetching center', err);
+      }
+    };
+
+    fetchCenterData();
   }, []);
 
   const handleSearch = () => {
@@ -127,7 +166,6 @@ function ChallengeModal({ onClose, isOpen, username }) {
         <Modal.Header closeButton>
           <Modal.Title>
             <h2>챌린지 만들기</h2>
-            <p>*챌린지는 일주일에 하나씩만 생성 가능</p>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body className={style.modalBody}>
@@ -226,6 +264,7 @@ function ChallengeModal({ onClose, isOpen, username }) {
               )}
             </div>
           </form>
+          <p>*챌린지는 일주일에 하나씩만 생성 가능</p>
         </Modal.Body>
         <Modal.Footer className={style.ModalFt}>
           <Button

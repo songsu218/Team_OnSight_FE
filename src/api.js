@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // 실제 작성 코드는 각자 변수를 만들어서 작성 후 api에 추가 각자 api에 대해 간단하게 명세
 // post 작성방법
@@ -23,7 +23,7 @@ import axios from "axios";
  * };
  */
 
-const baseURL = "http://localhost:8000";
+const baseURL = 'http://localhost:8000';
 
 // axios 인스턴스를 생성합니다.
 const instance = axios.create({
@@ -38,22 +38,28 @@ const ch = {
    * @returns  챌린지목록
    */
   chEnter: (challengename, members) => {
-    return instance.post("/challenge/challegeEnter", {
+    return instance.post('/challenge/challegeEnter', {
       challengename: challengename,
       members: members,
     });
   },
   /**
    * 챌린지등록
-   * @param {string} challengename 
-   * @param {string} id 
-   * @param {string} center 
-   * @param {string} address 
+   * @param {string} challengename
+   * @param {string} id
+   * @param {string} center
+   * @param {string} address
    * @param {string} date yyyy-MM-dd
    * @returns 챌린지목록
    */
   chRegister: (challengename, id, center, address, date) => {
-    return instance.post("/challenge/register", {challengename: challengename, id:id, center : center , address : address, date : date});
+    return instance.post('/challenge/register', {
+      challengename: challengename,
+      id: id,
+      center: center,
+      address: address,
+      date: date,
+    });
   },
 
   /**
@@ -63,9 +69,9 @@ const ch = {
    */
   chListEachStatus: (tag) => {
     return instance.post(
-      "/challenge/challengeTotList",
+      '/challenge/challengeTotList',
       { STATE: tag },
-      { headers: { "Content-Type": "application/json" } }
+      { headers: { 'Content-Type': 'application/json' } }
     );
   },
 
@@ -76,7 +82,7 @@ const ch = {
    * @returns challenge Collection, 썸네일
    */
   chMyList: (tag, member_id) => {
-    return instance.post("/challenge/challengeMyList", {
+    return instance.post('/challenge/challengeMyList', {
       STATE: tag,
       member_id: member_id,
     });
@@ -88,7 +94,7 @@ const ch = {
    * @returns {*} id.nick,썸네일
    */
   chJoinList: (challengename) => {
-    return instance.post("/challenge/challengeMemberList", {
+    return instance.post('/challenge/challengeMemberList', {
       challengename: challengename,
     });
   },
@@ -99,7 +105,7 @@ const ch = {
    * @returns {*} (순위),id.nick,썸네일,total
    */
   chRank: (challengename) => {
-    return instance.post("/challenge/challengeRanking", {
+    return instance.post('/challenge/challengeRanking', {
       challengename: challengename,
     });
   },
