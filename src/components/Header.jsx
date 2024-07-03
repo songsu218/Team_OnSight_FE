@@ -159,7 +159,7 @@ const Header = () => {
               <span style={{ color: hoverImg.link4 ? '#A2D262' : '#FFFFFF' }}>랭킹</span>
             </Link>
             <Link
-              to={`/mypage/${user.id}`}
+              to={`/mypage/${user?.id}`}
               onClick={() => setMenuOpen(false)}
               onMouseEnter={() => MouseHover('link5')}
               onMouseLeave={() => MouseLeave('link5')}
