@@ -80,7 +80,7 @@ const List = ({ items, itemType }) => {
               {itemType === "challenge"
                 ? "참여한 챌린저가 없습니다."
                 : itemType === "record"
-                ? "기록한 기록이 없습니다."
+                ? "작성한 기록이 없습니다."
                 : "센터가 없습니다."}
             </p>
           )}
