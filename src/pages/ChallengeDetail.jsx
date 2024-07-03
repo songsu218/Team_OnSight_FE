@@ -1,10 +1,10 @@
-import style from '../css/challengeDetail.module.css';
-import React, { useState, useEffect, useRef } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import ChallengeJoinUser from '../components/challenge/ChallengeJoinUser';
-import ListPagnation from '../components/list/ListPagnation.jsx';
-import { ch } from '../api.js';
-import { useSelector } from 'react-redux';
+import style from "../css/challengeDetail.module.css";
+import React, { useState, useEffect, useRef } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import ChallengeJoinUser from "../components/challenge/ChallengeJoinUser";
+import ListPagnation from "../components/list/ListPagnation.jsx";
+import { ch } from "../api.js";
+import { useSelector } from "react-redux";
 
 const itemsPerPage = 5;
 
@@ -44,21 +44,16 @@ const ChallengeDetail = () => {
     }
     ch.chJoinList(detailData.challengename)
       .then((result) => {
-        console.log('state : ' + detailData.state);
-        console.log('참여자 목록');
-        console.log(result.data);
         setJoinList(result.data);
         setIsJoined(result.data.some((member) => member.id === username)); // 참가 여부 확인
       })
       .catch((error) => {
         console.log(`${error}`);
       });
-    if (detailData.state === 'false' || detailData.state === false) {
+    if (detailData.state === "false" || detailData.state === false) {
       setWrapClass(`${style.challenge_detail_wrap} ${style.end}`);
       ch.chRank(detailData.challengename)
         .then((result) => {
-          console.log('랭킹데이터');
-          console.log(result.data);
           setRank(result.data);
           setCurrentItems(result.data.slice(indexOfFirstItem, indexOfLastItem));
           setTotalPages(Math.ceil(result.data.length / itemsPerPage));
@@ -66,7 +61,7 @@ const ChallengeDetail = () => {
         .catch((error) => {
           console.log(`${error}`);
         });
-    } else if (detailData.state === 'true') {
+    } else if (detailData.state === "true") {
       setWrapClass(style.challenge_detail_wrap);
     }
   }, [
@@ -90,12 +85,12 @@ const ChallengeDetail = () => {
     ch.chEnter(detailData.challengename, username) //username
       .then((result) => {
         console.log(result.data);
-        alert('참가하기 등록 성공');
+        alert("참가하기 등록 성공");
         window.location.reload();
       })
       .catch((error) => {
         console.log(`${error}`);
-        alert('참가하기 등록 실패');
+        alert("참가하기 등록 실패");
       });
   };
   // const today = () => {
@@ -179,14 +174,14 @@ const ChallengeDetail = () => {
                       type="button"
                       id={style.applyBtn}
                       className={`${style.apply_btn} ${
-                        isJoined ? style.apply_btn_completed : ''
+                        isJoined ? style.apply_btn_completed : ""
                       }`}
                       onClick={() => {
                         handleJoinClick();
                       }}
                       disabled={isJoined} // 참가 여부에 따라 버튼 비활성화
                     >
-                      {isJoined ? '참가 완료' : '참가하기'}
+                      {isJoined ? "참가 완료" : "참가하기"}
                     </button>
                   </div>
                 </div>
@@ -199,7 +194,7 @@ const ChallengeDetail = () => {
                       <li>
                         <span className={style.bold}>기간</span>
                         <span>{challenge_period}</span>
-                        {detailData.state === 'true' ? (
+                        {detailData.state === "true" ? (
                           <span className={`${style.status} ${style.ing}`}>
                             진행 중
                           </span>
@@ -248,13 +243,13 @@ const ChallengeDetail = () => {
                           <td>
                             <div
                               className={`${style.rank_profile} ${
-                                item.rank <= 3 ? style[`rank-${item.rank}`] : ''
+                                item.rank <= 3 ? style[`rank-${item.rank}`] : ""
                               }`}
                             >
                               <img
                                 src={
                                   item.thumbnail == null
-                                    ? '/img/joinuser.png'
+                                    ? "/img/joinuser.png"
                                     : `http://localhost:8000${item.thumbnail}`
                                 }
                                 alt="Profile"
@@ -288,7 +283,7 @@ const ChallengeDetail = () => {
                   <div className={style.noti_txt}>
                     * 집계는 <em>챌린지가 끝난 후</em> 결정돼요.
                   </div>
-                  {detailData.state === 'false' && (
+                  {detailData.state === "false" && (
                     <ListPagnation
                       currentPage={currentPage}
                       totalPages={totalPages}

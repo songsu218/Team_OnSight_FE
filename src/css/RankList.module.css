@@ -13,7 +13,7 @@
 .rankListCon .btnBox button {
   border: none;
   background-color: transparent;
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
   font-weight: bold;
   font-size: 1.5rem;
   white-space: nowrap;
@@ -26,7 +26,7 @@
   width: 200px;
   height: 250px;
   padding: 24px 32px 24px;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bold;
   border-radius: 0.5rem;
   background-color: #ffffff;
@@ -42,17 +42,17 @@
   align-items: center;
   color: #ffffff;
   font-size: 2.5rem;
-  background-color: #d3a428;
+  background-color: #fbb400;
   width: 50px;
   height: 50px;
   border-radius: 0.75rem;
 }
 
 .rankListCon .rankListCard:nth-of-type(2) > strong {
-  background-color: #a3a3a3;
+  background-color: #afafaf;
 }
 .rankListCon .rankListCard:nth-of-type(3) > strong {
-  background-color: #936840;
+  background-color: #b8743e;
 }
 
 .rankListCard span {
@@ -70,7 +70,7 @@
 
 .rankListCard span strong {
   font-size: 1.25rem;
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
 }
 
 .rankListCard span img:nth-of-type(2) {
@@ -125,7 +125,7 @@
   padding: 1rem 2rem;
   width: 100%;
   gap: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: bold;
   font-size: 1.5rem;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -147,5 +147,20 @@
 .rankListCon2 .rankListCard2 span strong {
   margin-left: 0.5rem;
   font-size: 1.1rem;
-  font-family: 'S-CoreDream-3Light';
+  font-family: "S-CoreDream-3Light";
+}
+
+@media (max-width: 1440px) {
+  .rankListCard:nth-of-type(1) {
+    order: 2;
+    margin-top: 6rem;
+  }
+  .rankListCard:nth-of-type(2) {
+    order: 1;
+    margin-top: 10rem;
+  }
+  .rankListCard:nth-of-type(3) {
+    order: 3;
+    margin-top: 10rem;
+  }
 }

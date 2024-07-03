@@ -36,8 +36,6 @@ const List = ({ items, itemType }) => {
     }
   }, [items]);
 
-  console.log(currentItems);
-  console.log(itemType);
   return (
     <div>
       <div className={`${style.listData1} ${style.ssw1}`}>
