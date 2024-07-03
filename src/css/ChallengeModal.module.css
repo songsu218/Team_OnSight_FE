@@ -3,14 +3,13 @@
   margin-top: 8rem;
 }
 .modalRe h2 {
-  /* font-size: 20px; */
   margin-left: 1.65rem;
   padding: 0.5rem 0;
 }
 .modalRe p {
   font-size: 1rem;
   color: red;
-  margin-left: 1.65rem;
+  margin-left: 1.8rem;
 }
 .recordCon {
   display: flex;
