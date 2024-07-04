@@ -81,28 +81,22 @@ function ChallengeModal({ onClose, isOpen, username }) {
     //     console.log(`${error}`);
     //     alert('오류 : 챌린지 생성실패');
     //   });
-    try {
-      const result = await ch.chRegister(
-        title,
-        username,
-        selectedPlace,
-        '주소 모달창미구현',
-        startDate.toISOString().split('T')[0]
-      );
-
-      if (result.success === false) {
-        {
-          alert('챌린지는 일주일에 하나씩만 생성할 수 있습니다');
-        }
-      } else {
+    ch.chRegister(
+      title,
+      username,
+      selectedPlace,
+      '주소 모달창미구현',
+      startDate.toISOString().split('T')[0]
+    )
+      .then((result) => {
+        console.log(result);
         alert('챌린지 생성이 완료되었습니다.');
         window.location.reload();
-      }
-    } catch (error) {
-      console.log(`${error}`);
-      alert('오류 : 챌린지 생성실패');
-    }
-
+      })
+      .catch((error) => {
+        console.log(`${error}`);
+        alert(`오류 : ${error.response.data.message}`);
+      });
     handleClose();
   };
 
