@@ -1,4 +1,4 @@
-import style from "../css/CrewDetail.module.css";
+import style from '../css/CrewDetail.module.css';
 import {
   NavLink,
   Routes,
@@ -6,15 +6,15 @@ import {
   useParams,
   useNavigate,
   Link,
-} from "react-router-dom";
-import CrewHome from "../components/CrewHome";
-import CrewWrite from "../components/CrewWrite";
-import CrewManage from "../components/CrewManage";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
-import { setUserAllInfo } from "../store/userStore";
-import { setCrewAllInfo } from "../store/crewStore";
-import { setUsers } from "../store/userAllStore";
+} from 'react-router-dom';
+import CrewHome from '../components/CrewHome';
+import CrewWrite from '../components/CrewWrite';
+import CrewManage from '../components/CrewManage';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { setUserAllInfo } from '../store/userStore';
+import { setCrewAllInfo } from '../store/crewStore';
+import { setUsers } from '../store/userAllStore';
 
 const CrewDetail = () => {
   const { crewId } = useParams();
@@ -176,7 +176,7 @@ const CrewDetail = () => {
                   <NavLink
                     to={`/crewdetail/${crewId}/crewhome`}
                     aria-current={({ isActive }) =>
-                      isActive ? "page" : undefined
+                      isActive ? 'page' : undefined
                     }
                   >
                     크루홈
@@ -188,7 +188,7 @@ const CrewDetail = () => {
                       to={`/crewdetail/${crewId}/crewwrite`}
                       state={{ crewName: selectedCrew.name }}
                       aria-current={({ isActive }) =>
-                        isActive ? "page" : undefined
+                        isActive ? 'page' : undefined
                       }
                     >
                       글쓰기
@@ -204,7 +204,7 @@ const CrewDetail = () => {
                     <NavLink
                       to={`/crewdetail/${crewId}/crewmanage`}
                       aria-current={({ isActive }) =>
-                        isActive ? "page" : undefined
+                        isActive ? 'page' : undefined
                       }
                     >
                       관리하기
