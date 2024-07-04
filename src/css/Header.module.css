@@ -54,7 +54,11 @@
 }
 
 .gnb .viewMore i {
-  padding: 0 0.5rem 0.5rem 2rem;
+  padding: 0 0 1.5rem 1rem;
+}
+
+.signOutWrap > span {
+  margin-left: 2.75rem;
 }
 
 .gnb .viewMore .signOutWrap,
@@ -62,6 +66,7 @@
   display: flex;
   flex-direction: column;
   margin-bottom: 0.5rem;
+  gap: 0.5rem;
 }
 
 .gnb .viewMore .nickBox {
@@ -71,7 +76,7 @@
   cursor: pointer;
 }
 
-.gnb .viewMore .nickBox i {
+.gnb .viewMore .nickBox i:nth-of-type(2) {
   display: none;
 }
 
@@ -82,6 +87,15 @@
 .gnb .viewMore .signInBox {
   display: flex;
   cursor: pointer;
+  justify-content: center;
+}
+
+.gnb .viewMore .signInBox i:nth-of-type(1) {
+  padding: 0 0.5rem 1.5rem 0rem;
+}
+
+.gnb .viewMore .signInBox i:nth-of-type(2) {
+  display: none;
 }
 
 @media (max-width: 1440px) {
@@ -130,17 +144,18 @@
   }
 
   .gnb .viewMore i {
-    padding: 0 1rem;
+    padding: 0;
   }
 
   .gnb .viewMore span {
     margin-right: 1rem;
   }
 
-  .gnb .viewMore .nickBox i {
+  .gnb .viewMore .nickBox i:nth-of-type(2) {
     display: block;
+    padding-right: 1rem;
   }
-  .gnb .viewMore a i:nth-of-type(2) {
+  .gnb .viewMore .signInBox i:nth-of-type(2) {
     display: block;
   }
 }
