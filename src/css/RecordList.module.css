@@ -39,7 +39,7 @@
 
 .listCon .textBox {
   transform: translateY(50%);
-  font-size: 2.5rem;
+  font-size: 2rem;
   white-space: nowrap;
   display: flex;
   flex-direction: column;
@@ -54,9 +54,9 @@
 
 .listCon .textBox p span {
   color: #000000;
-  font-family: "Bazzi";
+  font-family: 'Bazzi';
   font-weight: bold;
-  font-size: 4rem;
+  font-size: 3.5rem;
   letter-spacing: 0.085em;
 }
 
@@ -66,21 +66,33 @@
   }
 
   .listCon .textBox {
-    left: 55%;
-    font-size: 2.5rem;
+    left: 60%;
+    font-size: 1.75rem;
+  }
+  .listCon .textBox p span {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 1440px) {
+  .listCon .swiperCon {
+    top: 8.5vh;
   }
 }
 
 @media (max-width: 1100px) {
   .listCon .swiperCon {
-    left: 0%;
+    left: -15%;
   }
   .swiperBox {
     width: 400px;
   }
   .listCon .textBox {
     font-size: 1.5rem;
-    left: 70%;
+    left: 55%;
+  }
+  .listCon .textBox p span {
+    font-size: 2.5rem;
   }
 }
 

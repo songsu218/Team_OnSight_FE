@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import style from '../css/Header.module.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUserAllInfo, setUserAllInfo } from '../store/userStore';
 import { persistor } from '../store/store';
@@ -32,7 +32,7 @@ const Header = () => {
         const token = localStorage.getItem('onSightToken');
         if (token) {
           if (isTokenExpired(token)) {
-            //토큰 유효기간 확인
+            // 토큰 유효기간 확인
             localStorage.removeItem('onSightToken');
             dispatch(clearUserAllInfo());
             alert('로그인이 만료되었습니다. 다시 로그인 해주세요.');
@@ -65,7 +65,7 @@ const Header = () => {
     }
   }, [dispatch, location.pathname, user]);
 
-  //토큰의 유효기간을 확인하는 함수
+  // 토큰의 유효기간을 확인하는 함수
   const isTokenExpired = (token) => {
     try {
       const decoded = jwtDecode(token);
@@ -77,7 +77,6 @@ const Header = () => {
     }
   };
 
-  // console.log("유저 정보:", user);
   const username = user ? user.id : null;
   const nickname = user ? user.nick : null;
 
@@ -94,7 +93,6 @@ const Header = () => {
         persistor.purge();
         alert('로그아웃 되었어요');
         navigate('/');
-        // navigate("/login");
       } else {
         console.error('fail', response.statusText);
       }
@@ -116,94 +114,157 @@ const Header = () => {
       <div>
         <h1>
           <div>
-            <Link to="/">
+            <NavLink to="/">
               <img src="../../img/logo.png" alt="" />
-            </Link>
+            </NavLink>
           </div>
         </h1>
         <nav>
           <div className={`${style.holdBar} ${menuOpen ? style.showMenu : ''}`}>
-            <Link
+            <NavLink
               to="/SearchPage"
               onClick={() => setMenuOpen(false)}
               onMouseEnter={() => MouseHover('link1')}
               onMouseLeave={() => MouseLeave('link1')}
+              className={({ isActive }) => (isActive ? style.active : '')}
             >
-              <img
-                src={hoverImg.link1 ? '/img/eholdr.png' : '/img/holdr.png'}
-                alt=""
-              />
-              <span style={{ color: hoverImg.link1 ? '#FF454A' : '#FFFFFF' }}>
-                암장찾기
-              </span>
-            </Link>
-            <Link
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={
+                      hoverImg.link1 || isActive
+                        ? '/img/eholdr.png'
+                        : '/img/holdr.png'
+                    }
+                    alt=""
+                  />
+                  <span
+                    style={{
+                      color: hoverImg.link1 || isActive ? '#FF454A' : '#FFFFFF',
+                    }}
+                  >
+                    암장찾기
+                  </span>
+                </>
+              )}
+            </NavLink>
+            <NavLink
               to="/crew"
               onClick={() => setMenuOpen(false)}
               onMouseEnter={() => MouseHover('link2')}
               onMouseLeave={() => MouseLeave('link2')}
+              className={({ isActive }) => (isActive ? style.active : '')}
             >
-              <img
-                src={hoverImg.link2 ? '/img/eholdb.png' : '/img/holdb.png'}
-                alt=""
-              />
-              <span style={{ color: hoverImg.link2 ? '#0295CF' : '#FFFFFF' }}>
-                크루
-              </span>
-            </Link>
-            <Link
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={
+                      hoverImg.link2 || isActive
+                        ? '/img/eholdb.png'
+                        : '/img/holdb.png'
+                    }
+                    alt=""
+                  />
+                  <span
+                    style={{
+                      color: hoverImg.link2 || isActive ? '#0295CF' : '#FFFFFF',
+                    }}
+                  >
+                    크루
+                  </span>
+                </>
+              )}
+            </NavLink>
+            <NavLink
               to="/challenge"
               onClick={() => setMenuOpen(false)}
               onMouseEnter={() => MouseHover('link3')}
               onMouseLeave={() => MouseLeave('link3')}
+              className={({ isActive }) => (isActive ? style.active : '')}
             >
-              <img
-                src={hoverImg.link3 ? '/img/eholdy.png' : '/img/holdy.png'}
-                alt=""
-              />
-              <span style={{ color: hoverImg.link3 ? '#FFD02C' : '#FFFFFF' }}>
-                챌린지
-              </span>
-            </Link>
-            <Link
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={
+                      hoverImg.link3 || isActive
+                        ? '/img/eholdy.png'
+                        : '/img/holdy.png'
+                    }
+                    alt=""
+                  />
+                  <span
+                    style={{
+                      color: hoverImg.link3 || isActive ? '#FFD02C' : '#FFFFFF',
+                    }}
+                  >
+                    챌린지
+                  </span>
+                </>
+              )}
+            </NavLink>
+            <NavLink
               to="/rank"
               onClick={() => setMenuOpen(false)}
               onMouseEnter={() => MouseHover('link4')}
               onMouseLeave={() => MouseLeave('link4')}
+              className={({ isActive }) => (isActive ? style.active : '')}
             >
-              <img
-                src={hoverImg.link4 ? '/img/eholdg.png' : '/img/holdg.png'}
-                alt=""
-              />
-              <span style={{ color: hoverImg.link4 ? '#A2D262' : '#FFFFFF' }}>
-                랭킹
-              </span>
-            </Link>
-            <Link
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={
+                      hoverImg.link4 || isActive
+                        ? '/img/eholdg.png'
+                        : '/img/holdg.png'
+                    }
+                    alt=""
+                  />
+                  <span
+                    style={{
+                      color: hoverImg.link4 || isActive ? '#A2D262' : '#FFFFFF',
+                    }}
+                  >
+                    랭킹
+                  </span>
+                </>
+              )}
+            </NavLink>
+            <NavLink
               to={`/mypage/${user?.id}`}
               onClick={() => setMenuOpen(false)}
               onMouseEnter={() => MouseHover('link5')}
               onMouseLeave={() => MouseLeave('link5')}
+              className={({ isActive }) => (isActive ? style.active : '')}
             >
-              <img
-                src={hoverImg.link5 ? '/img/eholdp.png' : '/img/holdp.png'}
-                alt=""
-              />
-              <span style={{ color: hoverImg.link5 ? '#BE65FF' : '#FFFFFF' }}>
-                MY
-              </span>
-            </Link>
+              {({ isActive }) => (
+                <>
+                  <img
+                    src={
+                      hoverImg.link5 || isActive
+                        ? '/img/eholdp.png'
+                        : '/img/holdp.png'
+                    }
+                    alt=""
+                  />
+                  <span
+                    style={{
+                      color: hoverImg.link5 || isActive ? '#BE65FF' : '#FFFFFF',
+                    }}
+                  >
+                    MY
+                  </span>
+                </>
+              )}
+            </NavLink>
           </div>
         </nav>
       </div>
       <div className={style.viewMore}>
         {username ? (
           <div className={style.signOutWrap}>
-            <div>
-              <i className="fa-solid fa-sign-out-alt"></i>
-              <span>{nickname}님</span>
-            </div>
+            <span>{nickname}님</span>
             <div className={style.nickBox}>
+              <i className="fa-solid fa-sign-out-alt"></i>
               <span onClick={signout}>로그아웃</span>
               <i className="fa-solid fa-bars" onClick={toggleMenu}></i>
             </div>
