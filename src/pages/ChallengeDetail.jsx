@@ -93,33 +93,6 @@ const ChallengeDetail = () => {
         alert('참가하기 등록 실패');
       });
   };
-  // const today = () => {
-  //   const today = new Date();
-  //   const year = today.getFullYear();
-  //   let month = today.getMonth() + 1;
-  //   let day = today.getDate();
-  //   if (month < 10) {
-  //     month = '0' + month;
-  //   }
-  //   if (day < 10) {
-  //     day = '0' + day;
-  //   }
-  //   return `${year}${month}${day}`;
-  // };
-
-  // detailData에서 state가 넘어와서 해당기능 주석.
-  // useEffect(() => {
-  //   const checkDate = () => {
-  //     if (today() > detailData.date) {
-  //       setOngoing(false);
-  //     } else if (today() <= detailData.date) {
-  //       setOngoing(true);
-  //     } else {
-  //       console.log("몰?루");
-  //     }
-  //   };
-  //   checkDate();
-  // }, [detailData]);
 
   return (
     <>
@@ -268,19 +241,6 @@ const ChallengeDetail = () => {
                       ))}
                     </tbody>
                   </table>
-                  {/* <div className={style.pagination}>
-                    {Array.from({ length: totalPages }, (_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => handlePageChange(index + 1)}
-                        className={
-                          index + 1 === currentPage ? style.active : ''
-                        }
-                      >
-                        {index + 1}
-                      </button>
-                    ))}
-                  </div> */}
                   <div className={style.noti_txt}>
                     * 집계는 <em>챌린지가 끝난 후</em> 결정돼요.
                   </div>
