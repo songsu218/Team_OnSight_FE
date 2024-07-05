@@ -29,6 +29,8 @@
 
 [채연] (https://github.com/chaengleee)
 
+[영인] (https://github.com/LeeYoungin09)
+
 <br/>
 
 ## Skills
