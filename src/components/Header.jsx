@@ -131,11 +131,7 @@ const Header = () => {
               {({ isActive }) => (
                 <>
                   <img
-                    src={
-                      hoverImg.link1 || isActive
-                        ? '/img/eholdr.png'
-                        : '/img/holdr.png'
-                    }
+                    src={hoverImg.link1 || isActive ? '/img/eholdr.png' : '/img/holdr.png'}
                     alt=""
                   />
                   <span
@@ -158,11 +154,7 @@ const Header = () => {
               {({ isActive }) => (
                 <>
                   <img
-                    src={
-                      hoverImg.link2 || isActive
-                        ? '/img/eholdb.png'
-                        : '/img/holdb.png'
-                    }
+                    src={hoverImg.link2 || isActive ? '/img/eholdb.png' : '/img/holdb.png'}
                     alt=""
                   />
                   <span
@@ -185,11 +177,7 @@ const Header = () => {
               {({ isActive }) => (
                 <>
                   <img
-                    src={
-                      hoverImg.link3 || isActive
-                        ? '/img/eholdy.png'
-                        : '/img/holdy.png'
-                    }
+                    src={hoverImg.link3 || isActive ? '/img/eholdy.png' : '/img/holdy.png'}
                     alt=""
                   />
                   <span
@@ -212,11 +200,7 @@ const Header = () => {
               {({ isActive }) => (
                 <>
                   <img
-                    src={
-                      hoverImg.link4 || isActive
-                        ? '/img/eholdg.png'
-                        : '/img/holdg.png'
-                    }
+                    src={hoverImg.link4 || isActive ? '/img/eholdg.png' : '/img/holdg.png'}
                     alt=""
                   />
                   <span
@@ -239,11 +223,7 @@ const Header = () => {
               {({ isActive }) => (
                 <>
                   <img
-                    src={
-                      hoverImg.link5 || isActive
-                        ? '/img/eholdp.png'
-                        : '/img/holdp.png'
-                    }
+                    src={hoverImg.link5 || isActive ? '/img/eholdp.png' : '/img/holdp.png'}
                     alt=""
                   />
                   <span

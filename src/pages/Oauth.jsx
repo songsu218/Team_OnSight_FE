@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Oauth() {
@@ -6,6 +6,8 @@ function Oauth() {
   const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI;
 
   const navigate = useNavigate();
+
+  const [redirect, setRedirect] = useState(false);
 
   const getToken = async (code) => {
     if (!code) {
@@ -51,11 +53,9 @@ function Oauth() {
 
         //3. 인증코드를 localStorage에 저장 'token'명으로 저장
         localStorage.setItem('onSightKakaoToken', JSON.stringify(tokenRes));
-        console.log('토큰 저장 완료:', tokenRes);
 
         // 사용자 정보 가져오기
         const kakaoInfo = await getUserInfo(tokenRes.access_token);
-        console.log('사용자 정보:', kakaoInfo);
 
         const response = await fetch('http://localhost:8000/user/kakao', {
           method: 'POST',
@@ -64,19 +64,15 @@ function Oauth() {
         });
 
         const data = await response.json();
-        console.log('data 부분:', data);
 
         if (data.token) {
           localStorage.setItem('onSightToken', data.token);
-        } else {
-          alert('소셜 로그인에 실패하였습니다.');
+          setRedirect(true);
         }
 
         // 사용자 정보를 localStorage에 저장 (필요에 따라)
         // localStorage.setItem('', JSON.stringify(userInfo));
 
-        // 4. 메인 페이지로 이동
-        navigate('/');
         // 5. 토큰을 이용하여 사용자 정보를 받아올 수 있음 Header or Nav에 사용자 정보 표시
       } catch (err) {
         console.log('토큰 요청 중 에러 발생:', err);
@@ -84,7 +80,13 @@ function Oauth() {
       }
     };
     fetchData();
-  }, [navigate]);
+  }, []);
+
+  useEffect(() => {
+    if (redirect) {
+      navigate('/');
+    }
+  }, [redirect, navigate]);
 
   return <></>;
 }
