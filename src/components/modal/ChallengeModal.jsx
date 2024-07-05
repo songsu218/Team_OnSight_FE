@@ -62,16 +62,17 @@ function ChallengeModal({ onClose, isOpen, username }) {
       title,
       username,
       selectedPlace,
+      '주소 모달창미구현',
       startDate.toISOString().split('T')[0]
     )
       .then((result) => {
-        // console.log(result);
+        console.log(result);
         alert('챌린지 생성이 완료되었습니다.');
         window.location.reload();
       })
       .catch((error) => {
-        // console.log(`${error}`);
-        alert(` ${error.response.data.message}`);
+        console.log(`${error}`);
+        alert(`${error.response.data.message}`);
       });
     handleClose();
   };
