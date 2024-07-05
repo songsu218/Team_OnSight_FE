@@ -38,8 +38,6 @@ function ChallengeModal({ onClose, isOpen, username }) {
     onClose();
   };
 
-  // const handleShow = () => setShow(true);
-
   const resetForm = () => {
     setSelectedPlace(null);
     setTitle('');
@@ -60,27 +58,6 @@ function ChallengeModal({ onClose, isOpen, username }) {
       return;
     }
 
-    // const formData = new FormData();
-    // formData.append("title", title);
-    // formData.append("center", selectedPlace);
-    // formData.append("date", startDate.toISOString().split("T")[0]);
-
-    // ch.chRegister(
-    //   title,
-    //   username,
-    //   selectedPlace,
-    //   '주소 모달창미구현',
-    //   startDate.toISOString().split('T')[0]
-    // )
-    //   .then((result) => {
-    //     console.log(result);
-    //     alert('챌린지 생성이 완료되었습니다.');
-    //     window.location.reload();
-    //   })
-    //   .catch((error) => {
-    //     console.log(`${error}`);
-    //     alert('오류 : 챌린지 생성실패');
-    //   });
     ch.chRegister(
       title,
       username,
@@ -95,7 +72,7 @@ function ChallengeModal({ onClose, isOpen, username }) {
       })
       .catch((error) => {
         console.log(`${error}`);
-        alert(`오류 : ${error.response.data.message}`);
+        alert(`${error.response.data.message}`);
       });
     handleClose();
   };
@@ -146,16 +123,8 @@ function ChallengeModal({ onClose, isOpen, username }) {
     setShowingCenters(climbingCenters);
   };
 
-  // const handleClick = (e, action, diffi) => {
-  //   e.stopPropagation();
-  //   action(diffi);
-  // };
-
   return (
     <>
-      {/* <button className={style.addBtn}>
-        <span>나의 챌린지 만들기</span>
-      </button> */}
       <Modal className={style.modalRe} show={isOpen} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
