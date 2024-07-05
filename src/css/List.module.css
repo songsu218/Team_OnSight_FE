@@ -1,0 +1,77 @@
+.listData1 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+.listData1 ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.listData1 ul > li {
+  position: relative;
+  flex-basis: calc(50% - 1rem);
+}
+
+.p {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 767px) {
+  .listData1 ul {
+    gap: 4rem 2rem;
+  }
+
+  .listData1 ul > li {
+    width: calc(50% - 1rem);
+    flex: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .listData1 ul {
+    gap: 36px;
+  }
+
+  .listData1 ul > li {
+    flex-basis: calc(50% - 18px);
+  }
+}
+
+@media (min-width: 1080px) {
+  .listData1 ul {
+    gap: 54px;
+  }
+  .listData1.ssw1 ul {
+    gap: 36px;
+  }
+
+  .listData1 ul > li {
+    flex-basis: (33.333% -36px);
+  }
+
+  .listData1.ssw1 ul > li {
+    flex-basis: calc(25% - 27px);
+  }
+}
+
+@media (min-width: 1680px) {
+  .listData1 ul {
+    gap: 68px;
+  }
+
+  .listData1.ssw1 ul {
+    gap: 68px;
+  }
+
+  .listData1 ul > li {
+    flex-basis: calc(25% - 51px);
+  }
+
+  .listData1.ssw1 ul > li {
+    flex-basis: calc(25% - 51px);
+  }
+}

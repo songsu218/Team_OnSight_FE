@@ -1,0 +1,93 @@
+.SignInPage {
+  margin: 260px auto auto auto;
+  max-width: 720px;
+  width: calc(100% - 10rem);
+}
+
+.SignInPage h2 {
+  text-align: left;
+  margin-bottom: 60px;
+  font-weight: bold;
+  font-size: 3rem;
+}
+
+.SignInPage form {
+  text-align: center;
+}
+
+.SignInPage label {
+  display: inline-block;
+  display: flex;
+  align-items: center;
+}
+
+.SignInPage input {
+  border: none;
+  border-bottom: 1px solid lightgray;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.SignInPage form span {
+  display: block;
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
+.SignInPage form button,
+.SignInPage>button {
+  border: 3px solid black;
+  font-size: 1.25rem;
+  font-weight: 900;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+
+.SignInPage form button {
+  background-color: white;
+  width: 100%;
+  margin: 1rem 0 3rem 0;
+  transition: 0.3s;
+}
+
+.SignInPage form button:hover {
+  background-color: black;
+  color: white;
+}
+
+.SignInPage>button {
+  position: relative;
+  background-color: #fdcf3e;
+  width: 100%;
+}
+
+.eye {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.eye img {
+  position: absolute;
+  cursor: pointer;
+  right: 0;
+  top: 35%;
+}
+
+.errorMessage {  
+  color: red;
+}
+
+.moveSigninpage {
+  margin-top: 2rem;
+}
+
+.moveSigninpage a {
+  color: #999999;
+}
+
+.moveSigninpage a:hover {
+  border-bottom: 1px solid #999999;
+}

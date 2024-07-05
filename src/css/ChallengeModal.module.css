@@ -1,0 +1,133 @@
+.modalRe {
+  font-family: 'Spoqa Han Sans Neo', 'sans-serif';
+  margin-top: 8rem;
+}
+.modalRe h2 {
+  margin-left: 1.65rem;
+  padding: 0.5rem 0;
+}
+.modalRe p {
+  font-size: 1rem;
+  color: red;
+  margin-left: 1.8rem;
+}
+.recordCon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recordCon label {
+  align-self: flex-start;
+  margin-left: 2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  padding: 1rem 0;
+}
+
+.recordCon .dateWrap {
+  align-self: flex-start;
+  margin-left: 2.25rem;
+}
+
+.recordCon .placeC {
+  width: 90%;
+  position: relative;
+  margin-bottom: 2rem;
+  padding: 0.7rem 0 0.5rem 1rem;
+  box-shadow: 0 3px 3px -3px #777777;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  font-size: 0.9rem;
+}
+
+.recordCon .placeC .placeView {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.recordCon .placeC .searchCon {
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.recordCon .placeC .searchCon input {
+  width: 80%;
+}
+
+.recordCon .placeC .searchCon i {
+  padding: 0 0.5rem;
+}
+
+.recordCon .placeList {
+  padding: 1rem;
+  position: absolute;
+  gap: 1rem;
+  top: 120%;
+  left: 0;
+  width: 100%;
+  height: 260px;
+  overflow-y: scroll;
+  background-color: #ffffff;
+  z-index: 10;
+  box-shadow: 0px 0px 5px #777777;
+}
+
+.recordCon .placeList {
+  display: flex;
+  flex-direction: column;
+  justify-content: baseline;
+}
+
+.recordCon .placeList li {
+  padding: 0.5rem 0.25rem;
+  cursor: pointer;
+}
+
+.recordCon .placeResult {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  padding: 1rem;
+  width: 90%;
+}
+
+.modalBody input {
+  width: 90%;
+  margin-bottom: 1rem;
+  border: none;
+  box-shadow: 0 3px 3px -3px #777777;
+}
+
+.modalBody input:last-child {
+  box-shadow: none;
+}
+
+.modalRe .ModalFt {
+  display: flex;
+  justify-content: center;
+}
+
+.ModalFt .saveBtn {
+  background-color: #ffffff;
+  border: none;
+  color: #000000;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+  margin: 0.8rem 0;
+}
+
+.ModalFt .saveBtn:hover {
+  background-color: #000000;
+  color: #ffffff;
+}

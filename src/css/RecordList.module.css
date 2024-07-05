@@ -1,0 +1,126 @@
+.listCon {
+  position: relative;
+  height: 100vh;
+}
+
+.listCon .swiperCon {
+  height: 100vh;
+  width: 100%;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  scroll-behavior: smooth;
+  position: absolute;
+  left: -10%;
+}
+
+.swiperCon::-webkit-scrollbar {
+  display: none;
+}
+
+.swiperBox {
+  border-radius: 1rem;
+  overflow: hidden;
+  width: 600px;
+  height: 125px;
+  scroll-snap-align: start;
+  flex-shrink: 0;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.swiperBox img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.listCon .textBox {
+  transform: translateY(50%);
+  font-size: 2rem;
+  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-40%);
+  transition: 0.3s;
+  line-height: 180%;
+}
+
+.listCon .textBox p span {
+  color: #000000;
+  font-family: 'Bazzi';
+  font-weight: bold;
+  font-size: 3.5rem;
+  letter-spacing: 0.085em;
+}
+
+@media (max-width: 1550px) {
+  .swiperBox {
+    width: 600px;
+  }
+
+  .listCon .textBox {
+    left: 60%;
+    font-size: 1.75rem;
+  }
+  .listCon .textBox p span {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 1440px) {
+  .listCon .swiperCon {
+    top: 8.5vh;
+  }
+}
+
+@media (max-width: 1100px) {
+  .listCon .swiperCon {
+    left: -15%;
+  }
+  .swiperBox {
+    width: 400px;
+  }
+  .listCon .textBox {
+    font-size: 1.5rem;
+    left: 55%;
+  }
+  .listCon .textBox p span {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .listCon .swiperCon {
+    top: 100px;
+    height: 65vh;
+    width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .listCon .swiperBox {
+    transform: translateX(0) !important;
+    left: 0;
+  }
+  .listCon .textBox {
+    align-items: center;
+    top: 80%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+@media (max-width: 500px) {
+  .listCon .swiperCon {
+    width: 300px;
+  }
+  .listCon .swiperBox {
+    width: 300px;
+  }
+}

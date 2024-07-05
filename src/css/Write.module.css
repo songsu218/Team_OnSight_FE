@@ -1,0 +1,81 @@
+/* 재목설정 */
+/* .page_tit_area {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 56px;
+}
+
+.page_tit {
+  margin: 0;
+  font-size: 56px;
+  line-height: 68px;
+  font-weight: 800;
+} */
+
+/* 피드작성페이지 */
+.writeCon {
+  margin: auto;
+  padding-top: 70px;
+}
+
+.writeCon > div {
+  display: flex;
+}
+
+.writeCon div {
+  padding-top: 1px;
+}
+
+.writeCon h2 {
+  padding: 10px 5px;
+  font-weight: bold;
+}
+
+.titleCon {
+  border-top: 0.3rem solid black;
+  border-bottom: 1px solid lightgray;
+  justify-content: space-between;
+}
+
+.titleCon > input {
+  flex: 1;
+  border: 0;
+}
+.titleCon h2 {
+  width: 200px;
+}
+.titleCon > input {
+  flex: 1;
+  border: 0;
+}
+.contentCon h2 {
+  width: 200px;
+}
+
+.contentCon {
+  height: 550px;
+  justify-content: space-between;
+}
+
+.fileCon {
+  align-items: center;
+  border-bottom: 0.3rem solid black;
+}
+
+.buttonCon {
+  margin-top: 10px;
+  justify-content: center;
+}
+
+.buttonCon > button {
+  width: 128px;
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 20px;
+  margin-left: 10px;
+  font-size: 14px;
+  margin-bottom: 30px;
+}

@@ -1,0 +1,469 @@
+.page_tit_area {
+  position: absolute;
+  left: -99999px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 56px;
+}
+
+.page_tit {
+  margin: 0;
+  font-size: 56px;
+  line-height: 68px;
+  font-weight: 800;
+}
+
+.page_nav {
+  position: relative;
+  width: 64px;
+}
+
+.page_nav:before,
+.page_nav .active .page_link:before {
+  content: '';
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.page_nav:before {
+  border-top: 1px solid #b9b9b9;
+  border-bottom: 1px solid #b9b9b9;
+}
+
+.page_nav > ul {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0;
+  padding: 0 31px;
+  list-style: none;
+}
+
+.page_link {
+  display: block;
+  position: relative;
+  padding: 0 16px;
+  transition: all 0.3s ease;
+  font-size: 20px;
+  line-height: 56px;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 300;
+  color: #000;
+}
+.page_nav .page_link:hover,
+.page_nav .active .page_link {
+  font-weight: 800;
+}
+
+.page_nav .page_link:before {
+  border-top: 3px solid transparent;
+  border-bottom: 3px solid transparent;
+}
+.page_nav .active .page_link:before {
+  border-color: #000;
+}
+
+.sub_tit_area {
+  margin: 0;
+  margin-left: 1.5rem;
+}
+
+.sub_tit_area .sub_tit {
+  margin: 0;
+  font-size: 32px;
+  line-height: 40px;
+  font-weight: 800;
+}
+
+/* 여기서부터 해당 페이지 콘텐츠 */
+.back_button {
+  border: none;
+  background: none;
+  font-size: 2.5rem;
+  cursor: pointer;
+  padding: 5px;
+  transform: translate(-10px, -50px);
+}
+.challenge_info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 68px;
+}
+
+.challenge_img {
+  position: relative;
+  width: 420px;
+  height: 595px;
+  object-fit: contain;
+}
+
+.challenge_img img {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 16px;
+  width: 100%;
+  height: 100%;
+}
+
+.challenge_detail {
+  flex: 1;
+}
+
+.detail_list {
+  margin: 52px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.detail_list li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.detail_list li + li {
+  margin: 12px 0 0;
+}
+
+.detail_list li .bold {
+  margin: 0 16px 0 0;
+  font-weight: 800;
+}
+
+.detail_list .status {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 12px;
+  height: 30px;
+  margin-left: 16px;
+  background: #000;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 15px;
+}
+
+.detail_list .status.end {
+  /* display: none; */
+  background: #777;
+}
+
+.entry_list_wrap {
+  position: relative;
+  width: 300px;
+  box-sizing: border-box;
+}
+
+.challenge_detail_wrap.end .detail_list .status.end {
+  display: block;
+}
+
+.challenge_detail_wrap.end .detail_list .status.ing {
+  display: none;
+}
+
+.entry_list_btn {
+  width: 100%;
+  height: 48px;
+  padding: 0.5rem 3.6rem 0.5rem 1.6rem;
+  background: #f2f4f8
+    url('data:image/svg+xml,%3Csvg%20xmlns%3D%22http://www.w3.org/2000/svg%22%20width%3D%2212.176%22%20height%3D%226.048%22%20viewBox%3D%220%200%2012.176%206.048%22%3E%3Cpath%20d%3D%22M.585.811l5.545%204%205.455-4%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222%22/%3E%3C/svg%3E')
+    no-repeat calc(100% - 1.6rem) 50%;
+  box-sizing: border-box;
+  border: 1px solid #dde1e6;
+  border-radius: 0.5rem;
+  outline: none;
+  font-size: 15px;
+  text-align: left;
+  color: #121619;
+  cursor: default !important;
+}
+
+.entry_list {
+  overflow: hidden;
+  overflow-y: auto;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-height: 377px;
+  background: #fff;
+  box-sizing: border-box;
+  border: 1px solid #dde1e6;
+  border-top: 0;
+  list-style: none;
+}
+
+.challenge_detail_wrap.end .entry_list {
+  max-height: 293px;
+}
+
+.entry_list li {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 5px 16px;
+  box-sizing: border-box;
+}
+
+.entry_list li + li {
+  border-top: 1px solid #dde1e6;
+}
+
+/* .entry_list .entry_img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: #f2f4f8;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+.entry_list .entry_img img {
+  width: 24px;
+  height: 24px;
+  border: 0;
+  filter: invert(0.6);
+} */
+
+.entry_list .entry {
+  margin: 0 0 0 1px;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: bold;
+  color: #000;
+}
+
+.apply_btn_wrap {
+  display: block;
+  margin: 30px 0 0;
+}
+
+.challenge_detail_wrap.end .apply_btn_wrap {
+  display: none;
+}
+
+.apply_btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 64px;
+  width: 100%;
+  height: 54px;
+  font-size: 20px;
+  outline: none;
+  color: #fff;
+  background: #000;
+  cursor: pointer;
+  border-radius: 0.5rem;
+}
+.apply_btn_completed {
+  background: #b9b9b9; /* "참가완료" 상태일 때 버튼 색상 */
+  color: #fff;
+  border: none;
+}
+
+.detail_contents {
+  margin: 40px 0 0;
+  padding: 40px 0 0;
+  border-top: 3px solid #000;
+}
+
+.challenge_detail_wrap {
+  margin: 0 auto;
+  width: 940px;
+}
+
+.challenge_detail_wrap .detail_contents .noti_txt {
+  font-size: 32px;
+  text-align: center;
+  color: #000;
+  margin-top: 3rem;
+}
+
+.challenge_detail_wrap.end .detail_contents .noti_txt {
+  display: none;
+}
+
+.detail_contents .noti_txt > em {
+  font-weight: bold;
+  font-style: normal;
+  text-decoration: underline;
+  text-underline-position: under;
+}
+
+.challenge_detail_wrap.end .rank_table_wrap {
+  display: block;
+}
+
+.rank_table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  border-spacing: 0;
+  border: 0;
+}
+
+.rank_table th {
+  padding: 20px;
+  background: #f3f3f3;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+
+.rank_table td {
+  padding: 20px;
+  border-bottom: 1px solid #dde1e6;
+  font-size: 1.25rem;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.rank_table .rank_profile {
+  display: inline-flex;
+  position: relative;
+  width: 100px;
+  height: 100px;
+  background: #dde1e6;
+  border-radius: 50%;
+}
+
+.rank_table .rank_profile img {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+  /* object-fit: cover; */
+  text-decoration: none;
+}
+
+.rank_table .trophy {
+  display: block;
+  position: absolute;
+  bottom: 0;
+  right: -10px;
+  width: 50px;
+  height: 50px;
+}
+
+.rank-1 .trophy {
+  /* background: url(/public/img/first.png) no-repeat 50% 50%;
+  background-size: contain; */
+  /* background: url(/public/img/first.png) no-repeat center center;
+  background-size: 50px 50px; */
+  background: url(/public/img/first_1.png) no-repeat center center;
+  background-size: contain; /* 기본 크기 */
+}
+.rank-2 .trophy {
+  background: url(/public/img/second_1.png) no-repeat center center;
+  background-size: contain;
+}
+
+.rank-3 .trophy {
+  background: url(/public/img/third_1.png) no-repeat center center;
+  background-size: contain;
+}
+
+.pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+.pagination button {
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 7px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.pagination button:hover {
+  background-color: #aeb0b1;
+}
+.pagination .active {
+  color: white;
+  background-color: black;
+}
+
+@media (max-width: 1079px) {
+  .challenge_detail_wrap {
+    width: 100%;
+  }
+  .challenge_detail_wrap .sub_tit {
+    font-size: 24px;
+    line-height: normal;
+    font-weight: 900;
+  }
+  .challenge_info {
+    display: flex;
+    flex-direction: column;
+    justify-content: initial;
+    align-items: center;
+    gap: 55px;
+  }
+
+  .detail_list {
+    margin: 34px 0;
+  }
+
+  .challenge_img {
+    position: relative;
+    margin: 0 auto;
+    width: 350px;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .challenge_img img {
+    display: block;
+    overflow: hidden;
+    position: relative;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+  }
+  .rank_table td {
+    font-size: 1.1rem;
+  }
+  .entry_list_wrap {
+    width: 100%;
+  }
+
+  .challenge_detail_wrap .detail_contents .noti_txt {
+    font-size: 24px;
+  }
+
+  .rank_table .rank_profile {
+    width: 50px;
+    height: 50px;
+  }
+
+  .rank_table .trophy {
+    width: 30px;
+    height: 30px;
+  }
+}

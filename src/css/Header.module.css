@@ -1,0 +1,161 @@
+.gnb {
+  position: fixed;
+  top: 0;
+  width: 210px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  background-color: #ffffff;
+}
+
+.gnb h1 {
+  padding: 1rem 1rem 3rem 1rem;
+  width: 150px;
+  margin: auto;
+}
+
+.gnb h1 img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.holdBar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.holdBar > a {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.holdBar > a > img {
+  width: 120px;
+  height: 90px;
+  object-fit: contain;
+}
+
+.holdBar > a > span {
+  display: inline-block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  font-family: 'Gaegu', sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  white-space: nowrap;
+}
+
+.gnb .viewMore i {
+  padding: 0 0 1.5rem 1rem;
+}
+
+.signOutWrap > span {
+  margin-left: 2.75rem;
+}
+
+.gnb .viewMore .signOutWrap,
+.gnb .viewMore .signInWrap {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  gap: 0.5rem;
+}
+
+.gnb .viewMore .nickBox {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 2rem;
+  cursor: pointer;
+}
+
+.gnb .viewMore .nickBox i:nth-of-type(2) {
+  display: none;
+}
+
+.gnb .viewMore a i:nth-of-type(2) {
+  display: none;
+}
+
+.gnb .viewMore .signInBox {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+}
+
+.gnb .viewMore .signInBox i:nth-of-type(1) {
+  padding: 0 0.5rem 1.5rem 0rem;
+}
+
+.gnb .viewMore .signInBox i:nth-of-type(2) {
+  display: none;
+}
+
+@media (max-width: 1440px) {
+  .gnb {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 8vh;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .holdBar {
+    display: none;
+  }
+  .holdBar.showMenu {
+    display: flex;
+    position: absolute;
+    top: 8vh;
+    height: 100vh;
+    right: 0;
+    left: 0;
+    gap: 1rem;
+    background-color: #ffffff;
+    box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .holdBar.showMenu a {
+    margin-top: 2.5rem;
+  }
+
+  .gnb h1 {
+    padding: 1rem;
+  }
+
+  .gnb .viewMore .signOutWrap,
+  .gnb .viewMore .signInWrap {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 0;
+  }
+
+  .gnb .viewMore .nickBox {
+    margin-left: 0;
+    align-items: center;
+  }
+
+  .gnb .viewMore i {
+    padding: 0;
+  }
+
+  .gnb .viewMore span {
+    margin-right: 1rem;
+  }
+
+  .gnb .viewMore .nickBox i:nth-of-type(2) {
+    display: block;
+    padding-right: 1rem;
+  }
+  .gnb .viewMore .signInBox i:nth-of-type(2) {
+    display: block;
+  }
+}

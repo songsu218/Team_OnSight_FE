@@ -1,0 +1,406 @@
+.viewCon {
+  width: calc(100% - 210px);
+  margin-left: auto;
+}
+
+.search {
+  display: flex;
+  height: 100vh;
+}
+
+.customOverlay {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  white-space: nowrap;
+  transform: translateY(-28px);
+}
+
+.sidebar {
+  background-color: #f1f1f1;
+  box-shadow: 4px 0 4px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  padding: 20px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  z-index: 9;
+  position: relative;
+  margin-top: 20px;
+}
+
+.sidebar.details {
+  background-color: #fff;
+  margin-top: 0;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.searchInputCon {
+  position: fixed;
+  top: 0;
+  left: 210px;
+  width: 400px;
+  padding: 10px 20px;
+  background-color: white;
+  z-index: 10;
+}
+
+.sidebar .searchInputCon h3 {
+  /* 수정해야함 */
+  margin: 46px 0 50px 0;
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.selectCity {
+  display: flex;
+  justify-content: space-between;
+}
+
+.selectCity select {
+  width: 170px;
+  height: 36px;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  z-index: 2;
+}
+
+.sidebar .searchCon {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar .searchInput {
+  width: 260px;
+  height: 36px;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  padding-left: 10px;
+}
+
+.sidebar .readingGlasses,
+.sidebar .rotate {
+  width: 38px;
+  height: 38px;
+  background-color: white;
+  text-align: center;
+  line-height: 38px;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+.mapContainer {
+  flex: 1;
+}
+
+.centerName {
+  font-size: 0.8rem;
+}
+
+.centerList {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: 310px;
+  padding-bottom: 2rem;
+  margin: auto;
+  margin-top: 20px;
+  border-radius: 1rem;
+  background-color: white;
+}
+
+.centerList img {
+  width: 350px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 1rem 1rem 0 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.centerInfo {
+  margin-top: 1rem;
+  display: flex;
+  padding: 0 1.5rem;
+  justify-content: space-between;
+}
+
+.centerInfo div {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+}
+
+.centerInfo div h4 {
+  font-size: 18px;
+}
+
+.centerInfo div p {
+  font-size: 14px;
+  opacity: 0.5;
+}
+
+.searchResults {
+  margin-top: 210px;
+}
+
+.searchResults .centerDetail {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 1.5rem;
+  white-space: normal;
+  margin-top: 20px;
+  line-height: 140%;
+  opacity: 0.6;
+}
+
+/* 상세페이지-공통 */
+.centerDetailCon {
+  position: relative;
+}
+
+.centerDetailCon > * {
+  margin-bottom: 20px;
+}
+
+/* 상세페이지 이미지 */
+.centerDetailCon .centerDetailImg {
+  width: 360px;
+  height: 300px;
+  border-radius: 1rem;
+  margin-top: 10px;
+  overflow: hidden;
+}
+
+.centerDetailCon .centerDetailImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.centerDetailCon .iconX {
+  position: absolute;
+  top: -20px;
+  right: -10px;
+  cursor: pointer;
+  font-size: 1.5rem;
+}
+
+.centerDetailCon .centerDetailInfo {
+  margin-top: 10px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.likeStar {
+  color: #fece2f;
+}
+
+.centerDetailInfo div {
+  display: flex;
+}
+
+.centerDetailInfo div h4 {
+  font-size: 20px;
+}
+
+.centerDetailInfo div p {
+  opacity: 0.5;
+}
+
+/* 상세페이지 탭부분 */
+.tabButtonHome,
+.tabButtonRecode {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  outline: none;
+  color: grey;
+}
+
+.tabButtonHome.activeTab,
+.tabButtonRecode.activeTab,
+.tabButtonHome:hover,
+.tabButtonRecode:hover {
+  color: black;
+}
+
+.tabButtonHome.activeTab::after,
+.tabButtonRecode.activeTab::after {
+  content: "";
+  position: absolute;
+  bottom: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  border-bottom: 3px solid black;
+}
+
+.tabContent {
+  margin-top: 20px;
+}
+
+/* 상세페이지 - 홈 */
+.centerHome {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+}
+
+.centerHome > * {
+  margin-bottom: 20px;
+}
+
+.centerHome i {
+  margin-right: 10px;
+}
+
+.levelContainer {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.levelBox {
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  width: 30px;
+  height: 30px;
+}
+
+.levelBox:first-of-type {
+  border-left: 1px solid #dee2e6;
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.levelBox:last-of-type {
+  border-right: 1px solid #dee2e6;
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.websiteContainer {
+  display: flex;
+  align-items: center;
+}
+
+.websiteContainer a {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+}
+
+.centerHome .centerDetail {
+  white-space: pre-wrap;
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* 상세페이지- 기록 */
+.centerRecordNav {
+  display: flex;
+  justify-content: end;
+  margin-top: 30px;
+  margin-bottom: 1rem;
+}
+
+.centerRecordNav .btnBox {
+  border-radius: 0.5rem;
+}
+
+.btnBox .customButton {
+  font-size: 1rem;
+  font-family: Arial, sans-serif;
+  cursor: pointer;
+  height: 40px;
+  line-height: 40px;
+}
+
+.recordItem {
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 이미지, recordUserInfo */
+.recordHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.recordItem .recordHeader .profileImage {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 16px;
+  object-fit: cover;
+}
+
+/* recordUserInfo -> 닉네임, 기록수 */
+.recordNickname {
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+
+.recordCount {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+/* recordContent */
+.recordContent .recordImage {
+  width: 100%;
+  height: 170px;
+  margin-right: 16px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.recordText h5 {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.recordText p {
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: normal;
+}
+
+.recordDate {
+  font-size: 0.8rem;
+  color: gray;
+}
+
+@media (max-width: 1440px) {
+  .viewCon {
+    width: 100%;
+    margin-top: 8vh;
+  }
+
+  .searchInputCon {
+    top: 8vh;
+    left: 0px;
+  }
+}

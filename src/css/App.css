@@ -1,0 +1,108 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: 'S-CoreDream-3Light';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'NanumSquareRound';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'GongGothicMedium';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Bazzi';
+  src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff')
+    format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+:root {
+  font-family: 'NanumSquareRound';
+}
+
+.App {
+  overflow: hidden;
+}
+
+body {
+  letter-spacing: -0.025em;
+}
+
+.con1 {
+  padding: 96px 31px 136px;
+}
+
+.mw {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.modal-header .btn-close {
+  padding-right: 3.5rem;
+}
+
+@media (min-width: 768px) {
+  .con1 {
+    padding: 96px 0 136px;
+  }
+  .mw {
+    width: 633px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .con1 {
+    padding: 140px 0 135px;
+  }
+  .mw {
+    width: 1003px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .con1 {
+    padding: 100px 0 135px 210px;
+  }
+
+  .con2 {
+    padding: 0 0 135px 210px;
+  }
+}
+
+@media (min-width: 1680px) {
+  .mw {
+    width: 1396px;
+  }
+}
+
+.viewCon {
+  width: calc(100% - 210px);
+  margin-left: auto;
+}
+
+@media (max-width: 1400px) {
+  .viewCon {
+    width: 100%;
+  }
+}
+
+@media (max-width: 1440px) {
+  .viewCon {
+    width: 100%;
+    margin: auto;
+  }
+}

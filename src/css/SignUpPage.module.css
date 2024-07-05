@@ -1,0 +1,88 @@
+ .register {
+   margin: 200px auto auto auto;
+   max-width: 720px;
+   width: calc(100% - 10rem);
+ }
+
+ .register h2 {
+   text-align: left;
+   margin-bottom: 60px;
+   font-weight: bold;
+   font-size: 3rem;
+ }
+
+ .register form {
+   text-align: center;
+ }
+
+ .register form label {
+   display: inline-block;
+   display: flex;
+   align-items: center;
+ }
+
+ .register input {
+   border: none;
+   border-bottom: 1px solid lightgray;
+   box-sizing: border-box;
+   width: 100%;
+   padding: 1rem;
+   margin: 0.5rem 0;
+ }
+
+ .register button {
+   position: relative;
+   border: 3px solid black;
+   width: 100%;
+   padding: 1rem;
+   margin: 1.5rem 0 1rem 0;
+   font-size: 1.25rem;
+   font-weight: 900;
+   border-radius: 1rem;
+   background-color: white;
+   transition: 0.3s;
+ }
+
+ .register button:hover {
+   background-color: black;
+   color: white;
+ }
+
+ .register>p {
+   padding: 1rem 0;
+ }
+
+ .register>p a {
+   color: #999999;
+ }
+
+ .register>p a:hover {
+   border-bottom: 1px solid #999999;
+ }
+
+ .register form>span {
+   display: block;
+   font-size: 1rem;
+   color: red;
+   text-align: left;
+   padding: 0.25rem 0 1rem 0;
+ }
+
+ .eye {
+   position: relative;
+   display: flex;
+   align-items: center;
+ }
+
+ .eye img {
+  position: absolute;
+   cursor: pointer;
+   right: 0;
+   top: 35%;
+ }
+
+
+ .error {
+   color: red;
+   padding: 1rem 0;
+ }

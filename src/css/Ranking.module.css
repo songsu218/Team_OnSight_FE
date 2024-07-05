@@ -1,0 +1,86 @@
+.rankArea {
+  position: relative;
+  height: 100vh;
+  display: flex;
+  overflow: hidden;
+}
+
+.rankListBox {
+  padding-left: 15rem;
+  z-index: 10;
+  margin: 0 auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.imgBox {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  right: 0;
+}
+
+.imgBox > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.personBox img {
+  position: absolute;
+  left: 0;
+  height: 100px;
+  transition: 0.3s;
+  cursor: pointer;
+}
+.personBox img:nth-of-type(1) {
+  height: 130px;
+  bottom: 70vh;
+  left: 10vw;
+}
+.personBox img:nth-of-type(1):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
+
+.personBox img:nth-of-type(2) {
+  bottom: 45vh;
+  left: 5vw;
+}
+.personBox img:nth-of-type(2):hover {
+  transform: scale(1.1);
+  rotate: -5deg;
+}
+.personBox img:nth-of-type(3) {
+  height: 120px;
+  left: 5vw;
+  bottom: 10vh;
+}
+.personBox img:nth-of-type(3):hover {
+  transform: scale(1.1);
+  rotate: 5deg;
+}
+
+@media (max-width: 1600px) {
+  .rankArea .imgBox {
+    width: 200%;
+  }
+  .personBox {
+    display: none;
+  }
+}
+
+@media (max-width: 1160px) {
+  .rankArea {
+    margin: auto;
+  }
+  .rankArea .imgBox {
+    position: fixed;
+    top: 0;
+    right: 0;
+  }
+
+  .rankArea .rankListBox {
+    padding-left: 0rem;
+  }
+}

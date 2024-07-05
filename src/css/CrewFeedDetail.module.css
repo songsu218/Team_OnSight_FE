@@ -1,0 +1,55 @@
+.writeWrap {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.writeCon h2 {
+  padding: 10px 5px;
+  font-weight: bold;
+}
+
+.titleCon {
+  border-top: 0.3rem solid black;
+  border-bottom: 1px solid lightgray;
+  justify-content: space-between;
+}
+
+.titleCon > input {
+  flex: 1;
+  border: 0;
+}
+.titleCon h2 {
+  width: 200px;
+}
+.titleCon > input {
+  flex: 1;
+  border: 0;
+}
+.contentCon h2 {
+  width: 200px;
+}
+
+.contentCon {
+  height: 550px;
+  justify-content: space-between;
+}
+
+.fileCon {
+  align-items: center;
+  border-bottom: 0.3rem solid black;
+}
+
+.buttonCon {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+.buttonCon > button {
+  border: 1px solid lightgray;
+  background-color: white;
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
