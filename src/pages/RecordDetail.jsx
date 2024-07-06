@@ -62,7 +62,7 @@ const RecordDetail = () => {
           <div className={style.rightBox}>
             <div className={style.gaugeBox}>
               <GaugeBar percentileRank={percentileRank} />
-              <span>{percentileRank}</span>
+              <span>{record.levelsum}</span>
             </div>
             <div className={style.gaugeTextBox}>
               <span>'{record.nick}'</span> 님의 이 기록은
