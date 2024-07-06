@@ -24,6 +24,7 @@
   text-align: center;
   box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
   transition: 0.3s;
+
   overflow-y: scroll;
 }
 
@@ -50,7 +51,7 @@
 }
 
 .myCrewCon h3 {
-  padding: 22px 0 60px;
+  padding: 22px 0 40px;
   font-size: 26px;
   font-weight: bold;
 }
@@ -60,7 +61,16 @@
   flex-direction: column;
   gap: 2rem;
   padding: 2rem 0;
+}
+
+.myCrewListCon::before {
+  content: '';
+  position: absolute;
   background-color: #f1f1f1;
+  width: 100%;
+  height: 90%;
+  bottom: 0;
+  z-index: -10;
 }
 
 .myCrewListCon .crewListCard {
