@@ -29,7 +29,7 @@ const CrewDetail = () => {
   const [crewMember, setCrewMember] = useState(false);
   const [crewAdmin, setCrewAdmin] = useState(false);
   const [toggle, setToggle] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [filteredMembers, setFilteredMembers] = useState([]);
 
   useEffect(() => {
@@ -49,17 +49,17 @@ const CrewDetail = () => {
   };
 
   const handleKeyDown = (event) => {
-    if (event.key === "Enter") {
+    if (event.key === 'Enter') {
       handleSearch();
     }
   };
 
   const handleJoinCrew = async () => {
     try {
-      const response = await fetch("http://localhost:8000/crew/crewjoin", {
-        method: "POST",
+      const response = await fetch('http://localhost:8000/crew/crewjoin', {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userId: user, crewId: selectedCrew }),
       });
@@ -69,20 +69,20 @@ const CrewDetail = () => {
         dispatch(setUsers(data.users));
         dispatch(setCrewAllInfo(data.crews));
       } else {
-        console.error("Failed to join crew");
+        console.error('Failed to join crew');
       }
     } catch (err) {
-      console.error("Error joining crew", err);
+      console.error('Error joining crew', err);
     }
   };
 
   const handleLeaveCrew = async () => {
-    if (window.confirm("정말로 크루를 탈퇴하시겠습니까?")) {
+    if (window.confirm('정말로 크루를 탈퇴하시겠습니까?')) {
       try {
-        const response = await fetch("http://localhost:8000/crew/crewleave", {
-          method: "POST",
+        const response = await fetch('http://localhost:8000/crew/crewleave', {
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
           },
           body: JSON.stringify({ userId: user, crewId: selectedCrew }),
         });
@@ -92,16 +92,16 @@ const CrewDetail = () => {
           dispatch(setUsers(data.users));
           dispatch(setCrewAllInfo(data.crews));
         } else {
-          console.error("Failed to leave crew");
+          console.error('Failed to leave crew');
         }
       } catch (err) {
-        console.error("Error leaving crew", err);
+        console.error('Error leaving crew', err);
       }
     }
   };
 
   const moveToCrew = () => {
-    navigate("/crew");
+    navigate('/crew');
   };
 
   const handleMemberClick = (memberId) => {
@@ -119,11 +119,11 @@ const CrewDetail = () => {
   };
 
   return (
-    <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ""}`}>
+    <div className={`${style.mainCrew} ${toggle ? style.mainCrewToggled : ''}`}>
       <div className={style.leftCon}>
         <h3>크루원 찾기</h3>
         <i
-          className={`fa-solid ${toggle ? "fa-angle-right" : "fa-angle-left"} ${
+          className={`fa-solid ${toggle ? 'fa-angle-right' : 'fa-angle-left'} ${
             toggle ? style.iconLeft : style.iconRight
           }`}
           onClick={toggleSidebar}
@@ -141,7 +141,7 @@ const CrewDetail = () => {
               <i className="fa-solid fa-magnifying-glass"></i>
             </button>
           </div>
-          <ul className={`${style.memberCon} ${!crewMember ? style.blur : ""}`}>
+          <ul className={`${style.memberCon} ${!crewMember ? style.blur : ''}`}>
             {selectedCrew &&
               filteredMembers.map((memberId) => {
                 const memberInfo = users.find((user) => user.id === memberId);
@@ -150,13 +150,18 @@ const CrewDetail = () => {
                     key={memberId}
                     onClick={() => handleMemberClick(memberInfo.id)}
                   >
-                    <div className={style.profileBox}>
-                      <img
-                        src={`http://localhost:8000${memberInfo.thumbnail}`}
-                        alt="프로필 사진"
-                      />
+                    <div className={style.nickWrap}>
+                      <div className={style.profileBox}>
+                        <img
+                          src={`http://localhost:8000${memberInfo.thumbnail}`}
+                          alt="프로필 사진"
+                        />
+                      </div>
+                      <span>{memberInfo.nick}</span>
                     </div>
-                    <span>{memberInfo.nick}</span>
+                    {memberInfo.id === selectedCrew.userId && (
+                      <strong>크루장</strong>
+                    )}
                   </li>
                 );
               })}
