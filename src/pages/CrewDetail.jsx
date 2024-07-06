@@ -228,7 +228,9 @@ const CrewDetail = () => {
             <Route path="*" element={<CrewHome />} />
           </Routes>
         </div>
-        {crewMember && <span onClick={handleLeaveCrew}>크루 탈퇴하기</span>}
+        {crewMember && !crewAdmin && (
+          <span onClick={handleLeaveCrew}>크루 탈퇴하기</span>
+        )}
       </section>
     </div>
   );
