@@ -14,14 +14,13 @@ const CrewFeedEdit = () => {
   const { feedId } = useParams();
 
   const user = useSelector((state) => state.user.userInfo);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   useEffect(() => {
     if (feedId) {
       const fetchFeed = async () => {
         try {
-          const response = await axios.get(
-            `http://localhost:8000/feed/${feedId}`
-          );
+          const response = await axios.get(`${URL}/feed/${feedId}`);
           const result = response.data;
           setTitle(result.title);
           setContent(result.content);
@@ -49,16 +48,12 @@ const CrewFeedEdit = () => {
     formData.append("userId", user.id);
 
     try {
-      const response = await axios.put(
-        `http://localhost:8000/feed/${feedId}`,
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.put(`${URL}/feed/${feedId}`, formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (response.status === 200) {
         navigate(`/crewdetail/feeddetail/${feedId}`);

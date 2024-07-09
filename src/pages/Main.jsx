@@ -6,11 +6,12 @@ import { setUsers } from "../store/userAllStore";
 
 const Main = () => {
   const dispatch = useDispatch();
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const fetchGuData = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8000/center/guList",
+        `${URL}/center/guList`,
         {},
         {
           headers: {
@@ -38,7 +39,7 @@ const Main = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:8000/user/userall");
+        const response = await axios.get(`${URL}/user/userall`);
         dispatch(setUsers(response.data));
       } catch (error) {
         console.error("error", error);

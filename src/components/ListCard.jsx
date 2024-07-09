@@ -1,6 +1,7 @@
 import style from "../css/ListCard.module.css";
 
 const formatDate = (date) => {
+  const URL = process.env.REACT_APP_BACK_URL;
   const options = {
     year: "numeric",
     month: "2-digit",
@@ -17,7 +18,7 @@ const ListCard = ({ title, center, detail, date, thumbnail, itemType }) => {
   const imgPath =
     itemType === "challenge" || itemType === "center"
       ? thumbnail
-      : `http://localhost:8000` + thumbnail;
+      : `${URL}` + thumbnail;
   const renderDate = () => {
     if (Array.isArray(date)) {
       return (

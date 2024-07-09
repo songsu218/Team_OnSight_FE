@@ -10,6 +10,7 @@ const CrewHome = () => {
   const user = useSelector((state) => state.user.userInfo);
 
   const selectedCrew = crew.find((c) => c._id === crewId);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const [crewMember, setCrewMember] = useState(false);
 
@@ -27,10 +28,7 @@ const CrewHome = () => {
     <div>
       <div key={selectedCrew._id} className={style.introCrew}>
         <div className={style.crewImgCon}>
-          <img
-            src={`http://localhost:8000${selectedCrew.crewImg}`}
-            alt="crew"
-          />
+          <img src={`${URL}${selectedCrew.crewImg}`} alt="crew" />
         </div>
         <p>{selectedCrew.content}</p>
         <span>피드</span>

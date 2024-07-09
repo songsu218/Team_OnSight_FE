@@ -7,9 +7,9 @@ const InfoUpModal = ({ onClose }) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
   const [nickname, setNickname] = useState(userInfo.nick);
-  const [imgUrl, setImgUrl] = useState(
-    `http://localhost:8000${userInfo.thumbnail}`
-  );
+  const URL = process.env.REACT_APP_BACK_URL;
+
+  const [imgUrl, setImgUrl] = useState(`${URL}${userInfo.thumbnail}`);
   const [preImg, setPreImg] = useState(null);
 
   const formData = new FormData();
@@ -21,7 +21,7 @@ const InfoUpModal = ({ onClose }) => {
 
   const userPwCheck = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/user/infoUpdate`, {
+      const response = await fetch(`${URL}/user/infoUpdate`, {
         method: "POST",
         body: formData,
       });
@@ -55,7 +55,7 @@ const InfoUpModal = ({ onClose }) => {
 
   useEffect(() => {
     // 초기 이미지 미리보기 설정
-    setImgUrl(`http://localhost:8000${userInfo.thumbnail}`);
+    setImgUrl(`${URL}${userInfo.thumbnail}`);
   }, [userInfo]);
 
   return (

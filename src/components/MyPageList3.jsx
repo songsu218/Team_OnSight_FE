@@ -6,10 +6,11 @@ import FeedList from "./list/FeedList";
 const MyPageList3 = () => {
   const { user } = useOutletContext();
   const [feeds, setFeeds] = useState([]);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const fetchFeeds = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/user/feeds`, {
+      const response = await fetch(`${URL}/user/feeds`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -14,6 +14,7 @@ const PwUpModal = ({ onClose, onPasswordChange }) => {
   const currentPasswordRef = useRef(null);
   const newPasswordRef = useRef(null);
   const confirmNewPasswordRef = useRef(null);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const pwChange = async () => {
     if (newPassword !== confirmNewPassword) {
@@ -22,7 +23,7 @@ const PwUpModal = ({ onClose, onPasswordChange }) => {
     }
 
     try {
-      const response = await fetch("http://localhost:8000/user/pwUpdate", {
+      const response = await fetch(`${URL}/user/pwUpdate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

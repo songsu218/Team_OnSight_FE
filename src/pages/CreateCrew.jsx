@@ -12,6 +12,7 @@ const CreateCrew = () => {
   const [selectedSi, setSelectedSi] = useState("");
   const [selectedGu, setSelectedGu] = useState("");
   const [gus, setGus] = useState([]);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const navigate = useNavigate();
 
@@ -92,15 +93,11 @@ const CreateCrew = () => {
     formData.append("gu", selectedGu);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/crew",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${URL}/crew`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (response.status === 200) {
         alert("크루가 생성되었습니다.");
         navigate("/crew");

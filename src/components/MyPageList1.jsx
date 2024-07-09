@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 const MyPageList1 = () => {
   const { user } = useOutletContext();
   const [challenges, setChallenges] = useState([]);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   useEffect(() => {
     const fetchChallenges = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/user/challenges`, {
+        const response = await fetch(`${URL}/user/challenges`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

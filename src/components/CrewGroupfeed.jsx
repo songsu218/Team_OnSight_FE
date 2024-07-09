@@ -13,15 +13,14 @@ const CrewGroupfeed = () => {
   const user = useSelector((state) => state.user.userInfo);
 
   const selectedCrew = crew.find((c) => c._id === crewId);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const crewAdmin = selectedCrew && selectedCrew.userId === user.id;
 
   useEffect(() => {
     const fetchFeeds = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/feed/crew/${crewId}`
-        );
+        const response = await axios.get(`${URL}/feed/crew/${crewId}`);
         setFeeds(response.data);
       } catch (error) {
         console.error("error", error);
@@ -35,12 +34,9 @@ const CrewGroupfeed = () => {
     const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
     if (confirmDelete) {
       try {
-        const response = await axios.delete(
-          `http://localhost:8000/feed/${feedId}`,
-          {
-            params: { userId: user.id },
-          }
-        );
+        const response = await axios.delete(`${URL}/feed/${feedId}`, {
+          params: { userId: user.id },
+        });
         alert(response.data.message);
         setFeeds(feeds.filter((feed) => feed._id !== feedId));
       } catch (error) {

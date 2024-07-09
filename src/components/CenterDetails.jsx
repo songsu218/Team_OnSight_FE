@@ -1,7 +1,7 @@
-import React from 'react';
-import style from '../css/Search.module.css';
-import RecordModal from './RecordModal';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import style from "../css/Search.module.css";
+import RecordModal from "./RecordModal";
+import { useNavigate } from "react-router-dom";
 
 const CenterDetails = ({
   currentCenter,
@@ -13,12 +13,12 @@ const CenterDetails = ({
   userLikes,
   toggleLike,
 }) => {
-
   const navigate = useNavigate();
 
   const handleRecordClick = (id) => {
     navigate(`/recorddetail/${id}`);
   };
+  const URL = process.env.REACT_APP_BACK_URL;
 
   if (!showDetails || !currentCenter) return null;
 
@@ -38,7 +38,7 @@ const CenterDetails = ({
         </div>
         <i
           className={`fa-regular fa-star ${style.likeStar} ${
-            userLikes.includes(currentCenter._id) ? 'fa-solid' : ''
+            userLikes.includes(currentCenter._id) ? "fa-solid" : ""
           }`}
           onClick={() => toggleLike(currentCenter._id)}
         ></i>
@@ -46,23 +46,23 @@ const CenterDetails = ({
       <div className={style.tabContainer}>
         <button
           className={`${style.tabButtonHome} ${
-            activeTab === 'home' ? style.activeTab : ''
+            activeTab === "home" ? style.activeTab : ""
           }`}
-          onClick={() => setActiveTab('home')}
+          onClick={() => setActiveTab("home")}
         >
           홈
         </button>
         <button
           className={`${style.tabButtonRecode} ${
-            activeTab === 'records' ? style.activeTab : ''
+            activeTab === "records" ? style.activeTab : ""
           }`}
-          onClick={() => setActiveTab('records')}
+          onClick={() => setActiveTab("records")}
         >
           기록
         </button>
       </div>
       <div className={style.tabContent}>
-        {activeTab === 'home' && (
+        {activeTab === "home" && (
           <div className={style.centerHome}>
             <div className={style.centerAddress}>
               <i className="fa-solid fa-location-pin"></i>
@@ -100,7 +100,7 @@ const CenterDetails = ({
             </div>
           </div>
         )}
-        {activeTab === 'records' && (
+        {activeTab === "records" && (
           <div className={style.centerRecords}>
             <div className={style.centerRecordNav}>
               <div className={style.btnBox}>
@@ -114,10 +114,14 @@ const CenterDetails = ({
             <div>
               {records.length > 0 ? (
                 records.map((record) => (
-                  <div key={record._id} className={style.recordItem} onClick={() => handleRecordClick(record._id)}>
+                  <div
+                    key={record._id}
+                    className={style.recordItem}
+                    onClick={() => handleRecordClick(record._id)}
+                  >
                     <div className={style.recordHeader}>
                       <img
-                        src={`http://localhost:8000${record.userThumbnail}`}
+                        src={`${URL}${record.userThumbnail}`}
                         alt="프로필"
                         className={style.profileImage}
                       />
@@ -132,7 +136,7 @@ const CenterDetails = ({
                     </div>
                     <div className={style.recordContent}>
                       <img
-                        src={`http://localhost:8000${record.thumbnail}`}
+                        src={`${URL}${record.thumbnail}`}
                         alt="기록 이미지"
                         className={style.recordImage}
                       />

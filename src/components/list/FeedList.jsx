@@ -20,6 +20,7 @@ const formatDate = (date) => {
   }
   return formattedDate;
 };
+const URL = process.env.REACT_APP_BACK_URL;
 
 const FeedList = ({ items }) => {
   const [feeds, setFeeds] = useState([]);
@@ -75,12 +76,9 @@ const FeedList = ({ items }) => {
     const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
     if (confirmDelete) {
       try {
-        const response = await axios.delete(
-          `http://localhost:8000/feed/${feedId}`,
-          {
-            params: { userId: user.id },
-          }
-        );
+        const response = await axios.delete(`${URL}/feed/${feedId}`, {
+          params: { userId: user.id },
+        });
         alert(response.data.message);
         window.location.reload(); // 페이지 새로고침
       } catch (error) {
