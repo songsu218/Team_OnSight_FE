@@ -15,11 +15,12 @@ const MyPage = () => {
   const currentUser = useSelector((state) => state.user.userInfo);
   const { userId } = useParams();
   const [user, setUser] = useState(null);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   // 사용자 정보 조회 함수
   const fetchUserInfo = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/user/${id}`);
+      const response = await fetch(`${URL}/user/${id}`);
       if (response.ok) {
         const data = await response.json();
         return data;
@@ -63,7 +64,7 @@ const MyPage = () => {
       if (imgBox) {
         imgBox.style.setProperty(
           "--thumbnail-url",
-          `url(http://localhost:8000${user.thumbnail})`
+          `url(${URL}${user.thumbnail})`
         );
       }
     }

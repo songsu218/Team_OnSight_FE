@@ -5,10 +5,11 @@ import { useState } from "react";
 const InfoModal = ({ onClose, onPwCheck }) => {
   const [password, setPassword] = useState("");
   const user = useSelector((state) => state.user.userInfo);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const userPwCheck = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/user/pwCheck`, {
+      const response = await fetch(`${URL}/user/pwCheck`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

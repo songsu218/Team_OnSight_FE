@@ -1,4 +1,4 @@
-import style from '../css/CrewDetail.module.css';
+import style from "../css/CrewDetail.module.css";
 import {
   NavLink,
   Routes,
@@ -6,15 +6,15 @@ import {
   useParams,
   useNavigate,
   Link,
-} from 'react-router-dom';
-import CrewHome from '../components/CrewHome';
-import CrewWrite from '../components/CrewWrite';
-import CrewManage from '../components/CrewManage';
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
-import { setUserAllInfo } from '../store/userStore';
-import { setCrewAllInfo } from '../store/crewStore';
-import { setUsers } from '../store/userAllStore';
+} from "react-router-dom";
+import CrewHome from "../components/CrewHome";
+import CrewWrite from "../components/CrewWrite";
+import CrewManage from "../components/CrewManage";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { setUserAllInfo } from "../store/userStore";
+import { setCrewAllInfo } from "../store/crewStore";
+import { setUsers } from "../store/userAllStore";
 
 const CrewDetail = () => {
   const { crewId } = useParams();
@@ -22,6 +22,7 @@ const CrewDetail = () => {
   const users = useSelector((state) => state.userAll.userAllInfo);
   const user = useSelector((state) => state.user.userInfo);
   const selectedCrew = crew.find((c) => c._id === crewId);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -56,7 +57,7 @@ const CrewDetail = () => {
 
   const handleJoinCrew = async () => {
     try {
-      const response = await fetch("http://localhost:8000/crew/crewjoin", {
+      const response = await fetch(`${URL}/crew/crewjoin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -79,7 +80,7 @@ const CrewDetail = () => {
   const handleLeaveCrew = async () => {
     if (window.confirm("정말로 크루를 탈퇴하시겠습니까?")) {
       try {
-        const response = await fetch("http://localhost:8000/crew/crewleave", {
+        const response = await fetch(`${URL}/crew/crewleave`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -150,13 +151,18 @@ const CrewDetail = () => {
                     key={memberId}
                     onClick={() => handleMemberClick(memberInfo.id)}
                   >
-                    <div className={style.profileBox}>
-                      <img
-                        src={`http://localhost:8000${memberInfo.thumbnail}`}
-                        alt="프로필 사진"
-                      />
+                    <div className={style.nickWrap}>
+                      <div className={style.profileBox}>
+                        <img
+                          src={`${URL}${memberInfo.thumbnail}`}
+                          alt="프로필 사진"
+                        />
+                      </div>
+                      <span>{memberInfo.nick}</span>
                     </div>
-                    <span>{memberInfo.nick}</span>
+                    {memberInfo.id === selectedCrew.userId && (
+                      <strong>크루장</strong>
+                    )}
                   </li>
                 );
               })}
@@ -176,7 +182,7 @@ const CrewDetail = () => {
                   <NavLink
                     to={`/crewdetail/${crewId}/crewhome`}
                     aria-current={({ isActive }) =>
-                      isActive ? 'page' : undefined
+                      isActive ? "page" : undefined
                     }
                   >
                     크루홈
@@ -188,7 +194,7 @@ const CrewDetail = () => {
                       to={`/crewdetail/${crewId}/crewwrite`}
                       state={{ crewName: selectedCrew.name }}
                       aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
+                        isActive ? "page" : undefined
                       }
                     >
                       글쓰기
@@ -204,7 +210,7 @@ const CrewDetail = () => {
                     <NavLink
                       to={`/crewdetail/${crewId}/crewmanage`}
                       aria-current={({ isActive }) =>
-                        isActive ? 'page' : undefined
+                        isActive ? "page" : undefined
                       }
                     >
                       관리하기
@@ -223,7 +229,9 @@ const CrewDetail = () => {
             <Route path="*" element={<CrewHome />} />
           </Routes>
         </div>
-        {crewMember && <span onClick={handleLeaveCrew}>크루 탈퇴하기</span>}
+        {crewMember && !crewAdmin && (
+          <span onClick={handleLeaveCrew}>크루 탈퇴하기</span>
+        )}
       </section>
     </div>
   );

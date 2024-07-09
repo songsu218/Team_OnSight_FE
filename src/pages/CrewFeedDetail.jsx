@@ -15,17 +15,16 @@ const CrewFeedDetail = () => {
   // 실험은 나중에 해볼 예정
 
   const user = useSelector((state) => state.user.userInfo);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   useEffect(() => {
     const fetchFeedDetail = async () => {
       try {
-        const response = await axios.get(
-          `http://localhost:8000/feed/detail/${feedId}`
-        );
+        const response = await axios.get(`${URL}/feed/detail/${feedId}`);
         setFeed(response.data);
         setCrewId(response.data.crewId);
 
-        await axios.post(`http://localhost:8000/feed/viewIncrement/${feedId}`, {
+        await axios.post(`${URL}/feed/viewIncrement/${feedId}`, {
           method: "POST",
         });
       } catch (error) {
@@ -48,12 +47,9 @@ const CrewFeedDetail = () => {
     const confirmDelete = window.confirm("정말로 삭제하시겠습니까?");
     if (confirmDelete) {
       try {
-        const response = await axios.delete(
-          `http://localhost:8000/feed/${feedId}`,
-          {
-            params: { userId: user.id },
-          }
-        );
+        const response = await axios.delete(`${URL}/feed/${feedId}`, {
+          params: { userId: user.id },
+        });
         alert(response.data.message);
         navigate(`/crewdetail/${crewId}`);
       } catch (error) {
@@ -82,9 +78,9 @@ const CrewFeedDetail = () => {
               <i className="fa-solid fa-arrow-left-long"></i>
             </button>
             <div className={style.profileBox}>
-              <div className={style.imgBox}>
+              {/* <div className={style.imgBox}>
                 <img src="/img/test.jpg" alt="" />
-              </div>
+              </div> */}
               <span>{feed.nick}</span>
             </div>
           </div>

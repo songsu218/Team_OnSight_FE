@@ -7,6 +7,7 @@ const RankList = ({ hoveredCard }) => {
   const records = useSelector((state) => state.record.recordInfo);
   const users = useSelector((state) => state.userAll.userAllInfo);
   const navigate = useNavigate();
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const userLevelSumMap = {};
 
@@ -58,12 +59,7 @@ const RankList = ({ hoveredCard }) => {
           >
             <strong>{index + 1}</strong>
             <span>
-              <img
-                src={
-                  `http://localhost:8000${user.thumbnail}` || "/img/test.jpg"
-                }
-                alt=""
-              />
+              <img src={`${URL}${user.thumbnail}` || "/img/test.jpg"} alt="" />
               <strong>{user.nick || "클라이머"}</strong>
               <img
                 src={rankCrown(index)}
@@ -88,9 +84,7 @@ const RankList = ({ hoveredCard }) => {
               <strong>{index + 4}</strong>
               <span>
                 <img
-                  src={
-                    `http://localhost:8000${user.thumbnail}` || "/img/test.jpg"
-                  }
+                  src={`${URL}${user.thumbnail}` || "/img/test.jpg"}
                   alt=""
                 />
                 <strong>{user.nick || "클라이머"}</strong>

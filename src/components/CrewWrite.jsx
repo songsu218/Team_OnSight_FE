@@ -11,6 +11,7 @@ const CrewWrite = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [message1, setMessage1] = useState("");
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const navigate = useNavigate();
   const { crewId } = useParams();
@@ -35,16 +36,12 @@ const CrewWrite = () => {
     formData.append("crewName", crewName);
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/feed",
-        formData,
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${URL}/feed`, formData, {
+        withCredentials: true,
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       if (response.status === 201) {
         alert(response.data.message);

@@ -7,11 +7,12 @@ import { useOutletContext } from "react-router-dom";
 const MyPageList2 = () => {
   const { user, isOwnProfile } = useOutletContext();
   const [recodes, setRecodes] = useState([]);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   useEffect(() => {
     const fetchRecodes = async () => {
       try {
-        const response = await fetch(`http://localhost:8000/user/recodes`, {
+        const response = await fetch(`${URL}/user/recodes`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -32,6 +32,7 @@ function RecordModal({
   const [searchTerm, setSearchTerm] = useState("");
   const [showingCenters, setShowingCenters] = useState([]);
   const [diffiList, setDiffiList] = useState([]);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const user = useSelector((state) => state.user.userInfo);
   const navigate = useNavigate();
@@ -175,15 +176,11 @@ function RecordModal({
     }
 
     try {
-      const response = await axios.post(
-        "http://localhost:8000/record",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post(`${URL}/record`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (response.data && response.data.message) {
         alert(response.data.message);
       }
@@ -200,15 +197,12 @@ function RecordModal({
   useEffect(() => {
     const fetchCenterData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8000/center/centerList",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${URL}/center/centerList`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();

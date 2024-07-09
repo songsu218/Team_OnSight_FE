@@ -6,12 +6,13 @@ const WithdrawalModal = ({ onClose, onWithdrawSuccess }) => {
   const user = useSelector((state) => state.user.userInfo);
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const URL = process.env.REACT_APP_BACK_URL;
 
   const passwordRef = useRef(null);
 
   const withdrawal = async () => {
     try {
-      const response = await fetch("http://localhost:8000/user/withdrawal", {
+      const response = await fetch(`${URL}/user/withdrawal`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

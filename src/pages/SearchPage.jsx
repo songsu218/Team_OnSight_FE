@@ -24,6 +24,7 @@ const Search = () => {
   const [activeTab, setActiveTab] = useState("home"); // 활성 탭 상태 추가
   const [userLikes, setUserLikes] = useState(user?.like || []); // 사용자 좋아요 상태 추가
   const [records, setRecords] = useState([]); // 기록 상태 추가
+  const URL = process.env.REACT_APP_BACK_URL;
 
   useEffect(() => {
     if (user && user.like) {
@@ -32,15 +33,12 @@ const Search = () => {
 
     const fetchCenterData = async () => {
       try {
-        const response = await fetch(
-          "http://localhost:8000/center/centerList",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
+        const response = await fetch(`${URL}/center/centerList`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
         if (response.ok) {
           const data = await response.json();
@@ -77,7 +75,7 @@ const Search = () => {
 
   const fetchRecords = async (centerId) => {
     try {
-      const response = await fetch(`http://localhost:8000/center/${centerId}`, {
+      const response = await fetch(`${URL}/center/${centerId}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +138,7 @@ const Search = () => {
 
   const handleToggleLike = async (centerId) => {
     try {
-      const response = await fetch(`http://localhost:8000/user/toggleLike`, {
+      const response = await fetch(`${URL}/user/toggleLike`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
