@@ -1,0 +1,5 @@
+[[redirects]]
+  from = "/api/*"
+  to = "https://port-0-onsight-1pgyr2mlvly1kx0.sel5.cloudtype.app/:splat"
+  status = 200
+  force = true
