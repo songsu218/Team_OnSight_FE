@@ -54,6 +54,9 @@
   padding: 22px 0 40px;
   font-size: 26px;
   font-weight: bold;
+  position: sticky;
+  top: 0;
+  background-color: #ffffff;
 }
 
 .myCrewListCon {
@@ -64,10 +67,10 @@
 }
 
 .myCrewListCon::before {
-  content: '';
-  position: absolute;
+  content: "";
+  position: fixed;
   background-color: #f1f1f1;
-  width: 100%;
+  width: 400px;
   height: 90%;
   bottom: 0;
   z-index: -10;
@@ -181,7 +184,7 @@
 }
 
 .searchBox::after {
-  content: '';
+  content: "";
   width: 2px;
   height: 20px;
   position: absolute;
