@@ -105,12 +105,13 @@ const Challenge = () => {
       });
   };
 
-  const setMyChData = (tag, id) => {
+  const setMyChData = async (tag, id) => {
     if (id === null) {
       setPrintData([]);
       return;
     }
-    ch.chMyList(tag, id)
+    await ch
+      .chMyList(tag, id)
       .then((result) => {
         setPrintData(result.data);
         setTotalSlides(result.data.length);
@@ -169,14 +170,14 @@ const Challenge = () => {
     }
   };
 
-  const handleClick = (index, event) => {
+  const handleClick = async (index, event) => {
     event.preventDefault();
     if (index === 0) {
       //챌린지 일정
-      setChData(selectedOption);
+      await setChData(selectedOption);
     } else if (index === 1) {
       //나의 챌린지 보기
-      setMyChData(selectedOption, username);
+      await setMyChData(selectedOption, username);
     } else if (index === 2) {
       //나의 챌린지 만들기
       handleOpenModal();
