@@ -1,14 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { useNavigate } from "react-router-dom";
-import { ch } from "../api.js";
-import "swiper/css";
+import React, { useEffect, useRef, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { useNavigate } from 'react-router-dom';
+import { ch } from '../api.js';
+import 'swiper/css';
 // import "swiper/css/pagination";
 // import 'swiper/css/navigation';
-import style from "../css/challenge.module.css";
-import ChallengeModal from "../components/modal/ChallengeModal";
-import { useSelector } from "react-redux";
+import style from '../css/challenge.module.css';
+import ChallengeModal from '../components/modal/ChallengeModal';
+import { useSelector } from 'react-redux';
 
 const Challenge = () => {
   //#region 변수,Hook
@@ -29,13 +29,11 @@ const Challenge = () => {
   const [isAutoplay, setIsAutoplay] = useState(true);
   const [totalSlides, setTotalSlides] = useState(0);
   const [currentIndex, setCurrentIndex] = useState(1);
-  const [selectedOption, setSelectedOption] = useState("TOT");
+  const [selectedOption, setSelectedOption] = useState('TOT');
   const [printData, setPrintData] = useState([]);
   const [activeIndex, setActiveIndex] = useState(0);
   const [slidesPerViewCount, setSlidesPerViewCount] = useState(4);
-  const [isNarrowScreen, setIsNarrowScreen] = useState(
-    window.innerWidth <= 1079
-  );
+  const [isNarrowScreen, setIsNarrowScreen] = useState(window.innerWidth <= 1079);
   const [showModal, setShowModal] = useState(false);
   const isFirstRun = useRef(true);
   //#endregion 변수,Hook
@@ -56,7 +54,7 @@ const Challenge = () => {
       }
       setIsAutoplay(!isAutoplay);
     } else {
-      console.error("Swiper가 초기화되지 않았습니다.");
+      console.error('Swiper가 초기화되지 않았습니다.');
     }
   };
 
@@ -64,8 +62,8 @@ const Challenge = () => {
   // 비로그인 시 접근 제한
   useEffect(() => {
     if (!user) {
-      alert("로그인 후 사용가능해요. 로그인 하시겠어요?");
-      navigate("/signinpage");
+      alert('로그인 후 사용가능해요. 로그인 하시겠어요?');
+      navigate('/signinpage');
     }
   }, [user, navigate]);
 
@@ -74,10 +72,10 @@ const Challenge = () => {
       isFirstRun.current = false;
       return;
     }
-    setChData("TOT");
-    window.addEventListener("resize", handleResize);
+    setChData('TOT');
+    window.addEventListener('resize', handleResize);
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener('resize', handleResize);
     };
   }, []);
 
@@ -136,7 +134,7 @@ const Challenge = () => {
     setSelectedOption(target);
   };
   const onAutoplayTimeLeft = (s, time, progress) => {
-    progressCircle.current.style.setProperty("--progress", 1 - progress);
+    progressCircle.current.style.setProperty('--progress', 1 - progress);
     progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
   };
   const goNext = () => {
@@ -198,7 +196,7 @@ const Challenge = () => {
               <h2 className={style.page_tit}>챌린지 일정</h2>
               <nav className={style.page_nav}>
                 <ul>
-                  <li className={activeIndex === 0 ? style.active : ""}>
+                  <li className={activeIndex === 0 ? style.active : ''}>
                     <a
                       href="/"
                       className={style.page_link}
@@ -208,7 +206,7 @@ const Challenge = () => {
                       전체 챌린지
                     </a>
                   </li>
-                  <li className={activeIndex === 1 ? style.active : ""}>
+                  <li className={activeIndex === 1 ? style.active : ''}>
                     <a
                       href="/"
                       className={`${style.page_link}`}
@@ -218,7 +216,7 @@ const Challenge = () => {
                       나의 챌린지
                     </a>
                   </li>
-                  <li className={activeIndex === 2 ? style.active : ""}>
+                  <li className={activeIndex === 2 ? style.active : ''}>
                     <a
                       href="/"
                       className={style.page_link}
@@ -251,9 +249,9 @@ const Challenge = () => {
                 value={selectedOption}
                 onChange={handleSelectChange}
               >
-                <option value={"TOT"}>전체</option>
-                <option value={"NOW"}>진행 중</option>
-                <option value={"PAST"}>기간 종료</option>
+                <option value={'TOT'}>전체</option>
+                <option value={'NOW'}>진행 중</option>
+                <option value={'PAST'}>기간 종료</option>
               </select>
             </div>
             <div className={style.challenge_wrap}>
@@ -270,12 +268,9 @@ const Challenge = () => {
                 onAutoplayTimeLeft={onAutoplayTimeLeft}
               >
                 {printData.length === 0
-                  ? ""
+                  ? ''
                   : printData.map((item) => (
-                      <SwiperSlide
-                        key={item._id}
-                        onClick={() => handleCardClick(item)}
-                      >
+                      <SwiperSlide key={item._id} onClick={() => handleCardClick(item)}>
                         <div className={style.challenge_link}>
                           <div className={style.challenge_img}>
                             <img
@@ -284,12 +279,8 @@ const Challenge = () => {
                               alt={item.challengename}
                             />
                           </div>
-                          <span className={style.challenge_cate}>
-                            {item.center}
-                          </span>
-                          <em className={style.challenge_tit}>
-                            {item.challengename}
-                          </em>
+                          <span className={style.challenge_cate}>{item.center}</span>
+                          <em className={style.challenge_tit}>{item.challengename}</em>
                           <span className={style.challenge_txt}>
                             {item.date_string}
                             <p />
@@ -300,7 +291,7 @@ const Challenge = () => {
                 <div className={style.control}>
                   <div className={style.swiper_button_prev} onClick={goPrev} />
                   <div className={style.swiper_pagination}>
-                    {currentIndex} /{" "}
+                    {currentIndex} /{' '}
                     {totalSlides - slidesPerViewCount + 1 > 0
                       ? totalSlides - slidesPerViewCount + 1
                       : 1}
@@ -314,10 +305,10 @@ const Challenge = () => {
                       className={`${style.control_btn} ${
                         isAutoplay ? style.btn_stop : style.btn_play
                       }`}
-                      title={isAutoplay ? "정지 버튼" : "재생 버튼"}
+                      title={isAutoplay ? '정지 버튼' : '재생 버튼'}
                       onClick={handleAutoplayToggle}
                     >
-                      {isAutoplay ? "자동재생 정지 버튼" : "재생 버튼"}
+                      {isAutoplay ? '자동재생 정지 버튼' : '재생 버튼'}
                     </button>
                     <span ref={progressContent}></span>
                   </div>
