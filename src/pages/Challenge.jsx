@@ -93,8 +93,9 @@ const Challenge = () => {
 
   //#region 함수
 
-  const setChData = (tag) => {
-    ch.chListEachStatus(tag)
+  const setChData = async (tag) => {
+    await ch
+      .chListEachStatus(tag)
       .then((result) => {
         setPrintData(result.data);
         setTotalSlides(result.data.length);
