@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_BACK_URL;
+const baseURL = `/` || process.env.REACT_APP_BACK_URL;
 
 // axios 인스턴스를 생성합니다.
 const instance = axios.create({
