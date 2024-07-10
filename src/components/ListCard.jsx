@@ -1,22 +1,22 @@
-import style from "../css/ListCard.module.css";
+import style from '../css/ListCard.module.css';
 
 const formatDate = (date) => {
-  const URL = process.env.REACT_APP_BACK_URL;
   const options = {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
-    weekday: "short",
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    weekday: 'short',
   };
-  const formattedDate = new Intl.DateTimeFormat("ko-KR", options).format(
+  const formattedDate = new Intl.DateTimeFormat('ko-KR', options).format(
     new Date(date)
   );
-  return formattedDate.replace(/\./g, ".");
+  return formattedDate.replace(/\./g, '.');
 };
 
 const ListCard = ({ title, center, detail, date, thumbnail, itemType }) => {
+  const URL = process.env.REACT_APP_BACK_URL;
   const imgPath =
-    itemType === "challenge" || itemType === "center"
+    itemType === 'challenge' || itemType === 'center'
       ? thumbnail
       : `${URL}` + thumbnail;
   const renderDate = () => {
@@ -36,7 +36,7 @@ const ListCard = ({ title, center, detail, date, thumbnail, itemType }) => {
         <img src={imgPath} alt="대표이미지" />
       </span>
 
-      {itemType === "center" ? (
+      {itemType === 'center' ? (
         <>
           <strong className={style.tit}>{center}</strong>
           <span className={style.detail}>{detail}</span>

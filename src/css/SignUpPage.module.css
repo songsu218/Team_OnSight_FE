@@ -1,5 +1,5 @@
  .register {
-   margin: 200px auto auto auto;
+   margin: 100px auto auto auto;
    max-width: 720px;
    width: calc(100% - 10rem);
  }
@@ -75,7 +75,7 @@
  }
 
  .eye img {
-  position: absolute;
+   position: absolute;
    cursor: pointer;
    right: 0;
    top: 35%;

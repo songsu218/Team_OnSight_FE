@@ -1,5 +1,5 @@
 .SignInPage {
-  margin: 260px auto auto auto;
+  margin: 100px auto auto auto;
   max-width: 720px;
   width: calc(100% - 10rem);
 }
@@ -76,7 +76,7 @@
   top: 35%;
 }
 
-.errorMessage {  
+.errorMessage {
   color: red;
 }
 
