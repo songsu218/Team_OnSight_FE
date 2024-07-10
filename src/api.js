@@ -15,8 +15,8 @@ const ch = {
    * @param {array} members
    * @returns  챌린지목록
    */
-  chEnter: (challengename, members) => {
-    return instance.post('/challenge/challegeEnter', {
+  chEnter: async (challengename, members) => {
+    return await instance.post('/challenge/challegeEnter', {
       challengename: challengename,
       members: members,
     });
@@ -30,8 +30,8 @@ const ch = {
    * @param {string} date yyyy-MM-dd
    * @returns 챌린지목록
    */
-  chRegister: (challengename, id, center, address, date) => {
-    return instance.post('/challenge/register', {
+  chRegister: async (challengename, id, center, address, date) => {
+    return await instance.post('/challenge/register', {
       challengename: challengename,
       id: id,
       center: center,
@@ -45,8 +45,8 @@ const ch = {
    * @param {string} tag ('TOT','NOW','PAST')
    * @returns challenge Collection, 썸네일
    */
-  chListEachStatus: (tag) => {
-    return instance.post(
+  chListEachStatus: async (tag) => {
+    return await instance.post(
       '/challenge/challengeTotList',
       { STATE: tag },
       { headers: { 'Content-Type': 'application/json' } }
@@ -59,8 +59,8 @@ const ch = {
    * @param {string} member_id
    * @returns challenge Collection, 썸네일
    */
-  chMyList: (tag, member_id) => {
-    return instance.post('/challenge/challengeMyList', {
+  chMyList: async (tag, member_id) => {
+    return await instance.post('/challenge/challengeMyList', {
       STATE: tag,
       member_id: member_id,
     });
@@ -71,8 +71,8 @@ const ch = {
    * @param {string} challengename
    * @returns {*} id.nick,썸네일
    */
-  chJoinList: (challengename) => {
-    return instance.post('/challenge/challengeMemberList', {
+  chJoinList: async (challengename) => {
+    return await instance.post('/challenge/challengeMemberList', {
       challengename: challengename,
     });
   },
@@ -82,8 +82,8 @@ const ch = {
    * @param {string} challengename
    * @returns {*} (순위),id.nick,썸네일,total
    */
-  chRank: (challengename) => {
-    return instance.post('/challenge/challengeRanking', {
+  chRank: async (challengename) => {
+    return await instance.post('/challenge/challengeRanking', {
       challengename: challengename,
     });
   },
